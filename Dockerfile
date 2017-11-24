@@ -36,11 +36,10 @@ RUN git clone $NEO_HTTPS_REPO /opt/neo
 RUN cd /opt/neo && git checkout $NEO_BRANCH
 
 # remove neo-cli package and reference to local neo
-RUN cd /opt/neo-cli/neo-cli
-RUN dotnet remove package neo
-RUN dotnet add reference /opt/neo/neo/neo.csproj
-RUN cd /opt/neo-cli/
-RUN dotnet sln add /opt/neo/neo/neo.csproj
+RUN dotnet remove /opt/neo-cli/neo-cli/neo-cli.csproj package neo
+RUN dotnet sln /opt/neo-cli/neo-cli.sln add /opt/neo/neo/neo.csproj
+RUN dotnet add /opt/neo-cli/neo-cli/neo-cli.csproj reference /opt/neo/neo/neo.csproj
+
 
 # publish
 RUN dotnet publish -c Release -r ubuntu.16.04-x64
