@@ -41,8 +41,8 @@ RUN dotnet sln /opt/neo-cli/neo-cli.sln add /opt/neo/neo/neo.csproj
 RUN dotnet add /opt/neo-cli/neo-cli/neo-cli.csproj reference /opt/neo/neo/neo.csproj
 
 # publish
-RUN dotnet publish /opt/neo-cli/neo-cli/neo-cli.csproj -c Release -r ubuntu.16.04-x64
-RUN zip -r neo-cli.zip /opt/neo-cli/neo-cli/bin/Release/netcoreapp2.0/ubuntu.16.04-x64/publish
+RUN dotnet publish /opt/neo-cli/neo-cli/neo-cli.csproj -o neo-cli -c Release -r ubuntu.16.04-x64
+RUN zip -r /opt/neo-cli.zip /opt/neo-cli/neo-cli/neo-cli
 
 
 
