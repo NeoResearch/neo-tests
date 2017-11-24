@@ -1,8 +1,5 @@
 # NEO publish Dockerfile
 
-ARG neo_https_repo
-ARG neo_branch
-
 FROM ubuntu:16.04
 LABEL maintainer="AshRolls"
 
@@ -31,16 +28,19 @@ RUN apt-get update && apt-get install -y dotnet-sdk-2.0.0
 # APT cleanup to reduce image size
 RUN rm -rf /var/lib/apt/lists/*
 
-# get repo
+# get repo, the arguments should be supplied when building using this Dockerfile
+ARG NEO_HTTPS_REPO=https://github.com/neo-project/neo.git
+ARG NEO_BRANCH=master
 RUN git clone https://github.com/neo-project/neo-cli.git /opt/neo-cli
-RUN git clone $Env:neo_https_repo /opt/neo
-RUN cd /opt/neo && git checkout $Env:neo_branch
+RUN git clone $NEO_HTTPS_REPO /opt/neo
+RUN cd /opt/neo && git checkout $NEO_BRANCH
 
 # remove neo-cli package and reference to local neo
-RUN cd /opt/neo-cli
+RUN cd /opt/neo-cli/neo-cli
 RUN dotnet remove package neo
-RUN dotnet sln add /opt/neo/neo/neo.csproj
 RUN dotnet add reference /opt/neo/neo/neo.csproj
+RUN cd /opt/neo-cli/
+RUN dotnet sln add /opt/neo/neo/neo.csproj
 
 # publish
 RUN dotnet publish -c Release -r ubuntu.16.04-x64

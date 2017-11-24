@@ -5,7 +5,7 @@
 # use docker to publish neo
 #TODO sub in $1 $2
 echo "Building neo-publish..."
-docker build -t neo-publish . --build-arg neo-https-repo=https://github.com/neo-project/neo.git --build-arg neo-branch=master
+docker build -t --build-arg NEO_HTTPS_REPO=https://github.com/neo-project/neo.git --build-arg NEO_BRANCH=master neo-publish . 
 
 CONTAINER=$(docker ps -aqf name=neo-publish)
 
