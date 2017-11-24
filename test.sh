@@ -18,3 +18,10 @@ fi
 
 echo "Starting neo-publish container..."
 docker run --name neo-publish neo-publish
+
+echo "Copying published zip file from container..."
+docker cp neo-publish:/opt/neo-cli.zip /opt/neo-cli.zip
+
+
+
+
