@@ -32,7 +32,7 @@ RUN apt-get update && apt-get install -y dotnet-sdk-2.0.0
 RUN rm -rf /var/lib/apt/lists/*
 
 # get repo
-RUN git clone git@github.com:neo-project/neo-cli.git /opt/neo-cli
+RUN git clone https://github.com/neo-project/neo-cli.git /opt/neo-cli
 RUN git clone $Env:neo_https_repo /opt/neo
 RUN cd /opt/neo && git checkout $Env:neo_branch
 
