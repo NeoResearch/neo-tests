@@ -42,7 +42,7 @@ RUN dotnet add /opt/neo-cli/neo-cli/neo-cli.csproj reference /opt/neo/neo/neo.cs
 
 # publish
 RUN dotnet publish /opt/neo-cli/neo-cli/neo-cli.csproj -o neo-cli -c Release -r ubuntu.16.04-x64
-RUN zip -r /opt/neo-cli.zip /opt/neo-cli/neo-cli/neo-cli
+RUN cd /opt/neo-cli/neo-cli && zip -r /opt/neo-cli.zip neo-cli
 
 
 
