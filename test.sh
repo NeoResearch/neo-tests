@@ -14,9 +14,8 @@ if [ -n "$CONTAINER" ]; then
 fi
 
 echo "Building & running neo-publish..."
-docker rm neo-publish
 docker rmi neo-publish
-docker build --build-arg NEO_HTTPS_REPO=https://github.com/neo-project/neo.git --build-arg NEO_BRANCH=master -t neo-publish . 
+docker build --no-cache --build-arg NEO_HTTPS_REPO=https://github.com/neo-project/neo.git --build-arg NEO_BRANCH=master -t neo-publish . 
 docker run --name neo-publish neo-publish
 
 echo "Copying published zip file from container..."
@@ -31,16 +30,15 @@ if [ -n "$CONTAINER" ]; then
 	echo "Removing container named neo-privnet"
 	docker rm neo-privnet 1>/dev/null
 fi
-docker rm neo-privnet
 docker rmi neo-privnet
 
 echo "Cloning latest neo-privatenet-docker repo..."
 #git clone https://github.com/CityOfZion/neo-privatenet-docker.git
 git clone https://github.com/AshRolls/neo-privatenet-docker.git
+cd neo-privatenet-docker/
 git checkout specify_neocli
 
 echo "Building docker privatenet with new neo-cli..."
-cd neo-privatenet-docker/
 ./docker_build.sh /opt/neo-cli-built.zip
 
 echo "Running Privatenet and claiming GAS..."
