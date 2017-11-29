@@ -22,13 +22,21 @@ docker run --name neo-publish neo-publish
 echo "Copying published zip file from container..."
 docker cp neo-publish:/opt/neo-cli.zip /opt/neo-cli.zip
 
+echo "Removing existing privatenet files and images..."
+rm -rf ./neo-privatenet-docker
+docker stop neo-privnet
+docker rm neo-privnet
+docker rmi neo-privnet
+
 echo "Cloning latest neo-privatenet-docker repo..."
 #git clone https://github.com/CityOfZion/neo-privatenet-docker.git
 git clone https://github.com/AshRolls/neo-privatenet-docker.git
 git checkout specify_neocli
 
-echo "Building docker privatenet with new neo-cli"
+echo "Building docker privatenet with new neo-cli..."
 ./neo-privatenet-docker/docker_build.sh /opt/neo-cli-built.zip
 
+echo "Running Privatenet and claiming GAS..."
+./neo-privatenet-docker/docker_run_and_create_wallet.sh
 
 
