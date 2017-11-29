@@ -4,11 +4,8 @@
 
 # use docker to publish neo
 #TODO sub in $1 $2
-echo "Building neo-publish..."
-docker build --build-arg NEO_HTTPS_REPO=https://github.com/neo-project/neo.git --build-arg NEO_BRANCH=master -t neo-publish . 
 
 CONTAINER=$(docker ps -aqf name=neo-publish)
-
 if [ -n "$CONTAINER" ]; then
 	echo "Stopping container named neo-publish"
 	docker stop neo-publish 1>/dev/null
@@ -16,15 +13,24 @@ if [ -n "$CONTAINER" ]; then
 	docker rm neo-publish 1>/dev/null
 fi
 
-echo "Starting neo-publish container..."
+echo "Building & running neo-publish..."
+docker rm neo-publish
+docker rmi neo-publish
+docker build --build-arg NEO_HTTPS_REPO=https://github.com/neo-project/neo.git --build-arg NEO_BRANCH=master -t neo-publish . 
 docker run --name neo-publish neo-publish
 
 echo "Copying published zip file from container..."
-docker cp neo-publish:/opt/neo-cli.zip /opt/neo-cli.zip
+docker cp neo-publish:/opt/neo-cli-built.zip /opt/neo-cli.zip
 
 echo "Removing existing privatenet files and images..."
 rm -rf ./neo-privatenet-docker
-docker stop neo-privnet
+CONTAINER=$(docker ps -aqf name=neo-privnet)
+if [ -n "$CONTAINER" ]; then
+	echo "Stopping container named neo-privnet"
+	docker stop neo-privnet 1>/dev/null
+	echo "Removing container named neo-privnet"
+	docker rm neo-privnet 1>/dev/null
+fi
 docker rm neo-privnet
 docker rmi neo-privnet
 
@@ -34,9 +40,10 @@ git clone https://github.com/AshRolls/neo-privatenet-docker.git
 git checkout specify_neocli
 
 echo "Building docker privatenet with new neo-cli..."
-./neo-privatenet-docker/docker_build.sh /opt/neo-cli-built.zip
+cd neo-privatenet-docker/
+./docker_build.sh /opt/neo-cli-built.zip
 
 echo "Running Privatenet and claiming GAS..."
-./neo-privatenet-docker/docker_run_and_create_wallet.sh
+./docker_run_and_create_wallet.sh
 
 
