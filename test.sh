@@ -19,7 +19,7 @@ docker build --no-cache --build-arg NEO_HTTPS_REPO=https://github.com/neo-projec
 docker run --name neo-publish neo-publish
 
 echo "Copying published zip file from container..."
-docker cp neo-publish:/opt/neo-cli-built.zip /opt/neo-cli.zip
+docker cp neo-publish:/opt/neo-cli-built.zip /opt/neo-cli-built.zip
 
 echo "Removing existing privatenet files and images..."
 rm -rf ./neo-privatenet-docker
