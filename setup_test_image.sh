@@ -44,4 +44,13 @@ echo "Building docker privatenet with new neo-cli..."
 echo "Running Privatenet and claiming GAS..."
 ./docker_run_and_create_wallet.sh
 
+echo "Create a docker image at this point"
+cd ..
+CONTAINER=$(docker ps -aqf name=neo-privnet)
+if [ -n "$CONTAINER" ]; then
+	echo "Stopping container named neo-privnet"
+	docker stop neo-privnet 1>/dev/null
+	echo "Taking image of container named neo-privnet"
+	docker commit $CONTAINER neo-privnet:published
+fi
 
