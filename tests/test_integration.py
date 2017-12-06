@@ -2,22 +2,26 @@ import pytest
 import docker
 
 @pytest.fixture
-def setup():
+def privnet():
     # <summary>
     # runs before every test, sets up a blank network ready for test
     # </summary>
 
     # load image
     client = docker.from_env()
-    containers = client.containers.list(filters={'name':'neo-privnet'})    
-    # loop through and stop if running
-    # run a container from image 'neo-privnet:published' image
+    images = client.images.list(name='neo-privnet:published')
+    if not len(images) == 1:
+        assert False
+    # run container
+    container = client.containers.run(image=images[0], name='testcontainer', detach=True)
 
-    return containers
+    return container
 
 def test_True():
     assert True
 
-def test_Found_Container(setup):
-    assert len(setup) == 1
+def test_Running_Container(privnet):
+    client = docker.from_env()
+    runningContainers = client.containers.list()    
+    assert len(runningContainers) == 1
 
