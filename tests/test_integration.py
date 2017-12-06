@@ -1,9 +1,7 @@
 import pytest
 import docker
 
-from subprocess import call
-
-@pytest.fixture(scope="session", autouse=True)
+@pytest.fixture
 def setup():
     # <summary>
     # runs before every test, sets up a blank network ready for test
@@ -11,9 +9,15 @@ def setup():
 
     # load image
     client = docker.from_env()
-    containers = client.containers.list(filter={'name':'neo-privnet:published'})
+    containers = client.containers.list(filters={'name':'neo-privnet'})    
     # loop through and stop if running
     # run a container from image 'neo-privnet:published' image
 
-def test_singleTx():
+    return containers
+
+def test_True():
     assert True
+
+def test_Found_Container(setup):
+    assert len(setup) == 1
+
