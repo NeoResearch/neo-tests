@@ -12,8 +12,15 @@ def privnet():
     images = client.images.list(name='neo-privnet:published')
     if not len(images) == 1:
         assert False
-    # run container
-    container = client.containers.run(image=images[0], name='testcontainer', detach=True)
+
+    # delete existing container(s) if present to tidy up
+    containers = client.containers.list(all=True, filters={'name':'neo-integration-test'})
+    for c in containers[:]:
+        c.stop()
+        c.remove()
+
+    # run container    
+    container = client.containers.run(image=images[0], name='neo-integration-test', detach=True)
 
     return container
 
@@ -25,3 +32,4 @@ def test_Running_Container(privnet):
     runningContainers = client.containers.list()    
     assert len(runningContainers) == 1
 
+def test_
