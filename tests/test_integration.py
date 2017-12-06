@@ -11,7 +11,7 @@ def setup():
 
     # load image
     client = docker.from_env()
-    containers = client.containers.list()
+    containers = client.containers.list(filter={'name':'neo-privnet:published'})
     # loop through and stop if running
     # run a container from image 'neo-privnet:published' image
 
