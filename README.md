@@ -1,29 +1,26 @@
-# neo-integration-tests
+<p align="center">
+  <img
+    src="http://res.cloudinary.com/vidsy/image/upload/v1503160820/CoZ_Icon_DARKBLUE_200x178px_oq0gxm.png"
+    width="125px;">
+</p>
 
-## how to run
+<h1 align="center">neo-integration-tests</h1>
+
+## What is it
+
+A set of tests designed to test correctness and performance of the Neo blockchain. The repository comprises a set of scripts and docker containers to build and publish a private network, along with a set of python tests to run through.
+
+This is a work in progress, areas to be improved :-
+
+- Many more tests needed.
+- Invesigate using docker compose and improve the image build process so it's more suitable for CI.
+- Improve speed of build process, I suspect we can use cache a little more for our containers.
+
+## How to build an image
 
 1. Install docker
 1. Run `.setup_test_image.sh` to build an image
-1. Run tests `sudo ../.local/bin/pytest` . Must be admin to access docker.
 
-## to modify in other repo
+## How to run tests
 
-Modify neo-privatenet-docker docker_build.sh so that we can choose to install a locally supplied neo-cli distribution to download to image
-
-## overview
-
-1. in docker container
-    1. git clone neo branch to test
-    1. git clone neo-cli
-    1. remove package from neo-cli and replace with local reference
-    1. git publish neo-cli to zip
-1. Copy zip from docker to neo-privatenet-docker folder
-1. Remove neo-privnet running containers
-1. Remove neo-privnet image
-1. docker_build.sh
-1. docker_run_and_create_wallet.sh
-1. create snapshot of image
-1. loop through all tests (pytest)
-    1. stop privatenet
-    1. restore snapshot
-    1. run/assert test
+1. Run tests `sudo ../.local/bin/pytest` (must be admin to access docker)
