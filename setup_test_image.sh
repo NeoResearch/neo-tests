@@ -33,10 +33,9 @@ fi
 docker rmi neo-privnet
 
 echo "Cloning latest neo-privatenet-docker repo..."
-#git clone https://github.com/CityOfZion/neo-privatenet-docker.git
-git clone https://github.com/AshRolls/neo-privatenet-docker.git
+git clone https://github.com/CityOfZion/neo-privatenet-docker.git
 cd neo-privatenet-docker/
-git checkout specify_neocli
+git checkout master
 
 echo "Building docker privatenet with new neo-cli..."
 ./docker_build.sh /opt/neo-cli-built.zip
