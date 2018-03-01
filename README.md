@@ -25,18 +25,18 @@ In particular, this private network is usually created with new modified charact
 
 This is a work in progress, areas to be improved:
 
-0. Identify parameters that could be optimized and their impact on consensus behavior:
+1. Identify parameters that could be optimized and their impact on consensus behavior:
  - Check bottlenecks: on opcodes (.avm) readings execution; decoding transactions; communicating; changing view; broadcasting; among other.
  - Verify robustness: check the possibility of executing a graph optimization problem (using mathematical programming models of metaheuristics inspired procedures), described on the ongoing project [ODBFT](https://github.com/NeoResearch/ODBFT), which would balance find a consensus that balance efficiency and risk.  
-0. Create an automatic procedure for easily set these variables and report characteristics of the network:
+2. Create an automatic procedure for easily set these variables and report characteristics of the network:
  - Automatic CPU time reporting on the aforementioned points;
  - Automatic reports on the interaction with different interfaces of Neo ecosystem.
-0. Run several batches of experiments:
+3. Run several batches of experiments:
   - Involve different Neo developers in order to execute this containers and report their results;
   - Design a competition and co-working scheme for granting prizes to those that performed outstanding reports.
-0. Integrate this dockers into an self-adapting TestNet:
+4. Integrate this dockers into an self-adapting TestNet:
   - This TestNet would synchronize automatically and try to find the most suitable set of parameters.
-0. As mentioned in the original project:
+5. As mentioned in the original project:
   - Investigate using docker compose and improve the image build process so it's more suitable for CI;
   - Improve speed of build process, suspect we can use cache a little more for our containers.
 
