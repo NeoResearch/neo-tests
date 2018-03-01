@@ -15,7 +15,7 @@ It could be possible merged in a near future, as well as being merged with impro
 Here, the main focus is on establishing a set of parameters that will be subjected to optimization and statical analyses in order to check [neo-cli](https://github.com/neo-project/neo-cli) consensus capabilities.
 
 This project was initially described as a set of tests designed to test correctness and performance of the Neo blockchain.
-In this sense, the repository comprises a set of scripts and docker containers to build and publish a private network, along with a set of python tests to run through.
+In this sense, the repository comprises a set of scripts and docker containers to build and publish a [private network](https://hub.docker.com/r/cityofzion/neo-privatenet/), along with a set of python tests to run through.
 
 In particular, this private network is usually created with new modified characteristics from [neo blockchain](https://github.com/neo-project/neo/).
 
@@ -28,9 +28,14 @@ This is a work in progress, areas to be improved:
 
 ## How to build an image
 
-1. Install docker
-1. Run `.setup_test_image.sh` to build an image
+### Create a modified Neo blockchain
 
-## How to run tests
+1. Go to `docker-build-neo-cli` folder
+1. Execute the script `docker_build_run_copy_stop`
+1. A new `neo-cli-built` will be copied to this folder
 
-1. Run tests `sudo ../.local/bin/pytest` (must be admin to access docker)
+## Execute a personalized cityofzion/neo-privatenet
+
+1. Back to the root folder
+1. Run `docker_build.sh` in order to built the privanet
+1. Run it and create and, optionally, create initial wallet with Neo's and GAS `docker_run_and_create_wallet`. Otherwise, just run `docker_run.sh`.
