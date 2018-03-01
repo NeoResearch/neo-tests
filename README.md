@@ -26,11 +26,11 @@ In particular, this private network is usually created with new modified charact
 This is a work in progress, areas to be improved:
 
 * Identify parameters that could be optimized and their impact on consensus behavior:
- - Check bottlenecks: on opcodes (.avm) readings execution; decoding transactions; communicating; changing view; broadcasting; among other.
- - Verify robustness: check the possibility of executing a graph optimization problem (using mathematical programming models of metaheuristics inspired procedures), described on the ongoing project [ODBFT](https://github.com/NeoResearch/ODBFT), which would balance find a consensus that balance efficiency and risk.  
+  - Check bottlenecks: on opcodes (.avm) readings execution; decoding transactions; communicating; changing view; broadcasting; among other.
+  - Verify robustness: check the possibility of executing a graph optimization problem (using mathematical programming models of metaheuristics inspired procedures), described on the ongoing project [ODBFT](https://github.com/NeoResearch/ODBFT), which would balance find a consensus that balance efficiency and risk.  
 * Create an automatic procedure for easily set these variables and report characteristics of the network:
- - Automatic CPU time reporting on the aforementioned points;
- - Automatic reports on the interaction with different interfaces of Neo ecosystem.
+  - Automatic CPU time reporting on the aforementioned points;
+  - Automatic reports on the interaction with different interfaces of Neo ecosystem.
 * Run several batches of experiments:
   - Involve different Neo developers in order to execute this containers and report their results;
   - Possible, design a competition and co-working scheme for granting prizes to those that performed outstanding reports.
