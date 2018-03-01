@@ -42,4 +42,6 @@ This is a work in progress, areas to be improved:
 
 1. Back to the root folder
 1. Run `docker_build.sh` in order to built the privanet
-1. Run it and create and, optionally, create initial wallet with Neo's and GAS `docker_run_and_create_wallet`. Otherwise, just run `docker_run.sh`.
+1. Run it and, optionally, create initial wallet with Neo's and GAS `docker_run_and_create_wallet`. Otherwise, just run `docker_run.sh`.
+1. Access the Docker virtual environment with `bash-priv.sh`.
+1. Currently, you can monitor the blockchain accessing `opt/neo-python` and typing `python3 prompt.py -p`, as well as checking neo-cli nodes (currently, static set to 4) in its attached screens.
