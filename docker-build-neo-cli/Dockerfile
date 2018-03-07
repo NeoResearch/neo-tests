@@ -32,6 +32,9 @@ RUN cd /opt/neo && git checkout $NEO_BRANCH
 
 # remove neo-cli package and reference to local neo
 ADD neo-blockchain/Blockchain.cs /opt/neo/neo/neo/Core
+ADD neo-blockchain/StateReader.cs /opt/neo/neo/SmartContract
+
+
 RUN dotnet remove /opt/neo-cli/neo-cli/neo-cli.csproj package neo
 RUN dotnet sln /opt/neo-cli/neo-cli.sln add /opt/neo/neo/neo.csproj
 RUN dotnet add /opt/neo-cli/neo-cli/neo-cli.csproj reference /opt/neo/neo/neo.csproj
