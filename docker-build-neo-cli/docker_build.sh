@@ -5,5 +5,5 @@
 
 CONTAINER_NAME="neo-build-neo-cli-with-new-blockchain-csharp"
 
-echo "BUILDING neo cli with new blockchain files - csharp"
+echo "BUILDING neo cli with personalized characteristics..."
 docker build -t  $CONTAINER_NAME .

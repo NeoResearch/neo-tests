@@ -1,6 +1,6 @@
 # NEO publish Dockerfile
 
-FROM ubuntu:16.04
+FROM ubuntu:17.10
 LABEL maintainer="AshRolls, vncoelho and imcoelho"
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -11,14 +11,13 @@ ENV DOTNET_CLI_TELEMETRY_OPTOUT 1
 # Install system dependencies. always should be done in one line
 # https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/#run
 RUN apt-get update \
-    && apt-get install -y apt-utils mininet netcat curl wget unzip zip less screen ca-certificates apt-transport-https libleveldb-dev sqlite3 libsqlite3-dev  expect  git-core
+    && apt-get install -y apt-utils mininet netcat curl wget unzip zip less screen ca-certificates apt-transport-https libleveldb-dev sqlite3 libsqlite3-dev expect git-core
 
-# Add dotnet apt repository
-RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /etc/apt/trusted.gpg.d/microsoft.gpg
-RUN echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-xenial-prod xenial main" > /etc/apt/sources.list.d/dotnetdev.list
-
-# Install dotnet sdk
-RUN apt-get update && apt-get install -y dotnet-sdk-2.0.0
+# Setup microsoft repositories
+RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+RUN mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
+RUN sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-artful-prod artful main" > /etc/apt/sources.list.d/dotnetdev.list'
+RUN apt-get update && apt-get install -y dotnet-sdk-2.1.4
 
 # APT cleanup to reduce image size
 RUN rm -rf /var/lib/apt/lists/*
@@ -30,11 +29,15 @@ RUN git clone https://github.com/neo-project/neo-cli.git /opt/neo-cli
 RUN git clone $NEO_HTTPS_REPO /opt/neo
 RUN cd /opt/neo && git checkout $NEO_BRANCH
 
-# remove neo-cli package and reference to local neo
+# Add modified files to the local neo-blockchain library
 ADD neo-blockchain/Blockchain.cs /opt/neo/neo/neo/Core
 ADD neo-blockchain/StateReader.cs /opt/neo/neo/SmartContract
+ADD neo-blockchain/ConsensusContext.cs /opt/neo/neo/neo/Consensus
 
+# Add modified files to the local neo-cli clients
+#ADD neo-cli/ConsensusContext.cs /opt/neo-cli/XXXXXXXXXX
 
+# remove neo-cli package and reference to local neo
 RUN dotnet remove /opt/neo-cli/neo-cli/neo-cli.csproj package neo
 RUN dotnet sln /opt/neo-cli/neo-cli.sln add /opt/neo/neo/neo.csproj
 RUN dotnet add /opt/neo-cli/neo-cli/neo-cli.csproj reference /opt/neo/neo/neo.csproj

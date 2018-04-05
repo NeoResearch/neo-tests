@@ -12,9 +12,9 @@
 
 ## What is it
 
-This project is an ongoing branch of [AshRolls/neo-integration-tests](https://github.com/AshRolls/neo-integration-tests).
+This project is an ongoing alpha branch of [AshRolls/neo-integration-tests](https://github.com/AshRolls/neo-integration-tests).
 
-It could be possible merged in a near future, as well as being merged with improved features released from the original master.
+It could be possible merged in a near future, as well as being merged with improvements features released from the original master.
 
 Here, the main focus is on establishing a set of parameters that will be subjected to optimization and statical analyses in order to check [neo-cli](https://github.com/neo-project/neo-cli) consensus capabilities.
 
@@ -44,16 +44,22 @@ This is a work in progress, areas to be improved:
 
 ## How to build an image
 
-### Create a modified Neo blockchain
+### Simple and easy
+
+1. Run `setup_test_image.sh`
+
+This procedure will run the two steps (A1 and A2) described below.
+In addition, it will commit an image will nodes already running with a genesis wallet.
+
+### A1 - Create a modified neo-cli with modified neo-blockchain or neo-cli files
 
 1. Go to `docker-build-neo-cli` folder
 1. Execute the script `docker_build_run_copy_stop`
 1. A new `neo-cli-built` will be copied to this folder
 
-## Execute a personalized cityofzion/neo-privatenet
+### A2 - Execute a personalized cityofzion/neo-privatenet
 
 1. Back to the root folder
-1. Run `docker_build.sh` in order to built the privanet
-1. Run it and, optionally, create initial wallet with Neo's and GAS `docker_run_and_create_wallet`. Otherwise, just run `docker_run.sh`.
-1. Access the Docker virtual environment with `bash-priv.sh`.
-1. Currently, you can monitor the blockchain accessing `opt/neo-python` and typing `python3 prompt.py -p`, as well as checking neo-cli nodes (currently, static set to 4) in its attached screens.
+1. execute setup_test_image.sh
+1. Access the Docker virtual environment with `bash-priv.sh`, inside folder `neo-privatenet-docker`.
+1. Currently, you can monitor the blockchain accessing `/neo-python` and typing `neopy`, as well as checking neo-cli nodes (currently, static set to 4) in its attached screens.

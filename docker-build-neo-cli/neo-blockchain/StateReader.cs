@@ -220,14 +220,16 @@ namespace Neo.SmartContract
         {
             byte[] hashOrPubkey = engine.EvaluationStack.Pop().GetByteArray();
             bool result;
-            string message = "Chupa essa manga: " +  hashOrPubkey.Length + " hash length: " + hashOrPubkey;
+            string message = "Chupa essa manga: " +  hashOrPubkey.Length; // + " hash length: " + hashOrPubkey;
             //string message = "Chupa essa manga" + result " : oi " +  hashOrPubkey.Length;
-            StackItem state = hashOrPubkey.Length;
+            
+
+            /*StackItem state = hashOrPubkey.Length;
             Log?.Invoke(this, new LogEventArgs(engine.ScriptContainer, new UInt160(engine.CurrentContext.ScriptHash), message));
            
             NotifyEventArgs notification = new NotifyEventArgs(engine.ScriptContainer, new UInt160(engine.CurrentContext.ScriptHash), state);
             Notify?.Invoke(this, notification);
-            notifications.Add(notification);
+            notifications.Add(notification);*/
 
   	    Console.WriteLine(message);
 

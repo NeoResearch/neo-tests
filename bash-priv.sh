@@ -1,4 +1,4 @@
-CONTAINER_NAME="neo-privnet-neoresearch-integrations"
+CONTAINER_NAME="neo-privatenet-neoresearch-integrations"
 DOCKERPRIV=$(docker ps -aqf name=$CONTAINER_NAME)
 
 if [ -z ${DOCKERPRIV+x} ]; then 
