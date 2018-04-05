@@ -39,8 +39,8 @@ echo "Building docker privatenet with new neo-cli..."
 ./docker_build.sh --neo-cli ../docker-build-neo-cli/neo-cli-built.zip
 
 echo "Running Privatenet and claiming GAS..."
-./docker_run.sh
-#./docker_run_and_create_wallet.sh
+./docker_run_and_create_wallet.sh
+#./docker_run.sh
 
 echo "Create a docker image at this point"
 cd ..

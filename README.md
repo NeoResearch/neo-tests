@@ -16,10 +16,10 @@ This project is an ongoing alpha branch of [AshRolls/neo-integration-tests](http
 
 It could be possible merged in a near future, as well as being merged with improvements features released from the original master.
 
-Here, the main focus is on establishing a set of parameters that will be subjected to optimization and statical analyses in order to check [neo-cli](https://github.com/neo-project/neo-cli) consensus capabilities.
+Here, the main focus is on establishing a set of parameters that will be subjected to optimization and statical analyses in order to check csharp [neo-cli](https://github.com/neo-project/neo-cli) consensus capabilities, or other client implemented in any other languages.
 
 This project was initially described as a set of tests designed to test correctness and performance of the Neo blockchain.
-In this sense, the repository comprises a set of scripts and docker containers to build and publish a [private network](https://hub.docker.com/r/cityofzion/neo-privatenet/), along with a set of python tests to run through.
+In this sense, this repository comprises a set of scripts and docker containers to build and publish a [private network](https://hub.docker.com/r/cityofzion/neo-privatenet/), along with a set of python tests to run through.
 
 In particular, this private network is usually created with new modified characteristics from [neo blockchain](https://github.com/neo-project/neo/).
 
@@ -42,24 +42,26 @@ This is a work in progress, areas to be improved:
   - Investigate using docker compose and improve the image build process so it's more suitable for CI;
   - Improve speed of build process, suspect we can use cache a little more for our containers.
 
-## How to build an image
+## How to build and Run a `neo-privatenet-neoresearch-integrations` image
 
 ### Simple and easy
+
+#### Build everything and generated a personalized image of the desired private blockchain ecosystem
 
 1. Run `setup_test_image.sh`
 
 This procedure will run the two steps (A1 and A2) described below.
 In addition, it will commit an image will nodes already running with a genesis wallet.
 
-### A1 - Create a modified neo-cli with modified neo-blockchain or neo-cli files
+#### Execute a personalized privatenet
+
+1. After Go to the root folder of this project
+1. Run  the new committed `neo-privatenet-neoresearch-integrations`  with  `docker_run.sh`
+1. Access the Docker virtual environment with `bash-priv.sh`
+1. Currently, you can monitor the blockchain accessing `/neo-python` and typing `neopy`, as well as checking neo-cli nodes (currently, static set to 4) in its attached screens.
+
+### A1 (additional possibilities) - Only create a modified neo-cli with modified neo-blockchain or neo-cli files
 
 1. Go to `docker-build-neo-cli` folder
 1. Execute the script `docker_build_run_copy_stop`
-1. A new `neo-cli-built` will be copied to this folder
-
-### A2 - Execute a personalized cityofzion/neo-privatenet
-
-1. Back to the root folder
-1. execute setup_test_image.sh
-1. Access the Docker virtual environment with `bash-priv.sh`, inside folder `neo-privatenet-docker`.
-1. Currently, you can monitor the blockchain accessing `/neo-python` and typing `neopy`, as well as checking neo-cli nodes (currently, static set to 4) in its attached screens.
+  - As result, a new `neo-cli-built` will be copied to this folder
