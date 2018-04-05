@@ -8,13 +8,14 @@
       width="125px;">
 </p>
 
-<h1 align="center">neo-integration-tests</h1>
+<h1 align="center">neo-research-integration-tests</h1>
 
 ## What is it
 
 This project is an ongoing alpha branch of [AshRolls/neo-integration-tests](https://github.com/AshRolls/neo-integration-tests).
 
 It could be possible merged in a near future, as well as being merged with improvements features released from the original master.
+On other hand, it also consider the possibility of starting a new project itself.
 
 Here, the main focus is on establishing a set of parameters that will be subjected to optimization and statical analyses in order to check csharp [neo-cli](https://github.com/neo-project/neo-cli) consensus capabilities, or other client implemented in any other languages.
 
@@ -46,21 +47,29 @@ This is a work in progress, areas to be improved:
 
 ### Simple and easy
 
-#### Build everything and generated a personalized image of the desired private blockchain ecosystem
+This procedure requires two steps (A1 and -A2 or A3-), all of them described below.
+
+#### A1 - Build everything and generated a personalized image of the desired private blockchain ecosystem
 
 1. Run `setup_test_image.sh`
 
-This procedure will run the two steps (A1 and A2) described below.
-In addition, it will commit an image will nodes already running with a genesis wallet.
+Basically, this step commits an image with all nodes already running with a genesis wallet.
 
-#### Execute a personalized privatenet
+Jump to step 2 or 3.
 
-1. After Go to the root folder of this project
-1. Run  the new committed `neo-privatenet-neoresearch-integrations`  with  `docker_run.sh`
+#### A2 - Execute a personalized privatenet
+
+1. After going to the root folder of this project, run  the new committed `neo-privatenet-neoresearch-integrations`  with  `docker_run.sh`
 1. Access the Docker virtual environment with `bash-priv.sh`
 1. Currently, you can monitor the blockchain accessing `/neo-python` and typing `neopy`, as well as checking neo-cli nodes (currently, static set to 4) in its attached screens.
 
-### A1 (additional possibilities) - Only create a modified neo-cli with modified neo-blockchain or neo-cli files
+#### A3 - Execute all current functionalities
+
+1. After going to the root folder of this project, simply run `build_everything.sh`
+
+### Other additional possibilities and features
+
+#### F1 - Only create a modified neo-cli with modified neo-blockchain or neo-cli files
 
 1. Go to `docker-build-neo-cli` folder
 1. Execute the script `docker_build_run_copy_stop`
