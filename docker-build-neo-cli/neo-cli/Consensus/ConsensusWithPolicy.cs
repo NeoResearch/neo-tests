@@ -19,7 +19,7 @@ namespace Neo.Consensus
 
         protected override bool CheckPolicy(Transaction tx)
         {
-	    Report reportObj = new Report(d1,"[CheckPolicy]:");
+	    Report reportObj = new Report("[CheckPolicy]:");
             switch (Policy.Default.PolicyLevel)
             {
                 case PolicyLevel.AllowAll:
@@ -31,7 +31,7 @@ namespace Neo.Consensus
                 default:
                     return base.CheckPolicy(tx);
             }
-            reportObj.appendExport(d2,"./ReportCheckPolicy.txt");
+            reportObj.appendElapsedTime("./ReportCheckPolicy.txt");
         }
 
         protected override void Log(string message)

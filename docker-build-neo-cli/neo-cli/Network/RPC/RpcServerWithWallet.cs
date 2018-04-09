@@ -208,8 +208,8 @@ namespace Neo.Network.RPC
                 case "invoke":
                 case "invokefunction":
                 case "invokescript":
-          	    Console.WriteLine("Test inside Consensus TestInvokeScript");
-	            DateTime? d1 = DateTime.Now;
+		    Report reportObj = new Report("[TestInsideRPC-invokescript]:");
+
                     JObject result = base.Process(method, _params);
                     if (Program.Wallet != null)
                     {
@@ -235,8 +235,9 @@ namespace Neo.Network.RPC
                         Console.WriteLine("Tx:"+tx?.ToArray().ToHexString());
                         result["tx"] = tx?.ToArray().ToHexString();
                     }
-		    DateTime? d2 = DateTime.Now.AddDays(-1);
-	            Console.WriteLine("Elapsed seconds are:"+(double)(d1 - d2).GetValueOrDefault().TotalSeconds);
+
+		    reportObj.appendElapsedTime("./Report2.txt");
+
                     return result;
                 default:
                     return base.Process(method, _params);

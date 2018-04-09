@@ -5,9 +5,32 @@ using System.IO;
 
 namespace Neo
 {
+    class Report
+    {
+	public DateTime? d;
+	public string header;
+
+	public Report(string _header)
+	{
+	   this.d = DateTime.Now;
+	   this.header = _header;
+           Console.WriteLine("Starting test at " + header);
+	}
+
+	public void appendElapsedTime(string output)
+	{
+	    DateTime? d2 = DateTime.Now;
+            string reportMessage= "Elapsed in seconds are "+ header + (double)(d2 - d).GetValueOrDefault().TotalSeconds + "\n";
+	    Console.WriteLine(reportMessage);
+            //File.WriteAllText("./Report.txt", reportMessage);
+	    File.AppendAllText(output, reportMessage);
+	}          
+    }
+
+
     static class Program
     {
-          internal static Wallet Wallet;
+        internal static Wallet Wallet;
 
         private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
@@ -20,33 +43,9 @@ namespace Neo
 
         static void Main(string[] args)
         {
-	    FileStream ostrm;
-	    StreamWriter writer;
-	    TextWriter oldOut = Console.Out;
-	    try
-	    {
-		ostrm = new FileStream ("./Redirect.txt", FileMode.OpenOrCreate, FileAccess.Write);
-		writer = new StreamWriter (ostrm);
-	    }
-	    catch (Exception e)
-	    {
-		Console.WriteLine ("Cannot open Redirect.txt for writing");
-		Console.WriteLine (e.Message);
-		return;
-	    }
-	    Console.SetOut (writer);
 
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             new MainService().Run(args);
-
-	    Console.SetOut (writer);
-	    Console.WriteLine ("This is a line of text");
-	    Console.WriteLine ("Everything written to Console.Write() or");
-	    Console.WriteLine ("Console.WriteLine() will be written to a file");
-	    Console.SetOut (oldOut);
-	    writer.Close();
-	    ostrm.Close();
-	    Console.WriteLine ("Done");
         }
 
         private static void PrintErrorLogs(StreamWriter writer, Exception ex)
