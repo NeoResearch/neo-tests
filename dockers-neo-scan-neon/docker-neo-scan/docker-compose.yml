@@ -16,7 +16,8 @@ services:
       - neo-privnet:30334
       - neo-privnet:30335
       - neo-privnet:30336
-      - neo-privnet:8088
+      - neo-privnet:30337
+      - neo-privnet:38088
     depends_on:
       - postgresql
       - neo-privnet
@@ -39,4 +40,5 @@ services:
       - 30334:30334
       - 30335:30335
       - 30336:30336
-      - 8088:8088
+      - 30337:30337
+      - 38088:38088

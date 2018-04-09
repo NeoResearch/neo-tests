@@ -7,7 +7,7 @@ config :logger, :console,
   metadata: [:request_id]
 
 config :neoscan_sync, notification_seeds: [
-  System.get_env("NEO_SEED_1"),
+  System.get_env("NEO_PYTHON_SEED_1"),
 ]
 
 config :neoscan_sync, start_notifications: 0 #Block height to start notifications check

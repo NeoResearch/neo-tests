@@ -25,8 +25,8 @@ namespace Neo
 	    DateTime? d2 = DateTime.Now;
             string reportMessage= "Elapsed in seconds are " + header + ": " + (double)(d2 - d).GetValueOrDefault().TotalSeconds + "\n";
 	    Console.WriteLine(reportMessage);
-            //File.WriteAllText("./Report.txt", reportMessage);
 	    File.AppendAllText(output, reportMessage);
+            //File.WriteAllText("./Report.txt", reportMessage);
 	}          
     }
 

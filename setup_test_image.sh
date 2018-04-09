@@ -16,8 +16,10 @@ fi
 echo "Building & running neo-publish & copying.zip"
 (cd docker-build-neo-cli; ./docker_build_run_copy_stop.sh)
 
+
 #echo "Cloning latest neo-privatenet-docker repo..."
-#git clone https://github.com/CityOfZion/neo-privatenet-docker.git
+#git clone https://github.com/vncoelho/neo-privatenet-docker.git
+
 cd neo-privatenet-docker/
 echo "Git pull neoprivatenet docker..."
 git pull

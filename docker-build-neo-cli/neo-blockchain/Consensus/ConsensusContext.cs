@@ -34,6 +34,7 @@ namespace Neo.Consensus
         public void ChangeView(byte view_number)
         {
 	    ReportNeoBlockchain reportObj = new ReportNeoBlockchain("[NeoConsensusContext-ChangeView]");
+
             Console.WriteLine("Test inside Consensus ChangeView");
             DateTime? d1 = DateTime.Now;
 
@@ -53,6 +54,7 @@ namespace Neo.Consensus
             //Console.WriteLine("Elapsed seconds are:"+seconds);
 	    DateTime? d2 = DateTime.Now.AddDays(-1);
             Console.WriteLine("Elapsed seconds are:"+(double)(d1 - d2).GetValueOrDefault().TotalSeconds);
+
 	    reportObj.appendElapsedTime();
         }
 

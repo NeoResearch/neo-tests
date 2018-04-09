@@ -30,15 +30,14 @@ RUN git clone $NEO_HTTPS_REPO /opt/neo
 RUN cd /opt/neo && git checkout $NEO_BRANCH
 
 # Add modified files to the local neo-blockchain library
+#COPY neo-blockchain/ /opt/neo/neo/
 COPY neo-blockchain/Settings.cs /opt/neo/neo/Settings.cs
 COPY neo-blockchain/SmartContract/ /opt/neo/neo/SmartContract/
 COPY neo-blockchain/Consensus/ /opt/neo/neo/Consensus/
 
-#ADD neo-blockchain/Core/* /opt/neo/neo/Core/
-#COPY neo-blockchain/Consensus/ConsensusService.cs /opt/neo/neo/Consensus/ConsensusService.cs
-
 
 # Add modified files to the local neo-cli clients
+#COPY neo-cli/ /opt/neo-cli/neo-cli/
 COPY neo-cli/Network/ /opt/neo-cli/neo-cli/Network/
 COPY neo-cli/Program.cs /opt/neo-cli/neo-cli/Program.cs
 COPY neo-cli/Consensus/ /opt/neo-cli/Consensus/

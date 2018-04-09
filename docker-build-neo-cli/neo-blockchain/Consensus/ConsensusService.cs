@@ -32,6 +32,8 @@ namespace Neo.Consensus
 
         private bool AddTransaction(Transaction tx, bool verify)
         {
+	    ReportNeoBlockchain reportObj = new ReportNeoBlockchain("[NeoConsensusService-AddTransaction]");
+
             if (Blockchain.Default.ContainsTransaction(tx.Hash) ||
                 (verify && !tx.Verify(context.Transactions.Values)) ||
                 !CheckPolicy(tx))
@@ -57,23 +59,33 @@ namespace Neo.Consensus
                     return false;
                 }
             }
+
+	    reportObj.appendElapsedTime();
             return true;
         }
 
         private void Blockchain_PersistCompleted(object sender, Block block)
         {
+	    ReportNeoBlockchain reportObj = new ReportNeoBlockchain("[NeoConsensusService-Blockchain_PersistCompleted]");
+
             Log($"persist block: {block.Hash}");
             block_received_time = DateTime.Now;
             InitializeConsensus(0);
+
+	    reportObj.appendElapsedTime();
         }
 
         private void CheckExpectedView(byte view_number)
         {
+	    ReportNeoBlockchain reportObj = new ReportNeoBlockchain("[NeoConsensusService-CheckExpectedView]");
+
             if (context.ViewNumber == view_number) return;
             if (context.ExpectedView.Count(p => p == view_number) >= context.M)
             {
                 InitializeConsensus(view_number);
             }
+
+	    reportObj.appendElapsedTime();
         }
 
         protected virtual bool CheckPolicy(Transaction tx)
@@ -83,6 +95,8 @@ namespace Neo.Consensus
 
         private void CheckSignatures()
         {
+	    ReportNeoBlockchain reportObj = new ReportNeoBlockchain("[NeoConsensusService-CheckSignatures]");
+
             if (context.Signatures.Count(p => p != null) >= context.M && context.TransactionHashes.All(p => context.Transactions.ContainsKey(p)))
             {
                 Contract contract = Contract.CreateMultiSigContract(context.M, context.Validators);
@@ -101,6 +115,8 @@ namespace Neo.Consensus
                     Log($"reject block: {block.Hash}");
                 context.State |= ConsensusState.BlockSent;
             }
+
+	    reportObj.appendElapsedTime();
         }
 
         public void Dispose()
@@ -117,6 +133,8 @@ namespace Neo.Consensus
 
         private void FillContext()
         {
+	    ReportNeoBlockchain reportObj = new ReportNeoBlockchain("[NeoConsensusService-FillContext]");
+
             List<Transaction> transactions = LocalNode.GetMemoryPool().Where(p => CheckPolicy(p)).ToList();
             if (transactions.Count >= Settings.Default.MaxTransactionsPerBlock)
                 transactions = transactions.OrderByDescending(p => p.NetworkFee / p.Size).Take(Settings.Default.MaxTransactionsPerBlock - 1).ToList();
@@ -148,6 +166,8 @@ namespace Neo.Consensus
             context.TransactionHashes = transactions.Select(p => p.Hash).ToArray();
             context.Transactions = transactions.ToDictionary(p => p.Hash);
             context.NextConsensus = Blockchain.GetConsensusAddress(Blockchain.Default.GetValidators(transactions).ToArray());
+
+	    reportObj.appendElapsedTime();
         }
 
         private static ulong GetNonce()
@@ -167,7 +187,7 @@ namespace Neo.Consensus
                 else
                     context.ChangeView(view_number);
                 if (context.MyIndex < 0) return;
-                Log($"initialize: height={context.BlockIndex} viewTest==={view_number} indexOi={context.MyIndex} role={(context.MyIndex == context.PrimaryIndex ? ConsensusState.Primary : ConsensusState.Backup)}");
+                Log($"initialize: height={context.BlockIndex} view={view_number} index={context.MyIndex} role={(context.MyIndex == context.PrimaryIndex ? ConsensusState.Primary : ConsensusState.Backup)}");
                 if (context.MyIndex == context.PrimaryIndex)
                 {
                     context.State |= ConsensusState.Primary;
@@ -201,6 +221,8 @@ namespace Neo.Consensus
 
         private void LocalNode_InventoryReceived(object sender, IInventory inventory)
         {
+	    ReportNeoBlockchain reportObj = new ReportNeoBlockchain("[NeoConsensusService-LocalNode_InventoryReceived]");
+
             ConsensusPayload payload = inventory as ConsensusPayload;
             if (payload != null)
             {
@@ -250,10 +272,14 @@ namespace Neo.Consensus
                     }
                 }
             }
+
+	    reportObj.appendElapsedTime();
         }
 
         private void LocalNode_InventoryReceiving(object sender, InventoryReceivingEventArgs e)
         {
+	    ReportNeoBlockchain reportObj = new ReportNeoBlockchain("[NeoConsensusService-LocalNode_InventoryReceiving]");
+
             Transaction tx = e.Inventory as Transaction;
             if (tx != null)
             {
@@ -267,6 +293,8 @@ namespace Neo.Consensus
                     e.Cancel = true;
                 }
             }
+
+	    reportObj.appendElapsedTime();
         }
 
         protected virtual void Log(string message)
@@ -275,16 +303,22 @@ namespace Neo.Consensus
 
         private void OnChangeViewReceived(ConsensusPayload payload, ChangeView message)
         {
-            Log($"{nameof(OnChangeViewReceived)}: height={payload.BlockIndex} newViewwww={message.ViewNumber} index={payload.ValidatorIndex} nv={message.NewViewNumber}");
+	    ReportNeoBlockchain reportObj = new ReportNeoBlockchain("[NeoConsensusService-OnChangeViewReceived]");
+
+            Log($"{nameof(OnChangeViewReceived)}: height={payload.BlockIndex} view={message.ViewNumber} index={payload.ValidatorIndex} nv={message.NewViewNumber}");
             if (message.NewViewNumber <= context.ExpectedView[payload.ValidatorIndex])
                 return;
             context.ExpectedView[payload.ValidatorIndex] = message.NewViewNumber;
             CheckExpectedView(message.NewViewNumber);
+
+	    reportObj.appendElapsedTime();
         }
 
         private void OnPrepareRequestReceived(ConsensusPayload payload, PrepareRequest message)
         {
-            Log($"{nameof(OnPrepareRequestReceived)}: height={payload.BlockIndex} newViewwww={message.ViewNumber} index={payload.ValidatorIndex} tx={message.TransactionHashes.Length}");
+	    ReportNeoBlockchain reportObj = new ReportNeoBlockchain("[NeoConsensusService-OnPrepareRequestReceived]");
+
+            Log($"{nameof(OnPrepareRequestReceived)}: height={payload.BlockIndex} view={message.ViewNumber} index={payload.ValidatorIndex} tx={message.TransactionHashes.Length}");
             if (!context.State.HasFlag(ConsensusState.Backup) || context.State.HasFlag(ConsensusState.RequestReceived))
                 return;
             if (payload.ValidatorIndex != context.PrimaryIndex) return;
@@ -318,28 +352,36 @@ namespace Neo.Consensus
                 foreach (RemoteNode node in localNode.GetRemoteNodes())
                     node.EnqueueMessage("getdata", msg);
             }
+
+	    reportObj.appendElapsedTime();
         }
 
         private void OnPrepareResponseReceived(ConsensusPayload payload, PrepareResponse message)
         {
-            Log($"{nameof(OnPrepareResponseReceived)}: height={payload.BlockIndex} newViewwww={message.ViewNumber} index={payload.ValidatorIndex}");
+	    ReportNeoBlockchain reportObj = new ReportNeoBlockchain("[NeoConsensusService-OnPrepareResponseReceived]");
+
+            Log($"{nameof(OnPrepareResponseReceived)}: height={payload.BlockIndex} view={message.ViewNumber} index={payload.ValidatorIndex}");
             if (context.State.HasFlag(ConsensusState.BlockSent)) return;
             if (context.Signatures[payload.ValidatorIndex] != null) return;
             Block header = context.MakeHeader();
             if (header == null || !Crypto.Default.VerifySignature(header.GetHashData(), message.Signature, context.Validators[payload.ValidatorIndex].EncodePoint(false))) return;
             context.Signatures[payload.ValidatorIndex] = message.Signature;
             CheckSignatures();
+
+	    reportObj.appendElapsedTime();
         }
 
         private void OnTimeout(object state)
         {
+	    ReportNeoBlockchain reportObj = new ReportNeoBlockchain("[NeoConsensusService-OnTimeout]");
+
             lock (context)
             {
                 if (timer_height != context.BlockIndex || timer_view != context.ViewNumber) return;
-                Log($"timeout: height={timer_height} newViewwww={timer_view} state={context.State}");
+                Log($"timeout: height={timer_height} view={timer_view} state={context.State}");
                 if (context.State.HasFlag(ConsensusState.Primary) && !context.State.HasFlag(ConsensusState.RequestSent))
                 {
-                    Log($"send perpare request: height={timer_height} newViewwww={timer_view}");
+                    Log($"send perpare request: height={timer_height} view={timer_view}");
                     context.State |= ConsensusState.RequestSent;
                     if (!context.State.HasFlag(ConsensusState.SignatureSent))
                     {
@@ -354,20 +396,28 @@ namespace Neo.Consensus
                     RequestChangeView();
                 }
             }
+
+	    reportObj.appendElapsedTime();
         }
 
         private void RequestChangeView()
         {
+	    ReportNeoBlockchain reportObj = new ReportNeoBlockchain("[NeoConsensusService-RequestChangeView]");
+
             context.State |= ConsensusState.ViewChanging;
             context.ExpectedView[context.MyIndex]++;
-            Log($"request change view: height={context.BlockIndex} newViewwww={context.ViewNumber} nv={context.ExpectedView[context.MyIndex]} state={context.State}");
+            Log($"request change view: height={context.BlockIndex} view={context.ViewNumber} nv={context.ExpectedView[context.MyIndex]} state={context.State}");
             timer.Change(TimeSpan.FromSeconds(Blockchain.SecondsPerBlock << (context.ExpectedView[context.MyIndex] + 1)), Timeout.InfiniteTimeSpan);
             SignAndRelay(context.MakeChangeView());
             CheckExpectedView(context.ExpectedView[context.MyIndex]);
+
+	    reportObj.appendElapsedTime();
         }
 
         private void SignAndRelay(ConsensusPayload payload)
         {
+	    ReportNeoBlockchain reportObj = new ReportNeoBlockchain("[NeoConsensusService-SignAndRelay]");
+
             ContractParametersContext sc;
             try
             {
@@ -380,6 +430,8 @@ namespace Neo.Consensus
             }
             sc.Verifiable.Scripts = sc.GetScripts();
             localNode.RelayDirectly(payload);
+
+	    reportObj.appendElapsedTime();
         }
 
         public void Start()
