@@ -1,9 +1,9 @@
-CONTAINER_NAME="neo-privatenet-neoresearch-integrations"
-DOCKER_PRIVATENET_INTEGRATION=$(docker ps -aqf name=$CONTAINER_NAME)
+CONTAINER_NAME="neo-privatenet-opt-tests"
+DOCKER_PRIVATENET_OPT_TESTS=$(docker ps -aqf name=$CONTAINER_NAME)
 
-if [ -z ${DOCKER_PRIVATENET_INTEGRATION+x} ]; then 
-   echo "DOCKER_PRIVATENET_INTEGRATION var is unset";
+if [ -z ${DOCKER_PRIVATENET_OPT_TESTS+x} ]; then 
+   echo "DOCKER_PRIVATENET_OPT_TESTS var is unset";
 else
-   echo "DOCKER_PRIVATENET_INTEGRATION=$DOCKERPRIV";
+   echo "DOCKER_PRIVATENET_OPT_TESTS=$DOCKER_PRIVATENET_OPT_TESTS";
    docker exec -it $CONTAINER_NAME /bin/bash
 fi

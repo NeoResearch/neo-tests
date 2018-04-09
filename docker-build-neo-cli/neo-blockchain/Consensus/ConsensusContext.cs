@@ -4,6 +4,7 @@ using Neo.Cryptography.ECC;
 using Neo.IO;
 using Neo.Network.Payloads;
 using Neo.Wallets;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -27,15 +28,13 @@ namespace Neo.Consensus
         public byte[][] Signatures;
         public byte[] ExpectedView;
         public KeyPair KeyPair;
-
+  
         public int M => Validators.Length - (Validators.Length - 1) / 3;
 
         public void ChangeView(byte view_number)
         {
-string debugMessage= "Test inside Consensus ChangeView";
- DateTime now = DateTime.Now;
-            string line = $"[{now.TimeOfDay:hh\\:mm\\:ss}] {debugMessage}";
-            Console.WriteLine(line);
+            Console.WriteLine("Test inside Consensus ChangeView");
+            DateTime? d1 = DateTime.Now;
 
             int p = ((int)BlockIndex - view_number) % Validators.Length;
             State &= ConsensusState.SignatureSent;
@@ -48,11 +47,11 @@ string debugMessage= "Test inside Consensus ChangeView";
             }
             _header = null;
 
-now = DateTime.Now - now;
-debugMessage= "Test inside Consensus ChangeView with measured time ";
-line = $"[{now.TimeOfDay:hh\\:mm\\:ss}] {debugMessage}";
-            Console.WriteLine(line);
-
+            //TimeSpan diff = DateTime.Now - PreviousDateTime;
+            //double seconds = diff.TotalSeconds;
+            //Console.WriteLine("Elapsed seconds are:"+seconds);
+	    DateTime? d2 = DateTime.Now.AddDays(-1);
+            Console.WriteLine("Elapsed seconds are:"+(double)(d1 - d2).GetValueOrDefault().TotalSeconds);
         }
 
         public ConsensusPayload MakeChangeView()
@@ -66,11 +65,6 @@ line = $"[{now.TimeOfDay:hh\\:mm\\:ss}] {debugMessage}";
         private Block _header = null;
         public Block MakeHeader()
         {
-string debugMessage= "Test inside Consensus Make Header";
- DateTime now = DateTime.Now;
-            string line = $"[{now.TimeOfDay:hh\\:mm\\:ss}] {debugMessage}";
-            Console.WriteLine(line);
-
             if (TransactionHashes == null) return null;
             if (_header == null)
             {
@@ -86,10 +80,6 @@ string debugMessage= "Test inside Consensus Make Header";
                     Transactions = new Transaction[0]
                 };
             }
-now = DateTime.Now - now;
-debugMessage= "Test inside Consensus Make Header with measured time ";
-line = $"[{now.TimeOfDay:hh\\:mm\\:ss}] {debugMessage}";
-            Console.WriteLine(line);
 
             return _header;
         }

@@ -2,7 +2,7 @@ version: "3"
 services:
   neo-scan:
     build: .
-    image: neo-integrations-neo-scan # slipoh/neo-scan #vncoelho/neo-compiler-neo-scan:1.2 #slipoh/neo-scan
+    image: neo-scan-opt-tests:latest # slipoh/neo-scan #vncoelho/neo-compiler-neo-scan:1.2 #slipoh/neo-scan
     container_name: "neo-scan"
     ports:
       - 4000:4000
@@ -16,6 +16,7 @@ services:
       - neo-privnet:30334
       - neo-privnet:30335
       - neo-privnet:30336
+      - neo-privnet:8088
     depends_on:
       - postgresql
       - neo-privnet
@@ -27,8 +28,8 @@ services:
       POSTGRES_USER: postgres 
       POSTGRES_PASSWORD: postgres
   neo-privnet:
-    image: neo-privatenet-neoresearch-integrations:latest  #neo-compiler-privnet-with-gas:1.2 
-    container_name: "neo-privatenet-neoresearch-integrations"
+    image: neo-privatenet-opt-tests:latest  #neo-compiler-privnet-with-gas:1.2 
+    container_name: "neo-privatenet-opt-tests"
     ports:
       - 20333:20333
       - 20334:20334
@@ -38,3 +39,4 @@ services:
       - 30334:30334
       - 30335:30335
       - 30336:30336
+      - 8088:8088

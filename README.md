@@ -8,12 +8,11 @@
       width="125px;">
 </p>
 
-<h1 align="center">neo-research-integration-tests</h1>
+<h1 align="center">neo-opt-tests</h1>
 
 ## What is it
 
 This project is an ongoing alpha branch of [AshRolls/neo-integration-tests](https://github.com/AshRolls/neo-integration-tests).
-
 It could be possible merged in a near future, as well as being merged with improvements features released from the original master.
 On other hand, it also consider the possibility of starting a new project itself.
 

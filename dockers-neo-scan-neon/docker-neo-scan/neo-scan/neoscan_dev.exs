@@ -8,4 +8,3 @@ config :neoscan, Neoscan.Repo,
   database: System.get_env("POSTGRES_DATABASE"),
   hostname: System.get_env("POSTGRES_HOSTNAME"),
   pool_size: 10
-

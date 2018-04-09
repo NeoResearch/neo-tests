@@ -30,12 +30,14 @@ RUN git clone $NEO_HTTPS_REPO /opt/neo
 RUN cd /opt/neo && git checkout $NEO_BRANCH
 
 # Add modified files to the local neo-blockchain library
-ADD neo-blockchain/Blockchain.cs /opt/neo/neo/neo/Core
-ADD neo-blockchain/StateReader.cs /opt/neo/neo/SmartContract
-ADD neo-blockchain/ConsensusContext.cs /opt/neo/neo/neo/Consensus
+#ADD neo-blockchain/Core/* /opt/neo/neo/Core/
+#COPY neo-blockchain/Consensus/ConsensusService.cs /opt/neo/neo/Consensus/ConsensusService.cs
+COPY neo-blockchain/SmartContract/ /opt/neo/neo/SmartContract/
+COPY neo-blockchain/Consensus/ /opt/neo/neo/Consensus/
 
 # Add modified files to the local neo-cli clients
-#ADD neo-cli/ConsensusContext.cs /opt/neo-cli/XXXXXXXXXX
+#COPY neo-cli/Program.cs /opt/neo-cli/neo-cli/Program.cs
+COPY neo-cli/Network/ /opt/neo-cli/neo-cli/Network/
 
 # remove neo-cli package and reference to local neo
 RUN dotnet remove /opt/neo-cli/neo-cli/neo-cli.csproj package neo

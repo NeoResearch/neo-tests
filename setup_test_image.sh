@@ -5,11 +5,11 @@
 # use docker to publish neo
 #TODO sub in $1 $2
 
-CONTAINER_NAME="neo-privatenet-neoresearch-integrations"
+CONTAINER_NAME="neo-privatenet-opt-tests"
 CONTAINER_NEOPRIVNET="neo-privnet"
 CONTAINER=$(docker ps -aqf name=$CONTAINER_NAME)
 if [ -n "$CONTAINER" ]; then
-	echo "Stopping container named neo-publish"
+	echo "Stopping container named $CONTAINER_NAME"
 	docker stop $CONTAINER_NAME 1>/dev/null
 fi
 
