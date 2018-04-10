@@ -50,7 +50,7 @@ This procedure requires two steps (A1 and -A2 or A3-), all of them described bel
 
 #### A1 - Build everything and generated a personalized image of the desired private blockchain ecosystem
 
-1. Run `setup_test_image.sh`
+1. Run `commit_modified_privatenet.sh`
 
 Basically, this step commits an image with all nodes already running with a genesis wallet.
 
@@ -58,11 +58,11 @@ Jump to step 2 or 3.
 
 #### A2 - Execute a personalized privatenet
 
-1. After going to the root folder of this project, run  the new committed `neo-privatenet-neoresearch-integrations`  with  `docker_run.sh`
-1. Access the Docker virtual environment with `bash-priv.sh`
-1. Currently, you can monitor the blockchain accessing `/neo-python` and typing `neopy`, as well as checking neo-cli nodes (currently, static set to 4) in its attached screens.
+1. After going to the root folder of this project, run the new committed `neo-privatenet-opt-tests` with  `docker_run_integrations_privatenet.sh`
+1. Access the Docker virtual environment with `bash-priv_integrations_privatenet.sh`
+1. Currently, inside the docker container, you can monitor the blockchain accessing `/neo-python` and typing `neopy`, as well as checking neo-cli nodes (currently, static set to 4) in its attached screens.
 
-#### A3 - Execute all current functionalities
+#### A3 - Execute all master functionalities (neo-scan + debugging private net)
 
 1. After going to the root folder of this project, simply run `build_everything.sh`
 
