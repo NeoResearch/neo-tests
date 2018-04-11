@@ -13,8 +13,6 @@ if(this.window.location.href.indexOf("localhost")  != -1)
 if(LOCAL_DEVELOPMENT){
 	NEOSCAN_PATH = "http://localhost:4000";
 	NODES_CSHARP_PATH = "http://localhost:30333";
-	//NEOSCAN_PATH = "https://neoscan.neocompiler.io";
-	NODES_CSHARP_PATH = "https://node1.neocompiler.io";
 }
 
 /* Routes */
@@ -25,7 +23,7 @@ app.config(['$routeProvider', function ($routeProvider) {
     .when("/", {templateUrl: "partials/home.html", controller: "PageCtrl"})
 
     // Pages
-    .when("/neoeditor", {templateUrl: "partials/neoeditor.html", controller: "PageCtrl"})
+    .when("/opttestsinterface", {templateUrl: "partials/opttestsinterface.html", controller: "PageCtrl"})
     .when("/utils", {templateUrl: "partials/utils.html", controller: "PageCtrl"})
     .when("/about", {templateUrl: "partials/about.html", controller: "PageCtrl"})
 

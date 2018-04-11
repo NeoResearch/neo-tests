@@ -4,14 +4,23 @@
             <ol class="breadcrumb">
                 <li><a href="../index.html">Home</a>
                 </li>
-                <li class="active">Opt Eco</li>
+                <li class="active">Opt-tests framework</li>
             </ol>
         </div>
     </div>
 
+    Designer will be able to select some parameters and adapt the way that nodes interact with the blockchain.<br>
+    <button type="submit" onClick="setPrivateNetPameter()" id="btnStartTests" style="margin-bottom: 10px;" class="btn btn-success btn-sm">Set blockchain parameters</button><br>
 
-    <button type="submit" onClick="searchForTXs()" id="btndrawRelayedTXs" style="margin-bottom: 10px;" class="btn btn-success btn-sm">Check time reports</button><br>
-    <div id="divRelayedTXs" class="table-responsive"></div>
+
+    Different proof-of-bullets parameters will be set here, using inputs. <br>
+    Designer will be able to precisely select the combination of TXs and when they will be broadcasted to the nodes. <br>
+    <button type="submit" onClick="startExperiments()" id="btnStartTests" style="margin-bottom: 10px;" class="btn btn-success btn-sm">Start tests</button><br>
+
+    The table below will contain basic reports from your experiment.<br>
+    <button type="submit" onClick="getTimeReports()" id="btndrawRelayedTXs" style="margin-bottom: 10px;" class="btn btn-success btn-sm">Check time reports</button><br>
+
+    <div id="divTimeReports" class="table-responsive"></div>
 
 
 
@@ -77,7 +86,7 @@
     drawRelayedTXs();
     function drawRelayedTXs(){
     	//Clear previous data
-    	document.getElementById("divRelayedTXs").innerHTML = "";
+    	document.getElementById("divTimeReports").innerHTML = "";
     	var table = document.createElement("table");
       table.setAttribute('class', 'table');
 
@@ -88,11 +97,11 @@
       var headers4 = document.createElement('div');
       headers1.innerHTML = "<b> ID </b>";
       row.insertCell(-1).appendChild(headers1);
-      headers2.innerHTML = "<b> TX </b>";
+      headers2.innerHTML = "<b> CODE_SEGMENT </b>";
       row.insertCell(-1).appendChild(headers2);
-      headers3.innerHTML = "<b> Note </b>";
+      headers3.innerHTML = "<b> AVG_TIME </b>";
       row.insertCell(-1).appendChild(headers3);
-      headers4.innerHTML = "<b> Blockchained </b>";
+      headers4.innerHTML = "<b> STD_TIME </b>";
       row.insertCell(-1).appendChild(headers4);
 
       for (i = 0; i < vecRelayedTXs.length; i++) {
@@ -144,31 +153,9 @@
           //Check activation status ends
     	}//Finishes loop that draws each relayed transaction
 
-      document.getElementById("divRelayedTXs").appendChild(table);
-      searchForTXs();
+      document.getElementById("divTimeReports").appendChild(table);
     }//Finishe DrawRules function
 
-   //This function tries to search and verify for all relayed TXs that were, possible, broadcasted and included in the blockchain
-   function searchForTXs(){
-     for (i = 0; i < vecRelayedTXs.length; i++)
-      searchForTX(i);
-   }
-
-   //This function tries to search and verify for a specific relayed TX that was, possible, broadcasted and included in the blockchain
-   function searchForTX(indexToUpdate){
-          var urlToGet = neoScanTXBaseURL + vecRelayedTXs[indexToUpdate].tx;
-          //console.log("urlToGet:" + urlToGet);
-          $.getJSON(urlToGet, function(result) {
-              //console.log("div is activationStatus"+indexToUpdate);
-              if(result.txid == "not found" || result.vin == null){
-                document.getElementById("activationStatus"+indexToUpdate).innerHTML = "<font color=\"blue\">PENDING</font>";
-              }else{
-                document.getElementById("activationStatus"+indexToUpdate).innerHTML = "<font color=\"green\">FOUND</font>";
-              }
-          }).fail(function (result) {
-              document.getElementById("activationStatus"+indexToUpdate).innerHTML = "<font color=\"red\">FAILED</font>";
-          });
-   }
 
    function updateTXTable(contractMessagesBox){
      var indexRelayedTx = contractMessagesBox.indexOf("relayed TX");
