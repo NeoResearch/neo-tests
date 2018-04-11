@@ -18,7 +18,8 @@ echo "Building & running neo-publish & copying.zip"
 
 
 #echo "Cloning latest neo-privatenet-docker repo..."
-#git clone https://github.com/vncoelho/neo-privatenet-docker.git
+#NeoResearch repo is used for a better control of stability of this project
+#git clone https://github.com/NeoResearch/neo-privatenet-docker.git
 
 cd neo-privatenet-docker/
 echo "Git pull neoprivatenet docker..."

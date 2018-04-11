@@ -1,8 +1,4 @@
 <p align="center">
-  <img
-    src="http://res.cloudinary.com/vidsy/image/upload/v1503160820/CoZ_Icon_DARKBLUE_200x178px_oq0gxm.png"
-    width="125px;">
-    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
     <img
       src="http://res.cloudinary.com/dnh3we6el/image/upload/v1519941321/NeoResearch-Logo.png"
       width="125px;">
@@ -12,16 +8,15 @@
 
 ## What is it
 
-This project is an ongoing alpha branch of [AshRolls/neo-integration-tests](https://github.com/AshRolls/neo-integration-tests).
-It could be possible merged in a near future, as well as being merged with improvements features released from the original master.
-On other hand, it also consider the possibility of starting a new project itself.
+This project has its main focus on establishing a set of parameters that will be subjected to optimization and statical analyses in order to check csharp [neo-cli](https://github.com/neo-project/neo-cli) consensus capabilities, or other client implemented in any other languages.
+In this sense, this repository comprises a set of scripts and docker containers to build and publish a [private network](https://github.com/NeoResearch/neo-privatenet-docker.git), along with a set of python tests to run through.
+It posses the potential of improving performance of the Neo blockchain and finding optimization opportunities.
 
-Here, the main focus is on establishing a set of parameters that will be subjected to optimization and statical analyses in order to check csharp [neo-cli](https://github.com/neo-project/neo-cli) consensus capabilities, or other client implemented in any other languages.
+Furthermore, the scope of this project is to engage Neo community into this topic.
+Thus, competitions will be promote and their calls will be available at the folder `competition`.
+Our focus is to engage a wide public, from developers to advanced users.
 
-This project was initially described as a set of tests designed to test correctness and performance of the Neo blockchain.
-In this sense, this repository comprises a set of scripts and docker containers to build and publish a [private network](https://hub.docker.com/r/cityofzion/neo-privatenet/), along with a set of python tests to run through.
-
-In particular, this private network is usually created with new modified characteristics from [neo blockchain](https://github.com/neo-project/neo/).
+In particular, this private network is usually created with new modified characteristics from [neo blockchain](https://github.com/neo-project/neo/), with assist of the procedures inside folder `docker-build-neo-cli`.
 
 This is a work in progress, areas to be improved:
 
