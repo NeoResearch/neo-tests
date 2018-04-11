@@ -5,13 +5,13 @@
       width="125px;">
 </p>
 
-<h1 align="center">The 1st NeoOptTests Competition</h1>
+<h1 align="center">The 1st NeoOptTests Competition - Moving towards statistical comprehension</h1>
 
 ## What is it
 
-With a patnership with NeoResearch, we announce the first statistical and optimization competition, in which, 600 NEO will be awarded.
+Counting with the support and assistance of NeoResearch team, we announce the first statistical and optimization competition, in which, 600 NEO will be awarded.
 
-The main focus on this competition will be limited to awarding high quality statical reports, focused on Neo blockchain bottlenecks and interesting time aspects.
+The focus of this competition will be limited to awarding high quality statical reports, focused on Neo blockchain bottlenecks and interesting time aspects.
 However, participants are encouraged to go further. We do not discard the possibility of increasing the reward for outstanding findings.
 
 ## Competition infrasctruture
@@ -33,7 +33,7 @@ In each of these two rounds, participants are encouraged to released their resea
 
 ## Expected deadlines
 
-1. Registration will be open from June/July
-1. First round of reports are expected to be submitted by the end of August
-1. Second batch of replicated experiments, and consequently, second reports are expect to be summited by middle/end of September.
+1. Registration will be open from June/July, 2018;
+1. First round of reports are expected to be submitted by the end of August;
+1. Second batch of replicated experiments, and consequently, second reports are expect to be summited by middle/end of September;
 1. Prizes will be awarded in the beginning of October.
