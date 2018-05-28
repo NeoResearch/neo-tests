@@ -5,6 +5,8 @@ IMAGE_NAME="neo-opt-compiler"
 # neo-cli 2.7.4: tag v2.7.4
 # hexdump -v -C neo-cli.dll  > neo-cli.hex
 # diff neo-cli-274/neo-cli.hex neo-cli-built/neo-cli.hex (few bytes difference)
+# hexdump -v -C Neo.dll  > Neo.hex
+# diff neo-cli-274/Neo.hex neo-cli-built/Neo.hex (big difference perhaps...)
 
 
 NEO_BRANCH=b0b0646
