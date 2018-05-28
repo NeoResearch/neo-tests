@@ -1,0 +1,5 @@
+*.log
+.vs/
+neo-core
+neo-cli
+build
