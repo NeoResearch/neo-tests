@@ -1,6 +1,12 @@
 #!/bin/bash
 IMAGE_NAME="neo-opt-compiler"
 
+# neo-core 2.7.4 ~ cae8575c29ba76709dfa3962501011390fda7c8b
+# neo-cli 2.7.4: tag v2.7.4
+# hexdump -v -C neo-cli.dll  > neo-cli.hex
+# diff neo-cli-274/neo-cli.hex neo-cli-built/neo-cli.hex (few bytes difference)
+
+
 NEO_BRANCH=b0b0646
 NEO_CLI_BRANCH=5eb133e
 git clone https://github.com/neo-project/neo-cli.git neo-cli && git checkout $NEO_CLI_BRANCH
