@@ -4,7 +4,7 @@
       width="125px;">
 </p>
 
-<h1 align="center">ecolab-opt-tests</h1>
+<h1 align="center">neo-opt-tests</h1>
 
 ## What is it
 
