@@ -24,7 +24,7 @@ RUN rm -rf /var/lib/apt/lists/*
 
 # get repo, the arguments should be supplied when building using this Dockerfile
 ARG NEO_BRANCH=b0b0646  
-ARG NEO_CLI_BRANCH=5eb133e
+ARG NEO_CLI_BRANCH=4298f876a4dc23ecd57392cac4d680beb0401039
 RUN git clone https://github.com/neo-project/neo-cli.git /opt/neo-cli && cd /opt/neo-cli && git checkout $NEO_CLI_BRANCH
 RUN git clone https://github.com/neo-project/neo.git /opt/neo && cd /opt/neo && git checkout $NEO_BRANCH
 
