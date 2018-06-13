@@ -23,16 +23,26 @@ RUN apt-get update && apt-get install -y dotnet-sdk-2.1.4
 RUN rm -rf /var/lib/apt/lists/*
 
 # get repo, the arguments should be supplied when building using this Dockerfile
-ARG NEO_BRANCH=b0b0646  
-ARG NEO_CLI_BRANCH=4298f876a4dc23ecd57392cac4d680beb0401039
-RUN git clone https://github.com/neo-project/neo-cli.git /opt/neo-cli && cd /opt/neo-cli && git checkout $NEO_CLI_BRANCH
-RUN git clone https://github.com/neo-project/neo.git /opt/neo && cd /opt/neo && git checkout $NEO_BRANCH
+ARG NEOCLI_BLOCKCHAIN_URL=https://github.com/neo-project/neo-cli.git
+ARG NEO_BLOCKCHAIN_URL=https://github.com/neo-project/neo.git
+ARG NEO_VM_URL=https://github.com/neo-project/neo-vm.git
+RUN git clone $NEOCLI_BLOCKCHAIN_URL /opt/neo-cli 
+RUN git clone $NEO_VM_URL /opt/neo-vm
+RUN git clone $NEO_BLOCKCHAIN_URL /opt/neo 
 
-#The next line copies the whole local folder neo to the new one - replacing all files
-COPY neo/ /opt/neo/neo
+ARG NEO_CLI_COMMIT=8fa5f8ec3cd0f086d854e5dc0bbc7936189eb761
+ARG NEO_BLOCKCHAIN_COMMIT=b850003a9256528579b84fc165c3419752a245a6
+RUN cd /opt/neo-cli && git pull && git checkout $NEO_CLI_COMMIT
+RUN cd /opt/neo && git pull && git checkout $NEO_BLOCKCHAIN_COMMIT
+
 
 #==========================================================================
-#====================== NEO BLOCKCHAIN ============================================
+#============== EXAMPLES FOR CHANGING FILES WITH LOCAL FILES ==============
+#====================== NEO BLOCKCHAIN ====================================
+#The next line copies the whole local folder neo to the new one - replacing all files
+#RUN rm -rf /opt/neo/neo
+#ADD neo/ /opt/neo/neo
+
 #Scripts for copying only specific files
 #ADD files/ReportNeoBlockchain.cs /opt/neo/neo/
 
@@ -49,11 +59,20 @@ COPY neo/ /opt/neo/neo
 #COPY neo-cli/Program.cs /opt/neo-cli/neo-cli/Program.cs
 #COPY neo-cli/Consensus/ /opt/neo-cli/Consensus/
 #==========================================================================
+#==========================================================================
 
-# remove neo-cli package and reference to local neo
+# First of all, remove neo-vm package from neo-cli project, referencing it to the the docker local neo-vm
+RUN dotnet remove /opt/neo/neo/neo.csproj package neo.vm
+RUN dotnet sln /opt/neo/neo.sln add /opt/neo-vm/src/neo-vm/neo-vm.csproj
+RUN dotnet add /opt/neo/neo/neo.csproj reference /opt/neo-vm/src/neo-vm/neo-vm.csproj
+
+# remove neo blockchain package from neo-cli project, referencing it to the the docker local neo
 RUN dotnet remove /opt/neo-cli/neo-cli/neo-cli.csproj package neo
 RUN dotnet sln /opt/neo-cli/neo-cli.sln add /opt/neo/neo/neo.csproj
 RUN dotnet add /opt/neo-cli/neo-cli/neo-cli.csproj reference /opt/neo/neo/neo.csproj
+
+
+
 
 # publish
 RUN dotnet publish /opt/neo-cli/neo-cli/neo-cli.csproj -o neo-cli -c Release -r ubuntu.16.04-x64
