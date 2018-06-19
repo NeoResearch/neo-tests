@@ -17,3 +17,4 @@ docker cp $CONTAINER_NAME:/opt/neo-cli-built.zip ./neo-cli-built.zip
 
 echo "STOPPING container"
 docker stop $CONTAINER_NAME
+docker rm $CONTAINER_NAME

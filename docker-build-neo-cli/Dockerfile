@@ -23,6 +23,7 @@ RUN apt-get update && apt-get install -y dotnet-sdk-2.1.4
 RUN rm -rf /var/lib/apt/lists/*
 
 # get repo, the arguments should be supplied when building using this Dockerfile
+#ARG NEOCLI_BLOCKCHAIN_URL=https://github.com/vncoelho/neo-cli.git
 ARG NEOCLI_BLOCKCHAIN_URL=https://github.com/neo-project/neo-cli.git
 ARG NEO_BLOCKCHAIN_URL=https://github.com/neo-project/neo.git
 ARG NEO_VM_URL=https://github.com/neo-project/neo-vm.git
@@ -30,10 +31,11 @@ RUN git clone $NEOCLI_BLOCKCHAIN_URL /opt/neo-cli
 RUN git clone $NEO_VM_URL /opt/neo-vm
 RUN git clone $NEO_BLOCKCHAIN_URL /opt/neo 
 
-ARG NEO_CLI_COMMIT=8fa5f8ec3cd0f086d854e5dc0bbc7936189eb761
-ARG NEO_BLOCKCHAIN_COMMIT=b850003a9256528579b84fc165c3419752a245a6
-RUN cd /opt/neo-cli && git pull && git checkout $NEO_CLI_COMMIT
-RUN cd /opt/neo && git pull && git checkout $NEO_BLOCKCHAIN_COMMIT
+ARG NEO_CLI_COMMIT=dded813de88e5bc5ea3b434ccfd95dafccd4c3ae
+RUN cd /opt/neo-cli && git pull && git checkout master && git checkout $NEO_CLI_COMMIT
+
+ARG NEO_BLOCKCHAIN_COMMIT=b1cf41d60576e13be772e3b180722f50cd6d64bc
+RUN cd /opt/neo && git pull && git checkout master && git checkout $NEO_BLOCKCHAIN_COMMIT
 
 
 #==========================================================================
@@ -62,17 +64,14 @@ RUN cd /opt/neo && git pull && git checkout $NEO_BLOCKCHAIN_COMMIT
 #==========================================================================
 
 # First of all, remove neo-vm package from neo-cli project, referencing it to the the docker local neo-vm
-RUN dotnet remove /opt/neo/neo/neo.csproj package neo.vm
-RUN dotnet sln /opt/neo/neo.sln add /opt/neo-vm/src/neo-vm/neo-vm.csproj
-RUN dotnet add /opt/neo/neo/neo.csproj reference /opt/neo-vm/src/neo-vm/neo-vm.csproj
+#RUN dotnet remove /opt/neo/neo/neo.csproj package neo.vm
+#RUN dotnet sln /opt/neo/neo.sln add /opt/neo-vm/src/neo-vm/neo-vm.csproj
+#RUN dotnet add /opt/neo/neo/neo.csproj reference /opt/neo-vm/src/neo-vm/neo-vm.csproj
 
 # remove neo blockchain package from neo-cli project, referencing it to the the docker local neo
 RUN dotnet remove /opt/neo-cli/neo-cli/neo-cli.csproj package neo
 RUN dotnet sln /opt/neo-cli/neo-cli.sln add /opt/neo/neo/neo.csproj
 RUN dotnet add /opt/neo-cli/neo-cli/neo-cli.csproj reference /opt/neo/neo/neo.csproj
-
-
-
 
 # publish
 RUN dotnet publish /opt/neo-cli/neo-cli/neo-cli.csproj -o neo-cli -c Release -r ubuntu.16.04-x64
