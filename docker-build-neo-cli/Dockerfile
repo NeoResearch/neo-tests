@@ -1,6 +1,6 @@
 # Neo-Cli builder with with modified Neo-Core libraries
 
-FROM ubuntu:17.10
+FROM ubuntu:18.04
 LABEL maintainer="NeoResearch"
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -11,13 +11,17 @@ ENV DOTNET_CLI_TELEMETRY_OPTOUT 1
 # Install system dependencies. always should be done in one line
 # https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/#run
 RUN apt-get update \
-    && apt-get install -y apt-utils mininet netcat curl wget unzip zip less screen ca-certificates apt-transport-https libleveldb-dev sqlite3 libsqlite3-dev expect git-core
+    && apt-get install -y apt-utils mininet netcat curl wget unzip zip less screen ca-certificates libleveldb-dev sqlite3 libsqlite3-dev expect git-core
 
 # Setup microsoft repositories
-RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
-RUN mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
-RUN sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-artful-prod artful main" > /etc/apt/sources.list.d/dotnetdev.list'
-RUN apt-get update && apt-get install -y dotnet-sdk-2.1.4
+RUN apt-get install -y gnupg2 gnupg gnupg1
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+RUN echo "deb https://download.mono-project.com/repo/ubuntu stable-bionic main" | tee /etc/apt/sources.list.d/mono-official-stable.list
+RUN wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.asc.gpg
+RUN mv microsoft.asc.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
+RUN wget -q https://packages.microsoft.com/config/ubuntu/18.04/prod.list
+RUN mv prod.list /etc/apt/sources.list.d/microsoft-prod.list
+RUN apt-get update && apt-get install -y apt-transport-https dotnet-sdk-2.1.200
 
 # APT cleanup to reduce image size
 RUN rm -rf /var/lib/apt/lists/*
@@ -32,10 +36,10 @@ RUN git clone $NEO_VM_URL /opt/neo-vm
 RUN git clone $NEO_BLOCKCHAIN_URL /opt/neo 
 
 ARG NEO_CLI_COMMIT=dded813de88e5bc5ea3b434ccfd95dafccd4c3ae
-RUN cd /opt/neo-cli && git pull && git checkout master && git checkout $NEO_CLI_COMMIT
+RUN cd /opt/neo-cli && git pull && git checkout v3.0 && git checkout $NEO_CLI_COMMIT
 
 ARG NEO_BLOCKCHAIN_COMMIT=b1cf41d60576e13be772e3b180722f50cd6d64bc
-RUN cd /opt/neo && git pull && git checkout master && git checkout $NEO_BLOCKCHAIN_COMMIT
+RUN cd /opt/neo && git pull && git checkout Neo.Actor && git checkout $NEO_BLOCKCHAIN_COMMIT
 
 
 #==========================================================================
