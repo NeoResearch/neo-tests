@@ -39,7 +39,7 @@ ARG NEO_CLI_COMMIT=dded813de88e5bc5ea3b434ccfd95dafccd4c3ae
 RUN cd /opt/neo-cli && git pull && git checkout v3.0 && git checkout eb85ccb
 
 ARG NEO_BLOCKCHAIN_COMMIT=b1cf41d60576e13be772e3b180722f50cd6d64bc
-RUN cd /opt/neo && git pull && git checkout Neo.Actor && git checkout 09878c1f67bab248e1830e8d8dce7ea25bf7df10
+RUN cd /opt/neo && git pull && git checkout Neo.Actor && git checkout 876e7d5
 
 
 #==========================================================================

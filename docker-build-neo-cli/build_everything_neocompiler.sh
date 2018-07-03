@@ -1,9 +1,11 @@
 #!/bin/bash
-PATH_CSHARP_NODES="../../A-neocompiler-eco/docker-neo-csharp-nodes"
+PATH_NEOCOMPILER="../../A-neocompiler-eco"
+PATH_CSHARP_NODES=$PATH_NEOCOMPILER"/docker-neo-csharp-nodes"
+echo "Nodes path is: " + $PATH_CSHARP_NODES
 
 rm $PATH_CSHARP_NODES/neo-cli.zip
 rm $PATH_CSHARP_NODES/neo-cli-built.zip
 cp ./neo-cli-built.zip $PATH_CSHARP_NODES/neo-cli-built.zip
 
 echo "Building docker neo-csharp-nodes with specific neo-cli."
-(cd $PATH_CSHARP_NODES; ./docker_build.sh --neo-cli ./neo-cli-built.zip)
+(cd $PATH_NEOCOMPILER; ./build_everything.sh --dev)
