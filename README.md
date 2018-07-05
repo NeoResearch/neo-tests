@@ -8,7 +8,7 @@
 
 ## What is it
 
-This project has its main focus on establishing a set of parameters that will be subjected to optimization and statical analyses in order to check csharp [neo-cli](https://github.com/neo-project/neo-cli) consensus capabilities, or other client implemented in any other languages.
+This project has its main focus on establishing a set of parameters that will be subjected to optimization and statistical analyses in order to check csharp [neo-cli](https://github.com/neo-project/neo-cli) consensus capabilities, or other client implemented in any other languages.
 In this sense, this repository comprises a set of scripts and docker containers to build a modified neo-cli and integrate it
 with all tools available in the [NeoCompiler Eco(system)](https://github.com/NeoResearch/neocompiler-eco).
 
@@ -53,14 +53,15 @@ This procedure requires two steps (A1 and -A2 or A3-), all of them described bel
 #### A1 - Create a modified neo-cli with modified neo-blockchain or neo-cli files
 
 1. Go to `docker-build-neo-cli` folder
-1. Execute the script `docker_build_run_copy_stop`
+1. Execute the script `docker_build_run_copy_stop.sh`
   - As result, a new `neo-cli-built` will be copied to this folder
 
-#### A2 - Modify the neo-cli csharp nodes of the ecosystem
+#### A2 - Run a private net with a modified neo-cli csharp nodes
 
+1. Clone [NeoCompiler Eco(system)](https://github.com/NeoResearch/neocompiler-eco) and follow the guidelines for installing necessary packages:
+
+1. Adjust the NeoCompiler Eco path at variable `PATH_CSHARP_NODES` in the script `build_neo_csharp_nodes_with_builtNeoCli.sh` and `build_everything_neocompiler.sh`
+
+1. Run `build_everything_neocompiler.sh` or
 1. Run `build_neo_csharp_nodes_with_builtNeoCli.sh`
-
-
-#### A3 - Start the NeoCompiler Eco as usual
-
-1. Come one folder back and execute the `build_everything.sh`
+  1. Start the NeoCompiler Eco as usual. Go to the NeoCompiler Eco main folder and execute `build_everything.sh`

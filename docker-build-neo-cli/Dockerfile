@@ -30,16 +30,19 @@ RUN rm -rf /var/lib/apt/lists/*
 #ARG NEOCLI_BLOCKCHAIN_URL=https://github.com/vncoelho/neo-cli.git
 ARG NEOCLI_BLOCKCHAIN_URL=https://github.com/neo-project/neo-cli.git
 ARG NEO_BLOCKCHAIN_URL=https://github.com/neo-project/neo.git
+ARG NEO_BLOCKCHAIN_PLUGINS_URL=https://github.com/neo-project/neo-plugins.git
 ARG NEO_VM_URL=https://github.com/neo-project/neo-vm.git
+
 RUN git clone $NEOCLI_BLOCKCHAIN_URL /opt/neo-cli 
 RUN git clone $NEO_VM_URL /opt/neo-vm
 RUN git clone $NEO_BLOCKCHAIN_URL /opt/neo 
+RUN git clone $NEO_BLOCKCHAIN_PLUGINS_URL /opt/neo-plugins 
 
 ARG NEO_CLI_COMMIT=dded813de88e5bc5ea3b434ccfd95dafccd4c3ae
-RUN cd /opt/neo-cli && git pull && git checkout v3.0 && git checkout eb85ccb
+RUN cd /opt/neo-cli && git pull && git checkout v3.0 && git checkout cc18478
 
 ARG NEO_BLOCKCHAIN_COMMIT=b1cf41d60576e13be772e3b180722f50cd6d64bc
-RUN cd /opt/neo && git pull && git checkout Neo.Actor && git checkout 876e7d5
+RUN cd /opt/neo && git pull && git checkout Neo.Actor && git checkout 82b9702
 
 
 #==========================================================================
