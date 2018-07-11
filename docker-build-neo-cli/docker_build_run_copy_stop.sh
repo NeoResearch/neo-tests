@@ -5,6 +5,9 @@
 
 CONTAINER_NAME="neo-build-neo-cli-with-new-blockchain-csharp"
 
+echo "Delete previous .zip"
+rm *.zip
+
 ./docker_build.sh
 
 echo "RUNNING container:"
@@ -17,4 +20,4 @@ docker cp $CONTAINER_NAME:/opt/neo-cli-built.zip ./neo-cli-built.zip
 
 echo "STOPPING container"
 docker stop $CONTAINER_NAME
-docker rm $CONTAINER_NAME
+# docker rm $CONTAINER_NAME

@@ -42,15 +42,17 @@ ARG NEO_CLI_COMMIT=dded813de88e5bc5ea3b434ccfd95dafccd4c3ae
 RUN cd /opt/neo-cli && git pull && git checkout v3.0 && git checkout cc18478
 
 ARG NEO_BLOCKCHAIN_COMMIT=b1cf41d60576e13be772e3b180722f50cd6d64bc
-RUN cd /opt/neo && git pull && git checkout Neo.Actor && git checkout 82b9702
+RUN cd /opt/neo && git pull && git checkout Neo.Actor && git checkout 18be40a
 
 
 #==========================================================================
 #============== EXAMPLES FOR CHANGING FILES WITH LOCAL FILES ==============
 #====================== NEO BLOCKCHAIN ====================================
 #The next line copies the whole local folder neo to the new one - replacing all files
-#RUN rm -rf /opt/neo/neo
-#ADD neo/ /opt/neo/neo
+# RUN rm -rf /opt/neo/neo
+# ADD neo/ /opt/neo/neo-3
+RUN rm -rf /opt/neo
+ADD neo-3/ /opt/neo
 
 #Scripts for copying only specific files
 #ADD files/ReportNeoBlockchain.cs /opt/neo/neo/
@@ -69,6 +71,22 @@ RUN cd /opt/neo && git pull && git checkout Neo.Actor && git checkout 82b9702
 #COPY neo-cli/Consensus/ /opt/neo-cli/Consensus/
 #==========================================================================
 #==========================================================================
+
+#==========================================================================
+#====================================== PLUGINS ===========================
+ARG NEO_BLOCKCHAIN_COMMIT=b1cf41d60576e13be772e3b180722f50cd6d64bc
+RUN cd /opt/neo-plugins && git pull && git checkout 041c489
+
+ARG PLUGIN_TO_INCLUDE_I="SimplePolicy"
+RUN cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I /opt/neo/neo/Plugins
+RUN rm /opt/neo/neo/Plugins/$PLUGIN_TO_INCLUDE_I/*.cspro
+
+ARG PLUGIN_TO_INCLUDE_II="ApplicationLogs"
+RUN cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE_II /opt/neo/neo/Plugins
+RUN rm /opt/neo/neo/Plugins/$PLUGIN_TO_INCLUDE_II/*.csproj
+#==========================================================================
+
+
 
 # First of all, remove neo-vm package from neo-cli project, referencing it to the the docker local neo-vm
 #RUN dotnet remove /opt/neo/neo/neo.csproj package neo.vm
