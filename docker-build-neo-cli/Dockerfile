@@ -38,28 +38,31 @@ RUN git clone $NEO_VM_URL /opt/neo-vm
 RUN git clone $NEO_BLOCKCHAIN_URL /opt/neo 
 RUN git clone $NEO_BLOCKCHAIN_PLUGINS_URL /opt/neo-plugins 
 
-ARG NEO_CLI_COMMIT=dded813de88e5bc5ea3b434ccfd95dafccd4c3ae
-RUN cd /opt/neo-cli && git pull && git checkout v3.0 && git checkout cc18478
+ARG NEO_CLI_BRANCH=v3.0
+ARG NEO_CLI_COMMIT=cc18478
+ARG NEO_BLOCKCHAIN_BRANCH=Neo.Actor
+ARG NEO_BLOCKCHAIN_COMMIT=edfd60b
+ARG NEO_PLUGINS_BRANCH=master
+ARG NEO_PLUGINS_COMMIT=041c489
 
-ARG NEO_BLOCKCHAIN_COMMIT=b1cf41d60576e13be772e3b180722f50cd6d64bc
-RUN cd /opt/neo && git pull && git checkout Neo.Actor && git checkout 18be40a
-
+RUN cd /opt/neo-cli && git pull && git checkout $NEO_CLI_BRANCH && git checkout $NEO_CLI_COMMIT
+RUN cd /opt/neo && git pull && git checkout $NEO_BLOCKCHAIN_BRANCH && git checkout $NEO_BLOCKCHAIN_COMMIT
 
 #==========================================================================
 #============== EXAMPLES FOR CHANGING FILES WITH LOCAL FILES ==============
 #====================== NEO BLOCKCHAIN ====================================
 #The next line copies the whole local folder neo to the new one - replacing all files
-# RUN rm -rf /opt/neo/neo
-# ADD neo/ /opt/neo/neo-3
-RUN rm -rf /opt/neo
-ADD neo-3/ /opt/neo
+#RUN rm -rf /opt/neo/neo
+#ADD neo/ /opt/neo/neo-3
+#RUN rm -rf /opt/neo
+#ADD neo-3/ /opt/neo
 
 #Scripts for copying only specific files
 #ADD files/ReportNeoBlockchain.cs /opt/neo/neo/
 
 #ADD debugs/ /opt/debugs
 #RUN sed -i -e '/bool result;/r /opt/debugs/debugCheckWitness_StateReader.cs' /opt/neo/neo/SmartContract/StateReader.cs
-# Add modified files to the local neo-blockchain library
+# ============ ADD MODIFIED FILES TO THE LOCAL NEO-BLOCKCHAIN LIBRARY =============================
 #COPY neo-blockchain/ /opt/neo/neo/
 
 # COPY neo-blockchain/Consensus/ /opt/neo/neo/Consensus/
@@ -74,16 +77,17 @@ ADD neo-3/ /opt/neo
 
 #==========================================================================
 #====================================== PLUGINS ===========================
-ARG NEO_BLOCKCHAIN_COMMIT=b1cf41d60576e13be772e3b180722f50cd6d64bc
-RUN cd /opt/neo-plugins && git pull && git checkout 041c489
+RUN cd /opt/neo-plugins && git pull && git checkout $NEO_PLUGINS_BRANCH && git checkout $NEO_PLUGINS_COMMIT
 
 ARG PLUGIN_TO_INCLUDE_I="SimplePolicy"
 RUN cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I /opt/neo/neo/Plugins
-RUN rm /opt/neo/neo/Plugins/$PLUGIN_TO_INCLUDE_I/*.cspro
+RUN rm /opt/neo/neo/Plugins/$PLUGIN_TO_INCLUDE_I/*.csproj
 
-ARG PLUGIN_TO_INCLUDE_II="ApplicationLogs"
-RUN cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE_II /opt/neo/neo/Plugins
-RUN rm /opt/neo/neo/Plugins/$PLUGIN_TO_INCLUDE_II/*.csproj
+#ARG PLUGIN_TO_INCLUDE_II="ApplicationLogs"
+#RUN cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE_II /opt/neo/neo/Plugins
+#RUN rm /opt/neo/neo/Plugins/$PLUGIN_TO_INCLUDE_II/*.csproj
+
+#TODO - Ajust plugins configurations
 #==========================================================================
 
 
