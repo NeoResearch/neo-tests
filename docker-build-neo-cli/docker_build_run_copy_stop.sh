@@ -8,7 +8,12 @@ CONTAINER_NAME="neo-build-neo-cli-with-new-blockchain-csharp"
 echo "Delete previous .zip"
 rm *.zip
 
-./docker_build.sh
+echo "BUILDING neo cli with personalized characteristics..."
+if [[ "$#" > 0 ]]; then
+	docker build --file $1 -t  $CONTAINER_NAME:latest .
+else
+	docker build -t  $CONTAINER_NAME:latest .
+fi
 
 echo "RUNNING container:"
 echo $CONTAINER_NAME

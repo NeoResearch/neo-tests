@@ -4,24 +4,22 @@
       width="125px;">
 </p>
 
-<h1 align="center">neo-opt-tests</h1>
+<h1 align="center">neo-tests</h1>
 
-## What is it
+## Connecting, integrating, testing and analyzing
 
-This project has its main focus on establishing a set of parameters that will be subjected to optimization and statistical analyses in order to check csharp [neo-cli](https://github.com/neo-project/neo-cli) consensus capabilities, or other client implemented in any other languages.
-In this sense, this repository comprises a set of scripts and docker containers to build a modified neo-cli and integrate it
-with all tools available in the [NeoCompiler Eco(system)](https://github.com/NeoResearch/neocompiler-eco).
-
-
-In particular, this private network is usually created with new modified characteristics from [neo blockchain](https://github.com/neo-project/neo/), with assist of the procedures inside folder `docker-build-neo-cli`.
+This project has its main focus on establishing a set of parameters that will be subjected to optimization and statistical analyses in order to check Neo Consensus and Blockchain capabilities.
+The current C# client is used as the main tool for interacting with the Blockchain and Run the Consensus.
+In this sense, the private blockchain created using the tools available here is created with new modified characteristics from [neo blockchain](https://github.com/neo-project/neo/), with assist of the procedures inside folder `docker-build-neo-cli`.
+Thus, this repository comprises a set of scripts and docker containers to build a modified [neo-cli](https://github.com/neo-project/neo-cli) client and integrate it
+with different tools from the Neo Ecosystem, perhaps, those that are already integrated in the [NeoCompiler Eco(system)](https://github.com/NeoResearch/neocompiler-eco).
 
 ### Goal
 
-It posses the potential of improving performance of the Neo blockchain and finding optimization opportunities.
-
-Furthermore, the scope of this project is to engage Neo community into this topic.
-Thus, competitions will be promote and their calls will be available at the folder `competition`.
-Our focus is to engage a wide public, from developers to advanced users.
+It posses the potential of:
+  * Improve performance of the Neo Blockchain;
+  * Find optimization opportunities;
+  * Promote didactic tools for developers to comprehend core concepts of the Neo Blockchain.
 
 ## Possible improvements
 

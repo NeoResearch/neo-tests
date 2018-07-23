@@ -27,9 +27,8 @@ RUN apt-get update && apt-get install -y apt-transport-https dotnet-sdk-2.1.200
 RUN rm -rf /var/lib/apt/lists/*
 
 # get repo, the arguments should be supplied when building using this Dockerfile
-#ARG NEOCLI_BLOCKCHAIN_URL=https://github.com/vncoelho/neo-cli.git
 ARG NEOCLI_BLOCKCHAIN_URL=https://github.com/neo-project/neo-cli.git
-ARG NEO_BLOCKCHAIN_URL=https://github.com/neo-project/neo.git
+ARG NEO_BLOCKCHAIN_URL=https://github.com/shargon/neo.git
 ARG NEO_BLOCKCHAIN_PLUGINS_URL=https://github.com/neo-project/neo-plugins.git
 ARG NEO_VM_URL=https://github.com/neo-project/neo-vm.git
 
@@ -38,10 +37,10 @@ RUN git clone $NEO_VM_URL /opt/neo-vm
 RUN git clone $NEO_BLOCKCHAIN_URL /opt/neo 
 RUN git clone $NEO_BLOCKCHAIN_PLUGINS_URL /opt/neo-plugins 
 
-ARG NEO_CLI_BRANCH=v3.0
-ARG NEO_CLI_COMMIT=cc18478
-ARG NEO_BLOCKCHAIN_BRANCH=Neo.Actor
-ARG NEO_BLOCKCHAIN_COMMIT=edfd60b
+ARG NEO_CLI_BRANCH=master
+ARG NEO_CLI_COMMIT=f1fdeabe60736304a96316b25f0ce0d7904ef84c
+ARG NEO_BLOCKCHAIN_BRANCH=master
+ARG NEO_BLOCKCHAIN_COMMIT=a1272fa
 ARG NEO_PLUGINS_BRANCH=master
 ARG NEO_PLUGINS_COMMIT=041c489
 
@@ -79,9 +78,9 @@ RUN cd /opt/neo && git pull && git checkout $NEO_BLOCKCHAIN_BRANCH && git checko
 #====================================== PLUGINS ===========================
 RUN cd /opt/neo-plugins && git pull && git checkout $NEO_PLUGINS_BRANCH && git checkout $NEO_PLUGINS_COMMIT
 
-ARG PLUGIN_TO_INCLUDE_I="SimplePolicy"
-RUN cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/* /opt/neo/neo/Plugins
-RUN rm /opt/neo/neo/Plugins/*.csproj
+#ARG PLUGIN_TO_INCLUDE_I="SimplePolicy"
+#RUN cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/* /opt/neo/neo/Plugins
+#RUN rm /opt/neo/neo/Plugins/*.csproj
 
 #ARG PLUGIN_TO_INCLUDE_II="ApplicationLogs"
 #RUN cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE_II/* /opt/neo/neo/Plugins
