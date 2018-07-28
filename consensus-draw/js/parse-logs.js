@@ -114,6 +114,22 @@ function addMsg(x, consensus_id, nodelist=[], currentheight=-1) {
       nodelist.push(new LogMsg(timestamp, idstr, height, view, index, tx, nv, status, state, role, expected, current, nodes));
       return height;
    }
+   idstr = "Commit sent"; // [23:46:37] Commit sent: height=3 state=Backup, RequestReceived, SignatureSent, CommitSent
+   if(y.startsWith(idstr)) {
+      index  = consensus_id;
+      height = Number(y.substring(y.indexOf("height=")+"height=".length, y.lenght).split(" ")[0]);
+      state  = y.substring(y.indexOf("state=")+"state=".length, y.lenght).split("\n")[0];
+      nodelist.push(new LogMsg(timestamp, idstr, height, view, index, tx, nv, status, state, role, expected, current, nodes));
+      return height;
+   }
+   idstr = "OnCommitAgreement"; // [23:46:39] OnCommitAgreement: height=3 view=0 index=1
+   if(y.startsWith(idstr)) {
+      height = Number(y.substring(y.indexOf("height=")+"height=".length, y.lenght).split(" ")[0]);
+      view   = Number(y.substring(y.indexOf("view=")+"view=".length, y.lenght).split(" ")[0]);
+      index  = Number(y.substring(y.indexOf("index=")+"index=".length, y.lenght).split(" ")[0]);
+      nodelist.push(new LogMsg(timestamp, idstr, height, view, index, tx, nv, status, state, role, expected, current, nodes));
+      return height;
+   }
    return -1;
 };
 
