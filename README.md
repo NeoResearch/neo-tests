@@ -63,3 +63,22 @@ This procedure requires two steps (A1 and -A2 or A3-), all of them described bel
 1. Run `build_everything_neocompiler.sh` or
 1. Run `build_neo_csharp_nodes_with_builtNeoCli.sh`
   1. Start the NeoCompiler Eco as usual. Go to the NeoCompiler Eco main folder and execute `build_everything.sh`
+
+
+## Drawing messages from NEO Consensus: consensus-draw
+
+<p align="center">
+    <img
+      src="./consensus-draw/view-sample.png"
+      width="420px;">
+</p>
+
+### How to use
+RUN: `python -m SimpleHTTPServer 10000`
+
+ACCESS: `localhost:10000`
+
+### Example
+Current example is loaded from `example-logs.js`, which is parsed automatically.
+
+## NeoResearch 2018
