@@ -89,6 +89,12 @@ function addMsg(x, consensus_id, nodelist=[], currentheight=-1) {
       nodelist.push(new LogMsg(timestamp, idstr, height, view, index, tx, nv, status, state, role, expected, current, nodes));
       return height;
    }
+   idstr = "reject block"; // [03:38:53] reject block: 0x06961a306d717d1507bf11704ebf80d59d7e9d42cd2beb410a5d5e01251fc8ae
+   if(y.startsWith(idstr)) {
+      height = currentheight; // receives current height as parameter (important to keep this!)
+      nodelist.push(new LogMsg(timestamp, idstr, height, view, index, tx, nv, status, state, role, expected, current, nodes));
+      return height;
+   }
    idstr = "request change view"; // [03:39:49] request change view: height=66 view=0 nv=1 state=Backup, ViewChanging
    if(y.startsWith(idstr)) {
       index  = consensus_id;
