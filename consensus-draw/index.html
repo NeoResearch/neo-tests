@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+	<meta charset="utf-8">
+	<!-- This code MIT licensed (except explicitly indicated)- NeoResearch team 2018 -->
+
+	<!-- basic includes -->
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,800,700,300' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+	<script src="js/d3.v3.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+	<!-- Copyright 2012 Daniel Farrell - Apache 2.0 License -->
+	<script src="js/bootstrap-combobox.js"></script>
+	<link href="css/bootstrap-combobox.css" type="text/css" rel="stylesheet">
+
+	<!-- Consensus log parsing algorithm -->
+	<script src="js/parse-logs.js"></script>
+
+	<!-- Consensus log data -->
+	<script src="js/example-logs.js"></script>
+
+	<!-- Consensus data in Json format -->
+	<script src="js/consensus_data.js"></script>
+
+	<!-- Style taken from babynames D3 example: https://github.com/nbremer/babynames -->
+	<link href="css/style.css" type="text/css" rel="stylesheet">
+
+<body>
+
+	<div class="chartWrapper">
+		<div id="cont" class="container-fluid">
+
+			<div class="row" style="padding: 0px 0px;">
+				<div class="col-sm-4 column">
+					<div class="row" style="padding: 0px 50px;">
+						<div class="col-md-12 column text-center">
+							<h3 class="titles">Consensus analysis</h3>
+							<span class="subheader">NeoResearch 2018</span>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-7 column">
+					<div class="row">
+						<div class="col-md-12 column" style="padding-top: 10px;">
+							<p><span style="font-size: 12px;" class="expl">
+							</span></p>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<hr>
+
+			<div class="row text-center">
+				<div class="col-sm-3 col-sm-offset-1 column text-center">
+					 <div class="form-group">
+						<select id="searchBox" class="combobox input-large form-control" style="display: none;" onchange="searchEvent(this.value)">
+						  <option value="" selected="selected"></option>
+						</select>
+					  </div>
+				</div>
+
+			</div>
+
+			<!-- Focus chart -->
+			<div class="row">
+				<div class="col-md-12 column text-center">
+					<div class="chart focus"></div>
+				</div>
+			</div>
+
+			<!-- Context chart -->
+			<div class="row">
+				<div class="col-md-12 column text-center">
+					<div class="chart context"></div>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+
+   <!-- Taken from D3 babynames example, available on GitHub: https://github.com/nbremer/babynames -->
+	<script src="js/consensusdraw.js"></script>
+</body>
+</html>
