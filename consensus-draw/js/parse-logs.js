@@ -298,7 +298,25 @@ function parseLogsGenerateJson(node1log, node2log, node3log, node4log) {
             cnode_json.push({"name":"ChangeView_"+senderc+"_"+sendermsg.height+"_"+k+"_"+cnode_lists[k][i].nv, "values":values});
             color_list.push("#FF0000");
          }
-         // TODO: continue...
+
+         if(cnode_lists[k][i].idstr == "OnCommitAgreement") {
+            var sendermsg = findSendBefore("Commit sent", cnode_lists, cnode_lists[k][i].index, cnode_lists[k][i].timestamp, k, cnode_lists[k][i].height, cnode_lists[k][i].view);
+            if(!sendermsg) {
+               console.log("findSendBefore for OnCommitAgreement k="+k+" height="+cnode_lists[k][i].height);
+               console.log("WARNING! could not find origin of message.");//+JSON.stringify(cnode_lists[k][i]));
+               continue;
+            }
+            var senderc = sendermsg.index;  // sender consensus (destination is k)
+            if(senderc == -1) {
+               console.log("ERROR getting findSendBefore (came with height = -1)"+JSON.stringify(sendermsg));
+            }
+            var values = [];
+            values.push({"year" : ""+sendermsg.timestamp+".05"+k, "position": senderc});
+            values.push({"year" : ""+cnode_lists[k][i].timestamp+".05"+senderc, "position":k});
+            cnode_json.push({"name":"CommitAgreement_"+senderc+"_"+sendermsg.height+"_"+k+"_"+cnode_lists[k][i].nv, "values":values});
+            color_list.push("#0000FF");
+         }
+         // TODO: continue.. (?)
       }
    }
 
