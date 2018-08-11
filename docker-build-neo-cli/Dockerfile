@@ -39,9 +39,9 @@ RUN git clone $NEO_BLOCKCHAIN_URL /opt/neoLib
 RUN git clone $NEO_BLOCKCHAIN_PLUGINS_URL /opt/neo-plugins 
 
 ARG NEO_CLI_BRANCH=v3.0
-ARG NEO_CLI_COMMIT=93648a5
+ARG NEO_CLI_COMMIT=485f743
 ARG NEO_BLOCKCHAIN_BRANCH=Neo.Actor
-ARG NEO_BLOCKCHAIN_COMMIT=90df0de
+ARG NEO_BLOCKCHAIN_COMMIT=357cca0
 ARG NEO_PLUGINS_BRANCH=master
 ARG NEO_PLUGINS_COMMIT=041c489
 
@@ -96,17 +96,13 @@ RUN dotnet publish /opt/neo-cli/neo-cli/neo-cli.csproj -o neo-cli -c Release -r 
 #=================== PUBLISHING AND ADDING PLUGINS DLLS ===================
 RUN cd /opt/neo-plugins && git pull && git checkout $NEO_PLUGINS_BRANCH && git checkout $NEO_PLUGINS_COMMIT
 RUN mkdir /opt/neo-cli/neo-cli/neo-cli/Plugins/
+RUN mkdir /opt/neo-cli/neo-cli/neo-cli/Plugins-disabled/
 
 ARG PLUGIN_TO_INCLUDE_I="SimplePolicy"
 RUN dotnet publish /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj -o $PLUGIN_TO_INCLUDE_I -c Release -r ubuntu.16.04-x64 -f netstandard2.0
 RUN cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.dll /opt/neo-cli/neo-cli/neo-cli/Plugins/
 
-#RUN rm /opt/neo/neo/Plugins/*.csproj
-#ARG PLUGIN_TO_INCLUDE_II="ApplicationLogs"
-#RUN cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE_II/* /opt/neoLib/neo/Plugins
-#RUN rm /opt/neo/neo/Plugins/*.csproj
-
-#TODO - Ajust plugins configurations
+# TODO - Compile and include other plugins
 #==========================================================================
 
 #==========================================================================
