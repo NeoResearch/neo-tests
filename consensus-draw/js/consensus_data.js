@@ -1,6 +1,23 @@
 // MIT License - NeoResearch 2018
 
 var example = test_example();
+console.log(example);
+console.log("testing for name colision");
+// testing for name colision
+var col_count = 0;
+for(var i=0; i<example.data.length; i++)
+   for(var j=i+1; j<example.data.length; j++) {
+         //console.log(example.data[i]);
+         if(example.data[i].name == example.data[j].name) {
+            console.log("REMOVING: name collision for '"+example.data[i].name+"' at i="+i+" j="+j);
+            col_count++;
+            example.data.splice(j,1); // removing repeated element j
+            j--;
+         }
+   }
+
+//if(col_count > 0)
+//   example.data = [];
 
 var consensus_data = example.data;
 /*
