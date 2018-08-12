@@ -12,6 +12,7 @@ for(var i=0; i<example.data.length; i++)
             console.log("REMOVING: name collision for '"+example.data[i].name+"' at i="+i+" j="+j);
             col_count++;
             example.data.splice(j,1); // removing repeated element j
+            example.colors.splice(j,1);
             j--;
          }
    }
