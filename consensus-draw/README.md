@@ -24,9 +24,9 @@ Tolerance](http://pmg.csail.mit.edu/papers/osdi99.pdf)
 </p>
 
 ## How to use
-RUN: `python -m SimpleHTTPServer 10000`
+RUN: `python -m SimpleHTTPServer 20000`
 
-ACCESS: `localhost:10000`
+ACCESS: `http://localhost:20000`
 
 ## Example
 Current example is loaded from `example-logs.js`, which is parsed automatically.
