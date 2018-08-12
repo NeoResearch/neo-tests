@@ -265,8 +265,8 @@ function parseLogsGenerateJson(node1log, node2log, node3log, node4log) {
                console.log("ERROR getting findSendBefore (came with height = -1)"+JSON.stringify(sendermsg));
             }
             var values = [];
-            values.push({"year" : ""+sendermsg.timestamp+".02"+k, "position": senderc, "realtime":sendermsg.realtime});
-            values.push({"year" : ""+cnode_lists[k][i].timestamp+".02"+senderc, "position":k, "realtime":cnode_lists[k][i].realtime});
+            values.push({"year" : ""+sendermsg.timestamp+".02"+k+""+senderc+""+senderc+""+k, "position": senderc, "realtime":sendermsg.realtime});
+            values.push({"year" : ""+cnode_lists[k][i].timestamp+".02"+senderc+""+k+""+senderc+""+k, "position":k, "realtime":cnode_lists[k][i].realtime});
             cnode_json.push({"name":"PrepRequest_"+senderc+"_"+sendermsg.height+"_"+k, "values":values});
             color_list.push("#FEC60B");
          }
@@ -283,8 +283,8 @@ function parseLogsGenerateJson(node1log, node2log, node3log, node4log) {
                console.log("ERROR getting findSendBefore (came with height = -1)"+JSON.stringify(sendermsg));
             }
             var values = [];
-            values.push({"year" : ""+sendermsg.timestamp+".03"+k, "position": senderc, "realtime":sendermsg.realtime});
-            values.push({"year" : ""+cnode_lists[k][i].timestamp+".03"+senderc, "position":k, "realtime":cnode_lists[k][i].realtime});
+            values.push({"year" : ""+sendermsg.timestamp+".03"+k+""+senderc+""+senderc+""+k, "position": senderc, "realtime":sendermsg.realtime});
+            values.push({"year" : ""+cnode_lists[k][i].timestamp+".03"+senderc+""+k+""+senderc+""+k, "position":k, "realtime":cnode_lists[k][i].realtime});
             cnode_json.push({"name":"PrepResponse_"+senderc+"_"+sendermsg.height+"_"+k, "values":values});
             color_list.push("#00FF00");
          }
@@ -319,8 +319,8 @@ function parseLogsGenerateJson(node1log, node2log, node3log, node4log) {
                console.log("ERROR getting findSendBefore (came with height = -1)"+JSON.stringify(sendermsg));
             }
             var values = [];
-            values.push({"year" : ""+sendermsg.timestamp+".05"+k, "position": senderc, "realtime":sendermsg.realtime});
-            values.push({"year" : ""+cnode_lists[k][i].timestamp+".05"+senderc, "position":k, "realtime":cnode_lists[k][i].realtime});
+            values.push({"year" : ""+sendermsg.timestamp+".05"+k+""+senderc+""+senderc+""+k, "position": senderc, "realtime":sendermsg.realtime});
+            values.push({"year" : ""+cnode_lists[k][i].timestamp+".05"+senderc+""+k+""+senderc+""+k, "position":k, "realtime":cnode_lists[k][i].realtime});
             cnode_json.push({"name":"CommitAgreement_"+senderc+"_"+sendermsg.height+"_"+k+"_"+cnode_lists[k][i].nv, "values":values});
             color_list.push("#0000FF");
          }

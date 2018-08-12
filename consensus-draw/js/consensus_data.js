@@ -1,7 +1,6 @@
 // MIT License - NeoResearch 2018
 
 var example = test_example();
-console.log(example);
 console.log("testing for name colision");
 // testing for name colision
 var col_count = 0;
@@ -16,9 +15,40 @@ for(var i=0; i<example.data.length; i++)
             j--;
          }
    }
+console.log("colisions:"+col_count);
 
-//if(col_count > 0)
-//   example.data = [];
+for(var i=0; i<example.data.length; i++)
+   for(var j=i+1; j<example.data.length; j++) {
+         //console.log(example.data[i]);
+         if(example.data[i].values[0].year == example.data[j].values[0].year) {
+            console.log("WARNING: time collision for '"+example.data[i].name+"' at i="+i+" j="+j+" with first "+example.data[j].name);
+            //col_count++;
+            //example.data.splice(j,1); // removing repeated element j
+            //example.colors.splice(j,1);
+            //j--;
+         }
+
+         if(example.data[i].values[0].year == example.data[j].values[1].year) {
+            console.log("WARNING: time collision for '"+example.data[i].name+"' at i="+i+" j="+j+" with second "+example.data[j].name);
+            //col_count++;
+            //example.data.splice(j,1); // removing repeated element j
+            //example.colors.splice(j,1);
+            //j--;
+         }
+   }
+
+/*
+while(example.data.length > 20) {
+   console.log("will pop:"+JSON.stringify(example.data[example.data.length-1]));
+   console.log("will pop color:"+JSON.stringify(example.colors[example.colors.length-1]));
+   example.data.pop();
+   example.colors.pop();
+}
+*/
+
+//example.data[example.data.length-1].values[0].year = "70938.0331"
+
+console.log(example);
 
 var consensus_data = example.data;
 /*
