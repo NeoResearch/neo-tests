@@ -1,5 +1,18 @@
 #!/bin/bash
 
+echo ""
+echo "configuring plugins"
+echo "mkdir /opt/neo-cli/neo-cli/neo-cli/Plugins/"
+rm -rf /opt/neo-cli/neo-cli/neo-cli/Plugins/
+mkdir /opt/neo-cli/neo-cli/neo-cli/Plugins/
+echo "mkdir /opt/neo-cli/neo-cli/neo-cli/Plugins-disabled/"
+rm -rf /opt/neo-cli/neo-cli/neo-cli/Plugins-disabled/
+mkdir /opt/neo-cli/neo-cli/neo-cli/Plugins-disabled/
+PLUGIN_TO_INCLUDE_I="SimplePolicy"
+dotnet publish /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj -o $PLUGIN_TO_INCLUDE_I -c Release -r ubuntu.16.04-x64 -f netstandard2.0
+cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.dll /opt/neo-cli/neo-cli/neo-cli/Plugins/
+
+
 # remove neo-cli package and reference to local neo
 echo ""
 echo "dotnet remove /opt/neo-cli/neo-cli/neo-cli.csproj package neo"

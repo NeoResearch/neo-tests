@@ -2,4 +2,5 @@
 .vs/
 neo-core*
 neo-cli*
+neo-plugins*
 build
