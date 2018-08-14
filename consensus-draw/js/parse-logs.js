@@ -215,8 +215,20 @@ function parseLogsGenerateJson(node1log, node2log, node3log, node4log) {
          endTime = nodelist[i].timestamp;
    }
 
-   beginTime -= 1; // adjust one before
-   endTime += 1;   // adjust one after
+   // normalizing times
+   for(i=0; i<node1list.length; i++)
+      node1list[i].timestamp -= beginTime;
+   for(i=0; i<node2list.length; i++)
+      node2list[i].timestamp -= beginTime;
+   for(i=0; i<node3list.length; i++)
+      node3list[i].timestamp -= beginTime;
+   for(i=0; i<node4list.length; i++)
+      node4list[i].timestamp -= beginTime;
+
+   //beginTime -= 1; // adjust one before
+   //endTime += 1;   // adjust one after
+   endTime -= beginTime;
+   beginTime -= beginTime;
    var begin_times = [];
    var k = 0;
    for(k=0; k<4; k++)
