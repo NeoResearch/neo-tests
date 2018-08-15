@@ -24,9 +24,18 @@ Tolerance](http://pmg.csail.mit.edu/papers/osdi99.pdf)
 </p>
 
 ## How to use
+
+### Node express server
+
+`npm install`
+
+RUN: `runConsensusDraw.sh`
+
+### Simple python HTTP
+
 RUN: `python -m SimpleHTTPServer 20000`
 
-ACCESS: `http://localhost:20000`
+**ACCESS:** `http://localhost:20000`
 
 ## Example
 Current example is loaded from `example-logs.js`, which is parsed automatically.
