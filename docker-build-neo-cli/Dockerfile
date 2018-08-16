@@ -39,11 +39,11 @@ RUN git clone $NEO_BLOCKCHAIN_URL /opt/neoLib
 RUN git clone $NEO_BLOCKCHAIN_PLUGINS_URL /opt/neo-plugins 
 
 ARG NEO_CLI_BRANCH=v3.0
-ARG NEO_CLI_COMMIT=485f743
+ARG NEO_CLI_COMMIT=c34d2de7390e7b4d21bf616cd5e9b9a0735d9469 
 ARG NEO_BLOCKCHAIN_BRANCH=Neo.Actor
-ARG NEO_BLOCKCHAIN_COMMIT=357cca0
+ARG NEO_BLOCKCHAIN_COMMIT=bd5c707f58f0acef06ed69596865481480e6a554
 ARG NEO_PLUGINS_BRANCH=master
-ARG NEO_PLUGINS_COMMIT=041c489
+ARG NEO_PLUGINS_COMMIT=b7bcde5bb7eccad0aeb8dde1832151eee9911334
 
 RUN cd /opt/neo-cli && git pull && git checkout $NEO_CLI_BRANCH && git checkout $NEO_CLI_COMMIT
 RUN cd /opt/neoLib && git pull && git checkout $NEO_BLOCKCHAIN_BRANCH && git checkout $NEO_BLOCKCHAIN_COMMIT
@@ -77,12 +77,12 @@ RUN cd /opt/neoLib && git pull && git checkout $NEO_BLOCKCHAIN_BRANCH && git che
 
 #==========================================================================
 #============================== PUBLISH NEO-CLI ===========================
-# First of all, remove neo-vm package from neo-cli project, referencing it to the the docker local neo-vm
+# First of all, remove neo-vm package from neo-cli project, referencing it to the local neo-vm library
 #RUN dotnet remove /opt/neo/neo/neo.csproj package neo.vm
 #RUN dotnet sln /opt/neo/neo.sln add /opt/neo-vm/src/neo-vm/neo-vm.csproj
 #RUN dotnet add /opt/neo/neo/neo.csproj reference /opt/neo-vm/src/neo-vm/neo-vm.csproj
 
-# remove neo blockchain package from neo-cli project, referencing it to the the docker local neo
+# Remove neo blockchain package from neo-cli project, referencing it to the local NeoBlockchain Library
 RUN dotnet remove /opt/neo-cli/neo-cli/neo-cli.csproj package neo
 RUN dotnet sln /opt/neo-cli/neo-cli.sln add /opt/neoLib/neo/neo.csproj
 RUN dotnet add /opt/neo-cli/neo-cli/neo-cli.csproj reference /opt/neoLib/neo/neo.csproj
@@ -91,22 +91,21 @@ RUN dotnet add /opt/neo-cli/neo-cli/neo-cli.csproj reference /opt/neoLib/neo/neo
 RUN dotnet publish /opt/neo-cli/neo-cli/neo-cli.csproj -o neo-cli -c Release -r ubuntu.16.04-x64
 #==========================================================================
 
-
 #==========================================================================
-#=================== PUBLISHING AND ADDING PLUGINS DLLS ===================
+#=================== PUBLISHING AND ADDING PLUGINS DLL'S ==================
 RUN cd /opt/neo-plugins && git pull && git checkout $NEO_PLUGINS_BRANCH && git checkout $NEO_PLUGINS_COMMIT
 RUN mkdir /opt/neo-cli/neo-cli/neo-cli/Plugins/
-RUN mkdir /opt/neo-cli/neo-cli/neo-cli/Plugins-disabled/
 
 ARG PLUGIN_TO_INCLUDE_I="SimplePolicy"
 RUN dotnet publish /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj -o $PLUGIN_TO_INCLUDE_I -c Release -r ubuntu.16.04-x64 -f netstandard2.0
 RUN cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.dll /opt/neo-cli/neo-cli/neo-cli/Plugins/
 
-#ARG PLUGIN_TO_INCLUDE_I="ApplicationLogs"
-#RUN dotnet publish /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj -o $PLUGIN_TO_INCLUDE_I -c Release -r ubuntu.16.04-x64 -f netstandard2.0
-#RUN cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.dll /opt/neo-cli/neo-cli/neo-cli/Plugins/
+ARG PLUGIN_TO_INCLUDE_I="ApplicationLogs"
+RUN dotnet publish /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj -o $PLUGIN_TO_INCLUDE_I -c Release -r ubuntu.16.04-x64 -f netstandard2.0
+RUN cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.dll /opt/neo-cli/neo-cli/neo-cli/Plugins/
 
 # TODO - Compile and include other plugins
+# RUN mkdir /opt/neo-cli/neo-cli/neo-cli/Plugins-disabled/
 #==========================================================================
 
 #==========================================================================
@@ -114,5 +113,5 @@ RUN cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO
 RUN cd /opt/neo-cli/neo-cli && zip -r /opt/neo-cli-built.zip neo-cli
 #==========================================================================
 
-# stay alive
+# ALL NIGHT LONG - STAY ALIVE
 ENTRYPOINT ["tail", "-f", "/dev/null"]
