@@ -25,6 +25,10 @@ Tolerance](http://pmg.csail.mit.edu/papers/osdi99.pdf)
 
 ## How to use
 
+Create example! `generateExample.sh`
+
+Or... get it from running neocompiler-eco: `./getremotelog/getconsensuslog.sh`
+
 ### Node express server
 
 `npm install`
