@@ -20,10 +20,18 @@ function LogMsg(timestamp, realtime, idstr, height=-1, view=-1, index=-1, tx=-1,
 
 // adds message from consensus_id to nodelist (and returns block height if known, otherwise -1)
 function addMsg(x, consensus_id, nodelist=[], currentheight=-1) {
-   realtime = x.substring(1, 9);
+   if(x.charAt(9)==']') {  // seconds
+      realtime = x.substring(1, 9);
+      y = x.substring(10, x.length).trim();
+   } else { // charAt 13 == ']' // milliseconds
+      realtime = x.substring(1, 13);
+      y = x.substring(14, x.length).trim();
+   }
    a = realtime.split(':');
-   y = x.substring(10, x.length).trim();
    timestamp = (+a[0]) * 60 * 60 + (+a[1]) * 60 + (+a[2]);
+   timestamp *= 1000; // milliseconds resolution
+   timestamp = Math.round(timestamp); // integer only
+
    idstr = ""; height = -1; view = -1; index = -1; tx = -1;
    nv = -1; status=""; state=""; role=""; expected=-1; current=-1; nodes=-1;
    idstr = "OnPrepareRequestReceived"; // [03:38:53] OnPrepareResponseReceived: height=59 view=0 index=0
