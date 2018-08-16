@@ -25,24 +25,18 @@ Tolerance](http://pmg.csail.mit.edu/papers/osdi99.pdf)
 
 ## How to use
 
-Create example! `generateExample.sh`
-
-Or... get it from running neocompiler-eco: `./getremotelog/getconsensuslog.sh`
-
 ### Node express server
 
 `npm install`
 
 RUN: `runConsensusDraw.sh`
 
-### Simple python HTTP
-
-RUN: `python -m SimpleHTTPServer 20000`
-
 **ACCESS:** `http://localhost:20000`
 
-## Example
-Current example is loaded from `example-logs.js`, which is parsed automatically.
+An example will be created automatically with `generateExample.sh`
+
+Or... get it from running neocompiler-eco: `./getremotelog/getconsensuslog.sh`
+
 
 ## License
 
