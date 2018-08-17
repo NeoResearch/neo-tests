@@ -1,0 +1,40 @@
+node1
+
+[22:56:33.024] initialize: height=602 view=0 index=2 role=Primary
+[22:56:38.032] timeout: height=602 view=0 state=Primary
+[22:56:38.033] send prepare request: height=602 view=0
+[22:56:40.057] OnPrepareResponseReceived: height=602 view=0 index=3
+[22:56:40.062] OnPrepareResponseReceived: height=602 view=0 index=1
+[22:56:40.066] relay block: 0xef242b46014ff19a64310aa51f699bce48c72dd714c4b1d1f45d40a358ab8a63
+[22:56:40.072] persist block: 0xef242b46014ff19a64310aa51f699bce48c72dd714c4b1d1f45d40a358ab8a63
+[22:56:40.072] initialize: height=603 view=0 index=2 role=Backup
+I AM BLOCKED!
+
+
+node2
+[22:56:33.041] initialize: height=602 view=0 index=0 role=Backup
+I AM BLOCKED!
+[22:56:39.037] OnPrepareRequestReceived: height=602 view=0 index=2 tx=1
+[22:56:39.038] send prepare response
+[22:56:40.049] OnPrepareResponseReceived: height=602 view=0 index=3
+[22:56:40.055] relay block: 0xef242b46014ff19a64310aa51f699bce48c72dd714c4b1d1f45d40a358ab8a63
+[22:56:40.061] persist block: 0xef242b46014ff19a64310aa51f699bce48c72dd714c4b1d1f45d40a358ab8a63
+[22:56:40.062] initialize: height=603 view=0 index=0 role=Backup
+
+
+node3
+22:56:33.037] initialize: height=602 view=0 index=3 role=Backup
+[22:56:39.041] OnPrepareRequestReceived: height=602 view=0 index=2 tx=1
+[22:56:39.043] send prepare response
+[22:56:40.047] OnPrepareResponseReceived: height=602 view=0 index=1
+[22:56:40.060] relay block: 0xef242b46014ff19a64310aa51f699bce48c72dd714c4b1d1f45d40a358ab8a63
+[22:56:40.069] persist block: 0xef242b46014ff19a64310aa51f699bce48c72dd714c4b1d1f45d40a358ab8a63
+[22:56:40.070] initialize: height=603 view=0 index=3 role=Primary
+
+node4
+[22:56:33.029] initialize: height=602 view=0 index=1 role=Backup
+[22:56:39.039] OnPrepareRequestReceived: height=602 view=0 index=2 tx=1
+[22:56:39.043] send prepare response
+[22:56:43.036] timeout: height=602 view=0 state=Backup, RequestReceived, SignatureSent
+[22:56:43.036] request change view: height=602 view=0 nv=1 state=Backup, RequestReceived, SignatureSent, ViewChanging
+
