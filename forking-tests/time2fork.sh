@@ -52,12 +52,10 @@ docker exec -it eco-neo-csharp-node2-running ifconfig eth0 down
 sudo echo "I AM BLOCKED!" >> /home/imcoelho/git-reps/neocompiler-eco/docker-compose-eco-network/logs-neocli-node2/2018-08-18.log
 
 echo "will block node3<->node4 (node3)"
-docker exec -it eco-neo-csharp-node3-running iptables -A INPUT -p tcp --dport 20336:20336 -j DROP
-docker exec -it eco-neo-csharp-node3-running iptables -A OUTPUT -p tcp --dport 20336:20336 -j DROP
+docker exec -it eco-neo-csharp-node3-running iptables -I INPUT -p tcp --dport 20336:20336 -j DROP
 
 echo "will block node3<->node4 (node4)"
-docker exec -it eco-neo-csharp-node4-running iptables -A INPUT -p tcp --dport 20335:20335 -j DROP
-docker exec -it eco-neo-csharp-node4-running iptables -A OUTPUT -p tcp --dport 20335:20335 -j DROP
+docker exec -it eco-neo-csharp-node4-running iptables -I INPUT -p tcp --dport 20335:20335 -j DROP
 
 echo ""
 echo "will wait for node1 to timeout"
@@ -75,9 +73,9 @@ while [ `cat ../../neocompiler-eco/docker-compose-eco-network/logs-neocli-node3/
 done
 cat ../../neocompiler-eco/docker-compose-eco-network/logs-neocli-node3/*.log | tail -3 | grep index=2 | grep OnPrepareRequest
 
-echo "blocking OUTPUT on node1 to node3 (messages from node1 to node3)"
+echo "blocking connection node1 -> node3 (messages from node1 to node3)"
 docker exec -it eco-neo-csharp-node1-running iptables -A OUTPUT -p tcp --dport 20335:20335 -j DROP
-echo "blocking INPUT on node3 from node1 (messages from node1 to node3)"
+echo "blocking connection node3 <- node1 (messages from node1 to node3)"
 docker exec -it eco-neo-csharp-node3-running iptables -A INPUT -p tcp --dport 20333:20333 -j DROP
 
 echo ""
