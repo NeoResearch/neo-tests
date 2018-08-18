@@ -41,15 +41,15 @@ uptime
 
 echo ""
 echo "will block node2"
-docker exec -it eco-neo-csharp-node2-running iptables -A INPUT -p tcp --dport 20333:20336 -j DROP
-docker exec -it eco-neo-csharp-node2-running iptables -A OUTPUT -p tcp --dport 20333:20336 -j DROP
-echo "forbid communication with node2"
-docker exec -it eco-neo-csharp-node1-running iptables -A OUTPUT -p tcp --dport 20334:20334 -j DROP
-docker exec -it eco-neo-csharp-node3-running iptables -A OUTPUT -p tcp --dport 20334:20334 -j DROP
-docker exec -it eco-neo-csharp-node4-running iptables -A OUTPUT -p tcp --dport 20334:20334 -j DROP
-#docker exec -it eco-neo-csharp-node2-running iptables -D INPUT -p tcp --dport 10333:30336 -j DROP && iptables -D OUTPUT -p tcp --dport 10333:30336 -j DROP
+docker exec -it eco-neo-csharp-node2-running ifconfig eth0 down
+#docker exec -it eco-neo-csharp-node2-running iptables -A INPUT -p tcp --dport 20333:20336 -j DROP
+#docker exec -it eco-neo-csharp-node2-running iptables -A OUTPUT -p tcp --dport 20333:20336 -j DROP
+#echo "forbid communication with node2"
+#docker exec -it eco-neo-csharp-node1-running iptables -A OUTPUT -p tcp --dport 20334:20334 -j DROP
+#docker exec -it eco-neo-csharp-node3-running iptables -A OUTPUT -p tcp --dport 20334:20334 -j DROP
+#docker exec -it eco-neo-csharp-node4-running iptables -A OUTPUT -p tcp --dport 20334:20334 -j DROP
 
-sudo echo "I AM BLOCKED!" >> /home/imcoelho/git-reps/neocompiler-eco/docker-compose-eco-network/logs-neocli-node2/2018-08-17.log
+sudo echo "I AM BLOCKED!" >> /home/imcoelho/git-reps/neocompiler-eco/docker-compose-eco-network/logs-neocli-node2/2018-08-18.log
 
 echo "will block node3<->node4 (node3)"
 docker exec -it eco-neo-csharp-node3-running iptables -A INPUT -p tcp --dport 20336:20336 -j DROP
@@ -114,10 +114,11 @@ done
 cat ../../neocompiler-eco/docker-compose-eco-network/logs-neocli-node1/*.log | tail -4 | grep relay
 
 echo "fully block node1"
-docker exec -it eco-neo-csharp-node1-running iptables -A INPUT -p tcp --dport 20333:20336 -j DROP
-docker exec -it eco-neo-csharp-node1-running iptables -A OUTPUT -p tcp --dport 20333:20336 -j DROP
+docker exec -it eco-neo-csharp-node1-running ifconfig eth0 down
+#docker exec -it eco-neo-csharp-node1-running iptables -A INPUT -p tcp --dport 20333:20336 -j DROP
+#docker exec -it eco-neo-csharp-node1-running iptables -A OUTPUT -p tcp --dport 20333:20336 -j DROP
 
-sudo echo "I AM BLOCKED!" >> /home/imcoelho/git-reps/neocompiler-eco/docker-compose-eco-network/logs-neocli-node1/2018-08-17.log
+sudo echo "I AM BLOCKED!" >> /home/imcoelho/git-reps/neocompiler-eco/docker-compose-eco-network/logs-neocli-node1/2018-08-18.log
 
 echo "will wait for node2 to timeout"
 while [ `cat ../../neocompiler-eco/docker-compose-eco-network/logs-neocli-node2/*.log | tail -2 | grep timeout | wc -l` -eq 0 ]; do
@@ -125,11 +126,20 @@ while [ `cat ../../neocompiler-eco/docker-compose-eco-network/logs-neocli-node2/
 done
 cat ../../neocompiler-eco/docker-compose-eco-network/logs-neocli-node2/*.log | tail -2 | grep timeout
 
-echo "unblock node2"
-docker exec -it eco-neo-csharp-node2-running iptables -D INPUT -p tcp --dport 20333:20336 -j DROP
-docker exec -it eco-neo-csharp-node2-running iptables -D OUTPUT -p tcp --dport 20333:20336 -j DROP
+echo "unblock node2 (block node3, node4 before)"
+docker exec -it eco-neo-csharp-node3-running ifconfig eth0 down
+docker exec -it eco-neo-csharp-node4-running ifconfig eth0 down
+docker exec -it eco-neo-csharp-node2-running ifconfig eth0 up
+#docker exec -it eco-neo-csharp-node2-running iptables -D INPUT -p tcp --dport 20333:20336 -j DROP
+#docker exec -it eco-neo-csharp-node2-running iptables -D OUTPUT -p tcp --dport 20333:20336 -j DROP
 
-sudo echo "I AM UNBLOCKED!" >> /home/imcoelho/git-reps/neocompiler-eco/docker-compose-eco-network/logs-neocli-node2/2018-08-17.log
+sudo echo "I AM UNBLOCKED!" >> /home/imcoelho/git-reps/neocompiler-eco/docker-compose-eco-network/logs-neocli-node2/2018-08-18.log
+sleep 1
+
+docker exec -it eco-neo-csharp-node3-running ifconfig eth0 up
+docker exec -it eco-neo-csharp-node4-running ifconfig eth0 up
+
+sudo echo "I AM UNBLOCKED (node3 and node4 are back)!" >> /home/imcoelho/git-reps/neocompiler-eco/docker-compose-eco-network/logs-neocli-node2/2018-08-18.log
 
 echo "will wait for node2 index=0 to become primary nv=1"
 while [ `cat ../../neocompiler-eco/docker-compose-eco-network/logs-neocli-node2/*.log | tail -1 | grep initialize | grep index=0 | grep view=1 | grep Primary | wc -l` -eq 0 ]; do
@@ -149,7 +159,8 @@ while [ `cat ../../neocompiler-eco/docker-compose-eco-network/logs-neocli-node2/
 done
 
 echo "unblock node1"
-docker exec -it eco-neo-csharp-node1-running iptables -D INPUT -p tcp --dport 20333:20336 -j DROP
-docker exec -it eco-neo-csharp-node1-running iptables -D OUTPUT -p tcp --dport 20333:20336 -j DROP
+docker exec -it eco-neo-csharp-node2-running ifconfig eth0 up
+#docker exec -it eco-neo-csharp-node1-running iptables -D INPUT -p tcp --dport 20333:20336 -j DROP
+#docker exec -it eco-neo-csharp-node1-running iptables -D OUTPUT -p tcp --dport 20333:20336 -j DROP
 
 sudo echo "I AM UNBLOCKED!" >> /home/imcoelho/git-reps/neocompiler-eco/docker-compose-eco-network/logs-neocli-node1/2018-08-17.log

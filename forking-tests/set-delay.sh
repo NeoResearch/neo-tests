@@ -25,7 +25,45 @@ echo "shutting down python"
 docker stop eco-neo-python-logger-running
 docker stop eco-neo-python-rest-running
 
-sleep 30
+echo "shutting neo-scan"
+docker stop eco-neo-scan-running
+
+sleep 20
+
+echo "SELECTING SPECIFIC PORTS ONLY"
+docker exec -it eco-neo-csharp-node1-running iptables -A INPUT -p icmp --icmp-type 8 -s 0/0 -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT
+
+#iptables -A OUTPUT -p icmp --icmp-type 0 -d 0/0 -m state --state ESTABLISHED,RELATED -j ACCEPT
+#docker exec -it eco-neo-csharp-node1-running iptables -A INPUT -p tcp --dport 10333:10336 -j ACCEPT
+#docker exec -it eco-neo-csharp-node1-running iptables -A INPUT -p tcp --dport 20333:20336 -j ACCEPT
+#docker exec -it eco-neo-csharp-node1-running iptables -A INPUT -p udp --dport 10333:60336 -j ACCEPT
+docker exec -it eco-neo-csharp-node1-running iptables -A INPUT -p tcp --dport 10333:60333 -j ACCEPT
+docker exec -it eco-neo-csharp-node1-running iptables -A INPUT -j REJECT
+#docker exec -it eco-neo-csharp-node2-running iptables -A INPUT -p tcp --dport 10333:10336 -j ACCEPT
+docker exec -it eco-neo-csharp-node2-running iptables -A INPUT -p tcp --dport 10333:60336 -j ACCEPT
+#docker exec -it eco-neo-csharp-node2-running iptables -A INPUT -p udp --dport 10333:60336 -j ACCEPT
+docker exec -it eco-neo-csharp-node2-running iptables -A INPUT -j REJECT
+#docker exec -it eco-neo-csharp-node3-running iptables -A INPUT -p tcp --dport 10333:10336 -j ACCEPT
+docker exec -it eco-neo-csharp-node3-running iptables -A INPUT -p tcp --dport 10333:60336 -j ACCEPT
+#docker exec -it eco-neo-csharp-node3-running iptables -A INPUT -p udp --dport 10333:60336 -j ACCEPT
+docker exec -it eco-neo-csharp-node3-running iptables -A INPUT -j REJECT
+#docker exec -it eco-neo-csharp-node4-running iptables -A INPUT -p tcp --dport 10333:10336 -j ACCEPT
+docker exec -it eco-neo-csharp-node4-running iptables -A INPUT -p tcp --dport 10333:60336 -j ACCEPT
+#docker exec -it eco-neo-csharp-node4-running iptables -A INPUT -p udp --dport 10333:60336 -j ACCEPT
+docker exec -it eco-neo-csharp-node4-running iptables -A INPUT -j REJECT
+
+
+
+#docker exec -it eco-neo-csharp-node1-running iptables -A OUTPUT -j ACCEPT
+#docker exec -it eco-neo-csharp-node1-running iptables -A OUTPUT -o lo -j ACCEPT
+#docker exec -it eco-neo-csharp-node2-running iptables -A OUTPUT -j ACCEPT
+#docker exec -it eco-neo-csharp-node2-running iptables -A OUTPUT -o lo -j ACCEPT
+#docker exec -it eco-neo-csharp-node3-running iptables -A OUTPUT -j ACCEPT
+#docker exec -it eco-neo-csharp-node3-running iptables -A OUTPUT -o lo -j ACCEPT
+#docker exec -it eco-neo-csharp-node4-running iptables -A OUTPUT -j ACCEPT
+#docker exec -it eco-neo-csharp-node4-running iptables -A OUTPUT -o lo -j ACCEPT
+
+
 
 #echo "waiting for some time for system to self adjust (30 seconds)"
 #sleep 10
