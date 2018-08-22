@@ -1,5 +1,10 @@
 #!/bin/bash
 
+docker exec -it eco-neo-csharp-node1-running ifconfig eth0 up
+docker exec -it eco-neo-csharp-node2-running ifconfig eth0 up
+docker exec -it eco-neo-csharp-node3-running ifconfig eth0 up
+docker exec -it eco-neo-csharp-node4-running ifconfig eth0 up
+
 echo "unblock node1"
 docker exec -it eco-neo-csharp-node1-running iptables -D INPUT -p tcp --dport 20333:20336 -j DROP
 docker exec -it eco-neo-csharp-node1-running iptables -D OUTPUT -p tcp --dport 20333:20336 -j DROP

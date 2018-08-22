@@ -1,0 +1,501 @@
+[00:44:24.286] initialize: height=8 view=0 index=2 role=Backup
+[00:44:40.291] OnPrepareRequestReceived: height=8 view=0 index=0 tx=1
+[00:44:40.292] send prepare response
+[00:44:41.294] OnPrepareResponseReceived: height=8 view=0 index=1
+[00:44:41.298] relay block: 0x1d6d34f726a3eb343b0ad9a184e06a91f385c0cafddadc893cbc1dc582cd4a34
+[00:44:41.301] OnPrepareResponseReceived: height=8 view=0 index=3
+[00:44:41.301] persist block: 0x1d6d34f726a3eb343b0ad9a184e06a91f385c0cafddadc893cbc1dc582cd4a34
+[00:44:41.302] initialize: height=9 view=0 index=2 role=Backup
+[00:44:57.311] OnPrepareRequestReceived: height=9 view=0 index=1 tx=1
+[00:44:57.311] send prepare response
+[00:44:58.319] OnPrepareResponseReceived: height=9 view=0 index=0
+[00:44:58.323] relay block: 0xc1cf48c31cc5b6bced7b9c83addfec1644e789b62eafed7e643d2564ed68eb45
+[00:44:58.324] OnPrepareResponseReceived: height=9 view=0 index=3
+[00:44:58.326] persist block: 0xc1cf48c31cc5b6bced7b9c83addfec1644e789b62eafed7e643d2564ed68eb45
+[00:44:58.326] initialize: height=10 view=0 index=2 role=Primary
+[00:45:13.329] timeout: height=10 view=0 state=Primary
+[00:45:13.329] send prepare request: height=10 view=0
+[00:45:15.334] OnPrepareResponseReceived: height=10 view=0 index=3
+[00:45:15.337] OnPrepareResponseReceived: height=10 view=0 index=0
+[00:45:15.341] relay block: 0x5666072980ac0199e37ed38b43b2ee4e21400f366c3dcaa56a68ab1224266049
+[00:45:15.344] OnPrepareResponseReceived: height=10 view=0 index=1
+[00:45:15.344] persist block: 0x5666072980ac0199e37ed38b43b2ee4e21400f366c3dcaa56a68ab1224266049
+[00:45:15.347] initialize: height=11 view=0 index=2 role=Backup
+[00:45:31.354] OnPrepareRequestReceived: height=11 view=0 index=3 tx=1
+[00:45:31.355] send prepare response
+[00:45:32.360] OnPrepareResponseReceived: height=11 view=0 index=1
+[00:45:32.364] relay block: 0xbb462e840bd2deb22e5b6b05a942ea0bdbc3bb240e98c9311a214eded9988e95
+[00:45:32.364] OnPrepareResponseReceived: height=11 view=0 index=0
+[00:45:32.367] persist block: 0xbb462e840bd2deb22e5b6b05a942ea0bdbc3bb240e98c9311a214eded9988e95
+[00:45:32.367] initialize: height=12 view=0 index=2 role=Backup
+[00:45:48.371] OnPrepareRequestReceived: height=12 view=0 index=0 tx=1
+[00:45:48.371] send prepare response
+[00:45:49.379] OnPrepareResponseReceived: height=12 view=0 index=3
+[00:45:49.382] relay block: 0xddabafc33212fcbb0819e7388d17bc1d9ee029807f2fbd66d3b100a5cc6e6622
+[00:45:49.385] persist block: 0xddabafc33212fcbb0819e7388d17bc1d9ee029807f2fbd66d3b100a5cc6e6622
+[00:45:49.386] initialize: height=13 view=0 index=2 role=Backup
+[00:46:05.391] OnPrepareRequestReceived: height=13 view=0 index=1 tx=1
+[00:46:05.391] send prepare response
+[00:46:06.399] OnPrepareResponseReceived: height=13 view=0 index=3
+[00:46:06.402] relay block: 0xc3e3888ab1a3218bdb24cafaad7a57fa01aa69469ec10700b59b3fd8fe624053
+[00:46:06.405] OnPrepareResponseReceived: height=13 view=0 index=0
+[00:46:06.405] persist block: 0xc3e3888ab1a3218bdb24cafaad7a57fa01aa69469ec10700b59b3fd8fe624053
+[00:46:06.405] initialize: height=14 view=0 index=2 role=Primary
+[00:46:21.409] timeout: height=14 view=0 state=Primary
+[00:46:21.409] send prepare request: height=14 view=0
+[00:46:23.415] OnPrepareResponseReceived: height=14 view=0 index=1
+[00:46:23.420] OnPrepareResponseReceived: height=14 view=0 index=3
+[00:46:23.422] relay block: 0x7167e90b838923df0b0c697f5dc01634891e54b830711049578d05b3c4237881
+[00:46:23.424] persist block: 0x7167e90b838923df0b0c697f5dc01634891e54b830711049578d05b3c4237881
+[00:46:23.425] initialize: height=15 view=0 index=2 role=Backup
+[00:46:53.429] timeout: height=15 view=0 state=Backup
+[00:46:53.429] request change view: height=15 view=0 nv=1 state=Backup, ViewChanging
+[00:47:53.439] timeout: height=15 view=0 state=Backup, ViewChanging
+[00:47:53.439] request change view: height=15 view=0 nv=2 state=Backup, ViewChanging
+[00:49:30.946] OnStart
+[00:49:31.208] initialize: height=1 view=0 index=2 role=Backup
+[00:50:01.228] timeout: height=1 view=0 state=Backup
+[00:50:01.229] request change view: height=1 view=0 nv=1 state=Backup, ViewChanging
+[00:50:01.331] OnChangeViewReceived: height=1 view=0 index=0 nv=1
+[00:50:01.358] OnChangeViewReceived: height=1 view=0 index=1 nv=1
+[00:50:01.359] initialize: height=1 view=1 index=2 role=Backup
+[00:50:01.362] OnChangeViewReceived: height=1 view=0 index=1 nv=1
+[00:50:01.366] OnChangeViewReceived: height=1 view=0 index=3 nv=1
+[00:50:01.367] OnChangeViewReceived: height=1 view=0 index=3 nv=1
+[00:50:01.412] OnPrepareRequestReceived: height=1 view=1 index=0 tx=1
+[00:50:01.448] send prepare response
+[00:50:01.457] OnPrepareResponseReceived: height=1 view=1 index=1
+[00:50:01.470] relay block: 0x8793ee49e941fc671728a2e976413bddfe6c7ac6a91ecf36e68f7c388a483f2d
+[00:50:01.491] OnPrepareResponseReceived: height=1 view=1 index=1
+[00:50:01.491] OnPrepareResponseReceived: height=1 view=1 index=3
+[00:50:01.492] persist block: 0x8793ee49e941fc671728a2e976413bddfe6c7ac6a91ecf36e68f7c388a483f2d
+[00:50:01.492] initialize: height=2 view=0 index=2 role=Primary
+[00:50:16.497] timeout: height=2 view=0 state=Primary
+[00:50:16.498] send prepare request: height=2 view=0
+[00:50:16.578] OnPrepareResponseReceived: height=2 view=0 index=1
+[00:50:16.602] OnPrepareResponseReceived: height=2 view=0 index=3
+[00:50:16.627] relay block: 0x6b4fc1fef45cbdaa18b2b042c7165cdc74d02dfa6a2f4f3768ec262e20150ffb
+[00:50:16.627] OnPrepareResponseReceived: height=2 view=0 index=3
+[00:50:16.636] persist block: 0x6b4fc1fef45cbdaa18b2b042c7165cdc74d02dfa6a2f4f3768ec262e20150ffb
+[00:50:16.636] initialize: height=3 view=0 index=2 role=Backup
+[00:50:32.664] OnPrepareRequestReceived: height=3 view=0 index=3 tx=1
+[00:50:32.670] send prepare response
+[00:50:33.692] OnPrepareResponseReceived: height=3 view=0 index=0
+[00:50:33.737] relay block: 0x34166ea72f688d73ffc02cd0eece6585b83945cf5e8583d5816d535af34f67f1
+[00:50:33.754] OnPrepareResponseReceived: height=3 view=0 index=1
+[00:50:33.763] persist block: 0x34166ea72f688d73ffc02cd0eece6585b83945cf5e8583d5816d535af34f67f1
+[00:50:33.764] initialize: height=4 view=0 index=2 role=Backup
+[00:50:49.777] OnPrepareRequestReceived: height=4 view=0 index=0 tx=1
+[00:50:49.784] send prepare response
+[00:50:50.800] OnPrepareResponseReceived: height=4 view=0 index=3
+[00:50:50.838] relay block: 0xf3402452f29be0c865004f8a7b5e19838e4ab204e67c88dd4bf4bc295ed80526
+[00:50:50.840] OnPrepareResponseReceived: height=4 view=0 index=1
+[00:50:50.855] persist block: 0xf3402452f29be0c865004f8a7b5e19838e4ab204e67c88dd4bf4bc295ed80526
+[00:50:50.856] initialize: height=5 view=0 index=2 role=Backup
+[00:51:06.853] OnPrepareRequestReceived: height=5 view=0 index=1 tx=1
+[00:51:06.854] send prepare response
+[00:51:07.855] OnPrepareResponseReceived: height=5 view=0 index=0
+[00:51:07.859] relay block: 0x92d5f71d528cdc315c888cb931a7f20e156fa926066570277475efbf6fc08e0e
+[00:51:07.864] persist block: 0x92d5f71d528cdc315c888cb931a7f20e156fa926066570277475efbf6fc08e0e
+[00:51:07.864] initialize: height=6 view=0 index=2 role=Primary
+[00:51:22.866] timeout: height=6 view=0 state=Primary
+[00:51:22.867] send prepare request: height=6 view=0
+[00:51:24.897] OnPrepareResponseReceived: height=6 view=0 index=1
+[00:51:24.912] OnPrepareResponseReceived: height=6 view=0 index=3
+[00:51:24.939] relay block: 0x21901f996dd39a73f936b2554e65dac9a0922798255741874d83f66a66f33dcb
+[00:51:24.948] OnPrepareResponseReceived: height=6 view=0 index=0
+[00:51:24.949] persist block: 0x21901f996dd39a73f936b2554e65dac9a0922798255741874d83f66a66f33dcb
+[00:51:24.950] initialize: height=7 view=0 index=2 role=Backup
+[00:51:40.947] OnPrepareRequestReceived: height=7 view=0 index=3 tx=1
+[00:51:40.948] send prepare response
+[00:51:41.951] OnPrepareResponseReceived: height=7 view=0 index=0
+[00:51:41.955] relay block: 0xa76cafd6d9a2734684c72986a76d8e2873abc1a6cc87befe0b1e53f9f6b0be88
+[00:51:41.959] persist block: 0xa76cafd6d9a2734684c72986a76d8e2873abc1a6cc87befe0b1e53f9f6b0be88
+[00:51:41.959] initialize: height=8 view=0 index=2 role=Backup
+[00:51:57.967] OnPrepareRequestReceived: height=8 view=0 index=0 tx=1
+[00:51:57.967] send prepare response
+[00:51:58.975] OnPrepareResponseReceived: height=8 view=0 index=3
+[00:51:58.979] relay block: 0xe54a00fc6b26036ab907fae65ae21e45e89e3d6471f766fc6345ea24e2e6fea3
+[00:51:58.980] OnPrepareResponseReceived: height=8 view=0 index=1
+[00:51:58.982] persist block: 0xe54a00fc6b26036ab907fae65ae21e45e89e3d6471f766fc6345ea24e2e6fea3
+[00:51:58.982] initialize: height=9 view=0 index=2 role=Backup
+[00:52:14.991] OnPrepareRequestReceived: height=9 view=0 index=1 tx=1
+[00:52:14.992] send prepare response
+[00:52:15.991] OnPrepareResponseReceived: height=9 view=0 index=0
+[00:52:15.996] relay block: 0xae8d09ee035e17be48d81279a3a282da0a3233c1392a310d7b061adc2f7464f9
+[00:52:15.996] OnPrepareResponseReceived: height=9 view=0 index=3
+[00:52:16.003] persist block: 0xae8d09ee035e17be48d81279a3a282da0a3233c1392a310d7b061adc2f7464f9
+[00:52:16.004] initialize: height=10 view=0 index=2 role=Primary
+[00:52:31.007] timeout: height=10 view=0 state=Primary
+[00:52:31.007] send prepare request: height=10 view=0
+[00:52:33.018] OnPrepareResponseReceived: height=10 view=0 index=3
+[00:52:33.019] OnPrepareResponseReceived: height=10 view=0 index=0
+[00:52:33.022] relay block: 0xc8e35ea0d15820db9ca3b3c0601af64fb586b23f9747bd9e22e8016e3b5cdfb1
+[00:52:33.022] OnPrepareResponseReceived: height=10 view=0 index=1
+[00:52:33.025] persist block: 0xc8e35ea0d15820db9ca3b3c0601af64fb586b23f9747bd9e22e8016e3b5cdfb1
+[00:52:33.025] initialize: height=11 view=0 index=2 role=Backup
+[00:52:49.027] OnPrepareRequestReceived: height=11 view=0 index=3 tx=1
+[00:52:49.027] send prepare response
+[00:52:50.029] OnPrepareResponseReceived: height=11 view=0 index=0
+[00:52:50.033] relay block: 0x7093e6ffe6a205b63790ffe8092009ede116f5d1fef5127a47a5509114830f65
+[00:52:50.033] OnPrepareResponseReceived: height=11 view=0 index=1
+[00:52:50.036] persist block: 0x7093e6ffe6a205b63790ffe8092009ede116f5d1fef5127a47a5509114830f65
+[00:52:50.037] initialize: height=12 view=0 index=2 role=Backup
+[00:53:06.047] OnPrepareRequestReceived: height=12 view=0 index=0 tx=1
+[00:53:06.048] send prepare response
+[00:53:07.050] OnPrepareResponseReceived: height=12 view=0 index=3
+[00:53:07.059] relay block: 0x6866596222218ac512c1cad61559bd3bb8243b5e5afbe64d281c32e19f0a96fa
+[00:53:07.059] OnPrepareResponseReceived: height=12 view=0 index=1
+[00:53:07.061] persist block: 0x6866596222218ac512c1cad61559bd3bb8243b5e5afbe64d281c32e19f0a96fa
+[00:53:07.062] initialize: height=13 view=0 index=2 role=Backup
+[00:53:23.078] OnPrepareRequestReceived: height=13 view=0 index=1 tx=1
+[00:53:23.078] send prepare response
+[00:53:24.080] OnPrepareResponseReceived: height=13 view=0 index=3
+[00:53:24.084] relay block: 0xa92fee439c90b394c565c5759b922f0ef8da351fcc4a37e773f9dd716c474196
+[00:53:24.086] OnPrepareResponseReceived: height=13 view=0 index=0
+[00:53:24.087] persist block: 0xa92fee439c90b394c565c5759b922f0ef8da351fcc4a37e773f9dd716c474196
+[00:53:24.088] initialize: height=14 view=0 index=2 role=Primary
+[00:53:39.096] timeout: height=14 view=0 state=Primary
+[00:53:39.096] send prepare request: height=14 view=0
+[00:53:41.101] OnPrepareResponseReceived: height=14 view=0 index=3
+[00:53:41.104] OnPrepareResponseReceived: height=14 view=0 index=1
+[00:53:41.108] relay block: 0x44fcb7dc28a12df4ae9d69a0d315475da29a7998f415921e48239560c0424e14
+[00:53:41.110] persist block: 0x44fcb7dc28a12df4ae9d69a0d315475da29a7998f415921e48239560c0424e14
+[00:53:41.110] initialize: height=15 view=0 index=2 role=Backup
+[00:54:11.116] timeout: height=15 view=0 state=Backup
+[00:54:11.116] request change view: height=15 view=0 nv=1 state=Backup, ViewChanging
+[00:55:11.126] timeout: height=15 view=0 state=Backup, ViewChanging
+[00:55:11.126] request change view: height=15 view=0 nv=2 state=Backup, ViewChanging
+[00:57:11.136] timeout: height=15 view=0 state=Backup, ViewChanging
+[00:57:11.136] request change view: height=15 view=0 nv=3 state=Backup, ViewChanging
+[00:57:29.223] OnPrepareRequestReceived: height=15 view=0 index=3 tx=1
+[00:57:29.226] send prepare response
+[00:57:33.235] OnPrepareResponseReceived: height=15 view=0 index=1
+[00:57:33.238] relay block: 0xd20179e6b63f43b7db51f086f22f8c04a93ba3c32417eb89514206c434097ab9
+[00:57:33.241] persist block: 0xd20179e6b63f43b7db51f086f22f8c04a93ba3c32417eb89514206c434097ab9
+[00:57:33.241] initialize: height=16 view=0 index=2 role=Backup
+[00:58:03.247] timeout: height=16 view=0 state=Backup
+[00:58:03.247] request change view: height=16 view=0 nv=1 state=Backup, ViewChanging
+[00:58:07.274] OnChangeViewReceived: height=16 view=0 index=1 nv=1
+[00:58:07.282] OnChangeViewReceived: height=16 view=0 index=3 nv=1
+[00:58:07.282] initialize: height=16 view=1 index=2 role=Backup
+[00:58:08.292] OnPrepareRequestReceived: height=16 view=1 index=3 tx=1
+[00:58:08.294] send prepare response
+[00:58:09.299] OnPrepareResponseReceived: height=16 view=1 index=1
+[00:58:09.302] relay block: 0x3d68627ade0ca22700c190da62219c233b2fe16fca138fdb47c9232ba0288083
+[00:58:09.306] persist block: 0x3d68627ade0ca22700c190da62219c233b2fe16fca138fdb47c9232ba0288083
+[00:58:09.306] initialize: height=17 view=0 index=2 role=Backup
+[00:58:25.329] OnPrepareRequestReceived: height=17 view=0 index=1 tx=1
+[00:58:25.332] send prepare response
+[00:58:26.336] OnPrepareResponseReceived: height=17 view=0 index=3
+[00:58:26.340] relay block: 0x87523324b9c82818c6981e54f4e861aec2847e4d33cad45628c49b6e0d7f2bf6
+[00:58:26.350] persist block: 0x87523324b9c82818c6981e54f4e861aec2847e4d33cad45628c49b6e0d7f2bf6
+[00:58:26.351] initialize: height=18 view=0 index=2 role=Primary
+[00:58:41.356] timeout: height=18 view=0 state=Primary
+[00:58:41.357] send prepare request: height=18 view=0
+[00:58:43.388] OnPrepareResponseReceived: height=18 view=0 index=1
+[00:58:43.391] OnPrepareResponseReceived: height=18 view=0 index=3
+[00:58:43.403] relay block: 0xf7e063b2143de005ce62101eca4e5fdadbd6214d396f34675adbae210cbfad77
+[00:58:43.405] persist block: 0xf7e063b2143de005ce62101eca4e5fdadbd6214d396f34675adbae210cbfad77
+[00:58:43.406] initialize: height=19 view=0 index=2 role=Backup
+[00:58:59.417] OnPrepareRequestReceived: height=19 view=0 index=3 tx=1
+[00:58:59.422] send prepare response
+[00:59:00.432] OnPrepareResponseReceived: height=19 view=0 index=1
+[00:59:00.454] relay block: 0x5a636a83cf800752a1dd0eac10b7b3d50980d9ae818b5101f3ba9a4e26201fa3
+[00:59:00.460] persist block: 0x5a636a83cf800752a1dd0eac10b7b3d50980d9ae818b5101f3ba9a4e26201fa3
+[00:59:00.461] initialize: height=20 view=0 index=2 role=Backup
+[00:59:30.467] timeout: height=20 view=0 state=Backup
+[00:59:30.468] request change view: height=20 view=0 nv=1 state=Backup, ViewChanging
+[00:59:31.473] OnChangeViewReceived: height=20 view=0 index=3 nv=1
+[00:59:31.478] OnChangeViewReceived: height=20 view=0 index=1 nv=1
+[00:59:31.480] initialize: height=20 view=1 index=2 role=Backup
+[00:59:32.504] OnPrepareRequestReceived: height=20 view=1 index=3 tx=1
+[00:59:32.509] send prepare response
+[00:59:33.519] OnPrepareResponseReceived: height=20 view=1 index=1
+[00:59:33.541] relay block: 0x07ea72e1510317bc59483c7de5342bcf7c67da7b51dce94d5f93513d7b2fe96a
+[00:59:33.549] persist block: 0x07ea72e1510317bc59483c7de5342bcf7c67da7b51dce94d5f93513d7b2fe96a
+[00:59:33.552] initialize: height=21 view=0 index=2 role=Backup
+[00:59:49.569] OnPrepareRequestReceived: height=21 view=0 index=1 tx=1
+[00:59:49.570] send prepare response
+[00:59:50.572] OnPrepareResponseReceived: height=21 view=0 index=3
+[00:59:50.574] relay block: 0xa3ad5c1afa5a794997bd4fc02b0330cb3f196706c5a0691ec9058179d18d9a11
+[00:59:50.576] persist block: 0xa3ad5c1afa5a794997bd4fc02b0330cb3f196706c5a0691ec9058179d18d9a11
+[00:59:50.577] initialize: height=22 view=0 index=2 role=Primary
+[01:00:05.586] timeout: height=22 view=0 state=Primary
+[01:00:05.586] send prepare request: height=22 view=0
+[01:00:07.608] OnPrepareResponseReceived: height=22 view=0 index=1
+[01:00:07.620] OnPrepareResponseReceived: height=22 view=0 index=3
+[01:00:07.633] relay block: 0x96b9d1a9e1d61ed6ab760e8e8b62632b65f0142b73b13dddff5975b6af14a54d
+[01:00:07.637] persist block: 0x96b9d1a9e1d61ed6ab760e8e8b62632b65f0142b73b13dddff5975b6af14a54d
+[01:00:07.637] initialize: height=23 view=0 index=2 role=Backup
+[01:00:23.637] OnPrepareRequestReceived: height=23 view=0 index=3 tx=1
+[01:00:23.637] send prepare response
+[01:00:24.644] OnPrepareResponseReceived: height=23 view=0 index=1
+[01:00:24.669] relay block: 0x2e605ecb49a0b2618151451f83a75fd90f4486a2632d5ae219544df83cdf4eed
+[01:00:24.675] persist block: 0x2e605ecb49a0b2618151451f83a75fd90f4486a2632d5ae219544df83cdf4eed
+[01:00:24.676] initialize: height=24 view=0 index=2 role=Backup
+[01:00:54.687] timeout: height=24 view=0 state=Backup
+[01:00:54.688] request change view: height=24 view=0 nv=1 state=Backup, ViewChanging
+[01:00:55.698] OnChangeViewReceived: height=24 view=0 index=1 nv=1
+[01:00:55.711] OnChangeViewReceived: height=24 view=0 index=3 nv=1
+[01:00:55.714] initialize: height=24 view=1 index=2 role=Backup
+[01:00:56.740] OnPrepareRequestReceived: height=24 view=1 index=3 tx=1
+[01:00:56.744] send prepare response
+[01:00:57.761] OnPrepareResponseReceived: height=24 view=1 index=1
+[01:00:57.764] relay block: 0xfe0584dfd4b77da9d74860bc3b8f07b2b69250b26ea266f7d0d13d075306da74
+[01:00:57.767] persist block: 0xfe0584dfd4b77da9d74860bc3b8f07b2b69250b26ea266f7d0d13d075306da74
+[01:00:57.767] initialize: height=25 view=0 index=2 role=Backup
+[01:01:13.771] OnPrepareRequestReceived: height=25 view=0 index=1 tx=1
+[01:01:13.772] send prepare response
+[01:01:14.772] OnPrepareResponseReceived: height=25 view=0 index=3
+[01:01:14.776] relay block: 0xffe1d5918ff17cbabf6c85811bc702ee99250d9f245c7e24c23408df54e8669c
+[01:01:14.778] persist block: 0xffe1d5918ff17cbabf6c85811bc702ee99250d9f245c7e24c23408df54e8669c
+[01:01:14.778] initialize: height=26 view=0 index=2 role=Primary
+[01:01:29.787] timeout: height=26 view=0 state=Primary
+[01:01:29.787] send prepare request: height=26 view=0
+[01:01:31.807] OnPrepareResponseReceived: height=26 view=0 index=1
+[01:01:31.811] OnPrepareResponseReceived: height=26 view=0 index=3
+[01:01:31.818] relay block: 0x74bfc855fda469a957ae1a817404239361d86a717609e4cec389cce265806edb
+[01:01:31.820] persist block: 0x74bfc855fda469a957ae1a817404239361d86a717609e4cec389cce265806edb
+[01:01:31.821] initialize: height=27 view=0 index=2 role=Backup
+[01:01:47.827] OnPrepareRequestReceived: height=27 view=0 index=3 tx=1
+[01:01:47.827] send prepare response
+[01:01:48.829] OnPrepareResponseReceived: height=27 view=0 index=1
+[01:01:48.832] relay block: 0x4dee072b06f432ee3d2a18505055d96a2ba1d3b5b299b59dc844df1039c0162b
+[01:01:48.835] persist block: 0x4dee072b06f432ee3d2a18505055d96a2ba1d3b5b299b59dc844df1039c0162b
+[01:01:48.836] initialize: height=28 view=0 index=2 role=Backup
+[01:02:18.846] timeout: height=28 view=0 state=Backup
+[01:02:18.847] request change view: height=28 view=0 nv=1 state=Backup, ViewChanging
+[01:02:19.859] OnChangeViewReceived: height=28 view=0 index=1 nv=1
+[01:02:19.875] OnChangeViewReceived: height=28 view=0 index=3 nv=1
+[01:02:19.876] initialize: height=28 view=1 index=2 role=Backup
+[01:02:20.899] OnPrepareRequestReceived: height=28 view=1 index=3 tx=1
+[01:02:20.900] send prepare response
+[01:02:21.910] OnPrepareResponseReceived: height=28 view=1 index=1
+[01:02:21.915] relay block: 0xdb1ba7a020dba3ff92603f1955d8f74886c343bbab9f8d288d14b93e8576e042
+[01:02:21.918] persist block: 0xdb1ba7a020dba3ff92603f1955d8f74886c343bbab9f8d288d14b93e8576e042
+[01:02:21.919] initialize: height=29 view=0 index=2 role=Backup
+[01:02:37.937] OnPrepareRequestReceived: height=29 view=0 index=1 tx=1
+[01:02:37.938] send prepare response
+[01:02:38.934] OnPrepareResponseReceived: height=29 view=0 index=3
+[01:02:38.939] relay block: 0x805149ba8af9376559fcb7b0353efdeaf80842f510bbf27bb3fee4ac830f537e
+[01:02:38.947] persist block: 0x805149ba8af9376559fcb7b0353efdeaf80842f510bbf27bb3fee4ac830f537e
+[01:02:38.947] initialize: height=30 view=0 index=2 role=Primary
+[01:02:53.956] timeout: height=30 view=0 state=Primary
+[01:02:53.956] send prepare request: height=30 view=0
+[01:02:55.971] OnPrepareResponseReceived: height=30 view=0 index=1
+[01:02:55.973] OnPrepareResponseReceived: height=30 view=0 index=3
+[01:02:55.977] relay block: 0x0a0105a18701b1068bf41eb0e5944fe7edd97f57d3e8e84d316f750b6ed26bbc
+[01:02:55.980] persist block: 0x0a0105a18701b1068bf41eb0e5944fe7edd97f57d3e8e84d316f750b6ed26bbc
+[01:02:55.980] initialize: height=31 view=0 index=2 role=Backup
+[01:03:11.991] OnPrepareRequestReceived: height=31 view=0 index=3 tx=1
+[01:03:11.992] send prepare response
+[01:03:13.000] OnPrepareResponseReceived: height=31 view=0 index=1
+[01:03:13.006] relay block: 0x665095af986eb8c7cdf2889abf370230c63ab8f3545698d48cf1e2aca88545c8
+[01:03:13.010] persist block: 0x665095af986eb8c7cdf2889abf370230c63ab8f3545698d48cf1e2aca88545c8
+[01:03:13.011] initialize: height=32 view=0 index=2 role=Backup
+[01:03:43.016] timeout: height=32 view=0 state=Backup
+[01:03:43.017] request change view: height=32 view=0 nv=1 state=Backup, ViewChanging
+[01:03:44.033] OnChangeViewReceived: height=32 view=0 index=1 nv=1
+[01:03:44.038] OnChangeViewReceived: height=32 view=0 index=3 nv=1
+[01:03:44.038] initialize: height=32 view=1 index=2 role=Backup
+[01:03:45.058] OnPrepareRequestReceived: height=32 view=1 index=3 tx=1
+[01:03:45.059] send prepare response
+[01:03:46.067] OnPrepareResponseReceived: height=32 view=1 index=1
+[01:03:46.082] relay block: 0x46d3d63f025ba2abfafdd74baa1e01ceaf9c4481abe7fd16f2d6a3974f3cd67d
+[01:03:46.087] persist block: 0x46d3d63f025ba2abfafdd74baa1e01ceaf9c4481abe7fd16f2d6a3974f3cd67d
+[01:03:46.087] initialize: height=33 view=0 index=2 role=Backup
+[01:04:02.098] OnPrepareRequestReceived: height=33 view=0 index=1 tx=1
+[01:04:02.099] send prepare response
+[01:04:03.102] OnPrepareResponseReceived: height=33 view=0 index=3
+[01:04:03.105] relay block: 0xa586258075172aaba89417a5d9c364d2d7cb3417a0a81324a9409b5dba395f6b
+[01:04:03.108] persist block: 0xa586258075172aaba89417a5d9c364d2d7cb3417a0a81324a9409b5dba395f6b
+[01:04:03.108] initialize: height=34 view=0 index=2 role=Primary
+[01:04:18.116] timeout: height=34 view=0 state=Primary
+[01:04:18.116] send prepare request: height=34 view=0
+[01:04:20.122] OnPrepareResponseReceived: height=34 view=0 index=1
+[01:04:20.127] OnPrepareResponseReceived: height=34 view=0 index=3
+[01:04:20.129] relay block: 0xd35d9448c6ca778c6eb709aeae936209154e23a072e082df0ba96b65fef9dd3b
+[01:04:20.131] persist block: 0xd35d9448c6ca778c6eb709aeae936209154e23a072e082df0ba96b65fef9dd3b
+[01:04:20.131] initialize: height=35 view=0 index=2 role=Backup
+[01:04:36.138] OnPrepareRequestReceived: height=35 view=0 index=3 tx=1
+[01:04:36.140] send prepare response
+[01:04:37.144] OnPrepareResponseReceived: height=35 view=0 index=1
+[01:04:37.151] relay block: 0x7829572baf91bdde066b6d16db9b549469933916229b5dc2d7c8b9bf83430449
+[01:04:37.155] persist block: 0x7829572baf91bdde066b6d16db9b549469933916229b5dc2d7c8b9bf83430449
+[01:04:37.156] initialize: height=36 view=0 index=2 role=Backup
+[01:05:07.166] timeout: height=36 view=0 state=Backup
+[01:05:07.166] request change view: height=36 view=0 nv=1 state=Backup, ViewChanging
+[01:05:08.175] OnChangeViewReceived: height=36 view=0 index=3 nv=1
+[01:05:09.164] OnChangeViewReceived: height=36 view=0 index=1 nv=1
+[01:05:09.167] initialize: height=36 view=1 index=2 role=Backup
+[01:05:10.935] OnPrepareRequestReceived: height=36 view=1 index=3 tx=1
+[01:05:10.944] send prepare response
+[01:05:12.667] OnPrepareResponseReceived: height=36 view=1 index=1
+[01:05:12.693] relay block: 0x2ccb8d4909db71e6c0ab37e08d1a6f3840b1e45621a9da5deb3ea9901fe86702
+[01:05:12.701] persist block: 0x2ccb8d4909db71e6c0ab37e08d1a6f3840b1e45621a9da5deb3ea9901fe86702
+[01:05:12.701] initialize: height=37 view=0 index=2 role=Backup
+[01:05:28.697] OnPrepareRequestReceived: height=37 view=0 index=1 tx=1
+[01:05:28.707] send prepare response
+[01:05:29.718] OnPrepareResponseReceived: height=37 view=0 index=3
+[01:05:29.722] relay block: 0xfd3569be3876fb3dea3dd02a0954eaec97faca96cec910720c6fd23d007170ff
+[01:05:29.725] persist block: 0xfd3569be3876fb3dea3dd02a0954eaec97faca96cec910720c6fd23d007170ff
+[01:05:29.725] initialize: height=38 view=0 index=2 role=Primary
+[01:05:44.727] timeout: height=38 view=0 state=Primary
+[01:05:44.727] send prepare request: height=38 view=0
+[01:05:46.759] OnPrepareResponseReceived: height=38 view=0 index=3
+[01:05:47.391] OnPrepareResponseReceived: height=38 view=0 index=1
+[01:05:47.417] relay block: 0x4179ea30891847baf39848bd6cf745360b38ed9a9f7d45be0d0518066b16b7e2
+[01:05:47.425] persist block: 0x4179ea30891847baf39848bd6cf745360b38ed9a9f7d45be0d0518066b16b7e2
+[01:05:47.426] initialize: height=39 view=0 index=2 role=Backup
+[01:06:04.261] OnPrepareRequestReceived: height=39 view=0 index=3 tx=1
+[01:06:04.262] send prepare response
+[01:06:05.271] OnPrepareResponseReceived: height=39 view=0 index=1
+[01:06:05.275] relay block: 0x769cb659ebf968ea4fe55d28b9d3c5b2d32c16ce96ca89c51dff9ecc1286e4f1
+[01:06:05.285] persist block: 0x769cb659ebf968ea4fe55d28b9d3c5b2d32c16ce96ca89c51dff9ecc1286e4f1
+[01:06:05.287] initialize: height=40 view=0 index=2 role=Backup
+[01:06:35.297] timeout: height=40 view=0 state=Backup
+[01:06:35.297] request change view: height=40 view=0 nv=1 state=Backup, ViewChanging
+[01:06:36.313] OnChangeViewReceived: height=40 view=0 index=1 nv=1
+[01:06:36.363] OnChangeViewReceived: height=40 view=0 index=3 nv=1
+[01:06:36.363] initialize: height=40 view=1 index=2 role=Backup
+[01:06:37.427] OnPrepareRequestReceived: height=40 view=1 index=3 tx=1
+[01:06:37.469] send prepare response
+[01:06:38.450] OnPrepareResponseReceived: height=40 view=1 index=1
+[01:06:38.453] relay block: 0x1251ecfb310560881338961a0494ba2a22b3f8688cc3fce90cd4eb85c713af0e
+[01:06:38.455] persist block: 0x1251ecfb310560881338961a0494ba2a22b3f8688cc3fce90cd4eb85c713af0e
+[01:06:38.456] initialize: height=41 view=0 index=2 role=Backup
+[01:06:54.529] OnPrepareRequestReceived: height=41 view=0 index=1 tx=1
+[01:06:54.532] send prepare response
+[01:06:55.548] OnPrepareResponseReceived: height=41 view=0 index=3
+[01:06:55.607] relay block: 0xc886b4cdd13054d3a71554d49779990730fdb6e9d9cc67cf1ce1ca7526954596
+[01:06:55.613] persist block: 0xc886b4cdd13054d3a71554d49779990730fdb6e9d9cc67cf1ce1ca7526954596
+[01:06:55.614] initialize: height=42 view=0 index=2 role=Primary
+[01:07:10.616] timeout: height=42 view=0 state=Primary
+[01:07:10.617] send prepare request: height=42 view=0
+[01:07:12.670] OnPrepareResponseReceived: height=42 view=0 index=1
+[01:07:12.718] OnPrepareResponseReceived: height=42 view=0 index=3
+[01:07:12.734] relay block: 0x9f073c6e565ba74ce1d879df791992d7d3c72865865047be836375b3cb2a26ef
+[01:07:12.748] persist block: 0x9f073c6e565ba74ce1d879df791992d7d3c72865865047be836375b3cb2a26ef
+[01:07:12.749] initialize: height=43 view=0 index=2 role=Backup
+[01:07:43.610] OnStart
+[01:07:43.692] initialize: height=1 view=0 index=2 role=Backup
+[01:07:43.694] OnStart
+[01:07:43.694] initialize: height=1 view=0 index=2 role=Backup
+[01:08:13.710] timeout: height=1 view=0 state=Backup
+[01:08:13.710] timeout: height=1 view=0 state=Backup
+[01:08:13.716] request change view: height=1 view=0 nv=1 state=Backup, ViewChanging
+[01:08:13.716] request change view: height=1 view=0 nv=1 state=Backup, ViewChanging
+[01:08:14.057] OnChangeViewReceived: height=1 view=0 index=3 nv=1
+[01:08:14.153] OnChangeViewReceived: height=1 view=0 index=0 nv=1
+[01:08:14.154] initialize: height=1 view=1 index=2 role=Backup
+[01:08:14.154] OnChangeViewReceived: height=1 view=0 index=0 nv=1
+[01:08:14.160] OnChangeViewReceived: height=1 view=0 index=1 nv=1
+[01:08:14.175] OnChangeViewReceived: height=1 view=0 index=1 nv=1
+[01:08:14.201] OnPrepareRequestReceived: height=1 view=1 index=0 tx=1
+[01:08:14.219] send prepare response
+[01:08:14.231] OnPrepareResponseReceived: height=1 view=1 index=1
+[01:08:14.256] relay block: 0x4bd46d57a8773de211cb0a4fb1714944c47e7d76bf40c403074375a976b125bc
+[01:08:14.256] OnPrepareResponseReceived: height=1 view=1 index=3
+[01:08:14.265] persist block: 0x4bd46d57a8773de211cb0a4fb1714944c47e7d76bf40c403074375a976b125bc
+[01:08:14.266] initialize: height=2 view=0 index=2 role=Primary
+[01:08:29.271] timeout: height=2 view=0 state=Primary
+[01:08:29.271] send prepare request: height=2 view=0
+[01:08:29.320] OnPrepareResponseReceived: height=2 view=0 index=1
+[01:08:29.359] OnPrepareResponseReceived: height=2 view=0 index=3
+[01:08:29.384] relay block: 0x8928f3798f2f5bb22d7341a1f8da387784bb611dce40d016724fb7dcdb3eb057
+[01:08:29.390] persist block: 0x8928f3798f2f5bb22d7341a1f8da387784bb611dce40d016724fb7dcdb3eb057
+[01:08:29.391] initialize: height=3 view=0 index=2 role=Backup
+[01:08:44.487] OnPrepareRequestReceived: height=3 view=0 index=3 tx=1
+[01:08:44.504] send prepare response
+[01:08:44.529] OnPrepareResponseReceived: height=3 view=0 index=1
+[01:08:44.540] relay block: 0xbf5145c78e5ac1209df58d48e9c7f41f5b5d102c5ba6920e78a5e98d9e7c15a9
+[01:08:44.540] OnPrepareResponseReceived: height=3 view=0 index=0
+[01:08:44.544] OnPrepareResponseReceived: height=3 view=0 index=0
+[01:08:44.549] persist block: 0xbf5145c78e5ac1209df58d48e9c7f41f5b5d102c5ba6920e78a5e98d9e7c15a9
+[01:08:44.550] initialize: height=4 view=0 index=2 role=Backup
+[01:09:00.580] OnPrepareRequestReceived: height=4 view=0 index=0 tx=1
+[01:09:00.588] send prepare response
+[01:09:01.610] OnPrepareResponseReceived: height=4 view=0 index=3
+[01:09:01.662] relay block: 0x32c182b4a750e4e7a8c1eaefdb95a076f79ebdf5cbbed425e49fdbe1e18e1a19
+[01:09:01.688] persist block: 0x32c182b4a750e4e7a8c1eaefdb95a076f79ebdf5cbbed425e49fdbe1e18e1a19
+[01:09:01.690] initialize: height=5 view=0 index=2 role=Backup
+[01:09:13.721] timeout: height=1 view=0 state=Backup, ViewChanging
+[01:09:13.721] request change view: height=1 view=0 nv=2 state=Backup, ViewChanging
+[01:09:17.699] OnPrepareRequestReceived: height=5 view=0 index=1 tx=1
+[01:09:17.704] send prepare response
+[01:09:18.722] OnPrepareResponseReceived: height=5 view=0 index=0
+[01:09:18.755] relay block: 0x7d0cfa6ba0ccfc9dcf92f3615042ab300d073de1dd36603a6bfe5450e8d3c776
+[01:09:18.766] OnPrepareResponseReceived: height=5 view=0 index=3
+[01:09:18.774] persist block: 0x7d0cfa6ba0ccfc9dcf92f3615042ab300d073de1dd36603a6bfe5450e8d3c776
+[01:09:18.775] initialize: height=6 view=0 index=2 role=Primary
+[01:09:33.781] timeout: height=6 view=0 state=Primary
+[01:09:33.782] send prepare request: height=6 view=0
+[01:09:35.814] OnPrepareResponseReceived: height=6 view=0 index=1
+[01:09:35.829] OnPrepareResponseReceived: height=6 view=0 index=3
+[01:09:35.833] relay block: 0x759901f2a19d788f7d699434258fd067e1a4aea081e87e4035da13efe2bca2e1
+[01:09:35.833] OnPrepareResponseReceived: height=6 view=0 index=0
+[01:09:35.835] persist block: 0x759901f2a19d788f7d699434258fd067e1a4aea081e87e4035da13efe2bca2e1
+[01:09:35.835] initialize: height=7 view=0 index=2 role=Backup
+[01:09:51.832] OnPrepareRequestReceived: height=7 view=0 index=3 tx=1
+[01:09:51.832] send prepare response
+[01:09:52.845] OnPrepareResponseReceived: height=7 view=0 index=1
+[01:09:52.847] relay block: 0x9b02b3d38e521b8a69eda4ba3e09fefee6ad9b1b15fb9fa8949d523915302021
+[01:09:52.847] OnPrepareResponseReceived: height=7 view=0 index=0
+[01:09:52.854] persist block: 0x9b02b3d38e521b8a69eda4ba3e09fefee6ad9b1b15fb9fa8949d523915302021
+[01:09:52.855] initialize: height=8 view=0 index=2 role=Backup
+[01:10:08.856] OnPrepareRequestReceived: height=8 view=0 index=0 tx=1
+[01:10:08.857] send prepare response
+[01:10:09.858] OnPrepareResponseReceived: height=8 view=0 index=1
+[01:10:09.861] relay block: 0x61d5f842a083ba2023c7ecfd35080ab9ba002e54f9c9d428983f57de7e4ef068
+[01:10:09.863] persist block: 0x61d5f842a083ba2023c7ecfd35080ab9ba002e54f9c9d428983f57de7e4ef068
+[01:10:09.863] initialize: height=9 view=0 index=2 role=Backup
+[01:10:25.876] OnPrepareRequestReceived: height=9 view=0 index=1 tx=1
+[01:10:25.877] send prepare response
+[01:10:26.879] OnPrepareResponseReceived: height=9 view=0 index=0
+[01:10:26.882] relay block: 0xbff27d81d2dd2e9b5cb29d64750abebe4fc4c89388f4c01c63a39d6433877646
+[01:10:26.885] persist block: 0xbff27d81d2dd2e9b5cb29d64750abebe4fc4c89388f4c01c63a39d6433877646
+[01:10:26.885] initialize: height=10 view=0 index=2 role=Primary
+[01:10:41.890] timeout: height=10 view=0 state=Primary
+[01:10:41.890] send prepare request: height=10 view=0
+[01:10:43.895] OnPrepareResponseReceived: height=10 view=0 index=3
+[01:10:43.898] OnPrepareResponseReceived: height=10 view=0 index=0
+[01:10:43.903] relay block: 0xfcf8c790bce06dddcc1dc8daf1f9a9904bf6c1f3e0eadf3d8ce22fe3face68f7
+[01:10:43.904] OnPrepareResponseReceived: height=10 view=0 index=1
+[01:10:43.905] persist block: 0xfcf8c790bce06dddcc1dc8daf1f9a9904bf6c1f3e0eadf3d8ce22fe3face68f7
+[01:10:43.905] initialize: height=11 view=0 index=2 role=Backup
+[01:10:59.918] OnPrepareRequestReceived: height=11 view=0 index=3 tx=1
+[01:10:59.919] send prepare response
+[01:11:00.924] OnPrepareResponseReceived: height=11 view=0 index=0
+[01:11:00.930] relay block: 0x213a53c79b2144542eae087270f87abf07bc346c7f8fd3abdbe07f4180410769
+[01:11:00.931] OnPrepareResponseReceived: height=11 view=0 index=1
+[01:11:00.937] persist block: 0x213a53c79b2144542eae087270f87abf07bc346c7f8fd3abdbe07f4180410769
+[01:11:00.937] initialize: height=12 view=0 index=2 role=Backup
+[01:11:13.731] timeout: height=1 view=0 state=Backup, ViewChanging
+[01:11:13.731] request change view: height=1 view=0 nv=3 state=Backup, ViewChanging
+[01:11:16.946] OnPrepareRequestReceived: height=12 view=0 index=0 tx=1
+[01:11:16.947] send prepare response
+[01:11:17.950] OnPrepareResponseReceived: height=12 view=0 index=3
+[01:11:17.956] relay block: 0xf35b895c2507cd67826367bf9f9248fe6366dd4796c2c83d64d1738f8ea73934
+[01:11:17.959] OnPrepareResponseReceived: height=12 view=0 index=1
+[01:11:17.959] persist block: 0xf35b895c2507cd67826367bf9f9248fe6366dd4796c2c83d64d1738f8ea73934
+[01:11:17.959] initialize: height=13 view=0 index=2 role=Backup
+[01:11:33.971] OnPrepareRequestReceived: height=13 view=0 index=1 tx=1
+[01:11:33.972] send prepare response
+[01:11:34.969] OnPrepareResponseReceived: height=13 view=0 index=3
+[01:11:34.972] relay block: 0xaf27aac6e94121de4d3e64bb95a8900a70c0d37c50c3b26712817e1aa023afd3
+[01:11:34.973] OnPrepareResponseReceived: height=13 view=0 index=0
+[01:11:34.975] persist block: 0xaf27aac6e94121de4d3e64bb95a8900a70c0d37c50c3b26712817e1aa023afd3
+[01:11:34.975] initialize: height=14 view=0 index=2 role=Primary
+[01:11:49.980] timeout: height=14 view=0 state=Primary
+[01:11:49.980] send prepare request: height=14 view=0
+[01:11:51.986] OnPrepareResponseReceived: height=14 view=0 index=3
+[01:11:51.986] OnPrepareResponseReceived: height=14 view=0 index=1
+[01:11:51.989] relay block: 0xc65e8da8726ff0d91d8ed0bb9eb7ffd92250ab6f59ceef0a7af161a61f8f4ffe
+[01:11:51.991] persist block: 0xc65e8da8726ff0d91d8ed0bb9eb7ffd92250ab6f59ceef0a7af161a61f8f4ffe
+[01:11:51.991] initialize: height=15 view=0 index=2 role=Backup
+[01:12:22.001] timeout: height=15 view=0 state=Backup
+[01:12:22.002] request change view: height=15 view=0 nv=1 state=Backup, ViewChanging
+[01:13:22.011] timeout: height=15 view=0 state=Backup, ViewChanging
+[01:13:22.011] request change view: height=15 view=0 nv=2 state=Backup, ViewChanging
+

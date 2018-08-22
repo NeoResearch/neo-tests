@@ -4,14 +4,11 @@ echo "time2fork script initialized (part 1 - preset)"
 
 echo "reset delay to 0"
 # reset basic delay configurations (500 ms)
-docker exec -it eco-neo-csharp-node1-running tc qdisc del dev eth0 root
-docker exec -it eco-neo-csharp-node2-running tc qdisc del dev eth0 root
-docker exec -it eco-neo-csharp-node3-running tc qdisc del dev eth0 root
-docker exec -it eco-neo-csharp-node4-running tc qdisc del dev eth0 root
+./remove-delay.sh
 
 sleep 1
 
-echo "setting delay to 1000ms"
+echo "setting delay to 2000ms"
 docker exec -it eco-neo-csharp-node1-running tc qdisc add dev eth0 root netem delay 1000ms
 docker exec -it eco-neo-csharp-node2-running tc qdisc add dev eth0 root netem delay 1000ms
 docker exec -it eco-neo-csharp-node3-running tc qdisc add dev eth0 root netem delay 1000ms
@@ -28,7 +25,7 @@ docker stop eco-neo-python-rest-running
 echo "shutting neo-scan"
 docker stop eco-neo-scan-running
 
-sleep 20
+sleep 2
 
 echo "SELECTING SPECIFIC PORTS ONLY"
 docker exec -it eco-neo-csharp-node1-running iptables -A INPUT -p icmp --icmp-type echo-request -j ACCEPT
