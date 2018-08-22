@@ -34,6 +34,10 @@ echo "node1 is primary!"
 #TODO - Get Height
 uptime
 
+#| sed 's/.*=//'
+HEIGHT=$(cat $PATH_NEOCOMPILER_ECO/docker-compose-eco-network/logs-neocli-node1/*.log | tail -1 | grep initialize | grep view=0 | grep Primary | awk '{ print $3 }' | cut -f2 -d"=")
+echo "current height is: $HEIGHT"
+
 #echo "will wait for node2 to become backup"
 #while [ `cat $PATH_NEOCOMPILER_ECO/docker-compose-eco-network/logs-neocli-node2/*.log | tail -1 | grep initialize | grep index=0 | grep view=0 | grep Backup | wc -l` -eq 0 ]; do
 #   :  # no operation
@@ -69,7 +73,7 @@ echo "forcing delay of node4 to be longer than node3 - node1To6s"
 
 echo ""
 echo "will wait for node1 to receive prepare response from node3 index=3"
-while [ `cat $PATH_NEOCOMPILER_ECO/docker-compose-eco-network/logs-neocli-node1/*.log | tail -4 | grep height=14 |grep index=3 | grep OnPrepareResponse | wc -l` -eq 0 ]; do
+while [ `cat $PATH_NEOCOMPILER_ECO/docker-compose-eco-network/logs-neocli-node1/*.log | tail -4 | grep height=$HEIGHT |grep index=3 | grep OnPrepareResponse | wc -l` -eq 0 ]; do
    :  # no operation
 done
 cat $PATH_NEOCOMPILER_ECO/docker-compose-eco-network/logs-neocli-node1/*.log | tail -4 | grep index=3 | grep OnPrepareResponse

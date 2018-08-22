@@ -7,11 +7,12 @@ echo "reset delay to 0"
 
 sleep 1
 
-echo "setting delay to 1000ms"
-docker exec -it eco-neo-csharp-node1-running tc qdisc add dev eth0 root netem delay 1000ms
-docker exec -it eco-neo-csharp-node2-running tc qdisc add dev eth0 root netem delay 1000ms
-docker exec -it eco-neo-csharp-node3-running tc qdisc add dev eth0 root netem delay 1000ms
-docker exec -it eco-neo-csharp-node4-running tc qdisc add dev eth0 root netem delay 1000ms
+DESIRED_DELAY=1000
+echo "setting delay to ${DESIRED_DELAY}ms"
+docker exec -it eco-neo-csharp-node1-running tc qdisc add dev eth0 root netem delay ${DESIRED_DELAY}ms
+docker exec -it eco-neo-csharp-node2-running tc qdisc add dev eth0 root netem delay ${DESIRED_DELAY}ms
+docker exec -it eco-neo-csharp-node3-running tc qdisc add dev eth0 root netem delay ${DESIRED_DELAY}ms
+docker exec -it eco-neo-csharp-node4-running tc qdisc add dev eth0 root netem delay ${DESIRED_DELAY}ms
 
 # ========================================================
 # ==== SHUTTING DOWN NEOCOMPILERS NETWORK SERVICES =======
