@@ -1,4 +1,6 @@
 #!/bin/bash
+echo "unlocking everything"
+./unlockall.sh
 
 PATH_NEOCOMPILER_ECO="../../neocompiler-eco"
 
