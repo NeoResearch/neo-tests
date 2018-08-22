@@ -3,17 +3,18 @@
 echo "time2fork script initialized (part 1 - preset)"
 
 echo "reset delay to 0"
-# reset basic delay configurations (500 ms)
 ./remove-delay.sh
 
 sleep 1
 
-echo "setting delay to 2000ms"
+echo "setting delay to 1000ms"
 docker exec -it eco-neo-csharp-node1-running tc qdisc add dev eth0 root netem delay 1000ms
 docker exec -it eco-neo-csharp-node2-running tc qdisc add dev eth0 root netem delay 1000ms
 docker exec -it eco-neo-csharp-node3-running tc qdisc add dev eth0 root netem delay 1000ms
 docker exec -it eco-neo-csharp-node4-running tc qdisc add dev eth0 root netem delay 1000ms
 
+# ========================================================
+# ==== SHUTTING DOWN NEOCOMPILERS NETWORK SERVICES =======
 echo "shutting down extra nodes rpc1 rpc2"
 docker stop eco-neo-csharp-noderpc1-running
 docker stop eco-neo-csharp-noderpc2-running
@@ -24,6 +25,7 @@ docker stop eco-neo-python-rest-running
 
 echo "shutting neo-scan"
 docker stop eco-neo-scan-running
+# ========================================================
 
 sleep 2
 
@@ -60,8 +62,6 @@ docker exec -it eco-neo-csharp-node4-running iptables -A INPUT -j REJECT
 #docker exec -it eco-neo-csharp-node3-running iptables -A OUTPUT -o lo -j ACCEPT
 #docker exec -it eco-neo-csharp-node4-running iptables -A OUTPUT -j ACCEPT
 #docker exec -it eco-neo-csharp-node4-running iptables -A OUTPUT -o lo -j ACCEPT
-
-
 
 #echo "waiting for some time for system to self adjust (30 seconds)"
 #sleep 10

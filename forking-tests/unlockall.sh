@@ -1,5 +1,6 @@
 #!/bin/bash
 
+echo "setting eth0 of all 4 nodes up again"
 docker exec -it eco-neo-csharp-node1-running ifconfig eth0 up
 docker exec -it eco-neo-csharp-node2-running ifconfig eth0 up
 docker exec -it eco-neo-csharp-node3-running ifconfig eth0 up
