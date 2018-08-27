@@ -1,5 +1,5 @@
 #!/bin/bash
-PATH_CSHARP_NODE="../../A-neocompiler-eco/docker-neo-csharp-node"
+PATH_CSHARP_NODE="../../neocompiler-eco/docker-neo-csharp-node"
 
 rm $PATH_CSHARP_NODE/neo-cli.zip
 rm $PATH_CSHARP_NODE/neo-cli-built.zip
