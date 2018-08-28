@@ -1,5 +1,5 @@
 #!/bin/bash
-PATH_NEOCOMPILER="../../A-neocompiler-eco"
+PATH_NEOCOMPILER="../../neocompiler-eco"
 PATH_CSHARP_NODE=$PATH_NEOCOMPILER"/docker-neo-csharp-node"
 echo "Nodes path is: " + $PATH_CSHARP_NODE
 
