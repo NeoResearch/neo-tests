@@ -1,3 +1,5 @@
+var RPC_BASE_IMAGE="eco-neo-csharp-noderpc-mainnet-testnet";
+
 var express  = require('express');
 var http = require('http');
 var logger = require('morgan');             // log requests to the console (express4)
@@ -36,7 +38,14 @@ server.listen(12000 || process.env.PORT, (err) => {
 
 app.get('/', (req, res) => {
   console.log("Welcome to our State Snapshot RPC Server - NeoResearch");
-  res.status(200).send("Welcome to our State Snapshot RPC Server - NeoResearch");
+  var obj={};
+  obj["result"] = true;
+  obj["welcome"] = "Welcome to our State Snapshot RPC Server - NeoResearch.";
+  var arrMethods=[];
+  arrMethods.push({method: "/getSnapshots" });
+  arrMethods.push({method: "/getSnapshotsBestDifference/:blockHeight" });
+  obj["methods"] = arrMethods;
+  res.status(200).send(obj);
 });
 
 
@@ -45,8 +54,7 @@ var optionsDefault = {
   killSignal: 'SIGKILL'
 }
 
-var rpcBaseImage="eco-neo-csharp-noderpc-mainnet-testnet";
-var cmdDockerImagesFilter="(docker images " + rpcBaseImage + "* | tail -n +2) | awk '{ print $1,$2 }'";
+var cmdDockerImagesFilter="(docker images " + RPC_BASE_IMAGE + "* | tail -n +2) | awk '{ print $1,$2 }'";
 var rpcSnapshots = [];
 var objErrorHandler = {};
 
@@ -60,7 +68,7 @@ function dockerImagesToArray(planImagesResponse)
         	var obj = {};
         	obj["rpcsnapshot"] = planImagesResponse[i];
         	obj["version"] = planImagesResponse[i+1];
-		obj["snapshotHeight"] = planImagesResponse[i].substring( (rpcBaseImage+"-").length);
+		obj["snapshotHeight"] = planImagesResponse[i].substring( (RPC_BASE_IMAGE+"-").length);
         	arr.push(obj);
         }
 
@@ -99,13 +107,13 @@ function isInt(value) {
 }
 
 
-function checkIntenger(intParamToCheck, intMin = 0 , intMax = 10000000000){
+function checkInteger(intParamToCheck, intMin = 0 , intMax = 10000000000){
   if(!isInt(intParamToCheck) || intParamToCheck < intMin || intParamToCheck > intMax )
   {
-	 console.log("Someone is doing something crazy. Block height requested can not be obtained.");
+	 console.log("Some integer param was just checked " + intParamToCheck + " and it not an intenger or not within values " + intMin + "/" + intMax);
          objErrorHandler["result"] = false;
          objErrorHandler["reason"] = "Some integer param was just checked " + intParamToCheck + " and it not an intenger or not within values " + intMin + "/" + intMax;
-	 return;
+	 throw new Error("BROKEN")
   }
 }
 
@@ -156,7 +164,7 @@ function checkSnapshots()
   {
          objErrorHandler["result"] = false;
          objErrorHandler["reason"] = "Snapshots json array seems to be empty. Maybe theree are not snapshots. Check the route /getSnapshots first (it will probably do its job)!";
-	 return;
+	 throw new Error("BROKEN")
   }
 }
 
@@ -171,7 +179,7 @@ app.get('/getSnapshotsBestDifference/:blockHeight', (req, res) => {
   //console.log(maxSnapshotHeight)
   //console.log(req.params.blockHeight)
 
-  checkIntenger(req.params.blockHeight, minSnapshotHeight , maxSnapshotHeight);
+  checkInteger(req.params.blockHeight, minSnapshotHeight , maxSnapshotHeight);
 
   obj["result"] = true;
   obj["reason"] = "best pair has been obtained!";
@@ -187,7 +195,7 @@ app.get('/getStorage/scriptHash/:scriptHash/key/:key/type/:type/blockHeight/:blo
   var minSnapshotHeight = rpcSnapshots[0].snapshotHeight;
   var maxSnapshotHeight = rpcSnapshots[rpcSnapshots.length-1].snapshotHeight;
 
-  checkIntenger(req.params.blockHeight, minSnapshotHeight , maxSnapshotHeight);
+  checkInteger(req.params.blockHeight, minSnapshotHeight , maxSnapshotHeight);
   
   obj["result"] = true;
   obj["reason"] = "best pair has been obtained!";
@@ -206,7 +214,6 @@ app.use(function(req, res, next) {
 // error handler
 app.use(function(err, req, res, next) {
   // render the error page
-  console.log("Obj error handler should have something");
   if(!objErrorHandler.result)
   {
 	console.log("Obj error handler should have something");
