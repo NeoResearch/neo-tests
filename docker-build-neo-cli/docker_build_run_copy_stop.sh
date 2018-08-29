@@ -3,6 +3,9 @@
 # Build new neo-cli using new files of neo-blockchain
 #
 
+echo "Building ubuntu-dotnet dependent image"
+(cd ../docker-ubuntu-dotnet; ./docker_build.sh)
+
 CONTAINER_NAME="neo-build-neo-cli-with-new-blockchain-csharp"
 
 echo "Delete previous .zip"

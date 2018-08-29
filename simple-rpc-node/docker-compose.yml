@@ -1,0 +1,32 @@
+# ================================================================================
+# ========== WELCOME TO THE NEOCOMPILER ECO NEO BLOCKCHAIN MICROSERVICE  =========
+# ================================================================================
+
+version: "3"
+services:
+
+# ================================================================================
+# ================== OPEN CONTAINER WITH NEO-CLI RPC DESIGNED FOR MAINNET ========
+  eco-neo-csharp-node1-running:
+    image: eco-neo-csharp-node-mainnet:latest
+    container_name: "eco-neo-csharp-noderpc-mainnet-testnet"
+    ports: 
+      - "10333:10333"
+      - "10332:10332"
+    volumes:
+      - ./neo-cli/configs/protocol.mainnet.json:/opt/node/neo-cli/protocol.json
+      - ./neo-cli/configs/config.mainnet.json:/opt/node/neo-cli/config.json
+      - ./neo-cli/configs/plugins/simplePolicyConfig.json:/opt/node/neo-cli/Plugins/SimplePolicy/config.json
+      - ./neo-cli/configs/plugins/appLogConfig.json:/opt/node/neo-cli/Plugins/ApplicationLogs/config.json
+      - ./Chain:/opt/node/neo-cli/Chain_00746E41
+      - ./chain.acc:/opt/node/neo-cli/chain.acc
+      - ./logs-neocli-nodeRPC:/opt/node/neo-cli/Logs
+    environment:
+      IS_RPC: 1
+      NUMBER_SERVER: 1
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+# ================================================================================
+# ======================= THANKS FOR CREATING ME =================================
+# ================================================================================
