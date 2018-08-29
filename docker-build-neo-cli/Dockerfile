@@ -39,7 +39,7 @@ RUN git clone $NEO_BLOCKCHAIN_URL /opt/neoLib
 RUN git clone $NEO_BLOCKCHAIN_PLUGINS_URL /opt/neo-plugins 
 
 ARG NEO_CLI_BRANCH=v3.0
-ARG NEO_CLI_COMMIT=b4b979fdeccdf85b2daf76ff98ddcda133d3f8cd 
+ARG NEO_CLI_COMMIT=4ebc49893d12d47ebe2919955e8fb8301feaae79 
 ARG NEO_BLOCKCHAIN_BRANCH=Neo.Actor
 ARG NEO_BLOCKCHAIN_COMMIT=4280a5d7ac000bc94f5df5efde2f888aaac7a9c8
 ARG NEO_PLUGINS_BRANCH=master
@@ -50,28 +50,10 @@ RUN cd /opt/neoLib && git pull && git checkout $NEO_BLOCKCHAIN_BRANCH && git che
 
 #==========================================================================
 #============== EXAMPLES FOR CHANGING FILES WITH LOCAL FILES ==============
-#====================== NEO BLOCKCHAIN ====================================
-#The next line copies the whole local folder neo to the new one - replacing all files
-#RUN rm -rf /opt/neo/neo
-#ADD neo/ /opt/neo/neo-3
-#RUN rm -rf /opt/neo
-#ADD neo-3/ /opt/neo
-
-#Scripts for copying only specific files
-#ADD files/ReportNeoBlockchain.cs /opt/neo/neo/
-
-#ADD debugs/ /opt/debugs
-#RUN sed -i -e '/bool result;/r /opt/debugs/debugCheckWitness_StateReader.cs' /opt/neo/neo/SmartContract/StateReader.cs
-# ============ ADD MODIFIED FILES TO THE LOCAL NEO-BLOCKCHAIN LIBRARY =============================
-#COPY neo-blockchain/ /opt/neo/neo/
-
-# COPY neo-blockchain/Consensus/ /opt/neo/neo/Consensus/
-#====================== NEO-CLI ============================================
-# Add modified files to the local neo-cli clients
-#COPY neo-cli/ /opt/neo-cli/neo-cli/
-#COPY neo-cli/Network/ /opt/neo-cli/neo-cli/Network/
-#COPY neo-cli/Program.cs /opt/neo-cli/neo-cli/Program.cs
-#COPY neo-cli/Consensus/ /opt/neo-cli/Consensus/
+RUN rm -rf /opt/neoLib/
+ADD localfiles/neo /opt/neoLib
+#RUN rm -rf /opt/neo-cli
+#ADD localfiles/neo-cli /opt/neo-cli
 #==========================================================================
 #==========================================================================
 
@@ -94,8 +76,12 @@ RUN dotnet publish /opt/neo-cli/neo-cli/neo-cli.csproj -o neo-cli -c Release -r 
 #==========================================================================
 #=================== PUBLISHING AND ADDING PLUGINS DLL'S ==================
 RUN cd /opt/neo-plugins && git pull && git checkout $NEO_PLUGINS_BRANCH && git checkout $NEO_PLUGINS_COMMIT
-RUN mkdir /opt/neo-cli/neo-cli/neo-cli/Plugins/
 
+#Change path to local files
+RUN rm -rf /opt/neo-plugins
+ADD localfiles/neo-plugins /opt/neo-plugins
+
+RUN mkdir /opt/neo-cli/neo-cli/neo-cli/Plugins/
 ARG PLUGIN_TO_INCLUDE_I="SimplePolicy"
 RUN dotnet publish /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj -o $PLUGIN_TO_INCLUDE_I -c Release -r ubuntu.16.04-x64 -f netstandard2.0
 RUN cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.dll /opt/neo-cli/neo-cli/neo-cli/Plugins/
