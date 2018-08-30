@@ -20,19 +20,19 @@ RUN git clone $NEO_BLOCKCHAIN_URL /opt/neoLib
 RUN git clone $NEO_BLOCKCHAIN_PLUGINS_URL /opt/neo-plugins 
 
 ARG NEO_CLI_BRANCH=v3.0
-ARG NEO_CLI_COMMIT=4ebc49893d12d47ebe2919955e8fb8301feaae79 
+ARG NEO_CLI_COMMIT=28a53bdaabcd7811c4f5ebe4d534ad6386084ac6 
 ARG NEO_BLOCKCHAIN_BRANCH=Neo.Actor
-ARG NEO_BLOCKCHAIN_COMMIT=4280a5d7ac000bc94f5df5efde2f888aaac7a9c8
+ARG NEO_BLOCKCHAIN_COMMIT=b76aa0d94a643430e5c4195f7435bbb4633b93ac
 ARG NEO_PLUGINS_BRANCH=master
-ARG NEO_PLUGINS_COMMIT=b7bcde5bb7eccad0aeb8dde1832151eee9911334
+ARG NEO_PLUGINS_COMMIT=568e96654fd6c079952781446ccd984d3aa17b25
 
 RUN cd /opt/neo-cli && git pull && git checkout $NEO_CLI_BRANCH && git checkout $NEO_CLI_COMMIT
 RUN cd /opt/neoLib && git pull && git checkout $NEO_BLOCKCHAIN_BRANCH && git checkout $NEO_BLOCKCHAIN_COMMIT
 
 #==========================================================================
 #============== EXAMPLES FOR CHANGING FILES WITH LOCAL FILES ==============
-RUN rm -rf /opt/neoLib/
-ADD localfiles/neo /opt/neoLib
+#RUN rm -rf /opt/neoLib/
+#ADD localfiles/neo /opt/neoLib
 #RUN rm -rf /opt/neo-cli
 #ADD localfiles/neo-cli /opt/neo-cli
 #==========================================================================
@@ -58,9 +58,11 @@ RUN dotnet publish /opt/neo-cli/neo-cli/neo-cli.csproj -o neo-cli -c Release -r 
 #=================== PUBLISHING AND ADDING PLUGINS DLL'S ==================
 RUN cd /opt/neo-plugins && git pull && git checkout $NEO_PLUGINS_BRANCH && git checkout $NEO_PLUGINS_COMMIT
 
-#Change path to local files
-RUN rm -rf /opt/neo-plugins
-ADD localfiles/neo-plugins /opt/neo-plugins
+#--------------------------------------------------------------------------
+#--------------------- CHANGE PLUGINS PATH TO LOCAL FILES -----------------
+#RUN rm -rf /opt/neo-plugins
+#ADD localfiles/neo-plugins /opt/neo-plugins
+#--------------------------------------------------------------------------
 
 RUN mkdir /opt/neo-cli/neo-cli/neo-cli/Plugins/
 ARG PLUGIN_TO_INCLUDE_I="SimplePolicy"
