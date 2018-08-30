@@ -11,6 +11,7 @@ services:
     image: eco-neo-csharp-node-mainnet:latest
     container_name: "eco-neo-csharp-noderpc-mainnet-testnet"
     ports: 
+      - "10334:10334"
       - "10333:10333"
       - "10332:10332"
     volumes:
