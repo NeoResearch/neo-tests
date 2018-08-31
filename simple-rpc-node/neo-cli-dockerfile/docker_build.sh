@@ -4,7 +4,7 @@ set -e
 echo "Building ubuntu-dotnet dependent image"
 (cd ../../docker-ubuntu-dotnet; ./docker_build.sh)
 
-NEO_CLI_VERSION="3.0-preview9.1-appLog"
+NEO_CLI_VERSION="3.0-preview2-10-appLog"
 
 function usage {
     echo "Usage: $0 [--no-cache] [--neo-cli <zip-fn>]"
