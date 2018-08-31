@@ -20,9 +20,9 @@ RUN git clone $NEO_BLOCKCHAIN_URL /opt/neoLib
 RUN git clone $NEO_BLOCKCHAIN_PLUGINS_URL /opt/neo-plugins 
 
 ARG NEO_CLI_BRANCH=v3.0
-ARG NEO_CLI_COMMIT=28a53bdaabcd7811c4f5ebe4d534ad6386084ac6 
+ARG NEO_CLI_COMMIT=ed1d8e8a28067365e50e53a1db929c470cc5a405 
 ARG NEO_BLOCKCHAIN_BRANCH=Neo.Actor
-ARG NEO_BLOCKCHAIN_COMMIT=e98985ecf582f2fed08ab6bc17bf5fe619a83a59
+ARG NEO_BLOCKCHAIN_COMMIT=b5b63806bea1deb8667ba9c47c3ea1cb580036c1
 ARG NEO_PLUGINS_BRANCH=master
 ARG NEO_PLUGINS_COMMIT=568e96654fd6c079952781446ccd984d3aa17b25
 
@@ -41,9 +41,9 @@ RUN cd /opt/neoLib && git pull && git checkout $NEO_BLOCKCHAIN_BRANCH && git che
 #==========================================================================
 #============================== PUBLISH NEO-CLI ===========================
 # First of all, remove neo-vm package from neo-cli project, referencing it to the local neo-vm library
-#RUN dotnet remove /opt/neo/neo/neo.csproj package neo.vm
-#RUN dotnet sln /opt/neo/neo.sln add /opt/neo-vm/src/neo-vm/neo-vm.csproj
-#RUN dotnet add /opt/neo/neo/neo.csproj reference /opt/neo-vm/src/neo-vm/neo-vm.csproj
+#RUN dotnet remove /opt/neoLib/neo/neo.csproj package neo.vm
+#RUN dotnet sln /opt/neoLib/neo.sln add /opt/neo-vm/src/neo-vm/neo-vm.csproj
+#RUN dotnet add /opt/neoLib/neo/neo.csproj reference /opt/neo-vm/src/neo-vm/neo-vm.csproj
 
 # Remove neo blockchain package from neo-cli project, referencing it to the local NeoBlockchain Library
 RUN dotnet remove /opt/neo-cli/neo-cli/neo-cli.csproj package neo
@@ -56,6 +56,7 @@ RUN dotnet publish /opt/neo-cli/neo-cli/neo-cli.csproj -o neo-cli -c Release -r 
 
 #==========================================================================
 #=================== PUBLISHING AND ADDING PLUGINS DLL'S ==================
+RUN mkdir /opt/neo-cli/neo-cli/neo-cli/Plugins/
 RUN cd /opt/neo-plugins && git pull && git checkout $NEO_PLUGINS_BRANCH && git checkout $NEO_PLUGINS_COMMIT
 
 #--------------------------------------------------------------------------
@@ -64,14 +65,26 @@ RUN cd /opt/neo-plugins && git pull && git checkout $NEO_PLUGINS_BRANCH && git c
 #ADD localfiles/neo-plugins /opt/neo-plugins
 #--------------------------------------------------------------------------
 
-RUN mkdir /opt/neo-cli/neo-cli/neo-cli/Plugins/
 ARG PLUGIN_TO_INCLUDE_I="SimplePolicy"
+RUN dotnet remove /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj package neo
+RUN dotnet sln /opt/neo-cli/neo-cli.sln add /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj
+RUN dotnet add /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj reference /opt/neoLib/neo/neo.csproj
 RUN dotnet publish /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj -o $PLUGIN_TO_INCLUDE_I -c Release -r ubuntu.16.04-x64 -f netstandard2.0
 RUN cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.dll /opt/neo-cli/neo-cli/neo-cli/Plugins/
 
 ARG PLUGIN_TO_INCLUDE_I="ApplicationLogs"
+RUN dotnet remove /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj package neo
+RUN dotnet sln /opt/neo-cli/neo-cli.sln add /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj
+RUN dotnet add /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj reference /opt/neoLib/neo/neo.csproj
 RUN dotnet publish /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj -o $PLUGIN_TO_INCLUDE_I -c Release -r ubuntu.16.04-x64 -f netstandard2.0
 RUN cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.dll /opt/neo-cli/neo-cli/neo-cli/Plugins/
+
+#ARG PLUGIN_TO_INCLUDE_I="MaxHeight"
+#RUN dotnet remove /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj package neo
+#RUN dotnet sln /opt/neo-cli/neo-cli.sln add /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj
+#RUN dotnet add /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj reference /opt/neoLib/neo/neo.csproj
+#RUN dotnet publish /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj -o $PLUGIN_TO_INCLUDE_I -c Release -r ubuntu.16.04-x64 -f netstandard2.0
+#RUN cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.dll /opt/neo-cli/neo-cli/neo-cli/Plugins/
 
 # TODO - Compile and include other plugins
 # RUN mkdir /opt/neo-cli/neo-cli/neo-cli/Plugins-disabled/
