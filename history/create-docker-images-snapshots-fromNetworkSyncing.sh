@@ -30,6 +30,14 @@ while true; do
 
     if [ \( $blockHeight -gt $nextHeight \) ]; then
         echo "Time to Snapshot... $CONTAINER_TO_SNAPSHOT as $CONTAINER_TO_SNAPSHOT-$blockHeight"
+
+	#Example
+        #docker exec -it  $CONTAINER_TO_SNAPSHOT screen -S node -p 0 -X stuff "help^M"
+# This rm is import and not working =/
+#	docker exec -it  $CONTAINER_TO_SNAPSHOT rm -f /opt/node/neo-cli/chain.*
+	docker exec -it  $CONTAINER_TO_SNAPSHOT screen -S node -p 0 -X stuff "export blocks $(($nextHeight-$desiredSnapshotIncrement)) $desiredSnapshotIncrement^M"
+
+
         docker stop $CONTAINER_TO_SNAPSHOT
 	docker commit $CONTAINER_TO_SNAPSHOT $CONTAINER_TO_SNAPSHOT-$blockHeight:$VERSION
         docker start $CONTAINER_TO_SNAPSHOT

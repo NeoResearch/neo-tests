@@ -1,6 +1,5 @@
 #!/bin/bash
-PATH_NEOCOMPILER="../../neocompiler-eco"
-PATH_CSHARP_NODE=$PATH_NEOCOMPILER"/docker-neo-csharp-node"
+source ./.env
 echo "Nodes path is: " + $PATH_CSHARP_NODE
 
 rm $PATH_CSHARP_NODE/neo-cli.zip

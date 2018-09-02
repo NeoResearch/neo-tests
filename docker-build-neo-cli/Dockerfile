@@ -22,9 +22,9 @@ RUN git clone $NEO_BLOCKCHAIN_PLUGINS_URL /opt/neo-plugins
 ARG NEO_CLI_BRANCH=v3.0
 ARG NEO_CLI_COMMIT=ed1d8e8a28067365e50e53a1db929c470cc5a405 
 ARG NEO_BLOCKCHAIN_BRANCH=Neo.Actor
-ARG NEO_BLOCKCHAIN_COMMIT=b5b63806bea1deb8667ba9c47c3ea1cb580036c1
+ARG NEO_BLOCKCHAIN_COMMIT=a2ca623c518f301be06f2810458315a0fa9db892
 ARG NEO_PLUGINS_BRANCH=master
-ARG NEO_PLUGINS_COMMIT=568e96654fd6c079952781446ccd984d3aa17b25
+ARG NEO_PLUGINS_COMMIT=6f66abe005d98507e6ca06b705d820c5e8829e5c
 
 RUN cd /opt/neo-cli && git pull && git checkout $NEO_CLI_BRANCH && git checkout $NEO_CLI_COMMIT
 RUN cd /opt/neoLib && git pull && git checkout $NEO_BLOCKCHAIN_BRANCH && git checkout $NEO_BLOCKCHAIN_COMMIT
@@ -61,30 +61,37 @@ RUN cd /opt/neo-plugins && git pull && git checkout $NEO_PLUGINS_BRANCH && git c
 
 #--------------------------------------------------------------------------
 #--------------------- CHANGE PLUGINS PATH TO LOCAL FILES -----------------
-#RUN rm -rf /opt/neo-plugins
-#ADD localfiles/neo-plugins /opt/neo-plugins
+RUN rm -rf /opt/neo-plugins
+ADD localfiles/neo-plugins /opt/neo-plugins
 #--------------------------------------------------------------------------
 
-ARG PLUGIN_TO_INCLUDE_I="SimplePolicy"
-RUN dotnet remove /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj package neo
-RUN dotnet sln /opt/neo-cli/neo-cli.sln add /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj
-RUN dotnet add /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj reference /opt/neoLib/neo/neo.csproj
-RUN dotnet publish /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj -o $PLUGIN_TO_INCLUDE_I -c Release -r ubuntu.16.04-x64 -f netstandard2.0
-RUN cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.dll /opt/neo-cli/neo-cli/neo-cli/Plugins/
+ARG PLUGIN_TO_INCLUDE="SimplePolicy"
+RUN dotnet remove /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj package neo
+RUN dotnet sln /opt/neo-cli/neo-cli.sln add /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj
+RUN dotnet add /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj reference /opt/neoLib/neo/neo.csproj
+RUN dotnet publish /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj -o $PLUGIN_TO_INCLUDE -c Release -r ubuntu.16.04-x64 -f netstandard2.0
+RUN cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.dll /opt/neo-cli/neo-cli/neo-cli/Plugins/
 
-ARG PLUGIN_TO_INCLUDE_I="ApplicationLogs"
-RUN dotnet remove /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj package neo
-RUN dotnet sln /opt/neo-cli/neo-cli.sln add /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj
-RUN dotnet add /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj reference /opt/neoLib/neo/neo.csproj
-RUN dotnet publish /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj -o $PLUGIN_TO_INCLUDE_I -c Release -r ubuntu.16.04-x64 -f netstandard2.0
-RUN cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.dll /opt/neo-cli/neo-cli/neo-cli/Plugins/
+ARG PLUGIN_TO_INCLUDE="ApplicationLogs"
+RUN dotnet remove /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj package neo
+RUN dotnet sln /opt/neo-cli/neo-cli.sln add /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj
+RUN dotnet add /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj reference /opt/neoLib/neo/neo.csproj
+RUN dotnet publish /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj -o $PLUGIN_TO_INCLUDE -c Release -r ubuntu.16.04-x64 -f netstandard2.0
+RUN cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.dll /opt/neo-cli/neo-cli/neo-cli/Plugins/
 
-#ARG PLUGIN_TO_INCLUDE_I="MaxHeight"
-#RUN dotnet remove /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj package neo
-#RUN dotnet sln /opt/neo-cli/neo-cli.sln add /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj
-#RUN dotnet add /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj reference /opt/neoLib/neo/neo.csproj
-#RUN dotnet publish /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj -o $PLUGIN_TO_INCLUDE_I -c Release -r ubuntu.16.04-x64 -f netstandard2.0
-#RUN cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.dll /opt/neo-cli/neo-cli/neo-cli/Plugins/
+ARG PLUGIN_TO_INCLUDE="StatesDumper"
+RUN dotnet remove /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj package neo
+RUN dotnet sln /opt/neo-cli/neo-cli.sln add /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj
+RUN dotnet add /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj reference /opt/neoLib/neo/neo.csproj
+RUN dotnet publish /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj -o $PLUGIN_TO_INCLUDE -c Release -r ubuntu.16.04-x64 -f netstandard2.0
+RUN cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.dll /opt/neo-cli/neo-cli/neo-cli/Plugins/
+
+ARG PLUGIN_TO_INCLUDE="ImportBlocks"
+RUN dotnet remove /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj package neo
+RUN dotnet sln /opt/neo-cli/neo-cli.sln add /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj
+RUN dotnet add /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj reference /opt/neoLib/neo/neo.csproj
+RUN dotnet publish /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj -o $PLUGIN_TO_INCLUDE -c Release -r ubuntu.16.04-x64 -f netstandard2.0
+RUN cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.dll /opt/neo-cli/neo-cli/neo-cli/Plugins/
 
 # TODO - Compile and include other plugins
 # RUN mkdir /opt/neo-cli/neo-cli/neo-cli/Plugins-disabled/

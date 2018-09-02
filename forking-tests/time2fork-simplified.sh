@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "unlocking everything"
+echo "unlocking everything (TODO - ADD --privileged TO ALL EXEC IFCONFIG)"
 ./unlockall.sh
 
 PATH_NEOCOMPILER_ECO="../../neocompiler-eco"

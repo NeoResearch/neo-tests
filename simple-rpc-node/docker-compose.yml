@@ -8,8 +8,10 @@ services:
 # ================================================================================
 # ================== OPEN CONTAINER WITH NEO-CLI RPC DESIGNED FOR MAINNET ========
   eco-neo-csharp-node1-running:
-    image: eco-neo-csharp-node-mainnet:latest
+    image: eco-neo-csharp-node-mainnet:custom
     container_name: "eco-neo-csharp-noderpc-mainnet-testnet"
+    # privileged is needed for controlling ifconfig
+    privileged: true
     ports: 
       - "10334:10334"
       - "10333:10333"
@@ -19,15 +21,14 @@ services:
       - ./neo-cli/configs/config.mainnet.json:/opt/node/neo-cli/config.json
       - ./neo-cli/configs/plugins/simplePolicyConfig.json:/opt/node/neo-cli/Plugins/SimplePolicy/config.json
       - ./neo-cli/configs/plugins/appLogConfig.json:/opt/node/neo-cli/Plugins/ApplicationLogs/config.json
-      - ./Chain:/opt/node/neo-cli/Chain_00746E41
-      - ./chain.acc:/opt/node/neo-cli/chain.acc
+      - ./neo-cli/configs/plugins/importBlocks.json:/opt/node/neo-cli/Plugins/ImportBlocks/config.json
+      #- ./Chain:/opt/node/neo-cli/Chain_00746E41
+      - ./chainToLoad.acc:/opt/node/neo-cli/chain.acc
       - ./logs-neocli-nodeRPC:/opt/node/neo-cli/Logs
     environment:
       IS_RPC: 1
       NUMBER_SERVER: 1
-    cap_add:
-      - NET_ADMIN
-      - NET_RAW
+      DISABLE_NETWORK_P2P: 1
 # ================================================================================
 # ======================= THANKS FOR CREATING ME =================================
 # ================================================================================
