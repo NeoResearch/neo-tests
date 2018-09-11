@@ -20,11 +20,11 @@ RUN git clone $NEO_BLOCKCHAIN_URL /opt/neoLib
 RUN git clone $NEO_BLOCKCHAIN_PLUGINS_URL /opt/neo-plugins 
 
 ARG NEO_CLI_BRANCH=v3.0
-ARG NEO_CLI_COMMIT=ed1d8e8a28067365e50e53a1db929c470cc5a405 
+ARG NEO_CLI_COMMIT=3ae4deb1e7e079be2d218ead82f29db8674d424d 
 ARG NEO_BLOCKCHAIN_BRANCH=Neo.Actor
-ARG NEO_BLOCKCHAIN_COMMIT=a2ca623c518f301be06f2810458315a0fa9db892
+ARG NEO_BLOCKCHAIN_COMMIT=b235524c066adb2b13626a96bf5080357dae3ab1
 ARG NEO_PLUGINS_BRANCH=master
-ARG NEO_PLUGINS_COMMIT=6f66abe005d98507e6ca06b705d820c5e8829e5c
+ARG NEO_PLUGINS_COMMIT=fe125f621c58241e7c269fe366ce532ca05219af
 
 RUN cd /opt/neo-cli && git pull && git checkout $NEO_CLI_BRANCH && git checkout $NEO_CLI_COMMIT
 RUN cd /opt/neoLib && git pull && git checkout $NEO_BLOCKCHAIN_BRANCH && git checkout $NEO_BLOCKCHAIN_COMMIT
@@ -40,18 +40,26 @@ RUN cd /opt/neoLib && git pull && git checkout $NEO_BLOCKCHAIN_BRANCH && git che
 
 #==========================================================================
 #============================== PUBLISH NEO-CLI ===========================
+
+#--------------------- CHANGE PLUGINS PATH TO LOCAL FILES -----------------
 # First of all, remove neo-vm package from neo-cli project, referencing it to the local neo-vm library
 #RUN dotnet remove /opt/neoLib/neo/neo.csproj package neo.vm
 #RUN dotnet sln /opt/neoLib/neo.sln add /opt/neo-vm/src/neo-vm/neo-vm.csproj
 #RUN dotnet add /opt/neoLib/neo/neo.csproj reference /opt/neo-vm/src/neo-vm/neo-vm.csproj
+#--------------------- CHANGE PLUGINS PATH TO LOCAL FILES -----------------
 
+#--------------------------------------------------------------------------
 # Remove neo blockchain package from neo-cli project, referencing it to the local NeoBlockchain Library
 RUN dotnet remove /opt/neo-cli/neo-cli/neo-cli.csproj package neo
 RUN dotnet sln /opt/neo-cli/neo-cli.sln add /opt/neoLib/neo/neo.csproj
 RUN dotnet add /opt/neo-cli/neo-cli/neo-cli.csproj reference /opt/neoLib/neo/neo.csproj
+#--------------------------------------------------------------------------
 
-# publish
+#--------------------------------------------------------------------------
+# publish Neo-cli using defined NeoLib
 RUN dotnet publish /opt/neo-cli/neo-cli/neo-cli.csproj -o neo-cli -c Release -r ubuntu.16.04-x64
+#--------------------------------------------------------------------------
+
 #==========================================================================
 
 #==========================================================================
@@ -61,8 +69,8 @@ RUN cd /opt/neo-plugins && git pull && git checkout $NEO_PLUGINS_BRANCH && git c
 
 #--------------------------------------------------------------------------
 #--------------------- CHANGE PLUGINS PATH TO LOCAL FILES -----------------
-RUN rm -rf /opt/neo-plugins
-ADD localfiles/neo-plugins /opt/neo-plugins
+#RUN rm -rf /opt/neo-plugins
+#ADD localfiles/neo-plugins /opt/neo-plugins
 #--------------------------------------------------------------------------
 
 ARG PLUGIN_TO_INCLUDE="SimplePolicy"

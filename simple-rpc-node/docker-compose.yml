@@ -8,7 +8,7 @@ services:
 # ================================================================================
 # ================== OPEN CONTAINER WITH NEO-CLI RPC DESIGNED FOR MAINNET ========
   eco-neo-csharp-node1-running:
-    image: eco-neo-csharp-node-mainnet:custom
+    image: eco-neo-csharp-node-mainnet:latest
     container_name: "eco-neo-csharp-noderpc-mainnet-testnet"
     # privileged is needed for controlling ifconfig
     privileged: true
