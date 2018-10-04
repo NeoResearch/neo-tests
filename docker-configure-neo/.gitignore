@@ -3,4 +3,5 @@
 neo-core*
 neo-cli*
 neo-plugins*
+neo-vm*
 build
