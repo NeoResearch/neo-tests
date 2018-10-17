@@ -9,32 +9,33 @@ RUN apt-get update \
 
 # get repo, the arguments should be supplied when building using this Dockerfile
 #ARG NEOCLI_BLOCKCHAIN_URL=https://github.com/vncoelho/neo-cli.git
-ARG NEOCLI_BLOCKCHAIN_URL=https://github.com/neo-project/neo-cli.git
+ARG NEOCLI_BLOCKCHAIN_URL=https://github.com/belane/neo-cli.git
 ARG NEO_BLOCKCHAIN_URL=https://github.com/neo-project/neo.git
 ARG NEO_BLOCKCHAIN_PLUGINS_URL=https://github.com/neo-project/neo-plugins.git
 ARG NEO_VM_URL=https://github.com/neo-project/neo-vm.git
 
-RUN git clone $NEOCLI_BLOCKCHAIN_URL /opt/neo-cli 
+RUN git clone $NEOCLI_BLOCKCHAIN_URL /opt/neoCli 
 RUN git clone $NEO_VM_URL /opt/neo-vm
 RUN git clone $NEO_BLOCKCHAIN_URL /opt/neoLib 
 RUN git clone $NEO_BLOCKCHAIN_PLUGINS_URL /opt/neo-plugins 
 
-ARG NEO_CLI_BRANCH=v3.0
-ARG NEO_CLI_COMMIT=3ae4deb1e7e079be2d218ead82f29db8674d424d 
-ARG NEO_BLOCKCHAIN_BRANCH=Neo.Actor
-ARG NEO_BLOCKCHAIN_COMMIT=b235524c066adb2b13626a96bf5080357dae3ab1
-ARG NEO_PLUGINS_BRANCH=master
-ARG NEO_PLUGINS_COMMIT=fe125f621c58241e7c269fe366ce532ca05219af
 
-RUN cd /opt/neo-cli && git pull && git checkout $NEO_CLI_BRANCH && git checkout $NEO_CLI_COMMIT
+ARG NEO_CLI_BRANCH=bindAddress
+ARG NEO_CLI_COMMIT=d116a764ab5fccaab2bf10f9bc8aeb959230712b 
+ARG NEO_BLOCKCHAIN_BRANCH=master
+ARG NEO_BLOCKCHAIN_COMMIT=fbb273e
+ARG NEO_PLUGINS_BRANCH=master
+ARG NEO_PLUGINS_COMMIT=6a1c71b
+
+RUN cd /opt/neoCli && git pull && git checkout $NEO_CLI_BRANCH && git checkout $NEO_CLI_COMMIT
 RUN cd /opt/neoLib && git pull && git checkout $NEO_BLOCKCHAIN_BRANCH && git checkout $NEO_BLOCKCHAIN_COMMIT
 
 #==========================================================================
 #============== EXAMPLES FOR CHANGING FILES WITH LOCAL FILES ==============
 #RUN rm -rf /opt/neoLib/
 #ADD localfiles/neo /opt/neoLib
-#RUN rm -rf /opt/neo-cli
-#ADD localfiles/neo-cli /opt/neo-cli
+RUN rm -rf /opt/neoCli
+ADD localfiles/neo-cli-belane /opt/neoCli
 #==========================================================================
 #==========================================================================
 
@@ -50,21 +51,21 @@ RUN cd /opt/neoLib && git pull && git checkout $NEO_BLOCKCHAIN_BRANCH && git che
 
 #--------------------------------------------------------------------------
 # Remove neo blockchain package from neo-cli project, referencing it to the local NeoBlockchain Library
-RUN dotnet remove /opt/neo-cli/neo-cli/neo-cli.csproj package neo
-RUN dotnet sln /opt/neo-cli/neo-cli.sln add /opt/neoLib/neo/neo.csproj
-RUN dotnet add /opt/neo-cli/neo-cli/neo-cli.csproj reference /opt/neoLib/neo/neo.csproj
+RUN dotnet remove /opt/neoCli/neo-cli/neo-cli.csproj package neo
+RUN dotnet sln /opt/neoCli/neo-cli.sln add /opt/neoLib/neo/neo.csproj
+RUN dotnet add /opt/neoCli/neo-cli/neo-cli.csproj reference /opt/neoLib/neo/neo.csproj
 #--------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------
 # publish Neo-cli using defined NeoLib
-RUN dotnet publish /opt/neo-cli/neo-cli/neo-cli.csproj -o neo-cli -c Release -r ubuntu.16.04-x64
+RUN dotnet publish /opt/neoCli/neo-cli/neo-cli.csproj -o neo-cli -c Release -r ubuntu.16.04-x64
 #--------------------------------------------------------------------------
 
 #==========================================================================
 
 #==========================================================================
 #=================== PUBLISHING AND ADDING PLUGINS DLL'S ==================
-RUN mkdir /opt/neo-cli/neo-cli/neo-cli/Plugins/
+RUN mkdir /opt/neoCli/neo-cli/neo-cli/Plugins/
 RUN cd /opt/neo-plugins && git pull && git checkout $NEO_PLUGINS_BRANCH && git checkout $NEO_PLUGINS_COMMIT
 
 #--------------------------------------------------------------------------
@@ -75,39 +76,46 @@ RUN cd /opt/neo-plugins && git pull && git checkout $NEO_PLUGINS_BRANCH && git c
 
 ARG PLUGIN_TO_INCLUDE="SimplePolicy"
 RUN dotnet remove /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj package neo
-RUN dotnet sln /opt/neo-cli/neo-cli.sln add /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj
+RUN dotnet sln /opt/neoCli/neo-cli.sln add /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj
 RUN dotnet add /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj reference /opt/neoLib/neo/neo.csproj
 RUN dotnet publish /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj -o $PLUGIN_TO_INCLUDE -c Release -r ubuntu.16.04-x64 -f netstandard2.0
-RUN cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.dll /opt/neo-cli/neo-cli/neo-cli/Plugins/
+RUN cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.dll /opt/neoCli/neo-cli/neo-cli/Plugins/
 
 ARG PLUGIN_TO_INCLUDE="ApplicationLogs"
 RUN dotnet remove /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj package neo
-RUN dotnet sln /opt/neo-cli/neo-cli.sln add /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj
+RUN dotnet sln /opt/neoCli/neo-cli.sln add /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj
 RUN dotnet add /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj reference /opt/neoLib/neo/neo.csproj
 RUN dotnet publish /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj -o $PLUGIN_TO_INCLUDE -c Release -r ubuntu.16.04-x64 -f netstandard2.0
-RUN cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.dll /opt/neo-cli/neo-cli/neo-cli/Plugins/
+RUN cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.dll /opt/neoCli/neo-cli/neo-cli/Plugins/
 
 ARG PLUGIN_TO_INCLUDE="StatesDumper"
 RUN dotnet remove /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj package neo
-RUN dotnet sln /opt/neo-cli/neo-cli.sln add /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj
+RUN dotnet sln /opt/neoCli/neo-cli.sln add /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj
 RUN dotnet add /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj reference /opt/neoLib/neo/neo.csproj
 RUN dotnet publish /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj -o $PLUGIN_TO_INCLUDE -c Release -r ubuntu.16.04-x64 -f netstandard2.0
-RUN cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.dll /opt/neo-cli/neo-cli/neo-cli/Plugins/
+RUN cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.dll /opt/neoCli/neo-cli/neo-cli/Plugins/
 
 ARG PLUGIN_TO_INCLUDE="ImportBlocks"
 RUN dotnet remove /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj package neo
-RUN dotnet sln /opt/neo-cli/neo-cli.sln add /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj
+RUN dotnet sln /opt/neoCli/neo-cli.sln add /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj
 RUN dotnet add /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj reference /opt/neoLib/neo/neo.csproj
 RUN dotnet publish /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj -o $PLUGIN_TO_INCLUDE -c Release -r ubuntu.16.04-x64 -f netstandard2.0
-RUN cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.dll /opt/neo-cli/neo-cli/neo-cli/Plugins/
+RUN cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.dll /opt/neoCli/neo-cli/neo-cli/Plugins/
+
+ARG PLUGIN_TO_INCLUDE="RpcSecurity"
+RUN dotnet remove /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj package neo
+RUN dotnet sln /opt/neoCli/neo-cli.sln add /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj
+RUN dotnet add /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj reference /opt/neoLib/neo/neo.csproj
+RUN dotnet publish /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj -o $PLUGIN_TO_INCLUDE -c Release -r ubuntu.16.04-x64 -f netstandard2.0
+RUN cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.dll /opt/neoCli/neo-cli/neo-cli/Plugins/
 
 # TODO - Compile and include other plugins
-# RUN mkdir /opt/neo-cli/neo-cli/neo-cli/Plugins-disabled/
+# RUN mkdir /opt/neoCli/neo-cli/neo-cli/Plugins-disabled/
 #==========================================================================
 
 #==========================================================================
 #============ COMPACT NEO-CLI IN A ZIP FILE  ==============================
-RUN cd /opt/neo-cli/neo-cli && zip -r /opt/neo-cli-built.zip neo-cli
+RUN cd /opt/neoCli/neo-cli && zip -r /opt/neo-cli-built.zip neo-cli
 #==========================================================================
 
 # ALL NIGHT LONG - STAY ALIVE
