@@ -22,6 +22,7 @@ services:
       - ./neo-cli/configs/plugins/simplePolicyConfig.json:/opt/node/neo-cli/Plugins/SimplePolicy/config.json
       - ./neo-cli/configs/plugins/appLogConfig.json:/opt/node/neo-cli/Plugins/ApplicationLogs/config.json
       - ./neo-cli/configs/plugins/importBlocks.json:/opt/node/neo-cli/Plugins/ImportBlocks/config.json
+      - ./neo-cli/configs/plugins/rpcSecurity.json:/opt/node/neo-cli/Plugins/RpcSecurity/config.json
       - ./Chain:/opt/node/neo-cli/Chain_00746E41
       - ./chainToLoad.acc:/opt/node/neo-cli/chain.acc
       - ./logs-neocli-nodeRPC:/opt/node/neo-cli/Logs
