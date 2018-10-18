@@ -9,7 +9,7 @@ RUN apt-get update \
 
 # get repo, the arguments should be supplied when building using this Dockerfile
 #ARG NEOCLI_BLOCKCHAIN_URL=https://github.com/vncoelho/neo-cli.git
-ARG NEOCLI_BLOCKCHAIN_URL=https://github.com/belane/neo-cli.git
+ARG NEOCLI_BLOCKCHAIN_URL=https://github.com/neo-project/neo-cli.git
 ARG NEO_BLOCKCHAIN_URL=https://github.com/neo-project/neo.git
 ARG NEO_BLOCKCHAIN_PLUGINS_URL=https://github.com/neo-project/neo-plugins.git
 ARG NEO_VM_URL=https://github.com/neo-project/neo-vm.git
@@ -20,10 +20,10 @@ RUN git clone $NEO_BLOCKCHAIN_URL /opt/neoLib
 RUN git clone $NEO_BLOCKCHAIN_PLUGINS_URL /opt/neo-plugins 
 
 
-ARG NEO_CLI_BRANCH=bindAddress
-ARG NEO_CLI_COMMIT=d116a764ab5fccaab2bf10f9bc8aeb959230712b 
+ARG NEO_CLI_BRANCH=master
+ARG NEO_CLI_COMMIT=1e956ca 
 ARG NEO_BLOCKCHAIN_BRANCH=master
-ARG NEO_BLOCKCHAIN_COMMIT=fbb273e
+ARG NEO_BLOCKCHAIN_COMMIT=fcc3c31afdf1fed2191c3436c67418e4d2fd0700
 ARG NEO_PLUGINS_BRANCH=master
 ARG NEO_PLUGINS_COMMIT=6a1c71b
 
