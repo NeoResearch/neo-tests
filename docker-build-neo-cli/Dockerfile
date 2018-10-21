@@ -28,8 +28,8 @@ RUN cd /opt/neoLib && git pull && git checkout $NEO_BLOCKCHAIN_BRANCH && git che
 
 #==========================================================================
 #============== EXAMPLES FOR CHANGING FILES WITH LOCAL FILES ==============
-#RUN rm -rf /opt/neoLib/
-#ADD localfiles/neo /opt/neoLib
+RUN rm -rf /opt/neoLib/
+ADD localfiles/neo-igor /opt/neoLib
 #RUN rm -rf /opt/neoCli
 #ADD localfiles/neo-cli /opt/neoCli
 #==========================================================================
@@ -63,7 +63,7 @@ RUN dotnet publish /opt/neoCli/neo-cli/neo-cli.csproj -o neo-cli -c Release -r u
 #=================== PUBLISHING AND ADDING PLUGINS DLL'S ==================
 ARG NEO_BLOCKCHAIN_PLUGINS_URL=https://github.com/igormcoelho/neo-plugins.git
 ARG NEO_PLUGINS_BRANCH=storageitem_height
-ARG NEO_PLUGINS_COMMIT=6b88410be600d488922dc3a9556f26c01ac71073
+ARG NEO_PLUGINS_COMMIT=9804cdc8b9a6d1ab0b83bc6c784f0e15074699ac
 RUN git clone $NEO_BLOCKCHAIN_PLUGINS_URL /opt/neo-plugins 
 
 RUN mkdir /opt/neoCli/neo-cli/neo-cli/Plugins/
