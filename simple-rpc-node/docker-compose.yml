@@ -25,8 +25,8 @@ services:
       - ./neo-cli/configs/plugins/rpcSecurity.json:/opt/node/neo-cli/Plugins/RpcSecurity/config.json
       - ./Chain:/opt/node/neo-cli/Chain_00746E41
       - ./Storage:/opt/node/neo-cli/Storage
-      #- ./chainToLoad.0.acc.zip:/opt/node/neo-cli/chain.0.acc.zip
-      - ./chain.0.acc:/opt/node/neo-cli/chain.0.acc
+      - ./chain.0.acc.zip:/opt/node/neo-cli/chain.0.acc.zip
+      #- ./chain.0.acc:/opt/node/neo-cli/chain.0.acc
       - ./logs-neocli-nodeRPC:/opt/node/neo-cli/Logs
     environment:
       IS_RPC: 1
