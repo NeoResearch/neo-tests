@@ -61,9 +61,12 @@ RUN dotnet publish /opt/neoCli/neo-cli/neo-cli.csproj -o neo-cli -c Release -r u
 
 #==========================================================================
 #=================== PUBLISHING AND ADDING PLUGINS DLL'S ==================
-ARG NEO_BLOCKCHAIN_PLUGINS_URL=https://github.com/igormcoelho/neo-plugins.git
+#ARG NEO_BLOCKCHAIN_PLUGINS_URL=https://github.com/igormcoelho/neo-plugins.git
+ARG NEO_BLOCKCHAIN_PLUGINS_URL=https://github.com/neo-project/neo-plugins.git
 ARG NEO_PLUGINS_BRANCH=storageitem_height
+ARG NEO_PLUGINS_BRANCH=master
 ARG NEO_PLUGINS_COMMIT=9804cdc8b9a6d1ab0b83bc6c784f0e15074699ac
+ARG NEO_PLUGINS_COMMIT=ada292dec3c93cd478a101937f99af84a36654b8
 RUN git clone $NEO_BLOCKCHAIN_PLUGINS_URL /opt/neo-plugins 
 
 RUN mkdir /opt/neoCli/neo-cli/neo-cli/Plugins/
