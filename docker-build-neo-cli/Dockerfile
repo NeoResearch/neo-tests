@@ -42,7 +42,7 @@ RUN if [ "$LOCAL_NEO_BLOCKCHAIN" = "true" ] ; then (rm -rf /opt/neoLib/; mv /opt
 #============================== PUBLISH NEO-CLI ===========================
 
 #--------------------- CHANGE PLUGINS PATH TO LOCAL FILES -----------------
-# First of all, remove neo-vm package from neo-cli project, referencing it to the local neo-vm library
+# NEO-VM special configurations
 ARG SET_NEO_VM
 ARG NEO_VM_URL
 ARG NEO_VM_BRANCH
@@ -72,10 +72,10 @@ RUN dotnet publish /opt/neoCli/neo-cli/neo-cli.csproj -o neo-cli -c Release -r u
 
 #==========================================================================
 #=================== PUBLISHING AND ADDING PLUGINS DLL'S ==================
-ARG NEO_BLOCKCHAIN_PLUGINS_URL
+ARG NEO_PLUGINS_URL
 ARG NEO_PLUGINS_BRANCH
 ARG NEO_PLUGINS_COMMIT
-RUN git clone $NEO_BLOCKCHAIN_PLUGINS_URL /opt/neo-plugins 
+RUN git clone $NEO_PLUGINS_URL /opt/neo-plugins 
 
 RUN mkdir /opt/neoCli/neo-cli/neo-cli/Plugins/
 RUN cd /opt/neo-plugins && git pull && git checkout $NEO_PLUGINS_BRANCH && git checkout $NEO_PLUGINS_COMMIT
