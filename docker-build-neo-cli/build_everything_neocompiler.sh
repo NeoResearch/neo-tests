@@ -1,4 +1,28 @@
 #!/bin/bash
+DISABLE_BUILD=1
+
+while [[ "$#" > 0 ]]; do case $1 in
+    -h)
+        usage
+        exit 0
+        ;;
+    --build)
+	echo "PARAMETER DISABLE_BUILD desactived.";
+        DISABLE_BUILD=0
+        shift
+        ;;
+    *)
+        usage
+        exit 1
+        ;;
+  esac;
+done
+
+if ((!$DISABLE_BUILD)); then
+	echo "BUILDING neo-cli with configurations of the current folder";
+	./docker_build_run_copy_stop.sh
+fi
+
 source ./.env
 echo "Nodes path is: " + $PATH_CSHARP_NODE
 
