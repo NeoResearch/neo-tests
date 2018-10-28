@@ -19,20 +19,21 @@ RUN git clone $NEO_BLOCKCHAIN_URL /opt/neoLib
 
 ARG NEO_CLI_BRANCH
 ARG NEO_CLI_COMMIT
+RUN cd /opt/neoCli && git pull && git checkout $NEO_CLI_BRANCH && git checkout $NEO_CLI_COMMIT
+
 ARG NEO_BLOCKCHAIN_BRANCH
 ARG NEO_BLOCKCHAIN_COMMIT
-
-RUN cd /opt/neoCli && git pull && git checkout $NEO_CLI_BRANCH && git checkout $NEO_CLI_COMMIT
 RUN cd /opt/neoLib && git pull && git checkout $NEO_BLOCKCHAIN_BRANCH && git checkout $NEO_BLOCKCHAIN_COMMIT
 
 #==========================================================================
 #============== EXAMPLES FOR CHANGING FILES WITH LOCAL FILES ==============
-ARG LOCAL_NEO_BLOCKCHAIN
-ARG LOCAL_NEO_BLOCKCHAIN_URL
-RUN if [ "$LOCAL_NEO_BLOCKCHAIN" = "true" ] ; then (rm -rf /opt/neoLib/; ADD $LOCAL_NEO_BLOCKCHAIN_URL /opt/neoLib);  fi
 ARG LOCAL_NEO_CLI_BLOCKCHAIN
 ARG LOCAL_NEO_CLI_BLOCKCHAIN_URL
 RUN if [ "$LOCAL_NEO_CLI_BLOCKCHAIN" = "true" ] ; then (rm -rf /opt/neoCli/; ADD $LOCAL_NEO_CLI_BLOCKCHAIN_URL /opt/neoCli);  fi
+
+ARG LOCAL_NEO_BLOCKCHAIN
+ARG LOCAL_NEO_BLOCKCHAIN_URL
+RUN if [ "$LOCAL_NEO_BLOCKCHAIN" = "true" ] ; then (rm -rf /opt/neoLib/; ADD $LOCAL_NEO_BLOCKCHAIN_URL /opt/neoLib);  fi
 #==========================================================================
 #==========================================================================
 
