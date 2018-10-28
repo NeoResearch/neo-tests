@@ -8,9 +8,6 @@ RUN apt-get update \
 #apt-utils mininet netcat  less  ca-certificates  sqlite3 libsqlite3-dev 
 
 # get repo, the arguments should be supplied when building using this Dockerfile
-ARG NEO_VM_URL
-RUN git clone $NEO_VM_URL /opt/neo-vm
-
 ARG NEO_CLI_BLOCKCHAIN_URL
 RUN git clone $NEO_CLI_BLOCKCHAIN_URL /opt/neoCli 
 
@@ -46,9 +43,17 @@ RUN if [ "$LOCAL_NEO_BLOCKCHAIN" = "true" ] ; then (rm -rf /opt/neoLib/; mv /opt
 
 #--------------------- CHANGE PLUGINS PATH TO LOCAL FILES -----------------
 # First of all, remove neo-vm package from neo-cli project, referencing it to the local neo-vm library
-#RUN dotnet remove /opt/neoLib/neo/neo.csproj package neo.vm
-#RUN dotnet sln /opt/neoLib/neo.sln add /opt/neo-vm/src/neo-vm/neo-vm.csproj
-#RUN dotnet add /opt/neoLib/neo/neo.csproj reference /opt/neo-vm/src/neo-vm/neo-vm.csproj
+ARG SET_NEO_VM
+ARG NEO_VM_URL
+ARG NEO_VM_BRANCH
+ARG NEO_VM_COMMIT
+ARG LOCAL_NEO_VM
+ARG LOCAL_NEO_VM_URL
+RUN mkdir /opt/tempLocal_neo-vm
+RUN if [ "$SET_NEO_VM" = "true" ] ; then git clone $NEO_VM_URL /opt/neo-vm;  fi
+RUN if [ "$SET_NEO_VM" = "true" ] ; then (cd /opt/neo-vm; git pull; git checkout $NEO_VM_BRANCH; git checkout $NEO_VM_COMMIT);  fi
+RUN if [ "$SET_NEO_VM" = "true" ] ; then (dotnet remove /opt/neoLib/neo/neo.csproj package neo.vm; dotnet sln /opt/neoLib/neo.sln add /opt/neo-vm/src/neo-vm/neo-vm.csproj; dotnet add /opt/neoLib/neo/neo.csproj reference /opt/neo-vm/src/neo-vm/neo-vm.csproj);  fi
+RUN if [ "$SET_NEO_VM" = "true" ] && [ "$LOCAL_NEO_VM" = "true" ] ; then (rm -rf /opt/neo-vm/; mv /opt/tempLocal_neo-vm /opt/neo-vm);  fi
 #--------------------- CHANGE PLUGINS PATH TO LOCAL FILES -----------------
 
 #--------------------------------------------------------------------------
