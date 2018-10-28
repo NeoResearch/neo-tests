@@ -29,11 +29,15 @@ RUN cd /opt/neoLib && git pull && git checkout $NEO_BLOCKCHAIN_BRANCH && git che
 #============== EXAMPLES FOR CHANGING FILES WITH LOCAL FILES ==============
 ARG LOCAL_NEO_CLI_BLOCKCHAIN
 ARG LOCAL_NEO_CLI_BLOCKCHAIN_URL
-RUN if [ "$LOCAL_NEO_CLI_BLOCKCHAIN" = "true" ] ; then (rm -rf /opt/neoCli/; ADD $LOCAL_NEO_CLI_BLOCKCHAIN_URL /opt/neoCli);  fi
+RUN mkdir /opt/tempLocal_neoCli
+RUN mkdir /opt/tempLocal_neoLib
+ADD $LOCAL_NEO_CLI_BLOCKCHAIN_URL /opt/tempLocal_neoCli
+RUN if [ "$LOCAL_NEO_CLI_BLOCKCHAIN" = "true" ] ; then (rm -rf /opt/neoCli/; mv -r /opt/tempLocal_neoCli /opt/neoCli);  fi
 
 ARG LOCAL_NEO_BLOCKCHAIN
 ARG LOCAL_NEO_BLOCKCHAIN_URL
-RUN if [ "$LOCAL_NEO_BLOCKCHAIN" = "true" ] ; then (rm -rf /opt/neoLib/; ADD $LOCAL_NEO_BLOCKCHAIN_URL /opt/neoLib);  fi
+ADD $LOCAL_NEO_BLOCKCHAIN_URL /opt/tempLocal_neoLib
+RUN if [ "$LOCAL_NEO_BLOCKCHAIN" = "true" ] ; then (rm -rf /opt/neoLib/; mv /opt/tempLocal_neoLib /opt/neoLib);  fi
 #==========================================================================
 #==========================================================================
 
@@ -70,13 +74,13 @@ RUN git clone $NEO_BLOCKCHAIN_PLUGINS_URL /opt/neo-plugins
 
 RUN mkdir /opt/neoCli/neo-cli/neo-cli/Plugins/
 RUN cd /opt/neo-plugins && git pull && git checkout $NEO_PLUGINS_BRANCH && git checkout $NEO_PLUGINS_COMMIT
-
 #--------------------------------------------------------------------------
 #--------------------- CHANGE PLUGINS PATH TO LOCAL FILES -----------------
 ARG LOCAL_NEO_PLUGINS
 ARG LOCAL_NEO_PLUGINS_URL
-RUN if [ "$LOCAL_NEO_PLUGINS" = "true" ] ; then (rm -rf /opt/neo-plugins; ADD $LOCAL_NEO_PLUGINS_URL /opt/neo-plugins);  fi
-
+RUN mkdir /opt/tempLocal_neo-plugins
+ADD $LOCAL_NEO_PLUGINS_URL /opt/tempLocal_neo-plugins
+RUN if [ "$LOCAL_NEO_PLUGINS" = "true" ] ; then (rm -rf /opt/neo-plugins; mv -r /opt/tempLocal_neo-plugins /opt/neo-plugins);  fi
 #--------------------------------------------------------------------------
 
 #ARG PLUGIN_TO_INCLUDE="Persistence"
