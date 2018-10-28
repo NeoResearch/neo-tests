@@ -31,7 +31,7 @@ echo "will block node3<->node4 (node3)"
 docker exec -it eco-neo-csharp-node3-running iptables -I INPUT -p tcp --dport 20336:20336 -j REJECT
 docker exec -it eco-neo-csharp-node3-running iptables -I OUTPUT -p tcp --dport 20336:20336 -j REJECT
 
-echo "will block node3<->node4 (node4)"
+echo "will block node4<->node3 (node4)"
 docker exec -it eco-neo-csharp-node4-running iptables -I INPUT -p tcp --dport 20335:20335 -j REJECT
 docker exec -it eco-neo-csharp-node4-running iptables -I OUTPUT -p tcp --dport 20335:20335 -j REJECT
 
@@ -45,6 +45,7 @@ docker exec -it eco-neo-csharp-node1-running ifconfig eth0 down
 
 cat $PATH_NEOCOMPILER_ECO/docker-compose-eco-network/logs-neocli-node1/*.log | tail -4 | grep index=3 | grep OnPrepareResponse
 docker exec -it eco-neo-csharp-node3-running ifconfig eth0 down
+docker exec -it eco-neo-csharp-node4-running ifconfig eth0 down
 
 echo ""
 echo "will wait for node2 to timeout"
