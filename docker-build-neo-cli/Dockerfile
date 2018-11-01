@@ -29,7 +29,7 @@ ARG LOCAL_NEO_CLI_BLOCKCHAIN_URL
 RUN mkdir /opt/tempLocal_neoCli
 RUN mkdir /opt/tempLocal_neoLib
 ADD $LOCAL_NEO_CLI_BLOCKCHAIN_URL /opt/tempLocal_neoCli
-RUN if [ "$LOCAL_NEO_CLI_BLOCKCHAIN" = "true" ] ; then (rm -rf /opt/neoCli/; mv -r /opt/tempLocal_neoCli /opt/neoCli);  fi
+RUN if [ "$LOCAL_NEO_CLI_BLOCKCHAIN" = "true" ] ; then (rm -rf /opt/neoCli/; mv /opt/tempLocal_neoCli /opt/neoCli);  fi
 
 ARG LOCAL_NEO_BLOCKCHAIN
 ARG LOCAL_NEO_BLOCKCHAIN_URL
@@ -85,7 +85,7 @@ ARG LOCAL_NEO_PLUGINS
 ARG LOCAL_NEO_PLUGINS_URL
 RUN mkdir /opt/tempLocal_neo-plugins
 ADD $LOCAL_NEO_PLUGINS_URL /opt/tempLocal_neo-plugins
-RUN if [ "$LOCAL_NEO_PLUGINS" = "true" ] ; then (rm -rf /opt/neo-plugins; mv -r /opt/tempLocal_neo-plugins /opt/neo-plugins);  fi
+RUN if [ "$LOCAL_NEO_PLUGINS" = "true" ] ; then (rm -rf /opt/neo-plugins; mv /opt/tempLocal_neo-plugins /opt/neo-plugins);  fi
 #--------------------------------------------------------------------------
 
 #ARG PLUGIN_TO_INCLUDE="Persistence"
