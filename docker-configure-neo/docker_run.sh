@@ -9,26 +9,41 @@ IMAGE_NAME="neo-opt-compiler"
 # diff neo-cli-274/Neo.hex neo-cli-built/Neo.hex (big difference perhaps...)
 
 
-NEO_BRANCH=Neo.Actor
-NEO_BRANCH_COMMIT=4280a5d7ac000bc94f5df5efde2f888aaac7a9c8
+NEO_BRANCH=master
+NEO_BRANCH_COMMIT=c47b47b501f2cdfe49378bff11cd43192d11c610
 NEO_URL=https://github.com/neo-project/neo.git
 
-NEO_CLI_BRANCH=v3.0
-NEO_CLI_BRANCH_COMMIT=b4b979fdeccdf85b2daf76ff98ddcda133d3f8cd
+NEO_CLI_BRANCH=master
+NEO_CLI_BRANCH_COMMIT=6a875d546a9917b984dc88e64828b887de1010f8
 NEO_CLI_URL=https://github.com/neo-project/neo-cli.git
 
 NEO_PLUGINS_BRANCH=master
-NEO_PLUGINS_BRANCH_COMMIT=6f66abe005d98507e6ca06b705d820c5e8829e5c
+NEO_PLUGINS_BRANCH_COMMIT=39f0bde11f503bf2ab395489c41dfd0b61cc5367
 NEO_PLUGINS_URL=https://github.com/neo-project/neo-plugins.git
 
-NEO_VM_BRANCH=patch-3
-NEO_VM_BRANCH_COMMIT=ca2d305ab33edf5262b098742097a787b7d3230a
-NEO_VM_URL=https://github.com/igormcoelho/neo-vm.git
+NEO_VM_BRANCH=master
+NEO_VM_BRANCH_COMMIT=e074f009d442fd6007219bc2bbaf0d9dd372da4c
+NEO_VM_URL=https://github.com/neo-project/neo-vm.git
 
-git clone -b $NEO_CLI_BRANCH $NEO_CLI_URL neo-cli && (cd neo-cli && git checkout $NEO_CLI_BRANCH_COMMIT)
-git clone -b $NEO_BRANCH $NEO_URL neo-core && (cd neo-core && git checkout $NEO_BRANCH_COMMIT)
-git clone -b $NEO_PLUGINS_BRANCH $NEO_PLUGINS_URL neo-plugins && (cd neo-plugins && git checkout $NEO_PLUGINS_BRANCH_COMMIT)
-git clone -b $NEO_VM_BRANCH $NEO_VM_URL neo-vm && (cd neo-vm && git checkout $NEO_VM_BRANCH_COMMIT)
+echo "git clone -b $NEO_CLI_BRANCH $NEO_CLI_URL neo-cli"
+git clone -b $NEO_CLI_BRANCH $NEO_CLI_URL neo-cli
+echo "(cd neo-cli && git pull origin $NEO_CLI_BRANCH  && git checkout $NEO_CLI_BRANCH_COMMIT)"
+(cd neo-cli && git pull origin $NEO_CLI_BRANCH  && git checkout $NEO_CLI_BRANCH_COMMIT)
+
+echo "git clone -b $NEO_BRANCH $NEO_URL neo-core"
+#git clone -b $NEO_BRANCH $NEO_URL neo-core
+echo "(cd neo-core && git pull origin $NEO_BRANCH && git checkout $NEO_BRANCH_COMMIT)"
+#(cd neo-core && git pull origin $NEO_BRANCH && git checkout $NEO_BRANCH_COMMIT)
+
+echo "git clone -b $NEO_PLUGINS_BRANCH $NEO_PLUGINS_URL neo-plugins"
+git clone -b $NEO_PLUGINS_BRANCH $NEO_PLUGINS_URL neo-plugins
+echo "(cd neo-plugins && git pull origin $NEO_PLUGINS_BRANCH && git checkout $NEO_PLUGINS_BRANCH_COMMIT)"
+(cd neo-plugins && git pull origin $NEO_PLUGINS_BRANCH && git checkout $NEO_PLUGINS_BRANCH_COMMIT)
+
+echo "git clone -b $NEO_VM_BRANCH $NEO_VM_URL neo-vm"
+git clone -b $NEO_VM_BRANCH $NEO_VM_URL neo-vm
+echo "(cd neo-vm && git pull origin $NEO_VM_BRANCH && git checkout $NEO_VM_BRANCH_COMMIT)"
+(cd neo-vm && git pull origin $NEO_VM_BRANCH && git checkout $NEO_VM_BRANCH_COMMIT)
 
 echo "Starting container..."
 #docker run --rm --volume neo-code:/neo-code --name $IMAGE_NAME -it /bin/bash

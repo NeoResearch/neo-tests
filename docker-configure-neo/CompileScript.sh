@@ -73,6 +73,17 @@ echo "dotnet add /opt/neo/neo/neo.csproj reference /opt/neo-vm/src/neo-vm/neo-vm
 dotnet add /opt/neo/neo/neo.csproj reference /opt/neo-vm/src/neo-vm/neo-vm.csproj
 
 
+echo ""
+echo "dotnet test --verbosity n /opt/neo-plugins/SimplePolicy.UnitTests/SimplePolicy.UnitTests.csproj"
+dotnet test --verbosity n /opt/neo-plugins/SimplePolicy.UnitTests/SimplePolicy.UnitTests.csproj
+echo ""
+
+
+echo ""
+echo "dotnet test --verbosity n /opt/neo/neo.UnitTests/neo.UnitTests.csproj"
+dotnet test --verbosity n /opt/neo/neo.UnitTests/neo.UnitTests.csproj
+echo ""
+
 
 #(cd /opt/neo && dotnet clean)
 #(cd /opt/neo-cli && dotnet clean)
@@ -89,7 +100,6 @@ echo "==================================================="
 echo "BUILDING FINAL neo-cli"
 echo "==================================================="
 echo ""
-# publish
 echo ""
 echo "dotnet publish /opt/neo-cli/neo-cli/neo-cli.csproj -o neo-cli -c Release -r ubuntu.16.04-x64"
 dotnet publish /opt/neo-cli/neo-cli/neo-cli.csproj -o neo-cli -c Release -r ubuntu.16.04-x64 && cd /opt/neo-cli/neo-cli && zip -r /opt/build/neo-cli-built.zip neo-cli && echo "generated package: ./build/neo-cli-built.zip"
