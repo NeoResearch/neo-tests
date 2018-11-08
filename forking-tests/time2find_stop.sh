@@ -1,6 +1,6 @@
 #!/bin/bash
-echo "unlocking everything (TODO - ADD --privileged TO ALL EXEC IFCONFIG)"
-./unlockall.sh
+#echo "unlocking everything (TODO - ADD --privileged TO ALL EXEC IFCONFIG)"
+#./unlockall.sh
 
 echo "find onstop event script (RUN WITH SUDO!!!!)"
 
@@ -11,8 +11,8 @@ if [ -d "$PATH_NEOCOMPILER_ECO/docker-compose-eco-network/logs-neocli-node1" ]; 
 	echo "OFFICIAL ROUND"
 	echo ""
 	echo "will wait for node 1,2,3 or 4 gets an OnStop event"
-	while [ `cat $PATH_NEOCOMPILER_ECO/docker-compose-eco-network/logs-neocli-node1/*.log | tail -1 | grep OnStop | wc -l` -eq 0 -o `cat $PATH_NEOCOMPILER_ECO/docker-compose-eco-network/logs-neocli-node2/*.log | tail -1 | grep OnStop | wc -l`  -eq 0 -o `cat $PATH_NEOCOMPILER_ECO/docker-compose-eco-network/logs-neocli-node3/*.log | tail -1 | grep OnStop | wc -l`  -eq 0 -o `cat $PATH_NEOCOMPILER_ECO/docker-compose-eco-network/logs-neocli-node4/*.log | tail -1 | grep OnStop | wc -l`  -eq 0 ]; do
-	   :  # no operation
+	while [ `cat $PATH_NEOCOMPILER_ECO/docker-compose-eco-network/logs-neocli-node1/*.log | tail -200 | grep OnStop | wc -l` -eq 0 -o `cat $PATH_NEOCOMPILER_ECO/docker-compose-eco-network/logs-neocli-node2/*.log | tail -200 | grep OnStop | wc -l`  -eq 0 -o `cat $PATH_NEOCOMPILER_ECO/docker-compose-eco-network/logs-neocli-node3/*.log | tail -200 | grep OnStop | wc -l`  -eq 0 -o `cat $PATH_NEOCOMPILER_ECO/docker-compose-eco-network/logs-neocli-node4/*.log | tail -200 | grep OnStop | wc -l`  -eq 0 ]; do
+	   sleep 4
 	done
 
 	echo "Well done! Problems detected"
