@@ -9,10 +9,12 @@ RUN apt-get update \
 
 # get repo, the arguments should be supplied when building using this Dockerfile
 ARG NEO_CLI_BLOCKCHAIN_URL
-RUN git clone $NEO_CLI_BLOCKCHAIN_URL /opt/neoCli 
+RUN mkdir /opt/neoCli 
+RUN if [ "$LOCAL_NEO_CLI_BLOCKCHAIN" != "true" ] ; then (cd /opt/neoCli && git clone $NEO_CLI_BLOCKCHAIN_URL );  fi
 
 ARG NEO_BLOCKCHAIN_URL
-RUN git clone $NEO_BLOCKCHAIN_URL /opt/neoLib 
+RUN mkdir /opt/neoLib 
+RUN if [ "$LOCAL_NEO_BLOCKCHAIN" != "true" ] ; then (cd /opt/neoLib && git clone $NEO_BLOCKCHAIN_URL);  fi
 
 ARG NEO_CLI_BRANCH
 ARG NEO_CLI_COMMIT
@@ -75,7 +77,8 @@ RUN dotnet publish /opt/neoCli/neo-cli/neo-cli.csproj -o neo-cli -c Release -r u
 ARG NEO_PLUGINS_URL
 ARG NEO_PLUGINS_BRANCH
 ARG NEO_PLUGINS_COMMIT
-RUN git clone $NEO_PLUGINS_URL /opt/neo-plugins 
+RUN mkdir /opt/neo-plugins 
+RUN if [ "$LOCAL_NEO_PLUGINS" != "true" ] ; then (cd /opt/neo-plugins && git clone $NEO_PLUGINS_URL );  fi
 
 RUN mkdir /opt/neoCli/neo-cli/neo-cli/Plugins/
 RUN cd /opt/neo-plugins && git pull && git checkout $NEO_PLUGINS_BRANCH && git checkout $NEO_PLUGINS_COMMIT
