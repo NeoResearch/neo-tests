@@ -24,8 +24,8 @@ LOCAL_NEO_VM="false"
 LOCAL_NEO_VM_URL="localfiles/neo-vm"
 
 PLUGINS_LIST="
-Persistence
 SimplePolicy
+Persistence
 ApplicationLogs
 StatesDumper
 ImportBlocks
