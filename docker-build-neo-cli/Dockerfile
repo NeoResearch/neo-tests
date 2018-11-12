@@ -74,16 +74,18 @@ RUN dotnet publish /opt/neoCli/neo-cli/neo-cli.csproj -o neo-cli -c Release -r u
 
 #==========================================================================
 #=================== PUBLISHING AND ADDING PLUGINS DLL'S ==================
-ARG NEO_PLUGINS_URL
-ARG NEO_PLUGINS_BRANCH
-ARG NEO_PLUGINS_COMMIT
 RUN mkdir /opt/neoCli/neo-cli/neo-cli/Plugins/
 RUN mkdir /opt/neo-plugins 
+
+ARG NEO_PLUGINS_URL
+ARG LOCAL_NEO_PLUGINS
 RUN if [ "$LOCAL_NEO_PLUGINS" = "false" ] ; then (git clone $NEO_PLUGINS_URL /opt/neo-plugins);  fi
+
+ARG NEO_PLUGINS_BRANCH
+ARG NEO_PLUGINS_COMMIT
 RUN if [ "$LOCAL_NEO_PLUGINS" = "false" ] ; then (cd /opt/neo-plugins && git pull && git checkout $NEO_PLUGINS_BRANCH && git checkout $NEO_PLUGINS_COMMIT);  fi
 #--------------------------------------------------------------------------
 #--------------------- CHANGE PLUGINS PATH TO LOCAL FILES -----------------
-ARG LOCAL_NEO_PLUGINS
 ARG LOCAL_NEO_PLUGINS_URL
 RUN mkdir /opt/tempLocal_neo-plugins
 ADD $LOCAL_NEO_PLUGINS_URL /opt/tempLocal_neo-plugins
