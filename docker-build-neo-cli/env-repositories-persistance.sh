@@ -24,6 +24,7 @@ LOCAL_NEO_VM="false"
 LOCAL_NEO_VM_URL="localfiles/neo-vm"
 
 PLUGINS_LIST="
+SimplePolicy
 Persistence
 SimplePolicy
 ApplicationLogs

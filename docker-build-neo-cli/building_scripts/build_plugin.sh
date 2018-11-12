@@ -30,4 +30,11 @@ if [ ! -f /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCL
     echo "File does not exist"
     exit 1
 fi
+
+echo ""
+echo "dotnet test --verbosity n /opt/neo-plugins/$PLUGIN_TO_INCLUDE.UnitTests/$PLUGIN_TO_INCLUDE.UnitTests.csproj"
+dotnet test --verbosity n /opt/neo-plugins/$PLUGIN_TO_INCLUDE.UnitTests/$PLUGIN_TO_INCLUDE.UnitTests.csproj
+echo ""
+
+
 cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.dll /opt/neoCli/neo-cli/neo-cli/Plugins/

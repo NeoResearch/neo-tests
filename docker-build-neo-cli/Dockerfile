@@ -44,22 +44,35 @@ RUN if [ "$LOCAL_NEO_BLOCKCHAIN" = "true" ] ; then (rm -rf /opt/neoLib/; mv /opt
 #==========================================================================
 #============================== PUBLISH NEO-CLI ===========================
 
-#--------------------- CHANGE PLUGINS PATH TO LOCAL FILES -----------------
+#--------------------- CHANGE NEO-VM PATH TO LOCAL FILES -----------------
 # NEO-VM special configurations
+RUN mkdir /opt/neo-vm
+RUN mkdir /opt/tempLocal_neo-vm
+
 ARG SET_NEO_VM
 ARG NEO_VM_URL
+ARG LOCAL_NEO_VM
+RUN if [ "$SET_NEO_VM" = "true" ] && [ "$LOCAL_NEO_VM" = "false" ] ; then git clone $NEO_VM_URL /opt/neo-vm;  fi
+
 ARG NEO_VM_BRANCH
 ARG NEO_VM_COMMIT
-ARG LOCAL_NEO_VM
-ARG LOCAL_NEO_VM_URL
-RUN mkdir /opt/tempLocal_neo-vm
-RUN if [ "$SET_NEO_VM" = "true" ] ; then git clone $NEO_VM_URL /opt/neo-vm;  fi
-RUN if [ "$SET_NEO_VM" = "true" ] ; then (cd /opt/neo-vm; git pull; git checkout $NEO_VM_BRANCH; git checkout $NEO_VM_COMMIT);  fi
-RUN if [ "$SET_NEO_VM" = "true" ] ; then (dotnet remove /opt/neoLib/neo/neo.csproj package neo.vm; dotnet sln /opt/neoLib/neo.sln add /opt/neo-vm/src/neo-vm/neo-vm.csproj; dotnet add /opt/neoLib/neo/neo.csproj reference /opt/neo-vm/src/neo-vm/neo-vm.csproj);  fi
-RUN if [ "$SET_NEO_VM" = "true" ] && [ "$LOCAL_NEO_VM" = "true" ] ; then (rm -rf /opt/neo-vm/; mv /opt/tempLocal_neo-vm /opt/neo-vm);  fi
-#--------------------- CHANGE PLUGINS PATH TO LOCAL FILES -----------------
+RUN if [ "$SET_NEO_VM" = "true" ] && [ "$LOCAL_NEO_VM" = "false" ] ; then (cd /opt/neo-vm; git pull; git checkout $NEO_VM_BRANCH; git checkout $NEO_VM_COMMIT);  fi
 
-#--------------------------------------------------------------------------
+RUN if [ "$SET_NEO_VM" = "true" ] ; then (dotnet remove /opt/neoLib/neo/neo.csproj package neo.vm; dotnet sln /opt/neoLib/neo.sln add /opt/neo-vm/src/neo-vm/neo-vm.csproj; dotnet add /opt/neoLib/neo/neo.csproj reference /opt/neo-vm/src/neo-vm/neo-vm.csproj);  fi
+
+ARG LOCAL_NEO_VM_URL
+ADD $LOCAL_NEO_VM_URL /opt/tempLocal_neo-vm
+RUN if [ "$SET_NEO_VM" = "true" ] && [ "$LOCAL_NEO_VM" = "true" ] ; then (rm -rf /opt/neo-vm/; mv /opt/tempLocal_neo-vm /opt/neo-vm);  fi
+
+#---------------------- NEO VM UNIT TESTS---------------------------
+RUN if [ "$SET_NEO_VM" = "true" ] ; then (dotnet test --verbosity n /opt/neo-vm/src/neo-vm.UnitTests/neo-vm.UnitTests.csproj);  fi
+#--------------------- CHANGE NEO-VM PATH TO LOCAL FILES -----------------
+
+#---------------------- NEO CORE LIB UNIT TESTS ---------------------------
+# Unit tests on Neo - echo "dotnet test --verbosity n /opt/neoLib/neo/neo.UnitTests/neo.UnitTests.csproj"
+RUN dotnet test --verbosity n /opt/neoLib/neo.UnitTests/neo.UnitTests.csproj
+#---------------------- NEO CORE LIB UNIT TESTS ---------------------------
+
 # Remove neo blockchain package from neo-cli project, referencing it to the local NeoBlockchain Library
 RUN dotnet remove /opt/neoCli/neo-cli/neo-cli.csproj package neo
 RUN dotnet sln /opt/neoCli/neo-cli.sln add /opt/neoLib/neo/neo.csproj
