@@ -10,11 +10,11 @@ RUN apt-get update \
 # get repo, the arguments should be supplied when building using this Dockerfile
 ARG NEO_CLI_BLOCKCHAIN_URL
 RUN mkdir /opt/neoCli 
-RUN if [ "$LOCAL_NEO_CLI_BLOCKCHAIN" != "true" ] ; then (cd /opt/neoCli && git clone $NEO_CLI_BLOCKCHAIN_URL );  fi
+RUN if [ "$LOCAL_NEO_CLI_BLOCKCHAIN" != "true" ] ; then (git clone $NEO_CLI_BLOCKCHAIN_URL /opt/neoCli );  fi
 
 ARG NEO_BLOCKCHAIN_URL
 RUN mkdir /opt/neoLib 
-RUN if [ "$LOCAL_NEO_BLOCKCHAIN" != "true" ] ; then (cd /opt/neoLib && git clone $NEO_BLOCKCHAIN_URL);  fi
+RUN if [ "$LOCAL_NEO_BLOCKCHAIN" != "true" ] ; then (git clone $NEO_BLOCKCHAIN_URL /opt/neoLib );  fi
 
 ARG NEO_CLI_BRANCH
 ARG NEO_CLI_COMMIT
