@@ -75,6 +75,12 @@ else
 	docker build $ARGS -t $CONTAINER_NAME:latest .
 fi
 
+res=$?
+if [ $res = 1 ]; then
+    echo "EXITING AND NOT COPYING .ZIP Because last return was $res! Build probably had problems"
+    exit 1
+fi
+
 echo "RUNNING container $PATH_CSHARP_NODE:"
 echo $CONTAINER_NAME
 docker run -d --name $CONTAINER_NAME --rm -h $CONTAINER_NAME $CONTAINER_NAME
