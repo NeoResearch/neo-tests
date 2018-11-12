@@ -9,10 +9,12 @@ RUN apt-get update \
 
 # get repo, the arguments should be supplied when building using this Dockerfile
 ARG NEO_CLI_BLOCKCHAIN_URL
+ARG LOCAL_NEO_CLI_BLOCKCHAIN
 RUN mkdir /opt/neoCli 
 RUN if [ "$LOCAL_NEO_CLI_BLOCKCHAIN" = "false" ] ; then (git clone $NEO_CLI_BLOCKCHAIN_URL /opt/neoCli);  fi
 
 ARG NEO_BLOCKCHAIN_URL
+ARG LOCAL_NEO_BLOCKCHAIN
 RUN mkdir /opt/neoLib 
 RUN if [ "$LOCAL_NEO_BLOCKCHAIN" = "false" ] ; then (git clone $NEO_BLOCKCHAIN_URL /opt/neoLib);  fi
 
@@ -26,14 +28,12 @@ RUN if [ "$LOCAL_NEO_BLOCKCHAIN" = "false" ] ; then (cd /opt/neoLib && git pull 
 
 #==========================================================================
 #============== EXAMPLES FOR CHANGING FILES WITH LOCAL FILES ==============
-ARG LOCAL_NEO_CLI_BLOCKCHAIN
 ARG LOCAL_NEO_CLI_BLOCKCHAIN_URL
 RUN mkdir /opt/tempLocal_neoCli
 RUN mkdir /opt/tempLocal_neoLib
 ADD $LOCAL_NEO_CLI_BLOCKCHAIN_URL /opt/tempLocal_neoCli
 RUN if [ "$LOCAL_NEO_CLI_BLOCKCHAIN" = "true" ] ; then (rm -rf /opt/neoCli/; mv /opt/tempLocal_neoCli /opt/neoCli);  fi
 
-ARG LOCAL_NEO_BLOCKCHAIN
 ARG LOCAL_NEO_BLOCKCHAIN_URL
 ADD $LOCAL_NEO_BLOCKCHAIN_URL /opt/tempLocal_neoLib
 RUN if [ "$LOCAL_NEO_BLOCKCHAIN" = "true" ] ; then (rm -rf /opt/neoLib/; mv /opt/tempLocal_neoLib /opt/neoLib);  fi
