@@ -30,3 +30,11 @@ NEO_VM_BRANCH=master
 NEO_VM_COMMIT=fa79898
 LOCAL_NEO_VM="false"
 LOCAL_NEO_VM_URL="localfiles/neo-vm"
+
+PLUGINS_LIST="
+SimplePolicy
+ApplicationLogs
+StatesDumper
+ImportBlocks
+RpcSecurity
+"

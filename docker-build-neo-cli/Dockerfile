@@ -7,6 +7,7 @@ RUN apt-get update \
 # Old packages - might useful
 #apt-utils mininet netcat  less  ca-certificates  sqlite3 libsqlite3-dev 
 
+
 # get repo, the arguments should be supplied when building using this Dockerfile
 ARG NEO_CLI_BLOCKCHAIN_URL
 ARG LOCAL_NEO_CLI_BLOCKCHAIN
@@ -91,14 +92,12 @@ RUN mkdir /opt/tempLocal_neo-plugins
 ADD $LOCAL_NEO_PLUGINS_URL /opt/tempLocal_neo-plugins
 RUN if [ "$LOCAL_NEO_PLUGINS" = "true" ] ; then (rm -rf /opt/neo-plugins; mv /opt/tempLocal_neo-plugins /opt/neo-plugins);  fi
 #--------------------------------------------------------------------------
-
 ADD building_scripts/build_plugin.sh /opt/
-#RUN /opt/build_plugin.sh --plugin-name Persistence
-RUN /opt/build_plugin.sh --plugin-name SimplePolicy
-RUN /opt/build_plugin.sh --plugin-name ApplicationLogs
-RUN /opt/build_plugin.sh --plugin-name StatesDumper
-RUN /opt/build_plugin.sh --plugin-name ImportBlocks
-RUN /opt/build_plugin.sh --plugin-name RpcSecurity
+ADD building_scripts/buildAllList_Plugins.sh /opt/
+
+ARG ENVFILE
+ADD $ENVFILE /opt/env-repositories.sh
+RUN /opt/buildAllList_Plugins.sh
 
 # TODO - Compile and include other plugins
 # RUN mkdir /opt/neoCli/neo-cli/neo-cli/Plugins-disabled/
