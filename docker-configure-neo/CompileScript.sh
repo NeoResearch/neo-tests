@@ -32,10 +32,37 @@ echo "================================================"
 echo "BUILDING plugin StatesDumper"
 echo "================================================"
 echo ""
-PLUGIN_TO_INCLUDE_II="StatesDumper"
-dotnet publish /opt/neo-plugins/$PLUGIN_TO_INCLUDE_II/$PLUGIN_TO_INCLUDE_II.csproj -o $PLUGIN_TO_INCLUDE_II -c Release -r ubuntu.16.04-x64 -f netstandard2.0
-cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE_II/$PLUGIN_TO_INCLUDE_II/$PLUGIN_TO_INCLUDE_II.dll /opt/neo-cli/neo-cli/neo-cli/Plugins/
+PLUGIN_TO_INCLUDE_I="StatesDumper"
+dotnet publish /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj -o $PLUGIN_TO_INCLUDE_I -c Release -r ubuntu.16.04-x64 -f netstandard2.0
+cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.dll /opt/neo-cli/neo-cli/neo-cli/Plugins/
 
+echo ""
+echo "================================================"
+echo "BUILDING plugin ApplicationLogs"
+echo "================================================"
+echo ""
+PLUGIN_TO_INCLUDE_I="ApplicationLogs"
+dotnet publish /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj -o $PLUGIN_TO_INCLUDE_I -c Release -r ubuntu.16.04-x64 -f netstandard2.0
+cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.dll /opt/neo-cli/neo-cli/neo-cli/Plugins/
+
+echo ""
+echo "================================================"
+echo "BUILDING plugin RpcSecurity"
+echo "================================================"
+echo ""
+PLUGIN_TO_INCLUDE_I="RpcSecurity"
+dotnet publish /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj -o $PLUGIN_TO_INCLUDE_I -c Release -r ubuntu.16.04-x64 -f netstandard2.0
+cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.dll /opt/neo-cli/neo-cli/neo-cli/Plugins/
+
+
+echo ""
+echo "================================================"
+echo "BUILDING plugin ImportBlocks"
+echo "================================================"
+echo ""
+PLUGIN_TO_INCLUDE_I="ImportBlocks"
+dotnet publish /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj -o $PLUGIN_TO_INCLUDE_I -c Release -r ubuntu.16.04-x64 -f netstandard2.0
+cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.dll /opt/neo-cli/neo-cli/neo-cli/Plugins/
 
 # remove neo-cli package and reference to local neo
 echo ""
@@ -75,7 +102,7 @@ dotnet add /opt/neo/neo/neo.csproj reference /opt/neo-vm/src/neo-vm/neo-vm.cspro
 
 echo ""
 echo "dotnet test --verbosity n /opt/neo-plugins/SimplePolicy.UnitTests/SimplePolicy.UnitTests.csproj"
-dotnet test --verbosity n /opt/neo-plugins/SimplePolicy.UnitTests/SimplePolicy.UnitTests.csproj
+#dotnet test --verbosity n /opt/neo-plugins/SimplePolicy.UnitTests/SimplePolicy.UnitTests.csproj
 echo ""
 
 
