@@ -89,15 +89,15 @@ echo "UPDATING REFERENCE OF PROJECT neo-vm INSIDE neo"
 echo "==================================================="
 echo ""
 echo "dotnet remove /opt/neo/neo/neo.csproj package Neo.VM"
-dotnet remove /opt/neo/neo/neo.csproj package Neo.VM
+#dotnet remove /opt/neo/neo/neo.csproj package Neo.VM
 
 echo ""
 echo "dotnet sln /opt/neo/neo.sln add /opt/neo-vm/src/neo-vm/neo-vm.csproj"
-dotnet sln /opt/neo/neo.sln add /opt/neo-vm/src/neo-vm/neo-vm.csproj
+#dotnet sln /opt/neo/neo.sln add /opt/neo-vm/src/neo-vm/neo-vm.csproj
 
 echo ""
 echo "dotnet add /opt/neo/neo/neo.csproj reference /opt/neo-vm/src/neo-vm/neo-vm.csproj"
-dotnet add /opt/neo/neo/neo.csproj reference /opt/neo-vm/src/neo-vm/neo-vm.csproj
+#dotnet add /opt/neo/neo/neo.csproj reference /opt/neo-vm/src/neo-vm/neo-vm.csproj
 
 
 echo ""
