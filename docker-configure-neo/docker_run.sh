@@ -9,20 +9,20 @@ IMAGE_NAME="neo-opt-compiler"
 # diff neo-cli-274/Neo.hex neo-cli-built/Neo.hex (big difference perhaps...)
 
 
-NEO_BRANCH=master
-NEO_BRANCH_COMMIT=c47b47b501f2cdfe49378bff11cd43192d11c610
-NEO_URL=https://github.com/neo-project/neo.git
+NEO_BRANCH=patch-5
+NEO_BRANCH_COMMIT=9b9daba51eba846e1cf8ef94d1f0e51b2d5e7d1a
+NEO_URL=https://github.com/igormcoelho/neo.git
 
 NEO_CLI_BRANCH=master
-NEO_CLI_BRANCH_COMMIT=6a875d546a9917b984dc88e64828b887de1010f8
+NEO_CLI_BRANCH_COMMIT=899f2a963be7fdda1eeec5cdbf049a630ad9ceea
 NEO_CLI_URL=https://github.com/neo-project/neo-cli.git
 
 NEO_PLUGINS_BRANCH=master
-NEO_PLUGINS_BRANCH_COMMIT=39f0bde11f503bf2ab395489c41dfd0b61cc5367
+NEO_PLUGINS_BRANCH_COMMIT=e9e97ba3aee5f857a422bc43e907d1cfefc9ade6
 NEO_PLUGINS_URL=https://github.com/neo-project/neo-plugins.git
 
 NEO_VM_BRANCH=master
-NEO_VM_BRANCH_COMMIT=e074f009d442fd6007219bc2bbaf0d9dd372da4c
+NEO_VM_BRANCH_COMMIT=76cf461f0814bdd067cc0d0947cede05f8a0ff91
 NEO_VM_URL=https://github.com/neo-project/neo-vm.git
 
 echo "git clone -b $NEO_CLI_BRANCH $NEO_CLI_URL neo-cli"
