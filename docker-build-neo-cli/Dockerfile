@@ -64,15 +64,6 @@ ARG LOCAL_NEO_VM_URL
 ADD $LOCAL_NEO_VM_URL /opt/tempLocal_neo-vm
 RUN if [ "$SET_NEO_VM" = "true" ] && [ "$LOCAL_NEO_VM" = "true" ] ; then (rm -rf /opt/neo-vm/; mv /opt/tempLocal_neo-vm /opt/neo-vm);  fi
 
-#---------------------- NEO VM UNIT TESTS---------------------------
-RUN if [ "$SET_NEO_VM" = "true" ] ; then (dotnet test --verbosity n /opt/neo-vm/src/neo-vm.UnitTests/neo-vm.UnitTests.csproj);  fi
-#--------------------- CHANGE NEO-VM PATH TO LOCAL FILES -----------------
-
-#---------------------- NEO CORE LIB UNIT TESTS ---------------------------
-# Unit tests on Neo - echo "dotnet test --verbosity n /opt/neoLib/neo/neo.UnitTests/neo.UnitTests.csproj"
-RUN dotnet test --verbosity n /opt/neoLib/neo.UnitTests/neo.UnitTests.csproj
-#---------------------- NEO CORE LIB UNIT TESTS ---------------------------
-
 # Remove neo blockchain package from neo-cli project, referencing it to the local NeoBlockchain Library
 RUN dotnet remove /opt/neoCli/neo-cli/neo-cli.csproj package neo
 RUN dotnet sln /opt/neoCli/neo-cli.sln add /opt/neoLib/neo/neo.csproj
@@ -83,6 +74,15 @@ RUN dotnet add /opt/neoCli/neo-cli/neo-cli.csproj reference /opt/neoLib/neo/neo.
 # publish Neo-cli using defined NeoLib
 RUN dotnet publish /opt/neoCli/neo-cli/neo-cli.csproj -o neo-cli -c Release -r ubuntu.16.04-x64
 #--------------------------------------------------------------------------
+
+#---------------------- NEO VM UNIT TESTS---------------------------
+RUN if [ "$SET_NEO_VM" = "true" ] ; then (dotnet test --verbosity n /opt/neo-vm/src/neo-vm.UnitTests/neo-vm.UnitTests.csproj);  fi
+#--------------------- CHANGE NEO-VM PATH TO LOCAL FILES -----------------
+
+#---------------------- NEO CORE LIB UNIT TESTS ---------------------------
+# Unit tests on Neo - echo "dotnet test --verbosity n /opt/neoLib/neo/neo.UnitTests/neo.UnitTests.csproj"
+RUN dotnet test --verbosity n /opt/neoLib/neo.UnitTests/neo.UnitTests.csproj
+#---------------------- NEO CORE LIB UNIT TESTS ---------------------------
 
 #==========================================================================
 
