@@ -1,6 +1,6 @@
 #!/bin/bash
-cd Teste
-BLOCK_CACHE=3
+cd Storage
+BLOCK_CACHE=1000
 
 for d in */ ; do # --------- Loop into directories ---------
     echo "$d"
@@ -16,7 +16,7 @@ for d in */ ; do # --------- Loop into directories ---------
             echo ""
 	    echo "new filename $filename"
 
-	    echo "block height is $blockHeightInit"
+	    #echo "block height is $blockHeightInit"
 	    rest=$((blockHeightInit % BLOCK_CACHE))
 	    echo "rest is $rest"
 	    if [ "$rest" -ne "0" ]; then # --------- Files needs to be merged ---------
@@ -55,7 +55,7 @@ for d in */ ; do # --------- Loop into directories ---------
 				echo ']' >> $d"dtemp_$blockHeight.json"
 				rm ${FILE_ARRAY[*]}
 				mv $d"dtemp_$blockHeight.json" $d"dump-block-$blockHeight.json"
-				rm $dtemp*
+				
 
 				
 
