@@ -1,4 +1,6 @@
 #!/bin/bash
+./rpc_stop.sh
+
 #Build ubuntu-dotnet
 (cd ../docker-ubuntu-dotnet; ./docker_build.sh)
 
