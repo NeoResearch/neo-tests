@@ -24,8 +24,8 @@ echo "BUILDING plugin SimplePolicy"
 echo "================================================"
 echo ""
 PLUGIN_TO_INCLUDE_I="SimplePolicy"
-dotnet publish /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj -o $PLUGIN_TO_INCLUDE_I -c Release -r ubuntu.16.04-x64 -f netstandard2.0
-cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.dll /opt/neo-cli/neo-cli/neo-cli/Plugins/
+#dotnet publish /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj -o $PLUGIN_TO_INCLUDE_I -c Release -r ubuntu.16.04-x64 -f netstandard2.0
+#cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.dll /opt/neo-cli/neo-cli/neo-cli/Plugins/
 
 echo ""
 echo "================================================"
@@ -33,8 +33,8 @@ echo "BUILDING plugin StatesDumper"
 echo "================================================"
 echo ""
 PLUGIN_TO_INCLUDE_I="StatesDumper"
-dotnet publish /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj -o $PLUGIN_TO_INCLUDE_I -c Release -r ubuntu.16.04-x64 -f netstandard2.0
-cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.dll /opt/neo-cli/neo-cli/neo-cli/Plugins/
+#dotnet publish /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj -o $PLUGIN_TO_INCLUDE_I -c Release -r ubuntu.16.04-x64 -f netstandard2.0
+#cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.dll /opt/neo-cli/neo-cli/neo-cli/Plugins/
 
 echo ""
 echo "================================================"
@@ -42,8 +42,8 @@ echo "BUILDING plugin ApplicationLogs"
 echo "================================================"
 echo ""
 PLUGIN_TO_INCLUDE_I="ApplicationLogs"
-dotnet publish /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj -o $PLUGIN_TO_INCLUDE_I -c Release -r ubuntu.16.04-x64 -f netstandard2.0
-cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.dll /opt/neo-cli/neo-cli/neo-cli/Plugins/
+#dotnet publish /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj -o $PLUGIN_TO_INCLUDE_I -c Release -r ubuntu.16.04-x64 -f netstandard2.0
+#cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.dll /opt/neo-cli/neo-cli/neo-cli/Plugins/
 
 echo ""
 echo "================================================"
@@ -51,8 +51,8 @@ echo "BUILDING plugin RpcSecurity"
 echo "================================================"
 echo ""
 PLUGIN_TO_INCLUDE_I="RpcSecurity"
-dotnet publish /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj -o $PLUGIN_TO_INCLUDE_I -c Release -r ubuntu.16.04-x64 -f netstandard2.0
-cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.dll /opt/neo-cli/neo-cli/neo-cli/Plugins/
+#dotnet publish /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj -o $PLUGIN_TO_INCLUDE_I -c Release -r ubuntu.16.04-x64 -f netstandard2.0
+#cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.dll /opt/neo-cli/neo-cli/neo-cli/Plugins/
 
 
 echo ""
@@ -61,8 +61,8 @@ echo "BUILDING plugin ImportBlocks"
 echo "================================================"
 echo ""
 PLUGIN_TO_INCLUDE_I="ImportBlocks"
-dotnet publish /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj -o $PLUGIN_TO_INCLUDE_I -c Release -r ubuntu.16.04-x64 -f netstandard2.0
-cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.dll /opt/neo-cli/neo-cli/neo-cli/Plugins/
+#dotnet publish /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.csproj -o $PLUGIN_TO_INCLUDE_I -c Release -r ubuntu.16.04-x64 -f netstandard2.0
+#cp -ri /opt/neo-plugins/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I/$PLUGIN_TO_INCLUDE_I.dll /opt/neo-cli/neo-cli/neo-cli/Plugins/
 
 # remove neo-cli package and reference to local neo
 echo ""
@@ -105,10 +105,22 @@ echo "dotnet test --verbosity n /opt/neo-plugins/SimplePolicy.UnitTests/SimplePo
 #dotnet test --verbosity n /opt/neo-plugins/SimplePolicy.UnitTests/SimplePolicy.UnitTests.csproj
 echo ""
 
+echo "ls /root/.nuget/packages"
+ls /root/.nuget/
+
+dotnet restore /opt/neo/neo.UnitTests/neo.UnitTests.csproj
+#dotnet restore /opt/neo/neo.Xunit/neo.Xunit.csproj
 
 echo ""
 echo "dotnet test --verbosity n /opt/neo/neo.UnitTests/neo.UnitTests.csproj"
-dotnet test --verbosity n /opt/neo/neo.UnitTests/neo.UnitTests.csproj
+#dotnet test --verbosity n --packages /opt/neo/packages /opt/neo/neo.UnitTests/neo.UnitTests.csproj
+(cd /opt/neo/ && dotnet test --verbosity n --no-restore neo.UnitTests/neo.UnitTests.csproj)
+echo ""
+
+echo ""
+echo "dotnet test --verbosity n /opt/neo/neo.Xunit/neo.Xunit.csproj"
+#dotnet test --verbosity n --packages /opt/neo/packages /opt/neo/neo.UnitTests/neo.UnitTests.csproj
+#(cd /opt/neo/ && dotnet test --verbosity n --no-restore neo.Xunit/neo.Xunit.csproj)
 echo ""
 
 
@@ -129,6 +141,6 @@ echo "==================================================="
 echo ""
 echo ""
 echo "dotnet publish /opt/neo-cli/neo-cli/neo-cli.csproj -o neo-cli -c Release -r ubuntu.16.04-x64"
-dotnet publish /opt/neo-cli/neo-cli/neo-cli.csproj -o neo-cli -c Release -r ubuntu.16.04-x64 && cd /opt/neo-cli/neo-cli && zip -r /opt/build/neo-cli-built.zip neo-cli && echo "generated package: ./build/neo-cli-built.zip"
+#dotnet publish /opt/neo-cli/neo-cli/neo-cli.csproj -o neo-cli -c Release -r ubuntu.16.04-x64 && cd /opt/neo-cli/neo-cli && zip -r /opt/build/neo-cli-built.zip neo-cli && echo "generated package: ./build/neo-cli-built.zip"
 
 echo "finished!"
