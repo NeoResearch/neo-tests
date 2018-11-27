@@ -23,7 +23,7 @@ services:
       - ./neo-cli/configs/plugins/appLogConfig.json:/opt/node/neo-cli/Plugins/ApplicationLogs/config.json
       - ./neo-cli/configs/plugins/importBlocks.json:/opt/node/neo-cli/Plugins/ImportBlocks/config.json
       - ./neo-cli/configs/plugins/rpcSecurity.json:/opt/node/neo-cli/Plugins/RpcSecurity/config.json
-      - ./neo-cli/configs/plugins/persistence.json:/opt/node/neo-cli/Plugins/Persistence/config.json
+      - ./neo-cli/configs/plugins/statesDumper.json:/opt/node/neo-cli/Plugins/StatesDumper/config.json
       - ./Chain:/opt/node/neo-cli/Chain_00746E41
       - ./Storage:/opt/node/neo-cli/Storage
       - ./chain.0.acc.zip:/opt/node/neo-cli/chain.0.acc.zip
