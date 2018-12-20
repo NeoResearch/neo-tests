@@ -33,6 +33,16 @@ services:
       IS_RPC: 1
       NUMBER_SERVER: 1
       DISABLE_NETWORK_P2P: 0
+    healthcheck:
+      test:
+        - CMD
+        - bash
+        - '-c'
+        - exec 6<>/dev/tcp/127.0.0.1/10333
+      interval: 15s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
 # ================================================================================
 # ======================= THANKS FOR CREATING ME =================================
 # ================================================================================
