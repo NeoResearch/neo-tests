@@ -1,10 +1,7 @@
 #!/bin/bash
 set -e
 
-echo "Building ubuntu-dotnet dependent image"
-(cd ../../docker-ubuntu-dotnet; ./docker_build.sh)
-
-NEO_CLI_VERSION="2.9.1-all-plugins"
+NEO_CLI_VERSION="2.9.4-all-plugins-commit-phase"
 
 function usage {
     echo "Usage: $0 [--no-cache] [--neo-cli <zip-fn>]"
