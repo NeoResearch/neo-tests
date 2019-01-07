@@ -1,5 +1,5 @@
 # Neo node Csharp builder with desired specifications
-FROM microsoft/dotnet:2.2-sdk
+FROM microsoft/dotnet:2.2-sdk-bionic
 LABEL maintainer="NeoResearch"
 
 RUN apt-get update \
