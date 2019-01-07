@@ -1,9 +1,10 @@
 # Neo node Csharp builder with desired specifications
-FROM ubuntu-dotnet:18.04-2.1.200
+FROM microsoft/dotnet:2.2-sdk
 LABEL maintainer="NeoResearch"
 
 RUN apt-get update \
     && apt-get install -y zip
+
 # Old packages - might useful
 #apt-utils mininet netcat  less  ca-certificates  sqlite3 libsqlite3-dev 
 
