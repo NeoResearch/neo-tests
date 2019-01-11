@@ -9,8 +9,8 @@ IMAGE_NAME="neo-opt-compiler"
 # diff neo-cli-274/Neo.hex neo-cli-built/Neo.hex (big difference perhaps...)
 
 
-NEO_BRANCH=consensus/commit_phase
-NEO_BRANCH_COMMIT=5aa4075
+NEO_BRANCH=master
+NEO_BRANCH_COMMIT=b9e38fca02c91533772bb3b01ad2e70403469d63
 NEO_URL=https://github.com/neo-project/neo.git
 
 NEO_CLI_BRANCH=master
