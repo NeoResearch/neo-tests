@@ -1,11 +1,12 @@
 # Neo-Cli builder with with modified Neo-Core libraries
-FROM ubuntu-dotnet:18.04-2.1.200
+#FROM ubuntu-dotnet:18.04-2.1.200
+FROM microsoft/dotnet:2.2-sdk-bionic
 LABEL maintainer="NeoResearch"
 
 # Install system dependencies. always should be done in one line
 # https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/#run
 RUN apt-get update \
-    && apt-get install -y apt-utils mininet netcat zip less ca-certificates apt-transport-https libleveldb-dev sqlite3 
+    && apt-get install -y apt-utils mininet netcat zip less ca-certificates apt-transport-https libleveldb-dev sqlite3
 
 # APT cleanup to reduce image size
 RUN rm -rf /var/lib/apt/lists/*
