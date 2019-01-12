@@ -1,9 +1,9 @@
 NEO_CLI_BLOCKCHAIN_URL=https://github.com/neo-project/neo-cli.git
 NEO_CLI_BRANCH=master
-NEO_CLI_COMMIT=251c9354a55940415f19665af10f3b745ad9ef3b 
+NEO_CLI_COMMIT=ad4c87e45284892d1f8f1d980bbb859c8ac0db78 
 NEO_BLOCKCHAIN_URL=https://github.com/neo-project/neo.git
 NEO_BLOCKCHAIN_BRANCH=consensus/commit_phase
-NEO_BLOCKCHAIN_COMMIT=9640c497f09fb1e72c8e61b794f4c0da5b8bfef2
+NEO_BLOCKCHAIN_COMMIT=c2a4ce5e5c43f00d347d8aec2cd964de9cc3ac68
 NEO_PLUGINS_URL=https://github.com/neo-project/neo-plugins.git
 NEO_PLUGINS_BRANCH=master
 NEO_PLUGINS_COMMIT=64826c08ae5c3b7017b2772811e65dfea67bbcf3

@@ -1,5 +1,5 @@
 # Neo-Cli builder with with modified Neo-Core libraries
-FROM ubuntu-dotnet:18.04-2.1.200
+FROM microsoft/dotnet:2.2-sdk-bionic
 LABEL maintainer="NeoResearch"
 
 # Install system dependencies. always should be done in one line
