@@ -1,5 +1,4 @@
 #!/bin/bash
-#!/bin/bash
 ./rpc_stop.sh
 
 #Build neo cli
