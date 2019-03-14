@@ -1,12 +1,12 @@
 NEO_CLI_BLOCKCHAIN_URL=https://github.com/neo-project/neo-cli.git
-NEO_CLI_BRANCH=fix-OnShowPoolCommand
-NEO_CLI_COMMIT=1b845bb1a7da0635de24492e80a56a7e88f83cac 
-NEO_BLOCKCHAIN_URL=https://github.com/neo-project/neo.git
-NEO_BLOCKCHAIN_BRANCH=master
-NEO_BLOCKCHAIN_COMMIT=bbbc0cf5e401e425e7d749f26b23b824953da10a
+NEO_CLI_BRANCH=master
+NEO_CLI_COMMIT=a13c959bf1d29c51c96395fcc414a557b045107a 
+NEO_BLOCKCHAIN_URL=https://github.com/igormcoelho/neo.git
+NEO_BLOCKCHAIN_BRANCH=state_context
+NEO_BLOCKCHAIN_COMMIT=2d6cea52b08fb9ef79e58107149670926379b2d7
 NEO_PLUGINS_URL=https://github.com/neo-project/neo-plugins.git
-NEO_PLUGINS_BRANCH=master
-NEO_PLUGINS_COMMIT=e41d3441d43d9813bf6fa2a401bcbb9fb9b5267c
+NEO_PLUGINS_BRANCH=FixSubscribeAppLogsOrder
+NEO_PLUGINS_COMMIT=27d34a8bacf39803770e96f17366c4b8c01b53db
 
 LOCAL_NEO_CLI_BLOCKCHAIN="false"
 LOCAL_NEO_CLI_BLOCKCHAIN_URL="localfiles/neo-cli"
@@ -22,10 +22,14 @@ NEO_VM_COMMIT=fa79898
 LOCAL_NEO_VM="false"
 LOCAL_NEO_VM_URL="localfiles/neo-vm"
 
+# 
 PLUGINS_LIST="
-SimplePolicy
 ApplicationLogs
+SimplePolicy
 StatesDumper
 ImportBlocks
 RpcSecurity
+RpcWallet
+RpcNep5Tracker
 "
+#RpcSystemAssetTracker
