@@ -96,7 +96,7 @@ echo ""
 ##              BUILD ALL PLUGINS              ##
 #################################################
 
-for PLUGIN_TO_INCLUDE_I in SimplePolicy StatesDumper ApplicationLogs RpcSecurity ImportBlocks; do
+for PLUGIN_TO_INCLUDE_I in ApplicationLogs ImportBlocks RpcNep5Tracker RpcSecurity RpcWallet SimplePolicy StatesDumper; do
   echo ""
   echo "================================================"
   echo "BUILDING plugin $PLUGIN_TO_INCLUDE_I"
