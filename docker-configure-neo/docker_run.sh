@@ -31,14 +31,14 @@ echo "(cd neo-cli && git pull origin $NEO_CLI_BRANCH  && git checkout $NEO_CLI_B
 (cd neo-cli && git checkout $NEO_CLI_BRANCH && git pull origin $NEO_CLI_BRANCH  && git checkout $NEO_CLI_BRANCH_COMMIT)
 
 echo "git clone -b $NEO_BRANCH $NEO_URL neo-core"
-git clone -b $NEO_BRANCH $NEO_URL neo-core
+#git clone -b $NEO_BRANCH $NEO_URL neo-core
 echo "(cd neo-core && git pull origin $NEO_BRANCH && git checkout $NEO_BRANCH_COMMIT)"
-(cd neo-core && git checkout $NEO_BRANCH && git pull origin $NEO_BRANCH && git checkout $NEO_BRANCH_COMMIT)
+#(cd neo-core && git checkout $NEO_BRANCH && git pull origin $NEO_BRANCH && git checkout $NEO_BRANCH_COMMIT)
 
 echo "git clone -b $NEO_PLUGINS_BRANCH $NEO_PLUGINS_URL neo-plugins"
-git clone -b $NEO_PLUGINS_BRANCH $NEO_PLUGINS_URL neo-plugins
+#git clone -b $NEO_PLUGINS_BRANCH $NEO_PLUGINS_URL neo-plugins
 echo "(cd neo-plugins && git pull origin $NEO_PLUGINS_BRANCH && git checkout $NEO_PLUGINS_BRANCH_COMMIT)"
-(cd neo-plugins && git checkout $NEO_PLUGINS_BRANCH && git pull origin $NEO_PLUGINS_BRANCH && git checkout $NEO_PLUGINS_BRANCH_COMMIT)
+#(cd neo-plugins && git checkout $NEO_PLUGINS_BRANCH && git pull origin $NEO_PLUGINS_BRANCH && git checkout $NEO_PLUGINS_BRANCH_COMMIT)
 
 echo "git clone -b $NEO_VM_BRANCH $NEO_VM_URL neo-vm"
 git clone -b $NEO_VM_BRANCH $NEO_VM_URL neo-vm
