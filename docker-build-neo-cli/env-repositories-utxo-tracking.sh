@@ -1,12 +1,12 @@
 NEO_CLI_BLOCKCHAIN_URL=https://github.com/neo-project/neo-cli.git
 NEO_CLI_BRANCH=master
-NEO_CLI_COMMIT=dd1bbe56db9f21423f391f7b1775cdcdd149f832
+NEO_CLI_COMMIT=60b49f65d89fc8dd5a6ddf521b84ed1427d561a8
 NEO_BLOCKCHAIN_URL=https://github.com/neo-project/neo.git
 NEO_BLOCKCHAIN_BRANCH=master
-NEO_BLOCKCHAIN_COMMIT=a5cd123fd57e38c790fe5bb06e45990cff74505b
+NEO_BLOCKCHAIN_COMMIT=fe1834ab7c28c7e8f31c11530867581933b81ec1
 NEO_PLUGINS_URL=https://github.com/neo-project/neo-plugins.git
 NEO_PLUGINS_BRANCH=RpcSystemAssetPlugin
-NEO_PLUGINS_COMMIT=d8ff18aae2d85e72f494c4bb9c83fa78362b3a04
+NEO_PLUGINS_COMMIT=4e57313eaafefb5ca22b3374899c6877b7b5c557
 
 LOCAL_NEO_CLI_BLOCKCHAIN="false"
 LOCAL_NEO_CLI_BLOCKCHAIN_URL="localfiles/neo-cli"
@@ -24,9 +24,10 @@ LOCAL_NEO_VM_URL="localfiles/neo-vm"
 
 PLUGINS_LIST="
 ApplicationLogs
+CoreMetrics
+ImportBlocks
 SimplePolicy
 StatesDumper
-ImportBlocks
 RpcSecurity
 RpcWallet
 RpcNep5Tracker
