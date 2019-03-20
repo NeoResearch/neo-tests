@@ -20,17 +20,9 @@ dotnet --info
 
 echo ""
 echo "dotnet test --verbosity v /opt/neo/neo.UnitTests/neo.UnitTests.csproj"
-#(cd /opt/neo/ && dotnet test --verbosity n neo.UnitTests/neo.UnitTests.csproj)
+(cd /opt/neo/ && dotnet test --verbosity n neo.UnitTests/neo.UnitTests.csproj)
 echo ""
 
-# ===============================
-#    UNIT TESTING CORE PROJECT (FAST)
-# ===============================
-
-echo ""
-echo "dotnet test --verbosity v /opt/neo/neo.UnitTests_fast/neo.UnitTests_fast.csproj"
-(cd /opt/neo/ && dotnet test --verbosity n neo.UnitTests_fast/neo.UnitTests_fast.csproj)
-echo ""
 
 exit 1
 
