@@ -20,8 +20,11 @@ dotnet --info
 
 echo ""
 echo "dotnet test --verbosity v /opt/neo/neo.UnitTests/neo.UnitTests.csproj"
-#(cd /opt/neo/ && dotnet test --verbosity n neo.UnitTests/neo.UnitTests.csproj)
+(cd /opt/neo/ && dotnet test --verbosity n neo.UnitTests/neo.UnitTests.csproj)
 echo ""
+
+
+exit 1
 
 #dotnet nuget locals --clear all
 
