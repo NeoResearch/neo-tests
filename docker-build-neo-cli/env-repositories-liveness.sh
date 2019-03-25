@@ -1,6 +1,6 @@
 NEO_CLI_BLOCKCHAIN_URL=https://github.com/neo-project/neo-cli.git
 NEO_CLI_BRANCH=master
-NEO_CLI_COMMIT=60b49f65d89fc8dd5a6ddf521b84ed1427d561a8 
+NEO_CLI_COMMIT=da2e921d9ba330e097e60fc86f46d9896a9575e0 
 NEO_BLOCKCHAIN_URL=https://github.com/neo-project/neo.git
 NEO_BLOCKCHAIN_BRANCH=consensus/liveness
 NEO_BLOCKCHAIN_COMMIT=23586db6c3086dc7a5ac9a75d9d8bc83e390b44d
