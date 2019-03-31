@@ -12,7 +12,7 @@ LOCAL_NEO_CLI_BLOCKCHAIN="false"
 LOCAL_NEO_CLI_BLOCKCHAIN_URL="localfiles/neo-cli"
 LOCAL_NEO_BLOCKCHAIN="true"
 LOCAL_NEO_BLOCKCHAIN_URL="localfiles/neo"
-LOCAL_NEO_PLUGINS="false"
+LOCAL_NEO_PLUGINS="true"
 LOCAL_NEO_PLUGINS_URL="localfiles/neo-plugins"
 
 SET_NEO_VM="false"
