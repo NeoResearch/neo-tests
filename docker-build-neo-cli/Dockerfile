@@ -5,10 +5,6 @@ LABEL maintainer="NeoResearch"
 RUN apt-get update \
     && apt-get install -y zip
 
-# Old packages - might useful
-#apt-utils mininet netcat  less  ca-certificates  sqlite3 libsqlite3-dev 
-
-
 # get repo, the arguments should be supplied when building using this Dockerfile
 ARG NEO_CLI_BLOCKCHAIN_URL
 ARG LOCAL_NEO_CLI_BLOCKCHAIN
@@ -83,7 +79,7 @@ RUN dotnet test --verbosity n /opt/neoLib/neo.UnitTests/neo.UnitTests.csproj
 #---------------------- NEO CORE LIB UNIT TESTS ---------------------------
 
 #---------------------- NEO VM UNIT TESTS---------------------------
-RUN if [ "$SET_NEO_VM" = "true" ] ; then (dotnet test --verbosity n /opt/neo-vm/src/neo-vm.UnitTests/neo-vm.UnitTests.csproj);  fi
+RUN if [ "$SET_NEO_VM" = "true" ] ; then (dotnet test --verbosity n /opt/neo-vm/tests/neo-vm.Tests/neo-vm.Tests.csproj);  fi
 #--------------------- CHANGE NEO-VM PATH TO LOCAL FILES -----------------
 
 
