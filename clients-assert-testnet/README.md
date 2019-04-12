@@ -1,12 +1,13 @@
 <p align="center">
     <img
-      src="http://res.cloudinary.com/dnh3we6el/image/upload/v1519941321/NeoResearch-Logo.png"
-      width="125px;">
+      src="https://github.com/NeoResearch/neoresearch.github.io/blob/master/assets/images/logo/Gemcut-butterfly/butterfly-banner.png?raw=true"
+      >
 </p>
 
-<h1 align="center">neo-simple-rpc-node</h1>
+<h1 align="center">neo-cli clients assert</h1>
 
-This is the basic template for starting a simple C# RPC node
+This is the basic template for asserting neo-cli differences.
+Currently, it is able to verify storage differences.
 
 **Guidelines**
 
