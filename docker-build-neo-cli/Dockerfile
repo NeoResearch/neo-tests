@@ -72,7 +72,9 @@ RUN dotnet add /opt/neoCli/neo-cli/neo-cli.csproj reference /opt/neoLib/neo/neo.
 # publish Neo-cli using defined NeoLib
 RUN dotnet publish /opt/neoCli/neo-cli/neo-cli.csproj -o neo-cli -c Release -r ubuntu.16.04-x64
 #--------------------------------------------------------------------------
+#============================== PUBLISH NEO-CLI ENDS ======================
 
+#============================== TESTS NEO AND NEO-TESTS ===================
 #---------------------- NEO CORE LIB UNIT TESTS ---------------------------
 # Unit tests on Neo - echo "dotnet test --verbosity n /opt/neoLib/neo/neo.UnitTests/neo.UnitTests.csproj"
 RUN dotnet test --verbosity n /opt/neoLib/neo.UnitTests/neo.UnitTests.csproj
@@ -81,8 +83,6 @@ RUN dotnet test --verbosity n /opt/neoLib/neo.UnitTests/neo.UnitTests.csproj
 #---------------------- NEO VM UNIT TESTS---------------------------
 RUN if [ "$SET_NEO_VM" = "true" ] ; then (dotnet test --verbosity n /opt/neo-vm/tests/neo-vm.Tests/neo-vm.Tests.csproj);  fi
 #--------------------- CHANGE NEO-VM PATH TO LOCAL FILES -----------------
-
-
 
 #==========================================================================
 

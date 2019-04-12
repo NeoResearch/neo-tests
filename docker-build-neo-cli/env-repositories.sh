@@ -17,8 +17,8 @@ LOCAL_NEO_PLUGINS_URL="localfiles/neo-plugins"
 
 SET_NEO_VM="true"
 NEO_VM_URL=https://github.com/neo-project/neo-vm.git
-NEO_VM_BRANCH=master
-NEO_VM_COMMIT=f0f80906f90b507ec7f1fa4c8d992ebe2487b869
+NEO_VM_BRANCH=compatibility/NUMEQUAL
+NEO_VM_COMMIT=51f59111f9b46ff9dd79cf644167caf936c85411
 LOCAL_NEO_VM="false"
 LOCAL_NEO_VM_URL="localfiles/neo-vm"
 
