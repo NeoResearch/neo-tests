@@ -21,8 +21,6 @@ services:
       - ./neo-cli/configs/plugins/importBlocks.json:/opt/node/neo-cli/Plugins/ImportBlocks/config.json
       - ./neo-cli/configs/plugins/rpcSecurity.json:/opt/node/neo-cli/Plugins/RpcSecurity/config.json
       - ./neo-cli/configs/plugins/statesDumper.json:/opt/node/neo-cli/Plugins/StatesDumper/config.json
-      - ./neo-cli/configs/plugins/rpcNep5Tracker.json:/opt/node/neo-cli/Plugins/RpcNep5Tracker/config.json
-      - ./neo-cli/configs/plugins/rpcSystemAssetTracker.json:/opt/node/neo-cli/Plugins/RpcSystemAssetTracker/config.json
       - ./ChainBase:/opt/node/neo-cli/Chain_74746E41
       - ./StorageBase:/opt/node/neo-cli/Storage
       - ./StorageNew:/opt/node/neo-cli/StorageComp
@@ -30,7 +28,7 @@ services:
       - ./healthcheckScript.sh:/opt/healthcheckScript.sh
     environment:
       IS_CONSENSUS: 0
-      IS_RPC: 1
+      IS_RPC: 0
       DISABLE_NETWORK_P2P: 0
     healthcheck:
       test:
@@ -57,8 +55,6 @@ services:
       - ./neo-cli/configs/plugins/importBlocks.json:/opt/node/neo-cli/Plugins/ImportBlocks/config.json
       - ./neo-cli/configs/plugins/rpcSecurity.json:/opt/node/neo-cli/Plugins/RpcSecurity/config.json
       - ./neo-cli/configs/plugins/statesDumper.json:/opt/node/neo-cli/Plugins/StatesDumper/config.json
-      - ./neo-cli/configs/plugins/rpcNep5Tracker.json:/opt/node/neo-cli/Plugins/RpcNep5Tracker/config.json
-      - ./neo-cli/configs/plugins/rpcSystemAssetTracker.json:/opt/node/neo-cli/Plugins/RpcSystemAssetTracker/config.json
       - ./ChainNew:/opt/node/neo-cli/Chain_74746E41
       - ./StorageNew:/opt/node/neo-cli/Storage
       - ./StorageBase:/opt/node/neo-cli/StorageComp
@@ -66,8 +62,8 @@ services:
       - ./healthcheckScript.sh:/opt/healthcheckScript.sh
     environment:
       IS_CONSENSUS: 0
-      IS_RPC: 1
-      DISABLE_NETWORK_P2P: 0
+      IS_RPC: 0
+      DISABLE_NETWORK_P2P: 1
     healthcheck:
       test:
         - CMD
