@@ -13,7 +13,6 @@ else
    exit 1;
 fi
 
-
 if diff -rq StorageNew StorageBase | grep -q diff
 then
    echo "Something is different"

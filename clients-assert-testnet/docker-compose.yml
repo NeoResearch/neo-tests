@@ -22,21 +22,22 @@ services:
       - ./neo-cli/configs/plugins/rpcSecurity.json:/opt/node/neo-cli/Plugins/RpcSecurity/config.json
       - ./neo-cli/configs/plugins/statesDumper.json:/opt/node/neo-cli/Plugins/StatesDumper/config.json
       - ./ChainBase:/opt/node/neo-cli/Chain_74746E41
+      - ./AppLogBase:/opt/node/neo-cli/ApplicationLogs_74746E41
       - ./StorageBase:/opt/node/neo-cli/Storage
       - ./StorageNew:/opt/node/neo-cli/StorageComp
-      - ./chain.acc.zip:/opt/node/neo-cli/chain.acc.zip
+      - ./chainBase.acc.zip:/opt/node/neo-cli/chain.acc.zip
       - ./healthcheckScript.sh:/opt/healthcheckScript.sh
     environment:
       IS_CONSENSUS: 0
       IS_RPC: 0
-      DISABLE_NETWORK_P2P: 0
+      DISABLE_NETWORK_P2P: 1
     healthcheck:
       test:
         - CMD
         - /opt/healthcheckScript.sh
-      interval: 15s
-      timeout: 10s
-      retries: 3
+      interval: 60s
+      timeout: 600s
+      retries: 2
       start_period: 15s
 
   eco-neo-csharp-node-assert-new-version:
@@ -56,9 +57,10 @@ services:
       - ./neo-cli/configs/plugins/rpcSecurity.json:/opt/node/neo-cli/Plugins/RpcSecurity/config.json
       - ./neo-cli/configs/plugins/statesDumper.json:/opt/node/neo-cli/Plugins/StatesDumper/config.json
       - ./ChainNew:/opt/node/neo-cli/Chain_74746E41
+      - ./AppLogNew:/opt/node/neo-cli/ApplicationLogs_74746E41
       - ./StorageNew:/opt/node/neo-cli/Storage
       - ./StorageBase:/opt/node/neo-cli/StorageComp
-      - ./chain.acc.zip:/opt/node/neo-cli/chain.acc.zip
+      - ./chainNew.acc.zip:/opt/node/neo-cli/chain.acc.zip
       - ./healthcheckScript.sh:/opt/healthcheckScript.sh
     environment:
       IS_CONSENSUS: 0
@@ -68,9 +70,9 @@ services:
       test:
         - CMD
         - /opt/healthcheckScript.sh
-      interval: 15s
-      timeout: 10s
-      retries: 3
+      interval: 60s
+      timeout: 600s
+      retries: 2
       start_period: 15s
 # ================================================================================
 # ======================= THANKS FOR CREATING ME =================================
