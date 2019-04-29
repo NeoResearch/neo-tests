@@ -27,6 +27,7 @@ services:
       - ./neo-cli/configs/plugins/rpcNep5Tracker.json:/opt/node/neo-cli/Plugins/RpcNep5Tracker/config.json
       - ./neo-cli/configs/plugins/rpcSystemAssetTracker.json:/opt/node/neo-cli/Plugins/RpcSystemAssetTracker/config.json
       - ./Chain_$NETWORK:/opt/node/neo-cli/Chain_${FOLDER_BEGIN}746E41
+      - ./AppLog_$NETWORK:/opt/node/neo-cli/AppLog_${FOLDER_BEGIN}746E41
       - ./Storage_$NETWORK:/opt/node/neo-cli/Storage
       - ./chain.acc.zip:/opt/node/neo-cli/chain.acc.zip
     environment:
