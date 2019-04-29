@@ -39,7 +39,7 @@ services:
         - CMD
         - bash
         - '-c'
-        - exec 6<>/dev/tcp/127.0.0.1/$PORT_BEGIN0333
+        - exec 6<>/dev/tcp/127.0.0.1/${PORT_BEGIN}0333
       interval: 15s
       timeout: 10s
       retries: 3
