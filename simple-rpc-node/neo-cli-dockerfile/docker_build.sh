@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-NEO_CLI_VERSION="2.10.1-all-plugins-preview-12-fiximport"
+NEO_CLI_VERSION="2.10.2-all-plugins-master2x"
 
 function usage {
     echo "Usage: $0 [--no-cache] [--neo-cli <zip-fn>]"

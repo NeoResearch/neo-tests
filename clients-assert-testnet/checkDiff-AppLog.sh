@@ -13,14 +13,14 @@ else
    exit 1;
 fi
 
-if diff -x '*.log' -rq AppLogNew AppLogBase | grep -q diff
+if diff -x 'LOG' -x 'MANIFEST*' -x 'CURRENT' -x 'LOCK' -rq AppLogNew AppLogBase | grep -q diff
 then
    echo "Something is different"
-   diff -x '*.log' -rq AppLogNew AppLogBase | grep diff
+   diff -x 'LOG' -x 'MANIFEST*' -x 'CURRENT' -x 'LOCK' -rq AppLogNew AppLogBase | grep diff
    #exit 1;
 else
    echo "Nothing looks different"
    #exit 0;
 fi
 
-# diff -x '*.ldb' -rq ChainNew ChainBase | grep diff
+# diff -x 'LOG' -x 'MANIFEST*' -x 'CURRENT' -x 'LOCK' -rq ChainNew ChainBase | grep diff

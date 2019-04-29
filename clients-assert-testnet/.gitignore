@@ -1,7 +1,8 @@
 *.zip
 logs-*
 Chain*
-chain.acc
+AppLog*
+*chain.acc*
 *.acc
 Storage*
 Teste

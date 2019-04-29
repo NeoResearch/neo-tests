@@ -25,7 +25,7 @@ services:
       - ./AppLogBase:/opt/node/neo-cli/ApplicationLogs_74746E41
       - ./StorageBase:/opt/node/neo-cli/Storage
       - ./StorageNew:/opt/node/neo-cli/StorageComp
-      - ./chainBase.acc.zip:/opt/node/neo-cli/chain.acc.zip
+      - ./chain.acc.zip:/opt/node/neo-cli/chain.acc.zip
       - ./healthcheckScript.sh:/opt/healthcheckScript.sh
     environment:
       IS_CONSENSUS: 0
@@ -60,7 +60,7 @@ services:
       - ./AppLogNew:/opt/node/neo-cli/ApplicationLogs_74746E41
       - ./StorageNew:/opt/node/neo-cli/Storage
       - ./StorageBase:/opt/node/neo-cli/StorageComp
-      - ./chainNew.acc.zip:/opt/node/neo-cli/chain.acc.zip
+      - ./chain.acc.zip:/opt/node/neo-cli/chain.acc.zip
       - ./healthcheckScript.sh:/opt/healthcheckScript.sh
     environment:
       IS_CONSENSUS: 0
