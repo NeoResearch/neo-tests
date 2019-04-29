@@ -2,7 +2,7 @@
   "PluginConfiguration": {
     "PersistAction": "StorageChanges",
     "BlockCacheSize": 1000,
-    "HeightToBegin": 3450000,
-    "HeightToStartRealTimeSyncing": 3450000
+    "HeightToBegin": 0,
+    "HeightToStartRealTimeSyncing": 0
   }
 }

@@ -34,7 +34,7 @@ while [[ "$#" > 0 ]]; do case $1 in
   esac;
 done
 
-BASE_NAME="eco-neo-csharp-node-mainnet"
+BASE_NAME="eco-neo-csharp-simple-node"
 IMAGE_NAME="$BASE_NAME:$NEO_CLI_VERSION"
 
 # Definition of standard neo-cli filenames and URL based on the version

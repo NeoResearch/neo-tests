@@ -1,1 +1,0 @@
-7 */12 * * * /root/neo-tests/simple-rpc-node/merge_Storage.sh >/root/output_cron_merge.log 2>&1
