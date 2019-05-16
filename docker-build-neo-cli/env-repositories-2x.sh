@@ -1,5 +1,5 @@
 NEO_CLI_BLOCKCHAIN_URL=https://github.com/neo-project/neo-cli.git
-NEO_CLI_BRANCH=master-2x
+NEO_CLI_BRANCH=master-2.x
 NEO_CLI_COMMIT=55df26b1c41a2550b1f84cac44337a9dec885ed5 
 NEO_BLOCKCHAIN_URL=https://github.com/neo-project/neo.git
 NEO_BLOCKCHAIN_BRANCH=master-2.x
