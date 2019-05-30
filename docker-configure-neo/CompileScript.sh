@@ -19,6 +19,23 @@ dotnet --info
 # ===============================
 
 echo ""
+echo "dotnet test Plugins "
+#(cd /opt/neo-vm/tests/ && dotnet test --verbosity n neo-vm.Tests/neo-vm.Tests.csproj)
+(cd /opt/neo-plugins/SimplePolicy.UnitTests/ && dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover --verbosity n SimplePolicy.UnitTests.csproj)
+echo ""
+
+exit 1
+
+echo ""
+echo "dotnet test VM "
+#(cd /opt/neo-vm/tests/ && dotnet test --verbosity n neo-vm.Tests/neo-vm.Tests.csproj)
+(cd /opt/neo-vm/tests/ && dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover --verbosity n neo-vm.Tests/neo-vm.Tests.csproj)
+echo ""
+
+exit 1
+
+
+echo ""
 echo "dotnet test --verbosity v /opt/neo/neo.UnitTests/neo.UnitTests.csproj"
 (cd /opt/neo/ && dotnet test --verbosity n neo.UnitTests/neo.UnitTests.csproj)
 echo ""
