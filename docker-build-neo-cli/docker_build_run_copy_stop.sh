@@ -3,10 +3,11 @@
 # Build new neo-cli using new files of neo-blockchain
 #
 GETONLINEGITHUB=0
+NEO2X=0
 ENVFILE="env-repositories.sh"
 
 function usage {
-    echo "Usage: $0 [--github] [--envfile <env.sh>]"
+    echo "Usage: $0 [--github] [--envfile <env.sh>] [--neo2x]"
 }
 
 while [[ "$#" > 0 ]]; do case $1 in
@@ -23,6 +24,11 @@ while [[ "$#" > 0 ]]; do case $1 in
             usage
             exit 1
         fi
+        shift; shift
+        ;;
+    --neo2x)
+	echo "Building NEO2X";
+        NEO2X=1
         shift; shift
         ;;
     *)
@@ -64,9 +70,15 @@ CONTAINER_NAME="neo-build-neo-cli-with-new-blockchain-csharp"
 echo "Delete previous .zip"
 rm *.zip
 
+DOCKERFILE="./Dockerfile"
+
+if ((!$NEO2X)); then
+	DOCKERFILE="./Dockerfile_2x"
+fi
+
 echo "BUILDING neo cli with personalized characteristics..."
 if [[ "$#" > 0 ]]; then
-	docker build $ARGS --file $1 -t $CONTAINER_NAME:latest .
+	docker build $ARGS --file $1 -t $CONTAINER_NAME:latest -f $DOCKERFILE
 else
 	docker build $ARGS -t $CONTAINER_NAME:latest .
 fi
