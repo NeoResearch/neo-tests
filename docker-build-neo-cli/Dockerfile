@@ -75,7 +75,7 @@ RUN dotnet test --verbosity n /opt/neoLib/tests/neo.UnitTests/neo.UnitTests.cspr
 
 #--------------------------------------------------------------------------
 # publish Neo-cli using defined NeoLib
-RUN dotnet publish /opt/neoNode/neo-cli/neo-cli.csproj -o neo-cli -c Release -r ubuntu.16.04-x64
+RUN dotnet publish /opt/neoNode/neo-cli/neo-cli.csproj -o neo-cli -c Release
 #--------------------------------------------------------------------------
 #============================== PUBLISH NEO-CLI ENDS ======================
 
