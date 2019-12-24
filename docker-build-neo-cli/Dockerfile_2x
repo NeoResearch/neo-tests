@@ -105,12 +105,12 @@ RUN mkdir /opt/tempLocal_neo-plugins
 ADD $LOCAL_NEO_PLUGINS_URL /opt/tempLocal_neo-plugins
 RUN if [ "$LOCAL_NEO_PLUGINS" = "true" ] ; then (rm -rf /opt/neo-plugins; mv /opt/tempLocal_neo-plugins /opt/neo-plugins);  fi
 #--------------------------------------------------------------------------
-ADD building_scripts/build_plugin.sh /opt/
-ADD building_scripts/buildAllList_Plugins.sh /opt/
+ADD building_scripts/2x/build_plugin_2x.sh /opt/
+ADD building_scripts/2x/buildAllList_Plugins_2x.sh /opt/
 
 ARG ENVFILE
 ADD $ENVFILE /opt/env-repositories.sh
-RUN /opt/buildAllList_Plugins.sh
+RUN /opt/buildAllList_Plugins_2x.sh
 
 # TODO - Compile and include other plugins
 # RUN mkdir /opt/neoCli/neo-cli/neo-cli/Plugins-disabled/

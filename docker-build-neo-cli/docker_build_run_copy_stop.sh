@@ -3,7 +3,7 @@
 # Build new neo-cli using new files of neo-blockchain
 #
 GETONLINEGITHUB=0
-NEO2X=0
+NEO2X="false"
 ENVFILE="env-repositories.sh"
 
 function usage {
@@ -28,7 +28,7 @@ while [[ "$#" > 0 ]]; do case $1 in
         ;;
     --neo2x)
 	echo "Building NEO2X";
-        NEO2X=1
+        NEO2X="true"
         shift; shift
         ;;
     *)
@@ -72,16 +72,12 @@ rm *.zip
 
 DOCKERFILE="./Dockerfile"
 
-if ((!$NEO2X)); then
+if [ "$NEO2X" == "true" ] ; then
 	DOCKERFILE="./Dockerfile_2x"
 fi
 
-echo "BUILDING neo cli with personalized characteristics..."
-if [[ "$#" > 0 ]]; then
-	docker build $ARGS --file $1 -t $CONTAINER_NAME:latest -f $DOCKERFILE
-else
-	docker build $ARGS -t $CONTAINER_NAME:latest .
-fi
+echo "BUILDING neo cli with personalized characteristics... $DOCKERFILE"
+docker build $ARGS -t $CONTAINER_NAME:latest -f $DOCKERFILE .
 
 res=$?
 if [ $res = 1 ]; then
