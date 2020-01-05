@@ -5,6 +5,8 @@ LABEL maintainer="NeoResearch"
 RUN apt-get update \
     && apt-get install -y zip
 
+#==========================================================================
+#============== CLONING NEO-CORE & NEO-NODE ===============================
 # get repo, the arguments should be supplied when building using this Dockerfile
 ARG NEO_CLI_BLOCKCHAIN_URL
 ARG LOCAL_NEO_CLI_BLOCKCHAIN
@@ -23,9 +25,11 @@ RUN if [ "$LOCAL_NEO_CLI_BLOCKCHAIN" = "false" ] ; then (cd /opt/neoNode && git 
 ARG NEO_BLOCKCHAIN_BRANCH
 ARG NEO_BLOCKCHAIN_COMMIT
 RUN if [ "$LOCAL_NEO_BLOCKCHAIN" = "false" ] ; then (cd /opt/neoLib && git pull && git checkout $NEO_BLOCKCHAIN_BRANCH && git checkout $NEO_BLOCKCHAIN_COMMIT);  fi
+#==========================================================================
+#==========================================================================
 
 #==========================================================================
-#============== EXAMPLES FOR CHANGING FILES WITH LOCAL FILES ==============
+#============== CHANGING DOCKER FOLDER TO A LOCAL FILE ====================
 ARG LOCAL_NEO_CLI_BLOCKCHAIN_URL
 RUN mkdir /opt/tempLocal_neoNode
 RUN mkdir /opt/tempLocal_neoLib
@@ -37,9 +41,6 @@ ADD $LOCAL_NEO_BLOCKCHAIN_URL /opt/tempLocal_neoLib
 RUN if [ "$LOCAL_NEO_BLOCKCHAIN" = "true" ] ; then (rm -rf /opt/neoLib/; mv /opt/tempLocal_neoLib /opt/neoLib);  fi
 #==========================================================================
 #==========================================================================
-
-#==========================================================================
-#============================== PUBLISH NEO-CLI ===========================
 
 #--------------------- CHANGE NEO-VM PATH TO LOCAL FILES -----------------
 # NEO-VM special configurations
@@ -65,28 +66,30 @@ RUN if [ "$SET_NEO_VM" = "true" ] && [ "$LOCAL_NEO_VM" = "true" ] ; then (rm -rf
 RUN dotnet remove /opt/neoNode/neo-cli/neo-cli.csproj package neo
 RUN dotnet sln /opt/neoNode/neo-node.sln add /opt/neoLib/src/neo/neo.csproj
 RUN dotnet add /opt/neoNode/neo-cli/neo-cli.csproj reference /opt/neoLib/src/neo/neo.csproj
+RUN cat /opt/neoNode/neo-cli/neo-cli.csproj
 #--------------------------------------------------------------------------
 
-#============================== TESTS NEO AND NEO-TESTS ===================
 #---------------------- NEO CORE LIB UNIT TESTS ---------------------------
 # Unit tests on Neo - echo "dotnet test --verbosity n /opt/neoLib/neo/tests/neo.UnitTests/neo.UnitTests.csproj"
 RUN dotnet test --verbosity n /opt/neoLib/tests/neo.UnitTests/neo.UnitTests.csproj
 #---------------------- NEO CORE LIB UNIT TESTS ---------------------------
 
+#==========================================================================
+#============================== PUBLISH NEO-CLI ===========================
 #--------------------------------------------------------------------------
 # publish Neo-cli using defined NeoLib
-RUN dotnet publish /opt/neoNode/neo-cli/neo-cli.csproj -o neo-cli -c Release
+RUN cp /opt/neoNode/NuGet.Config /opt/neoNode/neo-cli
+RUN cd /opt/neoNode/neo-cli && dotnet restore && dotnet publish -c Release -o /app
+RUN mv /app/* /opt/neoNode/neo-cli/
 #--------------------------------------------------------------------------
-#============================== PUBLISH NEO-CLI ENDS ======================
+#==========================================================================
 
 #---------------------- NEO VM UNIT TESTS---------------------------
 RUN if [ "$SET_NEO_VM" = "true" ] ; then (dotnet test --verbosity n /opt/neo-vm/tests/neo-vm.Tests/neo-vm.Tests.csproj);  fi
 #--------------------- CHANGE NEO-VM PATH TO LOCAL FILES -----------------
 
 #==========================================================================
-
-#==========================================================================
-#=================== PUBLISHING AND ADDING PLUGINS DLL'S ==================
+#============= CLONING, PUBLISHING AND ADDING PLUGINS DLL'S ===============
 RUN mkdir /opt/neoNode/neo-cli/Plugins/
 RUN mkdir /opt/neo-plugins 
 
@@ -98,27 +101,31 @@ ARG NEO_PLUGINS_BRANCH
 ARG NEO_PLUGINS_COMMIT
 RUN if [ "$LOCAL_NEO_PLUGINS" = "false" ] ; then (cd /opt/neo-plugins && git pull && git checkout $NEO_PLUGINS_BRANCH && git checkout $NEO_PLUGINS_COMMIT);  fi
 #--------------------------------------------------------------------------
+
 #--------------------- CHANGE PLUGINS PATH TO LOCAL FILES -----------------
 ARG LOCAL_NEO_PLUGINS_URL
 RUN mkdir /opt/tempLocal_neo-plugins
 ADD $LOCAL_NEO_PLUGINS_URL /opt/tempLocal_neo-plugins
 RUN if [ "$LOCAL_NEO_PLUGINS" = "true" ] ; then (rm -rf /opt/neo-plugins; mv /opt/tempLocal_neo-plugins /opt/neo-plugins);  fi
 #--------------------------------------------------------------------------
+
+#-------- FILES FOR BUILDING & TESTING PUGLINS ----------------------------
 ADD building_scripts/build_plugin_3x.sh /opt/
 ADD building_scripts/test_module_3x.sh /opt/
 ADD building_scripts/buildAllList_Plugins_3x.sh /opt/
+#--------------------------------------------------------------------------
 
+#-------- PLUGINS TO BE PUBLISHED & TESTED ARE LISTED BELOW ---------------
 ARG ENVFILE
 ADD $ENVFILE /opt/env-repositories.sh
-RUN /opt/buildAllList_Plugins_3x.sh
+#--------------------------------------------------------------------------
 
-# TODO - Compile and include other plugins
-# RUN mkdir /opt/neoNode/neo-cli/neo-cli/Plugins-disabled/
+RUN /opt/buildAllList_Plugins_3x.sh
 #==========================================================================
 
 #==========================================================================
 #============ COMPACT NEO-CLI IN A ZIP FILE  ==============================
-RUN cd /opt/neoNode/neo-cli && zip -r /opt/neo-cli-built.zip neo-cli
+RUN cd /opt/neoNode && ls && zip -r /opt/neo-cli-built.zip neo-cli
 #==========================================================================
 
 # ALL NIGHT LONG - STAY ALIVE

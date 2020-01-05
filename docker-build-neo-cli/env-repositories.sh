@@ -1,12 +1,12 @@
-# https://github.com/neo-project/neo-cli/commits/master
+# https://github.com/neo-project/neo-node/commits/master
 NEO_CLI_BLOCKCHAIN_URL=https://github.com/neo-project/neo-node.git
 NEO_CLI_BRANCH=master
-NEO_CLI_COMMIT=0b439ab2354f09ff67c4aa24093c896e4b0b4ae8
+NEO_CLI_COMMIT=e6973a126c112eaba0e2645991f3947fae516378
 
 # https://github.com/neo-project/neo/commits/master
 NEO_BLOCKCHAIN_URL=https://github.com/neo-project/neo.git
 NEO_BLOCKCHAIN_BRANCH=master
-NEO_BLOCKCHAIN_COMMIT=44e7f3b715aedcef10f2cfb369ccca3ee0a5bcd2
+NEO_BLOCKCHAIN_COMMIT=a3759db4a41c7fb545a4e12e389bd6914d8463ec
 
 # https://github.com/neo-project/neo-modules/commits/master
 NEO_PLUGINS_URL=https://github.com/neo-project/neo-modules.git
