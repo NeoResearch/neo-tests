@@ -17,7 +17,7 @@ while [[ "$#" > 0 ]]; do case $1 in
         shift; shift
         ;;
     --delete-neo-ref)
-	echo "Setting to delete reference of not $3";
+	echo "OPTION TO DELETE NEO REFERENCE: $3";
         DELETE_NEO_REF=$3
         shift; shift
         ;;
@@ -29,7 +29,6 @@ while [[ "$#" > 0 ]]; do case $1 in
 done
 
 dotnet remove /opt/neo-plugins/src/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj package neo
-dotnet sln /opt/neoNode/neo-node.sln add /opt/neo-plugins/src/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj
 dotnet add /opt/neo-plugins/src/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj reference /opt/neoLib/src/neo/neo.csproj
 dotnet publish /opt/neo-plugins/src/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj -o $PLUGIN_TO_INCLUDE -c Release
 
@@ -46,4 +45,5 @@ if [ ! -f /opt/neo-plugins/src/$PLUGIN_TO_INCLUDE/$BUILD_FOLDER/$PLUGIN_TO_INCLU
     exit 1
 fi
 
-#cp -ri /opt/neo-plugins/src/$PLUGIN_TO_INCLUDE/$BUILD_FOLDER/$PLUGIN_TO_INCLUDE.dll /opt/neoNode/neo-cli/neo-cli/Plugins/
+echo "Going to copy file /opt/neo-plugins/src/$PLUGIN_TO_INCLUDE/$BUILD_FOLDER/$PLUGIN_TO_INCLUDE.dll TO /opt/neoNode/neo-cli/Plugins/"
+cp -ri /opt/neo-plugins/src/$PLUGIN_TO_INCLUDE/$BUILD_FOLDER/$PLUGIN_TO_INCLUDE.dll /opt/neoNode/neo-cli/Plugins/

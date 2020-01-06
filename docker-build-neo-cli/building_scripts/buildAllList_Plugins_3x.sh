@@ -1,10 +1,10 @@
 #!/bin/bash
 source /opt/env-repositories.sh
 
-for i in "${PLUGINS_LIST_NEO_PACKAGE[@]}";
+for i in "${PLUGINS_LIST_NEO_PACKAGE[@]}"
 do 
-	echo "Going to build plugin ${PLUGINS_LIST_NEO_PACKAGE[i]}"
-	/opt/build_plugin_3x.sh --plugin-name ${PLUGINS_LIST_NEO_PACKAGE[i]} --delete-neo-ref 1
+	echo "Going to build plugin ${i}"
+	/opt/build_plugin_3x.sh --plugin-name ${i}
 	res=$?
 	if [ $res = 1 ]; then
 	    echo "Going to exit because last return is $res"
@@ -12,10 +12,10 @@ do
 	fi
 done
 
-for i in "${PLUGINS_LIST_NO_NEO_PACKAGE[@]}";
+for i in "${PLUGINS_LIST_NO_NEO_PACKAGE[@]}"
 do 
-	echo "Going to build plugin ${PLUGINS_LIST_NO_NEO_PACKAGE[i]}"
-	/opt/build_plugin_3x.sh --plugin-name ${PLUGINS_LIST_NO_NEO_PACKAGE[i]} --delete-neo-ref 0
+	echo "Going to build plugin ${i}"
+	/opt/build_plugin_3x.sh --plugin-name ${i}
 	res=$?
 	if [ $res = 1 ]; then
 	    echo "Going to exit because last return is $res"
@@ -23,10 +23,10 @@ do
 	fi
 done
 
-for i in "${PLUGINS_UT_LIST[@]}";
+for i in "${PLUGINS_UT_LIST[@]}"
 do 
-	echo "Going to call test ${PLUGINS_UT_LIST[i]}"
-	/opt/test_plugin_3x.sh --module-test-name ${PLUGINS_UT_LIST[i]}
+	echo "Going to call test ${i}"
+	/opt/test_plugin_3x.sh --module-test-name ${i}
 	res=$?
 	if [ $res = 1 ]; then
 	    echo "Going to exit because last return is $res"

@@ -125,7 +125,7 @@ RUN /opt/buildAllList_Plugins_3x.sh
 
 #==========================================================================
 #============ COMPACT NEO-CLI IN A ZIP FILE  ==============================
-RUN cd /opt/neoNode && ls && zip -r /opt/neo-cli-built.zip neo-cli
+RUN cd /opt/neoNode && zip -r /opt/neo-cli-built.zip neo-cli
 #==========================================================================
 
 # ALL NIGHT LONG - STAY ALIVE
