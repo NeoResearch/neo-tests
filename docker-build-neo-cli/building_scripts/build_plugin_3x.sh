@@ -12,7 +12,7 @@ while [[ "$#" > 0 ]]; do case $1 in
         exit 0
         ;;
     --plugin-name)
-	echo "Getting plugin name as parameter $2";
+	echo "GETTING PLUGIN NAME AS PARAMETER $2";
         PLUGIN_TO_INCLUDE=$2
         shift; shift
         ;;

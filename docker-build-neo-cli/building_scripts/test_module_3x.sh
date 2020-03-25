@@ -11,7 +11,7 @@ while [[ "$#" > 0 ]]; do case $1 in
         exit 0
         ;;
     --module-test-name)
-	echo "Getting plugin name as parameter $2";
+	echo "GETTING PLUGIN TEST NAME AS PARAMETER $2";
         MODULE_TEST_TO_INCLUDE=$2
         shift; shift
         ;;
