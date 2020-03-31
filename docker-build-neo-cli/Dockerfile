@@ -1,5 +1,5 @@
 # Neo node Csharp builder with desired specifications
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1-bionic
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1.201-bionic
 LABEL maintainer="NeoResearch"
 
 RUN apt-get update \
@@ -66,12 +66,11 @@ RUN if [ "$SET_NEO_VM" = "true" ] && [ "$LOCAL_NEO_VM" = "true" ] ; then (rm -rf
 RUN dotnet remove /opt/neoNode/neo-cli/neo-cli.csproj package neo
 RUN dotnet sln /opt/neoNode/neo-node.sln add /opt/neoLib/src/neo/neo.csproj
 RUN dotnet add /opt/neoNode/neo-cli/neo-cli.csproj reference /opt/neoLib/src/neo/neo.csproj
-RUN cat /opt/neoNode/neo-cli/neo-cli.csproj
 #--------------------------------------------------------------------------
 
 #---------------------- NEO CORE LIB UNIT TESTS ---------------------------
 # Unit tests on Neo - echo "dotnet test --verbosity n /opt/neoLib/neo/tests/neo.UnitTests/neo.UnitTests.csproj"
-RUN dotnet test --verbosity n /opt/neoLib/tests/neo.UnitTests/neo.UnitTests.csproj
+RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then (dotnet test --verbosity n /opt/neoLib/tests/neo.UnitTests/neo.UnitTests.csproj);  fi
 #---------------------- NEO CORE LIB UNIT TESTS ---------------------------
 
 #==========================================================================

@@ -30,20 +30,17 @@ done
 
 dotnet remove /opt/neo-plugins/src/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj package neo
 dotnet add /opt/neo-plugins/src/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj reference /opt/neoLib/src/neo/neo.csproj
-dotnet publish /opt/neo-plugins/src/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj -o $PLUGIN_TO_INCLUDE -c Release
+dotnet publish /opt/neo-plugins/src/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj -c Release -o /opt/neo-plugins/src/$PLUGIN_TO_INCLUDE/app
 
-#ls /opt/neo-plugins/src/$PLUGIN_TO_INCLUDE
-#ls /opt/neo-plugins/src/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE
-#ls /opt/neo-plugins/src/$PLUGIN_TO_INCLUDE/bin/Release
-#ls /opt/neo-plugins/src/$PLUGIN_TO_INCLUDE/bin/Release/netstandard2.1/
-#ls /opt/neo-plugins/src/$PLUGIN_TO_INCLUDE/bin/Release/netstandard2.1/ubuntu.18.04-x64
+if [ "$PLUGIN_TO_INCLUDE" = "RpcServer" ]; then
+   echo "Going to copy file Microsoft.AspNetCore.ResponseCompression.dll because RpcServer needs it together."
+   cp -ri /opt/neo-plugins/src/$PLUGIN_TO_INCLUDE/app/Microsoft.AspNetCore.ResponseCompression.dll /opt/neoNode/neo-cli/Plugins/
+fi
 
-BUILD_FOLDER=bin/Release/netstandard2.1
-
-if [ ! -f /opt/neo-plugins/src/$PLUGIN_TO_INCLUDE/$BUILD_FOLDER/$PLUGIN_TO_INCLUDE.dll ]; then
+if [ ! -f /opt/neo-plugins/src/$PLUGIN_TO_INCLUDE/app/$PLUGIN_TO_INCLUDE.dll ]; then
     echo "File does not exist"
     exit 1
 fi
 
-echo "Going to copy file /opt/neo-plugins/src/$PLUGIN_TO_INCLUDE/$BUILD_FOLDER/$PLUGIN_TO_INCLUDE.dll TO /opt/neoNode/neo-cli/Plugins/"
-cp -ri /opt/neo-plugins/src/$PLUGIN_TO_INCLUDE/$BUILD_FOLDER/$PLUGIN_TO_INCLUDE.dll /opt/neoNode/neo-cli/Plugins/
+echo "Going to copy file /opt/neo-plugins/src/$PLUGIN_TO_INCLUDE/app/$PLUGIN_TO_INCLUDE.dll TO /opt/neoNode/neo-cli/Plugins/"
+cp -ri /opt/neo-plugins/src/$PLUGIN_TO_INCLUDE/app/$PLUGIN_TO_INCLUDE.dll /opt/neoNode/neo-cli/Plugins/
