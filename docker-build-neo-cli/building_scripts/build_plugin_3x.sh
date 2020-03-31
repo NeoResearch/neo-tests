@@ -1,6 +1,6 @@
 #!/bin/bash
 PLUGIN_TO_INCLUDE=1
-DELETE_NEO_REF=1
+DELETE_NEO_REF="true"
 
 function usage {
     echo "Usage: $0 [--plugin-name <plugin to build> --delete-neo-ref <bool>]"
@@ -17,8 +17,8 @@ while [[ "$#" > 0 ]]; do case $1 in
         shift; shift
         ;;
     --delete-neo-ref)
-	echo "OPTION TO DELETE NEO REFERENCE: $3";
-        DELETE_NEO_REF=$3
+	echo "SETTING TO FALSE THE OPTION TO REPLACE NEO REFERECE: $3";
+        DELETE_NEO_REF="false"
         shift; shift
         ;;
     *)
@@ -28,8 +28,14 @@ while [[ "$#" > 0 ]]; do case $1 in
   esac;
 done
 
-dotnet remove /opt/neo-plugins/src/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj package neo
-dotnet add /opt/neo-plugins/src/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj reference /opt/neoLib/src/neo/neo.csproj
+if [ "$DELETE_NEO_REF" = "true" ]; then
+        echo "GOING TO REPLACE NEO REFERENCE AND SET TO LOCAL NEO-CORE LIBRARY."
+	dotnet remove /opt/neo-plugins/src/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj package neo
+	dotnet add /opt/neo-plugins/src/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj reference /opt/neoLib/src/neo/neo.csproj
+fi
+
+echo "GOING TO PUBLISH..."
+echo ""
 dotnet publish /opt/neo-plugins/src/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj -c Release -o /opt/neo-plugins/src/$PLUGIN_TO_INCLUDE/app
 
 if [ "$PLUGIN_TO_INCLUDE" = "RpcServer" ]; then

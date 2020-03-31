@@ -17,7 +17,6 @@ LOCAL_NEO_CLI_BLOCKCHAIN="false"
 LOCAL_NEO_CLI_BLOCKCHAIN_URL="localfiles/neo-cli"
 LOCAL_NEO_BLOCKCHAIN="false"
 LOCAL_NEO_BLOCKCHAIN_URL="localfiles/neo"
-NEO_BLOCKCHAIN_RUN_TESTS="false"
 LOCAL_NEO_PLUGINS="true"
 LOCAL_NEO_PLUGINS_URL="localfiles/neo-modules-betty"
 
@@ -32,5 +31,7 @@ LOCAL_NEO_VM_URL="localfiles/neo-vm"
 
 PLUGINS_LIST_NEO_PACKAGE=(RpcServer RpcClient LevelDBStore RocksDBStore StatesDumper SystemLog)
 PLUGINS_LIST_NO_NEO_PACKAGE=(ApplicationLogs RpcNep5Tracker)
-MODULES_UT_LIST=(Neo.Network.RPC.Tests Neo.Plugins.Storage.Tests)
-#RpcClient
+PLUGINS_UT_LIST=(Neo.Network.RPC.Tests Neo.Plugins.Storage.Tests)
+
+NEO_BLOCKCHAIN_RUN_TESTS="false"
+PLUGINS_RUN_TESTS="false"

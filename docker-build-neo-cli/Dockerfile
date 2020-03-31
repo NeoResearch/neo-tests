@@ -2,8 +2,9 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1.201-bionic
 LABEL maintainer="NeoResearch"
 
+# libleveldb-dev libsnappy-dev libc6-dev are used for testing Neo.Plugins.Storage.Tests
 RUN apt-get update \
-    && apt-get install -y zip
+    && apt-get install -y zip libleveldb-dev libsnappy-dev libc6-dev
 
 #==========================================================================
 #============== CLONING NEO-CORE & NEO-NODE ===============================
@@ -110,7 +111,7 @@ RUN if [ "$LOCAL_NEO_PLUGINS" = "true" ] ; then (rm -rf /opt/neo-plugins; mv /op
 
 #-------- FILES FOR BUILDING & TESTING PUGLINS ----------------------------
 ADD building_scripts/build_plugin_3x.sh /opt/
-ADD building_scripts/test_module_3x.sh /opt/
+ADD building_scripts/test_plugin_3x.sh /opt/
 ADD building_scripts/buildAllList_Plugins_3x.sh /opt/
 #--------------------------------------------------------------------------
 

@@ -23,6 +23,6 @@ while [[ "$#" > 0 ]]; do case $1 in
 done
 
 echo ""
-echo "dotnet test --verbosity n /opt/neo-plugins/$MODULE_TEST_TO_INCLUDE.UnitTests/$MODULE_TEST_TO_INCLUDE.UnitTests.csproj"
-dotnet test --verbosity n /opt/neo-plugins/tests/$MODULE_TEST_TO_INCLUDE.UnitTests/$MODULE_TEST_TO_INCLUDE.UnitTests.csproj
+echo "dotnet test --verbosity n /opt/neo-plugins/tests/$MODULE_TEST_TO_INCLUDE/$MODULE_TEST_TO_INCLUDE.csproj"
+dotnet test --verbosity n /opt/neo-plugins/tests/$MODULE_TEST_TO_INCLUDE/$MODULE_TEST_TO_INCLUDE.csproj
 echo ""
