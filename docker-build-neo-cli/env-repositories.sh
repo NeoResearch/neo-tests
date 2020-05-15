@@ -1,23 +1,23 @@
 # https://github.com/neo-project/neo-node/commits/master
-NEO_CLI_BLOCKCHAIN_URL=https://github.com/simplitech/neo-cli.git
-NEO_CLI_BRANCH=conversion-methods
-NEO_CLI_COMMIT=36daf5588b1998b704fcb655658d983f90b31e9f
+NEO_CLI_BLOCKCHAIN_URL=https://github.com/neo-project/neo-node.git
+NEO_CLI_BRANCH=master
+NEO_CLI_COMMIT=4bfce3d9e3d6afaed34aefef9396f148682dbb70
 
 # https://github.com/neo-project/neo/commits/master
 NEO_BLOCKCHAIN_URL=https://github.com/neo-project/neo.git
 NEO_BLOCKCHAIN_BRANCH=master
-NEO_BLOCKCHAIN_COMMIT=f46613884eaaa3ea571495e149b6e6a90ef853c5
+NEO_BLOCKCHAIN_COMMIT=e14053695ece799d88a5228a5507840d4f76e4ec
 
 # https://github.com/neo-project/neo-modules/commits/master
-NEO_PLUGINS_URL=https://github.com/bettybao1209/neo-modules.git
-NEO_PLUGINS_BRANCH=add-relayreason
-NEO_PLUGINS_COMMIT=007ff3e811a7ac9ef55274a2e78760cc72149e81
+NEO_PLUGINS_URL=https://github.com/neo-project/neo-modules.git
+NEO_PLUGINS_BRANCH=master
+NEO_PLUGINS_COMMIT=3dcd2bdac59611ad5c71fcb4891f631919892d0a
 
 LOCAL_NEO_CLI_BLOCKCHAIN="false"
 LOCAL_NEO_CLI_BLOCKCHAIN_URL="localfiles/neo-cli"
 LOCAL_NEO_BLOCKCHAIN="false"
 LOCAL_NEO_BLOCKCHAIN_URL="localfiles/neo"
-LOCAL_NEO_PLUGINS="true"
+LOCAL_NEO_PLUGINS="false"
 LOCAL_NEO_PLUGINS_URL="localfiles/neo-modules-betty"
 
 # https://github.com/neo-project/neo-vm/commits/master
