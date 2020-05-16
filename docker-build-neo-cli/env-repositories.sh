@@ -18,7 +18,7 @@ LOCAL_NEO_CLI_BLOCKCHAIN_URL="localfiles/neo-cli"
 LOCAL_NEO_BLOCKCHAIN="false"
 LOCAL_NEO_BLOCKCHAIN_URL="localfiles/neo"
 LOCAL_NEO_PLUGINS="false"
-LOCAL_NEO_PLUGINS_URL="localfiles/neo-modules-betty"
+LOCAL_NEO_PLUGINS_URL="localfiles/neo-modules"
 
 # https://github.com/neo-project/neo-vm/commits/master
 SET_NEO_VM="false"
