@@ -10,6 +10,7 @@ function usage {
     echo "Usage: $0 [--github] [--envfile <env.sh>] [--neo2x]"
 }
 
+# Order is important
 while [[ "$#" > 0 ]]; do case $1 in
     --github)
 	echo "PARAMETER GETONLINEGITHUB activated.";
