@@ -33,7 +33,7 @@ fi
 
 echo ""
 echo "dotnet test --verbosity n /opt/neo-plugins/$PLUGIN_TO_INCLUDE.UnitTests/$PLUGIN_TO_INCLUDE.UnitTests.csproj"
-echo "SKIPPING TESTS FOR 2x MODULES"
+echo "SKIPPING TESTS FOR 2x MODULES FILE /building_script/2x/build_plugin_2x.sh"
 #dotnet test --verbosity n /opt/neo-plugins/$PLUGIN_TO_INCLUDE.UnitTests/$PLUGIN_TO_INCLUDE.UnitTests.csproj
 echo ""
 
