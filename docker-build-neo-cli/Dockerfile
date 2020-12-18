@@ -2,7 +2,8 @@
 # https://hub.docker.com/_/microsoft-dotnet-framework?tab=description
 # https://hub.docker.com/_/microsoft-dotnet-sdk/
 # FROM mcr.microsoft.com/dotnet/sdk:5.0.101-focal
-FROM mcr.microsoft.com/dotnet/sdk:3.1.404-focal
+# last for Dotnet 3 is 3.1.400 and called like mcr.microsoft.com/dotnet/sdk:3.1.400-focal without core
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1.100-bionic
 LABEL maintainer="NeoResearch"
 
 # libleveldb-dev libsnappy-dev libc6-dev are used for testing Neo.Plugins.Storage.Tests

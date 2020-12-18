@@ -22,6 +22,7 @@ while [[ "$#" > 0 ]]; do case $1 in
   esac;
 done
 
+# dotnet test --verbosity n /opt/neo-modules/tests/$MODULE_TEST_TO_INCLUDE/$MODULE_TEST_TO_INCLUDE.csproj can be replated to just /opt/neo-modules/tests/$MODULE_TEST_TO_INCLUDE
 echo ""
 echo "dotnet test --verbosity n /opt/neo-modules/tests/$MODULE_TEST_TO_INCLUDE/$MODULE_TEST_TO_INCLUDE.csproj"
 dotnet test --verbosity n /opt/neo-modules/tests/$MODULE_TEST_TO_INCLUDE/$MODULE_TEST_TO_INCLUDE.csproj
