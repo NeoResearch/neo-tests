@@ -1,5 +1,8 @@
 # Neo node Csharp builder with desired specifications
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1.201-bionic
+# https://hub.docker.com/_/microsoft-dotnet-framework?tab=description
+# https://hub.docker.com/_/microsoft-dotnet-sdk/
+# FROM mcr.microsoft.com/dotnet/sdk:5.0.101-focal
+FROM mcr.microsoft.com/dotnet/sdk:3.1.404-focal
 LABEL maintainer="NeoResearch"
 
 # libleveldb-dev libsnappy-dev libc6-dev are used for testing Neo.Plugins.Storage.Tests
@@ -69,8 +72,8 @@ RUN dotnet sln /opt/neoNode/neo-node.sln add /opt/neoLib/src/neo/neo.csproj
 RUN dotnet add /opt/neoNode/neo-cli/neo-cli.csproj reference /opt/neoLib/src/neo/neo.csproj
 #--------------------------------------------------------------------------
 
+ARG NEO_BLOCKCHAIN_RUN_TESTS
 #---------------------- NEO CORE LIB UNIT TESTS ---------------------------
-# Unit tests on Neo - echo "dotnet test --verbosity n /opt/neoLib/neo/tests/neo.UnitTests/neo.UnitTests.csproj"
 RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then (dotnet test --verbosity n /opt/neoLib/tests/neo.UnitTests/neo.UnitTests.csproj);  fi
 #---------------------- NEO CORE LIB UNIT TESTS ---------------------------
 
@@ -91,22 +94,22 @@ RUN if [ "$SET_NEO_VM" = "true" ] ; then (dotnet test --verbosity n /opt/neo-vm/
 #==========================================================================
 #============= CLONING, PUBLISHING AND ADDING PLUGINS DLL'S ===============
 RUN mkdir /opt/neoNode/neo-cli/Plugins/
-RUN mkdir /opt/neo-plugins 
+RUN mkdir /opt/neo-modules 
 
 ARG NEO_PLUGINS_URL
 ARG LOCAL_NEO_PLUGINS
-RUN if [ "$LOCAL_NEO_PLUGINS" = "false" ] ; then (git clone $NEO_PLUGINS_URL /opt/neo-plugins);  fi
+RUN if [ "$LOCAL_NEO_PLUGINS" = "false" ] ; then (git clone $NEO_PLUGINS_URL /opt/neo-modules);  fi
 
 ARG NEO_PLUGINS_BRANCH
 ARG NEO_PLUGINS_COMMIT
-RUN if [ "$LOCAL_NEO_PLUGINS" = "false" ] ; then (cd /opt/neo-plugins && git pull && git checkout $NEO_PLUGINS_BRANCH && git checkout $NEO_PLUGINS_COMMIT);  fi
+RUN if [ "$LOCAL_NEO_PLUGINS" = "false" ] ; then (cd /opt/neo-modules && git pull && git checkout $NEO_PLUGINS_BRANCH && git checkout $NEO_PLUGINS_COMMIT);  fi
 #--------------------------------------------------------------------------
 
 #--------------------- CHANGE PLUGINS PATH TO LOCAL FILES -----------------
 ARG LOCAL_NEO_PLUGINS_URL
-RUN mkdir /opt/tempLocal_neo-plugins
-ADD $LOCAL_NEO_PLUGINS_URL /opt/tempLocal_neo-plugins
-RUN if [ "$LOCAL_NEO_PLUGINS" = "true" ] ; then (rm -rf /opt/neo-plugins; mv /opt/tempLocal_neo-plugins /opt/neo-plugins);  fi
+RUN mkdir /opt/tempLocal_neo-modules
+ADD $LOCAL_NEO_PLUGINS_URL /opt/tempLocal_neo-modules
+RUN if [ "$LOCAL_NEO_PLUGINS" = "true" ] ; then (rm -rf /opt/neo-modules; mv /opt/tempLocal_neo-modules /opt/neo-modules);  fi
 #--------------------------------------------------------------------------
 
 #-------- FILES FOR BUILDING & TESTING PUGLINS ----------------------------
@@ -119,6 +122,11 @@ ADD building_scripts/buildAllList_Plugins_3x.sh /opt/
 ARG ENVFILE
 ADD $ENVFILE /opt/env-repositories.sh
 #--------------------------------------------------------------------------
+
+RUN dotnet remove /opt/neo-modules/src/Directory.Build.props reference Neo
+RUN dotnet add /opt/neo-modules/src/Directory.Build.props reference /opt/neoLib/src/neo/neo.csproj
+# THIS SYMBOLIC LINK IS A WORKAROUND BECAUSE OF THE RELATIVE PATH WHEN ADDING A REFERENCE
+RUN ln -s /opt/neoLib/ opt/neo-modules/
 
 RUN /opt/buildAllList_Plugins_3x.sh
 #==========================================================================

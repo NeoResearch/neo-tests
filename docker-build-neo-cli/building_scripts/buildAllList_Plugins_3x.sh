@@ -14,18 +14,8 @@ do
 	fi
 done
 
-for i in "${PLUGINS_LIST_NO_NEO_PACKAGE[@]}"
-do 
-	echo "GOING TO BUILD PLUGIN ${i} THAT WE DO NOT NEED TO REMOVE NEO. NO REFERENCE TO BASE CORE LIBRARY."
-        echo ""
-	/opt/build_plugin_3x.sh --plugin-name ${i} --delete-neo-ref
-	res=$?
-	if [ $res = 1 ]; then
-	    echo "GOING TO EXIT BECAUSE LAST VERIFICATION RETURNED $res"
-	    echo ""
-	    exit 1
-	fi
-done
+echo "PLUGINS_RUN_TESTS is $PLUGINS_RUN_TESTS, WHICH DEFINES IF TESTS ARE GOING TO RUN"
+echo ""
 
 if [ "$PLUGINS_RUN_TESTS" = "true" ]; then
 	for i in "${PLUGINS_UT_LIST[@]}"
