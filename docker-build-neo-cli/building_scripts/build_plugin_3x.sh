@@ -25,7 +25,7 @@ done
 
 echo "GOING TO PUBLISH..."
 echo ""
-dotnet publish /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/$PLUGIN_TO_INCLUDE.csproj -c Release -o /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app
+(cd /opt/neo-modules/src/$PLUGIN_TO_INCLUDE; dotnet publish -c Release -o /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app)
 
 if [ "$PLUGIN_TO_INCLUDE" = "RpcServer" ]; then
    echo "Going to copy file Microsoft.AspNetCore.ResponseCompression.dll because RpcServer needs it together."

@@ -3,7 +3,7 @@
 # https://hub.docker.com/_/microsoft-dotnet-sdk/
 # FROM mcr.microsoft.com/dotnet/sdk:5.0.101-focal
 # last for Dotnet 3 is 3.1.400 and called like mcr.microsoft.com/dotnet/sdk:3.1.400-focal without core
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1.100-bionic
+FROM mcr.microsoft.com/dotnet/sdk:5.0.101-focal
 LABEL maintainer="NeoResearch"
 
 # libleveldb-dev libsnappy-dev libc6-dev are used for testing Neo.Plugins.Storage.Tests
@@ -69,7 +69,7 @@ RUN if [ "$SET_NEO_VM" = "true" ] && [ "$LOCAL_NEO_VM" = "true" ] ; then (rm -rf
 
 # Remove neo blockchain package from neo-cli project, referencing it to the local NeoBlockchain Library
 RUN dotnet remove /opt/neoNode/neo-cli/neo-cli.csproj package neo
-RUN dotnet sln /opt/neoNode/neo-node.sln add /opt/neoLib/src/neo/neo.csproj
+#RUN dotnet sln /opt/neoNode/neo-node.sln add /opt/neoLib/src/neo/neo.csproj
 RUN dotnet add /opt/neoNode/neo-cli/neo-cli.csproj reference /opt/neoLib/src/neo/neo.csproj
 #--------------------------------------------------------------------------
 
@@ -126,8 +126,12 @@ ADD $ENVFILE /opt/env-repositories.sh
 
 RUN dotnet remove /opt/neo-modules/src/Directory.Build.props reference Neo
 RUN dotnet add /opt/neo-modules/src/Directory.Build.props reference /opt/neoLib/src/neo/neo.csproj
-# THIS SYMBOLIC LINK IS A WORKAROUND BECAUSE OF THE RELATIVE PATH WHEN ADDING A REFERENCE
+#THIS SYMBOLIC LINK IS A WORKAROUND BECAUSE OF THE RELATIVE PATH WHEN ADDING A REFERENCE
+RUN rm -r /opt/neoLib/src/neo/bin /opt/neoLib/src/neo/obj
 RUN ln -s /opt/neoLib/ opt/neo-modules/
+#SED IS ALSO WORKROUND
+#RUN sed -i 's+.*Include="Neo".*+<PackageReference Include="\\opt\\neoLib\\src\\neo\\neo.csproj" />+g' /opt/neo-modules/src/Directory.Build.props
+#RUN cat /opt/neo-modules/src/Directory.Build.props
 
 RUN /opt/buildAllList_Plugins_3x.sh
 #==========================================================================
