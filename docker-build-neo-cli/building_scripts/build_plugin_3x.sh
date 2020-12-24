@@ -27,10 +27,11 @@ echo "GOING TO PUBLISH..."
 echo ""
 (cd /opt/neo-modules/src/$PLUGIN_TO_INCLUDE; dotnet publish -c Release -o /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app)
 
-if [ "$PLUGIN_TO_INCLUDE" = "RpcServer" ]; then
-   echo "Going to copy file Microsoft.AspNetCore.ResponseCompression.dll because RpcServer needs it together."
-   cp -ri /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app/Microsoft.AspNetCore.ResponseCompression.dll /opt/neoNode/neo-cli/Plugins/
-fi
+# Recently removed by https://github.com/neo-project/neo-modules/pull/442
+#if [ "$PLUGIN_TO_INCLUDE" = "RpcServer" ]; then
+#   echo "Going to copy file Microsoft.AspNetCore.ResponseCompression.dll because RpcServer needs it together."
+#   cp -ri /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app/Microsoft.AspNetCore.ResponseCompression.dll /opt/neoNode/neo-cli/Plugins/
+#fi
 
 if [ ! -f /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app/$PLUGIN_TO_INCLUDE.dll ]; then
     echo "File does not exist"
