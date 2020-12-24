@@ -31,8 +31,7 @@ LOCAL_NEO_VM_URL="localfiles/neo-vm"
 
 # https://github.com/neo-project/neo-modules/tree/master/src
 # https://github.com/neo-project/neo-modules/tree/master/tests
-# RpcClient
-PLUGINS_LIST_NEO_PACKAGE=(LevelDBStore RpcServer  ApplicationLogs RocksDBStore RpcClient RpcNep17Tracker  StateService StatesDumper)
+PLUGINS_LIST_NEO_PACKAGE=(ApplicationLogs LevelDBStore RocksDBStore RpcClient RpcNep17Tracker RpcServer StateService StatesDumper)
 PLUGINS_UT_LIST=(Neo.Network.RPC.Tests Neo.Plugins.StateService.Tests Neo.Plugins.Storage.Tests)
 
 NEO_BLOCKCHAIN_RUN_TESTS="true"
