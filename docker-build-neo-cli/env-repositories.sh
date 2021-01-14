@@ -1,20 +1,20 @@
 # https://github.com/neo-project/neo-node/commits/master
-NEO_CLI_BLOCKCHAIN_URL=https://github.com/neo-project/neo-node.git
-NEO_CLI_BRANCH=master
-NEO_CLI_COMMIT=b74c88f8c83c0365ce93737bbb63606694d40855
+NEO_CLI_BLOCKCHAIN_URL=https://github.com/bettybao1209/neo-node.git
+NEO_CLI_BRANCH=add-totalsupply
+NEO_CLI_COMMIT=02aa8f0
 
 # https://github.com/neo-project/neo/commits/master
-NEO_BLOCKCHAIN_URL=https://github.com/Ashuaidehao/neo.git
-NEO_BLOCKCHAIN_BRANCH=fix-dotnet5
-NEO_BLOCKCHAIN_COMMIT=36fbf61 
+NEO_BLOCKCHAIN_URL=https://github.com/neo-project/neo.git
+NEO_BLOCKCHAIN_BRANCH=master
+NEO_BLOCKCHAIN_COMMIT=df79b42bce1901b2ab1372ade24634e693f6252e 
 
 # https://github.com/neo-project/neo-modules/commits/master
-NEO_PLUGINS_URL=https://github.com/Ashuaidehao/neo-plugins.git
-NEO_PLUGINS_BRANCH=fix-dotnet5
-NEO_PLUGINS_COMMIT=d070b54
+NEO_PLUGINS_URL=https://github.com/chenzhitong/neo-modules.git
+NEO_PLUGINS_BRANCH=getnativecontract
+NEO_PLUGINS_COMMIT=1147f72
 
 LOCAL_NEO_CLI_BLOCKCHAIN="false"
-LOCAL_NEO_CLI_BLOCKCHAIN_URL="localfiles/neo-cli"
+LOCAL_NEO_CLI_BLOCKCHAIN_URL="localfiles/neo-node"
 LOCAL_NEO_BLOCKCHAIN="false"
 LOCAL_NEO_BLOCKCHAIN_URL="localfiles/neo"
 LOCAL_NEO_PLUGINS="false"
@@ -31,7 +31,7 @@ LOCAL_NEO_VM_URL="localfiles/neo-vm"
 
 # https://github.com/neo-project/neo-modules/tree/master/src
 # https://github.com/neo-project/neo-modules/tree/master/tests
-PLUGINS_LIST_NEO_PACKAGE=(ApplicationLogs LevelDBStore RocksDBStore RpcClient RpcNep17Tracker RpcServer StateService StatesDumper)
+PLUGINS_LIST_NEO_PACKAGE=(ApplicationLogs LevelDBStore RocksDBStore RpcClient RpcNep17Tracker RpcServer StateService StatesDumper dBFT)
 PLUGINS_UT_LIST=(Neo.Network.RPC.Tests Neo.Plugins.StateService.Tests Neo.Plugins.Storage.Tests)
 
 NEO_BLOCKCHAIN_RUN_TESTS="true"
