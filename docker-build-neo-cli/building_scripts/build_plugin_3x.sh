@@ -38,5 +38,14 @@ if [ ! -f /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app/$PLUGIN_TO_INCLUDE.dll ]; 
     exit 1
 fi
 
-echo "Going to copy file /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app/$PLUGIN_TO_INCLUDE.dll TO /opt/neoNode/neo-cli/Plugins/"
-cp -ri /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app/$PLUGIN_TO_INCLUDE.dll /opt/neoNode/neo-cli/Plugins/
+
+
+if [ $PLUGIN_TO_INCLUDE = "OracleService" ]; then
+    echo "Going to copy all dll files /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app/$*.dll TO /opt/neoNode/neo-cli/Plugins/"
+    cp -ri /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app/*.dll /opt/neoNode/neo-cli/Plugins/
+fi
+
+if [ $PLUGIN_TO_INCLUDE != "OracleService" ]; then
+    echo "Going to copy file /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app/$PLUGIN_TO_INCLUDE.dll TO /opt/neoNode/neo-cli/Plugins/"
+    cp -ri /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app/$PLUGIN_TO_INCLUDE.dll /opt/neoNode/neo-cli/Plugins/
+fi
