@@ -41,8 +41,16 @@ fi
 
 
 if [ $PLUGIN_TO_INCLUDE = "OracleService" ]; then
-    echo "Going to copy all dll files /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app/$*.dll TO /opt/neoNode/neo-cli/Plugins/"
-    cp -ri /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app/*.dll /opt/neoNode/neo-cli/Plugins/
+    echo "Going to copy some dll files /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app/*.dll TO /opt/neoNode/neo-cli/Plugins/"
+    cp -ri /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app/$PLUGIN_TO_INCLUDE.dll /opt/neoNode/neo-cli/Plugins/
+    cp -ri /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app/Neo.FileStorage.API.dll /opt/neoNode/neo-cli/Plugins/
+    cp -ri /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app/Grpc.Net.Common.dll /opt/neoNode/neo-cli/Plugins/
+    cp -ri /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app/Grpc.Net.ClientFactory.dll /opt/neoNode/neo-cli/Plugins/
+    cp -ri /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app/ Grpc.Net.Client.dll /opt/neoNode/neo-cli/Plugins/
+    cp -ri /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app/Grpc.Core.Api.dll /opt/neoNode/neo-cli/Plugins/
+    cp -ri /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app/Grpc.AspNetCore.Server.dll /opt/neoNode/neo-cli/Plugins/
+    cp -ri /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app/Grpc.AspNetCore.Server.ClientFactory.dll /opt/neoNode/neo-cli/Plugins/
+    cp -ri /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app/Google.Protobuf.dll /opt/neoNode/neo-cli/Plugins/
 fi
 
 if [ $PLUGIN_TO_INCLUDE != "OracleService" ]; then
