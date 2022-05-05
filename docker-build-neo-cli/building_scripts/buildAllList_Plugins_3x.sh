@@ -31,3 +31,6 @@ if [ "$PLUGINS_RUN_TESTS" = "true" ]; then
 		fi
 	done
 fi
+
+echo "Script buildAllList_Plugins finished!!"
+echo ""
