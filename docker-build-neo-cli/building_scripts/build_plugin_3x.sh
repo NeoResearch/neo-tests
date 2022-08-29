@@ -23,29 +23,34 @@ while [[ "$#" > 0 ]]; do case $1 in
 done
 
 
+ORIGIN_PATH=/opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app
+
 echo "GOING TO PUBLISH..."
 echo ""
-(cd /opt/neo-modules/src/$PLUGIN_TO_INCLUDE; dotnet publish -c Release -o /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app)
+(cd /opt/neo-modules/src/$PLUGIN_TO_INCLUDE; dotnet publish -c Release -o app)
 
-if [ ! -f /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app/$PLUGIN_TO_INCLUDE.dll ]; then
+if [ ! -f $ORIGIN_PATH/$PLUGIN_TO_INCLUDE.dll ]; then
     echo "File does not exist"
     exit 1
 fi
 
+DEST_FOLDER=/opt/neoNode/neo-cli/Plugins/$PLUGIN_TO_INCLUDE/
+mkdir $DEST_FOLDER
+
 if [ $PLUGIN_TO_INCLUDE = "OracleService" ]; then
-    echo "Going to copy file /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app/$PLUGIN_TO_INCLUDE.dll TO /opt/neoNode/neo-cli/Plugins/ - and some other dependencies"
-    cp -ri /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app/$PLUGIN_TO_INCLUDE.dll /opt/neoNode/neo-cli/Plugins/
-    cp -ri /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app/Neo.FileStorage.API.dll /opt/neoNode/neo-cli/Plugins/
-    cp -ri /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app/Grpc.Net.Common.dll /opt/neoNode/neo-cli/Plugins/
-    cp -ri /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app/Grpc.Net.ClientFactory.dll /opt/neoNode/neo-cli/Plugins/
-    cp -ri /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app/Grpc.Net.Client.dll /opt/neoNode/neo-cli/Plugins/
-    cp -ri /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app/Grpc.Core.Api.dll /opt/neoNode/neo-cli/Plugins/
-    cp -ri /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app/Grpc.AspNetCore.Server.dll /opt/neoNode/neo-cli/Plugins/
-    cp -ri /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app/Grpc.AspNetCore.Server.ClientFactory.dll /opt/neoNode/neo-cli/Plugins/
-    cp -ri /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app/Google.Protobuf.dll /opt/neoNode/neo-cli/Plugins/
+    echo "Going to copy file $ORIGIN_PATH/$PLUGIN_TO_INCLUDE.dll TO $DEST_FOLDER - and some other dependencies"
+    cp -ri $ORIGIN_PATH/$PLUGIN_TO_INCLUDE.dll $DEST_FOLDER
+    cp -ri $ORIGIN_PATH/Neo.FileStorage.API.dll $DEST_FOLDER
+    cp -ri $ORIGIN_PATH/Grpc.Net.Common.dll $DEST_FOLDER
+    cp -ri $ORIGIN_PATH/Grpc.Net.ClientFactory.dll $DEST_FOLDER
+    cp -ri $ORIGIN_PATH/Grpc.Net.Client.dll $DEST_FOLDER
+    cp -ri $ORIGIN_PATH/Grpc.Core.Api.dll $DEST_FOLDER
+    cp -ri $ORIGIN_PATH/Grpc.AspNetCore.Server.dll $DEST_FOLDER
+    cp -ri $ORIGIN_PATH/Grpc.AspNetCore.Server.ClientFactory.dll $DEST_FOLDER
+    cp -ri $ORIGIN_PATH/Google.Protobuf.dll $DEST_FOLDER
 fi
 
 if [ $PLUGIN_TO_INCLUDE != "OracleService" ]; then
     echo "Going to copy file /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app/$PLUGIN_TO_INCLUDE.dll TO /opt/neoNode/neo-cli/Plugins/"
-    cp -ri /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app/$PLUGIN_TO_INCLUDE.dll /opt/neoNode/neo-cli/Plugins/
+    cp -ri $ORIGIN_PATH/$PLUGIN_TO_INCLUDE.dll $DEST_FOLDER
 fi

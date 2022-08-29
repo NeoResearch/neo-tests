@@ -57,7 +57,7 @@ ARG NEO_VM_BRANCH
 ARG NEO_VM_COMMIT
 RUN if [ "$SET_NEO_VM" = "true" ] && [ "$LOCAL_NEO_VM" = "false" ] ; then (cd /opt/neo-vm; git pull; git checkout $NEO_VM_BRANCH; git checkout $NEO_VM_COMMIT);  fi
 
-RUN if [ "$SET_NEO_VM" = "true" ] ; then (dotnet remove /opt/neoLib/src/neo/neo.csproj package neo.vm; dotnet sln /opt/neoLib/neo.sln add /opt/neo-vm/src/neo-vm/neo-vm.csproj; dotnet add /opt/neoLib/src/neo/neo.csproj reference /opt/neo-vm/src/neo-vm/neo-vm.csproj);  fi
+RUN if [ "$SET_NEO_VM" = "true" ] ; then (dotnet remove /opt/neoLib/src/Neo/Neo.csproj package neo.vm; dotnet sln /opt/neoLib/neo.sln add /opt/neo-vm/src/neo-vm/neo-vm.csproj; dotnet add /opt/neoLib/src/Neo/Neo.csproj reference /opt/neo-vm/src/neo-vm/neo-vm.csproj);  fi
 
 ARG LOCAL_NEO_VM_URL
 ADD $LOCAL_NEO_VM_URL /opt/tempLocal_neo-vm
@@ -65,14 +65,22 @@ RUN if [ "$SET_NEO_VM" = "true" ] && [ "$LOCAL_NEO_VM" = "true" ] ; then (rm -rf
 
 # Remove neo blockchain package from neo-cli project, referencing it to the local NeoBlockchain Library
 RUN dotnet remove /opt/neoNode/neo-cli/neo-cli.csproj package neo
-#RUN dotnet sln /opt/neoNode/neo-node.sln add /opt/neoLib/src/neo/neo.csproj
-RUN dotnet add /opt/neoNode/neo-cli/neo-cli.csproj reference /opt/neoLib/src/neo/neo.csproj
+RUN dotnet add /opt/neoNode/neo-cli/neo-cli.csproj reference /opt/neoLib/src/Neo/Neo.csproj
 #--------------------------------------------------------------------------
 
 ARG NEO_BLOCKCHAIN_RUN_TESTS
 #---------------------- NEO CORE LIB UNIT TESTS ---------------------------
-RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then (dotnet test --verbosity n /opt/neoLib/tests/neo.UnitTests/neo.UnitTests.csproj);  fi
+RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then (dotnet test --verbosity n /opt/neoLib/tests/Neo.UnitTests/Neo.UnitTests.csproj);  fi
+RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then (dotnet test --verbosity n /opt/neoLib/tests/Neo.Json.UnitTests/Neo.Json.UnitTests.csproj);  fi
 #---------------------- NEO CORE LIB UNIT TESTS ---------------------------
+
+#==========================================================================
+#============================== NEO.JSON LIB ==============================
+#--------------------------------------------------------------------------
+# RESTORE NEW NEO.JSON SEPARETED LIB
+RUN cd /opt/neoLib/src/Neo.Json && dotnet restore
+#--------------------------------------------------------------------------
+#==========================================================================
 
 #==========================================================================
 #============================== PUBLISH NEO-CLI ===========================
@@ -121,9 +129,11 @@ ADD $ENVFILE /opt/env-repositories.sh
 #--------------------------------------------------------------------------
 
 RUN dotnet remove /opt/neo-modules/src/Directory.Build.props reference Neo
-RUN dotnet add /opt/neo-modules/src/Directory.Build.props reference /opt/neoLib/src/neo/neo.csproj
+RUN dotnet add /opt/neo-modules/src/Directory.Build.props reference /opt/neoLib/src/Neo/Neo.csproj
+RUN dotnet add /opt/neo-modules/src/Directory.Build.props reference /opt/neoLib/src/Neo.Json/Neo.Json.csproj
 #THIS SYMBOLIC LINK IS A WORKAROUND BECAUSE OF THE RELATIVE PATH WHEN ADDING A REFERENCE
-RUN rm -r /opt/neoLib/src/neo/bin /opt/neoLib/src/neo/obj
+RUN rm -r /opt/neoLib/src/Neo/bin /opt/neoLib/src/Neo/obj
+RUN rm -r /opt/neoLib/src/Neo.Json/bin /opt/neoLib/src/Neo.Json/obj
 RUN ln -s /opt/neoLib/ opt/neo-modules/
 #SED IS ALSO WORKROUND
 #RUN sed -i 's+.*Include="Neo".*+<PackageReference Include="\\opt\\neoLib\\src\\neo\\neo.csproj" />+g' /opt/neo-modules/src/Directory.Build.props
