@@ -11,7 +11,7 @@ NEO_BLOCKCHAIN_COMMIT=5f4c14e3801c691ceccb5705c634e9e55dd3bba1
 # https://github.com/neo-project/neo-modules/commits/master
 NEO_PLUGINS_URL=https://github.com/neo-project/neo-modules.git
 NEO_PLUGINS_BRANCH=dbft3.0-doublespeakers #master #dbft3.0-doublespeakers
-NEO_PLUGINS_COMMIT=6d5daf5 #7db1c7956ac68758793a6ea30b5329cceb6ab1bc #6d5daf5
+NEO_PLUGINS_COMMIT=e86de2a7376e54981dc64d50bc9b3a192814e30e #7db1c7956ac68758793a6ea30b5329cceb6ab1bc #6d5daf5
 
 LOCAL_NEO_CLI_BLOCKCHAIN="false"
 LOCAL_NEO_CLI_BLOCKCHAIN_URL="localfiles/neo-node"
