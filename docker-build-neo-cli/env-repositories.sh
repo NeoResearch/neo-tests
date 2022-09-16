@@ -11,11 +11,11 @@ NEO_BLOCKCHAIN_COMMIT=5f4c14e3801c691ceccb5705c634e9e55dd3bba1
 # https://github.com/neo-project/neo-modules/commits/master
 NEO_PLUGINS_URL=https://github.com/neo-project/neo-modules.git
 NEO_PLUGINS_BRANCH=dbft3.0-doublespeakers #master #dbft3.0-doublespeakers
-NEO_PLUGINS_COMMIT=e86de2a7376e54981dc64d50bc9b3a192814e30e #7db1c7956ac68758793a6ea30b5329cceb6ab1bc #6d5daf5
+NEO_PLUGINS_COMMIT=d524245 #7db1c7956ac68758793a6ea30b5329cceb6ab1bc #6d5daf5
 
 LOCAL_NEO_CLI_BLOCKCHAIN="false"
 LOCAL_NEO_CLI_BLOCKCHAIN_URL="localfiles/neo-node"
-LOCAL_NEO_BLOCKCHAIN="false"
+LOCAL_NEO_BLOCKCHAIN="true"
 LOCAL_NEO_BLOCKCHAIN_URL="localfiles/neo"
 LOCAL_NEO_PLUGINS="false"
 LOCAL_NEO_PLUGINS_URL="localfiles/neo-modules"
@@ -35,5 +35,5 @@ LOCAL_NEO_VM_URL="localfiles/neo-vm"
 PLUGINS_LIST_NEO_PACKAGE=(ApplicationLogs LevelDBStore MPTTrie OracleService RocksDBStore RpcClient RpcServer StateService StatesDumper TokensTracker DBFTPlugin)
 PLUGINS_UT_LIST=(Neo.Cryptography.MPTTrie.Tests Neo.Network.RPC.Tests Neo.Plugins.OracleService.Tests  Neo.Plugins.RpcServer.Tests  Neo.Plugins.Storage.Tests)
 
-NEO_BLOCKCHAIN_RUN_TESTS="true"
-PLUGINS_RUN_TESTS="true"
+NEO_BLOCKCHAIN_RUN_TESTS="false"
+PLUGINS_RUN_TESTS="false"
