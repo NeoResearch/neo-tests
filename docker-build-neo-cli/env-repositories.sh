@@ -1,23 +1,23 @@
 # https://github.com/neo-project/neo-node/commits/master
 NEO_CLI_BLOCKCHAIN_URL=https://github.com/neo-project/neo-node.git
 NEO_CLI_BRANCH=master
-NEO_CLI_COMMIT=bc208c8cfb39c7569fd2089c40cd45004ccc561f
+NEO_CLI_COMMIT=1fed544fa753fc9cc2424793857e3273ef996d5d
 
 # https://github.com/neo-project/neo/commits/master
 NEO_BLOCKCHAIN_URL=https://github.com/neo-project/neo.git
 NEO_BLOCKCHAIN_BRANCH=master
-NEO_BLOCKCHAIN_COMMIT=5f4c14e3801c691ceccb5705c634e9e55dd3bba1 
+NEO_BLOCKCHAIN_COMMIT=f88d4f8f97018492713907554b89f9e0fbafb916 
 
 # https://github.com/neo-project/neo-modules/commits/master
 NEO_PLUGINS_URL=https://github.com/neo-project/neo-modules.git
-NEO_PLUGINS_BRANCH=dbft3.0-doublespeakers #master #dbft3.0-doublespeakers
-NEO_PLUGINS_COMMIT=f9f0465 #7db1c7956ac68758793a6ea30b5329cceb6ab1bc #6d5daf5
+NEO_PLUGINS_BRANCH=master #master #dbft3.0-doublespeakers
+NEO_PLUGINS_COMMIT=c187c2640ff31f32dc900341c80dfef824a0aa70 #7db1c7956ac68758793a6ea30b5329cceb6ab1bc #6d5daf5
 
 LOCAL_NEO_CLI_BLOCKCHAIN="false"
 LOCAL_NEO_CLI_BLOCKCHAIN_URL="localfiles/neo-node"
-LOCAL_NEO_BLOCKCHAIN="true"
+LOCAL_NEO_BLOCKCHAIN="false"
 LOCAL_NEO_BLOCKCHAIN_URL="localfiles/neo"
-LOCAL_NEO_PLUGINS="false"
+LOCAL_NEO_PLUGINS="true"
 LOCAL_NEO_PLUGINS_URL="localfiles/neo-modules"
 
 # https://github.com/neo-project/neo-vm/commits/master
