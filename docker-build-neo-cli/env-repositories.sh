@@ -17,7 +17,7 @@ LOCAL_NEO_CLI_BLOCKCHAIN="false"
 LOCAL_NEO_CLI_BLOCKCHAIN_URL="localfiles/neo-node"
 LOCAL_NEO_BLOCKCHAIN="false"
 LOCAL_NEO_BLOCKCHAIN_URL="localfiles/neo"
-LOCAL_NEO_PLUGINS="true"
+LOCAL_NEO_PLUGINS="false"
 LOCAL_NEO_PLUGINS_URL="localfiles/neo-modules"
 
 # https://github.com/neo-project/neo-vm/commits/master
@@ -32,8 +32,8 @@ LOCAL_NEO_VM_URL="localfiles/neo-vm"
 # https://github.com/neo-project/neo-modules/tree/master/src
 # https://github.com/neo-project/neo-modules/tree/master/tests
 # RpcNep11Tracker
-PLUGINS_LIST_NEO_PACKAGE=(ApplicationLogs LevelDBStore MPTTrie OracleService RocksDBStore RpcClient RpcServer StateService StatesDumper TokensTracker DBFTPlugin)
+PLUGINS_LIST_NEO_PACKAGE=(ApplicationLogs LevelDBStore MPTTrie OracleService RocksDBStore RpcClient RpcServer SQLiteWallet StateService StatesDumper TokensTracker DBFTPlugin)
 PLUGINS_UT_LIST=(Neo.Cryptography.MPTTrie.Tests Neo.Network.RPC.Tests Neo.Plugins.OracleService.Tests  Neo.Plugins.RpcServer.Tests  Neo.Plugins.Storage.Tests)
 
-NEO_BLOCKCHAIN_RUN_TESTS="false"
-PLUGINS_RUN_TESTS="false"
+NEO_BLOCKCHAIN_RUN_TESTS="true"
+PLUGINS_RUN_TESTS="true"
