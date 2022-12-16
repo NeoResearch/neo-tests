@@ -15,9 +15,9 @@ NEO_PLUGINS_COMMIT=c187c2640ff31f32dc900341c80dfef824a0aa70 #7db1c7956ac68758793
 
 LOCAL_NEO_CLI_BLOCKCHAIN="false"
 LOCAL_NEO_CLI_BLOCKCHAIN_URL="localfiles/neo-node"
-LOCAL_NEO_BLOCKCHAIN="false"
+LOCAL_NEO_BLOCKCHAIN="true"
 LOCAL_NEO_BLOCKCHAIN_URL="localfiles/neo"
-LOCAL_NEO_PLUGINS="false"
+LOCAL_NEO_PLUGINS="true"
 LOCAL_NEO_PLUGINS_URL="localfiles/neo-modules"
 
 # https://github.com/neo-project/neo-vm/commits/master
