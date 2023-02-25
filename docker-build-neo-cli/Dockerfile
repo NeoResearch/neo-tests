@@ -1,5 +1,5 @@
 # https://hub.docker.com/_/microsoft-dotnet-sdk/
-FROM mcr.microsoft.com/dotnet/sdk:6.0.404-jammy
+FROM mcr.microsoft.com/dotnet/sdk:7.0.103-jammy
 LABEL maintainer="NeoResearch"
 
 # libleveldb-dev libsnappy-dev libc6-dev are used for testing Neo.Plugins.Storage.Tests
