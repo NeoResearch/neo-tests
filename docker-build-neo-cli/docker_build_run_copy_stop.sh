@@ -78,7 +78,7 @@ if [ "$NEO2X" == "true" ] ; then
 fi
 
 echo "BUILDING neo cli with personalized characteristics... $DOCKERFILE"
-docker build $ARGS -t $CONTAINER_NAME:latest -f $DOCKERFILE .
+docker build $ARGS -t $CONTAINER_NAME:latest -f $DOCKERFILE --progress=plain .
 
 res=$?
 if [ $res = 1 ]; then
