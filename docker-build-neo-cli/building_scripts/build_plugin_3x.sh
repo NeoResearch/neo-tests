@@ -27,10 +27,10 @@ ORIGIN_PATH=/opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app
 
 echo "GOING TO PUBLISH..."
 echo ""
-(cd /opt/neo-modules/src/$PLUGIN_TO_INCLUDE; dotnet publish -c Release -o app)
+(cd /opt/neo-modules/src/$PLUGIN_TO_INCLUDE; dotnet clean; dotnet publish -c Release -o app)
 
 if [ ! -f $ORIGIN_PATH/$PLUGIN_TO_INCLUDE.dll ]; then
-    echo "File does not exist"
+    echo "PLUGIN DLL File does not exist at $ORIGIN_PATH/$PLUGIN_TO_INCLUDE.dll"
     exit 1
 fi
 

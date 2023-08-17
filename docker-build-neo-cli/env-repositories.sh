@@ -6,12 +6,12 @@ NEO_CLI_COMMIT=868c053fe543577749fd1cb5b90d7ead478c3fe6
 # https://github.com/neo-project/neo/commits/master
 NEO_BLOCKCHAIN_URL=https://github.com/neo-project/neo.git
 NEO_BLOCKCHAIN_BRANCH=master
-NEO_BLOCKCHAIN_COMMIT=d6620cb410bcb89a386fa2dde4ea891f5d2a0ab1 
+NEO_BLOCKCHAIN_COMMIT=d63eb1da7a99e7459a647dc3355145f5cccc6d74 
 
 # https://github.com/neo-project/neo-modules/commits/master
 NEO_PLUGINS_URL=https://github.com/neo-project/neo-modules.git
 NEO_PLUGINS_BRANCH=master
-NEO_PLUGINS_COMMIT=5deb20baf36329ef0ddc5c5969cb6092be56d7b3
+NEO_PLUGINS_COMMIT=99ffc846e4df93491d1d812cb4c6ef6ee875e056
 
 LOCAL_NEO_CLI_BLOCKCHAIN="false"
 LOCAL_NEO_CLI_BLOCKCHAIN_URL="localfiles/neo-node"
@@ -25,7 +25,7 @@ LOCAL_NEO_PLUGINS_URL="localfiles/neo-modules"
 SET_NEO_VM="false"
 NEO_VM_URL=https://github.com/neo-project/neo-vm.git
 NEO_VM_BRANCH=master
-NEO_VM_COMMIT=5b0a39811b34abacab1273f3ee5a9a9f7e52ac7b
+NEO_VM_COMMIT=7e5996844a90b514739f879bc9f873f9a34c9a67
 
 # INJECT LOCAL NEO-VM
 LOCAL_NEO_VM="false"
