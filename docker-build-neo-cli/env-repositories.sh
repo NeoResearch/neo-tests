@@ -6,12 +6,12 @@ NEO_CLI_COMMIT=868c053fe543577749fd1cb5b90d7ead478c3fe6
 # https://github.com/neo-project/neo/commits/master
 NEO_BLOCKCHAIN_URL=https://github.com/neo-project/neo.git
 NEO_BLOCKCHAIN_BRANCH=master
-NEO_BLOCKCHAIN_COMMIT=d63eb1da7a99e7459a647dc3355145f5cccc6d74 
+NEO_BLOCKCHAIN_COMMIT=52107280ccb0c7e3dacfd296efb07cd1af5fbcd1 
 
 # https://github.com/neo-project/neo-modules/commits/master
-NEO_PLUGINS_URL=https://github.com/neo-project/neo-modules.git
-NEO_PLUGINS_BRANCH=master
-NEO_PLUGINS_COMMIT=99ffc846e4df93491d1d812cb4c6ef6ee875e056
+NEO_PLUGINS_URL=https://github.com/cschuchardt88/neo-modules.git
+NEO_PLUGINS_BRANCH=RcpServer-CORS
+NEO_PLUGINS_COMMIT=5d74503
 
 LOCAL_NEO_CLI_BLOCKCHAIN="false"
 LOCAL_NEO_CLI_BLOCKCHAIN_URL="localfiles/neo-node"
