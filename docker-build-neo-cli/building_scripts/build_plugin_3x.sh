@@ -25,14 +25,24 @@ done
 
 ORIGIN_PATH=/opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app
 
+echo "GOING TO CLEAN..."
+echo ""
+(cd /opt/neo-modules/src/$PLUGIN_TO_INCLUDE; dotnet clean)
+
 echo "GOING TO PUBLISH..."
 echo ""
-(cd /opt/neo-modules/src/$PLUGIN_TO_INCLUDE; dotnet clean; dotnet publish -c Release -o app)
+(cd /opt/neo-modules/src/$PLUGIN_TO_INCLUDE; dotnet publish -c Release -o app)
+
+echo "GOING TO CHECK CREATED DLL..."
+echo ""
 
 if [ ! -f $ORIGIN_PATH/$PLUGIN_TO_INCLUDE.dll ]; then
     echo "PLUGIN DLL File does not exist at $ORIGIN_PATH/$PLUGIN_TO_INCLUDE.dll"
     exit 1
 fi
+
+echo "GOING TO COPY DEPENDENCIES (IF NEEDED - CURRENTLY JUST ORACLE SERVICES)"
+echo ""
 
 DEST_FOLDER=/opt/neoNode/neo-cli/Plugins/$PLUGIN_TO_INCLUDE/
 mkdir $DEST_FOLDER
@@ -49,6 +59,9 @@ if [ $PLUGIN_TO_INCLUDE = "OracleService" ]; then
     cp -ri $ORIGIN_PATH/Grpc.AspNetCore.Server.ClientFactory.dll $DEST_FOLDER
     cp -ri $ORIGIN_PATH/Google.Protobuf.dll $DEST_FOLDER
 fi
+
+echo "GOING TO COPY DLL ITSELF"
+echo ""
 
 if [ $PLUGIN_TO_INCLUDE != "OracleService" ]; then
     echo "Going to copy file /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app/$PLUGIN_TO_INCLUDE.dll TO /opt/neoNode/neo-cli/Plugins/"
