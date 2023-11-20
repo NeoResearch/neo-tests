@@ -27,7 +27,14 @@ ORIGIN_PATH=/opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app
 
 echo "GOING TO CLEAN..."
 echo ""
+echo "CLEAN MODULE..."
 (cd /opt/neo-modules/src/$PLUGIN_TO_INCLUDE; dotnet clean)
+
+echo "CLEAN NeoLib..."
+(cd /opt/neo-modules/neoLib/; dotnet clean)
+(cd /opt/neo-modules/neoLib/src/Neo; dotnet clean)
+(cd /opt/neo-modules/neoLib/src/Neo.Json; dotnet clean)
+
 
 echo "GOING TO PUBLISH..."
 echo ""

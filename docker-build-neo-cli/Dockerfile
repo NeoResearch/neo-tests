@@ -135,6 +135,7 @@ RUN dotnet add /opt/neo-modules/src/Directory.Build.props reference /opt/neoLib/
 RUN rm -r /opt/neoLib/src/Neo/bin /opt/neoLib/src/Neo/obj
 RUN rm -r /opt/neoLib/src/Neo.Json/bin /opt/neoLib/src/Neo.Json/obj
 RUN ln -s /opt/neoLib/ opt/neo-modules/
+
 #SED IS ALSO WORKROUND
 #RUN sed -i 's+.*Include="Neo".*+<PackageReference Include="\\opt\\neoLib\\src\\neo\\neo.csproj" />+g' /opt/neo-modules/src/Directory.Build.props
 #RUN cat /opt/neo-modules/src/Directory.Build.props
