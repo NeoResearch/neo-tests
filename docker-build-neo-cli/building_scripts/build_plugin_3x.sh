@@ -23,24 +23,29 @@ while [[ "$#" > 0 ]]; do case $1 in
 done
 
 
-ORIGIN_PATH=/opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app
+#echo "GOING TO CLEAN $PLUGIN_TO_INCLUDE..."
+#echo ""
+#echo "CLEAN MODULE..."
+#(cd /opt/neo-modules/src/$PLUGIN_TO_INCLUDE; dotnet clean)
 
-echo "GOING TO CLEAN..."
-echo ""
-echo "CLEAN MODULE..."
-(cd /opt/neo-modules/src/$PLUGIN_TO_INCLUDE; dotnet clean)
+#echo "CLEAN NeoLib..."
+#(cd /opt/neo-modules/neoLib/; dotnet clean)
+#(cd /opt/neo-modules/neoLib/src/Neo; dotnet clean)
+#(cd /opt/neo-modules/neoLib/src/Neo.Json; dotnet clean)
+#(cd /opt/neo-modules/neoLib/src/Neo.VM; dotnet clean)
+#rm -r /opt/neoLib/src/Neo.Json/obj/
+#rm -r /opt/neoLib/src/Neo.VM/obj/
+#rm -r /opt/neo-modules/neoLib/src/Neo.VM/obj/
+#rm -r /opt/neo-modules/neoLib/src/Neo.Json/obj/
 
-echo "CLEAN NeoLib..."
-(cd /opt/neo-modules/neoLib/; dotnet clean)
-(cd /opt/neo-modules/neoLib/src/Neo; dotnet clean)
-(cd /opt/neo-modules/neoLib/src/Neo.Json; dotnet clean)
 
-
-echo "GOING TO PUBLISH..."
+echo "GOING TO PUBLISH $PLUGIN_TO_INCLUDE..."
 echo ""
 (cd /opt/neo-modules/src/$PLUGIN_TO_INCLUDE; dotnet publish -c Release -o app)
 
-echo "GOING TO CHECK CREATED DLL..."
+ORIGIN_PATH=/opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app
+
+echo "GOING TO CHECK CREATED DLL $PLUGIN_TO_INCLUDE..."
 echo ""
 
 if [ ! -f $ORIGIN_PATH/$PLUGIN_TO_INCLUDE.dll ]; then
@@ -51,7 +56,7 @@ fi
 echo "GOING TO COPY DEPENDENCIES (IF NEEDED - CURRENTLY JUST ORACLE SERVICES)"
 echo ""
 
-DEST_FOLDER=/opt/neoNode/neo-cli/Plugins/$PLUGIN_TO_INCLUDE/
+DEST_FOLDER=/opt/neoLib/src/Neo.CLI/Plugins/$PLUGIN_TO_INCLUDE/
 mkdir $DEST_FOLDER
 
 if [ $PLUGIN_TO_INCLUDE = "OracleService" ]; then

@@ -1,5 +1,5 @@
 # https://hub.docker.com/_/microsoft-dotnet-sdk/
-FROM mcr.microsoft.com/dotnet/sdk:7.0.103-jammy
+FROM mcr.microsoft.com/dotnet/sdk:7.0.404-jammy
 LABEL maintainer="NeoResearch"
 
 # libleveldb-dev libsnappy-dev libc6-dev are used for testing Neo.Plugins.Storage.Tests
@@ -7,21 +7,12 @@ RUN apt-get update \
     && apt-get install -y zip libleveldb-dev libsnappy-dev libc6-dev
 
 #==========================================================================
-#============== CLONING NEO-CORE & NEO-NODE ===============================
+#============== CLONING NEO-CORE ===============================
 # get repo, the arguments should be supplied when building using this Dockerfile
-ARG NEO_CLI_BLOCKCHAIN_URL
-ARG LOCAL_NEO_CLI_BLOCKCHAIN
-RUN mkdir /opt/neoNode 
-RUN if [ "$LOCAL_NEO_CLI_BLOCKCHAIN" = "false" ] ; then (git clone $NEO_CLI_BLOCKCHAIN_URL /opt/neoNode);  fi
-
 ARG NEO_BLOCKCHAIN_URL
 ARG LOCAL_NEO_BLOCKCHAIN
 RUN mkdir /opt/neoLib 
 RUN if [ "$LOCAL_NEO_BLOCKCHAIN" = "false" ] ; then (git clone $NEO_BLOCKCHAIN_URL /opt/neoLib);  fi
-
-ARG NEO_CLI_BRANCH
-ARG NEO_CLI_COMMIT
-RUN if [ "$LOCAL_NEO_CLI_BLOCKCHAIN" = "false" ] ; then (cd /opt/neoNode && git pull && git checkout $NEO_CLI_BRANCH && git checkout $NEO_CLI_COMMIT);  fi
 
 ARG NEO_BLOCKCHAIN_BRANCH
 ARG NEO_BLOCKCHAIN_COMMIT
@@ -31,42 +22,17 @@ RUN if [ "$LOCAL_NEO_BLOCKCHAIN" = "false" ] ; then (cd /opt/neoLib && git pull 
 
 #==========================================================================
 #============== CHANGING DOCKER FOLDER TO A LOCAL FILE ====================
-ARG LOCAL_NEO_CLI_BLOCKCHAIN_URL
-RUN mkdir /opt/tempLocal_neoNode
-RUN mkdir /opt/tempLocal_neoLib
-ADD $LOCAL_NEO_CLI_BLOCKCHAIN_URL /opt/tempLocal_neoNode
-RUN if [ "$LOCAL_NEO_CLI_BLOCKCHAIN" = "true" ] ; then (rm -rf /opt/neoNode/; mv /opt/tempLocal_neoNode /opt/neoNode);  fi
+#ARG LOCAL_NEO_CLI_BLOCKCHAIN_URL
+#RUN mkdir /opt/tempLocal_neoNode
+#ADD $LOCAL_NEO_CLI_BLOCKCHAIN_URL /opt/tempLocal_neoNode
+#RUN if [ "$LOCAL_NEO_CLI_BLOCKCHAIN" = "true" ] ; then (rm -rf /opt/neoNode/; mv /opt/tempLocal_neoNode /opt/neoNode);  fi
 
+RUN mkdir /opt/tempLocal_neoLib
 ARG LOCAL_NEO_BLOCKCHAIN_URL
 ADD $LOCAL_NEO_BLOCKCHAIN_URL /opt/tempLocal_neoLib
 RUN if [ "$LOCAL_NEO_BLOCKCHAIN" = "true" ] ; then (rm -rf /opt/neoLib/; mv /opt/tempLocal_neoLib /opt/neoLib);  fi
 #==========================================================================
 #==========================================================================
-
-#--------------------- CHANGE NEO-VM PATH TO LOCAL FILES -----------------
-# NEO-VM special configurations
-RUN mkdir /opt/neo-vm
-RUN mkdir /opt/tempLocal_neo-vm
-
-ARG SET_NEO_VM
-ARG NEO_VM_URL
-ARG LOCAL_NEO_VM
-RUN if [ "$SET_NEO_VM" = "true" ] && [ "$LOCAL_NEO_VM" = "false" ] ; then git clone $NEO_VM_URL /opt/neo-vm;  fi
-
-ARG NEO_VM_BRANCH
-ARG NEO_VM_COMMIT
-RUN if [ "$SET_NEO_VM" = "true" ] && [ "$LOCAL_NEO_VM" = "false" ] ; then (cd /opt/neo-vm; git pull; git checkout $NEO_VM_BRANCH; git checkout $NEO_VM_COMMIT);  fi
-
-RUN if [ "$SET_NEO_VM" = "true" ] ; then (dotnet remove /opt/neoLib/src/Neo/Neo.csproj package neo.vm; dotnet sln /opt/neoLib/neo.sln add /opt/neo-vm/src/neo-vm/neo-vm.csproj; dotnet add /opt/neoLib/src/Neo/Neo.csproj reference /opt/neo-vm/src/neo-vm/neo-vm.csproj);  fi
-
-ARG LOCAL_NEO_VM_URL
-ADD $LOCAL_NEO_VM_URL /opt/tempLocal_neo-vm
-RUN if [ "$SET_NEO_VM" = "true" ] && [ "$LOCAL_NEO_VM" = "true" ] ; then (rm -rf /opt/neo-vm/; mv /opt/tempLocal_neo-vm /opt/neo-vm);  fi
-
-# Remove neo blockchain package from neo-cli project, referencing it to the local NeoBlockchain Library
-RUN dotnet remove /opt/neoNode/neo-cli/neo-cli.csproj package neo
-RUN dotnet add /opt/neoNode/neo-cli/neo-cli.csproj reference /opt/neoLib/src/Neo/Neo.csproj
-#--------------------------------------------------------------------------
 
 ARG NEO_BLOCKCHAIN_RUN_TESTS
 #---------------------- NEO CORE LIB UNIT TESTS ---------------------------
@@ -74,11 +40,35 @@ RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then (dotnet test --verbosity 
 RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then (dotnet test --verbosity n /opt/neoLib/tests/Neo.Json.UnitTests/Neo.Json.UnitTests.csproj);  fi
 #---------------------- NEO CORE LIB UNIT TESTS ---------------------------
 
+RUN  dotnet pack /opt/neoLib/src/Neo \
+        --configuration Release \
+        --output /opt/neoLib/out
+
+RUN ls /opt/neoLib/out
+
+RUN dotnet pack /opt/neoLib/src/Neo.Json \
+        --configuration Release \
+        --output /opt/neoLib/out
+        
+RUN dotnet pack /opt/neoLib/src/Neo.VM \
+        --configuration Release \
+        --output /opt/neoLib/out
+        
+RUN dotnet pack /opt/neoLib/src/Neo.ConsoleService \
+        --configuration Release \
+        --output /opt/neoLib/out   
+
+#RUN ls /opt/neoLib/out        
+
+WORKDIR /opt/neoLib/src/Neo.CLI
+RUN dotnet build --configuration Release
+RUN cp -r ./bin/Release/net7.0/* ./
+WORKDIR /
 #==========================================================================
 #============================== NEO.JSON LIB ==============================
 #--------------------------------------------------------------------------
 # RESTORE NEW NEO.JSON SEPARETED LIB
-RUN cd /opt/neoLib/src/Neo.Json && dotnet restore
+#RUN cd /opt/neoLib/src/Neo.Json && dotnet restore
 #--------------------------------------------------------------------------
 #==========================================================================
 
@@ -86,19 +76,18 @@ RUN cd /opt/neoLib/src/Neo.Json && dotnet restore
 #============================== PUBLISH NEO-CLI ===========================
 #--------------------------------------------------------------------------
 # publish Neo-cli using defined NeoLib
-RUN cp /opt/neoNode/NuGet.Config /opt/neoNode/neo-cli
-RUN cd /opt/neoNode/neo-cli && dotnet restore && dotnet publish -c Release -o /app
-RUN mv /app/* /opt/neoNode/neo-cli/
+#RUN cp /opt/neoNode/NuGet.Config /opt/neoNode/neo-cli
+#RUN cd /opt/neoNode/neo-cli && dotnet restore && dotnet publish -c Release -o /app
+#RUN mv /app/* /opt/neoNode/neo-cli/
 #--------------------------------------------------------------------------
 #==========================================================================
 
 #---------------------- NEO VM UNIT TESTS---------------------------
-RUN if [ "$SET_NEO_VM" = "true" ] ; then (dotnet test --verbosity n /opt/neo-vm/tests/neo-vm.Tests/neo-vm.Tests.csproj);  fi
+#RUN if [ "$SET_NEO_VM" = "true" ] ; then (dotnet test --verbosity n /opt/neo-vm/tests/neo-vm.Tests/neo-vm.Tests.csproj);  fi
 #--------------------- CHANGE NEO-VM PATH TO LOCAL FILES -----------------
 
 #==========================================================================
 #============= CLONING, PUBLISHING AND ADDING PLUGINS DLL'S ===============
-RUN mkdir /opt/neoNode/neo-cli/Plugins/
 RUN mkdir /opt/neo-modules 
 
 ARG NEO_PLUGINS_URL
@@ -123,29 +112,33 @@ ADD building_scripts/test_plugin_3x.sh /opt/
 ADD building_scripts/buildAllList_Plugins_3x.sh /opt/
 #--------------------------------------------------------------------------
 
+
 #-------- PLUGINS TO BE PUBLISHED & TESTED ARE LISTED BELOW ---------------
 ARG ENVFILE
 ADD $ENVFILE /opt/env-repositories.sh
 #--------------------------------------------------------------------------
 
-RUN dotnet remove /opt/neo-modules/src/Directory.Build.props reference Neo
-RUN dotnet add /opt/neo-modules/src/Directory.Build.props reference /opt/neoLib/src/Neo/Neo.csproj
-RUN dotnet add /opt/neo-modules/src/Directory.Build.props reference /opt/neoLib/src/Neo.Json/Neo.Json.csproj
+#RUN dotnet remove /opt/neo-modules/src/Directory.Build.props reference Neo
+#RUN dotnet add /opt/neo-modules/src/Directory.Build.props reference /opt/neoLib/src/Neo/Neo.csproj
+#RUN dotnet add /opt/neo-modules/src/Directory.Build.props reference /opt/neoLib/src/Neo.Json/Neo.Json.csproj
+#RUN dotnet add /opt/neo-modules/src/Directory.Build.props reference /opt/neoLib/src/Neo.VM/Neo.VM.csproj
 #THIS SYMBOLIC LINK IS A WORKAROUND BECAUSE OF THE RELATIVE PATH WHEN ADDING A REFERENCE
-RUN rm -r /opt/neoLib/src/Neo/bin /opt/neoLib/src/Neo/obj
-RUN rm -r /opt/neoLib/src/Neo.Json/bin /opt/neoLib/src/Neo.Json/obj
-RUN ln -s /opt/neoLib/ opt/neo-modules/
+#RUN rm -r /opt/neoLib/src/Neo/bin /opt/neoLib/src/Neo/obj
+#RUN rm -r /opt/neoLib/src/Neo.Json/bin /opt/neoLib/src/Neo.Json/obj
+#RUN rm -r /opt/neoLib/src/Neo.VM/bin /opt/neoLib/src/Neo.VM/obj
+#RUN ln -s /opt/neoLib/ /opt/neo-modules/
 
 #SED IS ALSO WORKROUND
 #RUN sed -i 's+.*Include="Neo".*+<PackageReference Include="\\opt\\neoLib\\src\\neo\\neo.csproj" />+g' /opt/neo-modules/src/Directory.Build.props
 #RUN cat /opt/neo-modules/src/Directory.Build.props
 
+RUN mkdir /opt/neoLib/src/Neo.CLI/Plugins/
 RUN /opt/buildAllList_Plugins_3x.sh
 #==========================================================================
 
 #==========================================================================
 #============ COMPACT NEO-CLI IN A ZIP FILE  ==============================
-RUN cd /opt/neoNode && zip -r /opt/neo-cli-built.zip neo-cli
+RUN cd /opt/neoLib/src/ && zip -r /opt/neo-cli-built.zip Neo.CLI
 #==========================================================================
 
 # ALL NIGHT LONG - STAY ALIVE

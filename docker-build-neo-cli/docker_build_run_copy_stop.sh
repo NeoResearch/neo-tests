@@ -66,7 +66,7 @@ ARGS="--build-arg NEO_VM_URL=$NEO_VM_URL --build-arg NEO_CLI_BLOCKCHAIN_URL=$NEO
 
 echo "Building ARGS are: $ARGS"
 
-CONTAINER_NAME="neo-build-neo-cli-with-new-blockchain-csharp"
+CONTAINER_NAME="neo-cli-csharp-builder-neo-tests"
 
 echo "Delete previous .zip"
 rm *.zip
