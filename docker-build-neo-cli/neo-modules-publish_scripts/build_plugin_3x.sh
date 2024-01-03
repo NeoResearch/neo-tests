@@ -36,11 +36,11 @@ if [ ! -f $ORIGIN_PATH/$PLUGIN_TO_INCLUDE.dll ]; then
     exit 1
 fi
 
-echo "GOING TO COPY DEPENDENCIES (IF NEEDED - CURRENTLY JUST ORACLE SERVICES)"
-echo ""
-
 DEST_FOLDER=/opt/neoLib/src/Neo.CLI/Plugins/$PLUGIN_TO_INCLUDE/
 mkdir $DEST_FOLDER
+
+echo "GOING TO COPY DEPENDENCIES (IF NEEDED - CURRENTLY JUST ORACLE SERVICES)"
+echo ""
 
 # =========================================================
 # cp -ri $ORIGIN_PATH/*.dll $DEST_FOLDER
