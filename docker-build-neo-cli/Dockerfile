@@ -22,43 +22,30 @@ RUN if [ "$LOCAL_NEO_BLOCKCHAIN" = "false" ] ; then (cd /opt/neoLib && git pull 
 
 #==========================================================================
 #============== CHANGING DOCKER FOLDER TO A LOCAL FILE ====================
-#ARG LOCAL_NEO_CLI_BLOCKCHAIN_URL
-#RUN mkdir /opt/tempLocal_neoNode
-#ADD $LOCAL_NEO_CLI_BLOCKCHAIN_URL /opt/tempLocal_neoNode
-#RUN if [ "$LOCAL_NEO_CLI_BLOCKCHAIN" = "true" ] ; then (rm -rf /opt/neoNode/; mv /opt/tempLocal_neoNode /opt/neoNode);  fi
-
-RUN mkdir /opt/tempLocal_neoLib
+ARG TEMP_LOCAL_NEO_LIB=/opt/tempLocal_neoLib
+RUN mkdir $TEMP_LOCAL_NEO_LIB
 ARG LOCAL_NEO_BLOCKCHAIN_URL
-ADD $LOCAL_NEO_BLOCKCHAIN_URL /opt/tempLocal_neoLib
-RUN if [ "$LOCAL_NEO_BLOCKCHAIN" = "true" ] ; then (rm -rf /opt/neoLib/; mv /opt/tempLocal_neoLib /opt/neoLib);  fi
+ADD $LOCAL_NEO_BLOCKCHAIN_URL $TEMP_LOCAL_NEO_LIB
+RUN if [ "$LOCAL_NEO_BLOCKCHAIN" = "true" ] ; then (rm -rf /opt/neoLib/; mv $TEMP_LOCAL_NEO_LIB /opt/neoLib);  fi
 #==========================================================================
 #==========================================================================
 
 ARG NEO_BLOCKCHAIN_RUN_TESTS
 #---------------------- NEO CORE LIB UNIT TESTS ---------------------------
-RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then (dotnet test --verbosity n /opt/neoLib/tests/Neo.UnitTests/Neo.UnitTests.csproj);  fi
+RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then (cd /opt/neoLib && dotnet format --verify-no-changes --verbosity diagnostic);  fi
+RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then (dotnet test --verbosity n /opt/neoLib/tests/Neo.ConsoleService.Tests/Neo.ConsoleService.Tests.csproj);  fi
 RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then (dotnet test --verbosity n /opt/neoLib/tests/Neo.Json.UnitTests/Neo.Json.UnitTests.csproj);  fi
+RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then (dotnet test --verbosity n /opt/neoLib/tests/Neo.UnitTests/Neo.UnitTests.csproj);  fi
+RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then (dotnet test --verbosity n /opt/neoLib/tests/Neo.VM.Tests/Neo.VM.Tests.csproj);  fi
 #---------------------- NEO CORE LIB UNIT TESTS ---------------------------
 
-RUN  dotnet pack /opt/neoLib/src/Neo \
-        --configuration Release \
-        --output /opt/neoLib/out
+#RUN  dotnet pack /opt/neoLib/src/Neo --configuration Release     --output /opt/neoLib/out
 
-RUN ls /opt/neoLib/out
-
-RUN dotnet pack /opt/neoLib/src/Neo.Json \
-        --configuration Release \
-        --output /opt/neoLib/out
+#RUN dotnet pack /opt/neoLib/src/Neo.Json --configuration Release    --output /opt/neoLib/out
         
-RUN dotnet pack /opt/neoLib/src/Neo.VM \
-        --configuration Release \
-        --output /opt/neoLib/out
+#RUN dotnet pack /opt/neoLib/src/Neo.VM  --configuration Release --output /opt/neoLib/out
         
-RUN dotnet pack /opt/neoLib/src/Neo.ConsoleService \
-        --configuration Release \
-        --output /opt/neoLib/out   
-
-#RUN ls /opt/neoLib/out        
+#RUN dotnet pack /opt/neoLib/src/Neo.ConsoleService    --configuration Release      --output /opt/neoLib/out   
 
 WORKDIR /opt/neoLib/src/Neo.CLI
 RUN dotnet build --configuration Release
@@ -138,7 +125,9 @@ RUN /opt/buildAllList_Plugins_3x.sh
 
 #==========================================================================
 #============ COMPACT NEO-CLI IN A ZIP FILE  ==============================
-RUN cd /opt/neoLib/src/ && zip -r /opt/neo-cli-built.zip Neo.CLI
+WORKDIR /opt/neoLib/src/
+
+RUN zip -r /opt/neo-cli-built.zip Neo.CLI
 #==========================================================================
 
 # ALL NIGHT LONG - STAY ALIVE

@@ -73,10 +73,6 @@ rm *.zip
 
 DOCKERFILE="./Dockerfile"
 
-if [ "$NEO2X" == "true" ] ; then
-	DOCKERFILE="./Dockerfile_2x"
-fi
-
 echo "BUILDING neo cli with personalized characteristics... $DOCKERFILE"
 docker build $ARGS -t $CONTAINER_NAME:latest -f $DOCKERFILE --progress=plain .
 

@@ -22,23 +22,6 @@ while [[ "$#" > 0 ]]; do case $1 in
   esac;
 done
 
-
-#echo "GOING TO CLEAN $PLUGIN_TO_INCLUDE..."
-#echo ""
-#echo "CLEAN MODULE..."
-#(cd /opt/neo-modules/src/$PLUGIN_TO_INCLUDE; dotnet clean)
-
-#echo "CLEAN NeoLib..."
-#(cd /opt/neo-modules/neoLib/; dotnet clean)
-#(cd /opt/neo-modules/neoLib/src/Neo; dotnet clean)
-#(cd /opt/neo-modules/neoLib/src/Neo.Json; dotnet clean)
-#(cd /opt/neo-modules/neoLib/src/Neo.VM; dotnet clean)
-#rm -r /opt/neoLib/src/Neo.Json/obj/
-#rm -r /opt/neoLib/src/Neo.VM/obj/
-#rm -r /opt/neo-modules/neoLib/src/Neo.VM/obj/
-#rm -r /opt/neo-modules/neoLib/src/Neo.Json/obj/
-
-
 echo "GOING TO PUBLISH $PLUGIN_TO_INCLUDE..."
 echo ""
 (cd /opt/neo-modules/src/$PLUGIN_TO_INCLUDE; dotnet publish -c Release -o app)
@@ -58,6 +41,11 @@ echo ""
 
 DEST_FOLDER=/opt/neoLib/src/Neo.CLI/Plugins/$PLUGIN_TO_INCLUDE/
 mkdir $DEST_FOLDER
+
+# =========================================================
+# cp -ri $ORIGIN_PATH/*.dll $DEST_FOLDER
+# =========================================================
+# OR COPY MANUALLY - TODO FOR SQLIT PLUGIN
 
 if [ $PLUGIN_TO_INCLUDE = "OracleService" ]; then
     echo "Going to copy file $ORIGIN_PATH/$PLUGIN_TO_INCLUDE.dll TO $DEST_FOLDER - and some other dependencies"
