@@ -3,7 +3,6 @@ __pycache__/
 .cache/
 *.zip
 others
-neo*
 localfiles
 env-repositories-temp.sh
 *(copy)*

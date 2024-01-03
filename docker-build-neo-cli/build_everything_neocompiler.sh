@@ -1,4 +1,5 @@
 #!/bin/bash
+source ./.env
 DISABLE_BUILD=1
 
 while [[ "$#" > 0 ]]; do case $1 in
@@ -23,12 +24,15 @@ if ((!$DISABLE_BUILD)); then
 	./docker_build_run_copy_stop.sh
 fi
 
-source ./.env
+# ====================================================
+# Copy local neo-cli to folder
 echo "Nodes path is: " + $PATH_CSHARP_NODE
-
 rm $PATH_CSHARP_NODE/neo-cli.zip
 rm $PATH_CSHARP_NODE/neo-cli-built.zip
 cp ./neo-cli-built.zip $PATH_CSHARP_NODE/neo-cli-built.zip
+# ====================================================
 
+# ====================================================
+# Start using --dev which invokes local neo-cli
 echo "Building docker neo-csharp-nodes with specific neo-cli."
 (cd $PATH_NEOCOMPILER; ./build_everything.sh --dev)

@@ -94,11 +94,10 @@ RUN if [ "$LOCAL_NEO_PLUGINS" = "true" ] ; then (rm -rf /opt/neo-modules; mv /op
 #--------------------------------------------------------------------------
 
 #-------- FILES FOR BUILDING & TESTING PUGLINS ----------------------------
-ADD building_scripts/build_plugin_3x.sh /opt/
-ADD building_scripts/test_plugin_3x.sh /opt/
-ADD building_scripts/buildAllList_Plugins_3x.sh /opt/
+ADD neo-modules-publish_scripts/build_plugin_3x.sh /opt/
+ADD neo-modules-publish_scripts/test_plugin_3x.sh /opt/
+ADD neo-modules-publish_scripts/buildAllList_Plugins_3x.sh /opt/
 #--------------------------------------------------------------------------
-
 
 #-------- PLUGINS TO BE PUBLISHED & TESTED ARE LISTED BELOW ---------------
 ARG ENVFILE
