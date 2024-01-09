@@ -24,7 +24,10 @@ done
 
 echo "GOING TO PUBLISH $PLUGIN_TO_INCLUDE..."
 echo ""
-(cd /opt/neo-modules/src/$PLUGIN_TO_INCLUDE; dotnet publish -c Release -o app)
+(cd /opt/neo-modules/src/$PLUGIN_TO_INCLUDE; dotnet restore)
+(cd /opt/neo-modules/src/$PLUGIN_TO_INCLUDE; dotnet publish -c Release -f net7.0 --no-restore -o app)
+
+ls -R /opt/neo-modules/src/$PLUGIN_TO_INCLUDE
 
 ORIGIN_PATH=/opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app
 
@@ -58,12 +61,24 @@ if [ $PLUGIN_TO_INCLUDE = "OracleService" ]; then
     cp -ri $ORIGIN_PATH/Grpc.AspNetCore.Server.dll $DEST_FOLDER
     cp -ri $ORIGIN_PATH/Grpc.AspNetCore.Server.ClientFactory.dll $DEST_FOLDER
     cp -ri $ORIGIN_PATH/Google.Protobuf.dll $DEST_FOLDER
+    exit 
+fi
+
+if [ $PLUGIN_TO_INCLUDE = "RestServer" ]; then
+    echo "Going to copy file $ORIGIN_PATH/$PLUGIN_TO_INCLUDE.dll TO $DEST_FOLDER - and some other dependencies"
+    cp -ri $ORIGIN_PATH/*.dll $DEST_FOLDER    
+    cp -ri $ORIGIN_PATH/RestServer.xml $DEST_FOLDER
+    exit
+fi
+
+if [ $PLUGIN_TO_INCLUDE = "SQLiteWallet" ]; then
+    echo "Going to copy file $ORIGIN_PATH/$PLUGIN_TO_INCLUDE.dll TO $DEST_FOLDER - and some other dependencies"
+    cp -ri $ORIGIN_PATH/*.dll $DEST_FOLDER    
+    exit
 fi
 
 echo "GOING TO COPY DLL ITSELF"
 echo ""
 
-if [ $PLUGIN_TO_INCLUDE != "OracleService" ]; then
-    echo "Going to copy file /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app/$PLUGIN_TO_INCLUDE.dll TO /opt/neoNode/neo-cli/Plugins/"
-    cp -ri $ORIGIN_PATH/$PLUGIN_TO_INCLUDE.dll $DEST_FOLDER
-fi
+echo "Going to copy file /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app/$PLUGIN_TO_INCLUDE.dll TO /opt/neoNode/neo-cli/Plugins/"
+cp -ri $ORIGIN_PATH/$PLUGIN_TO_INCLUDE.dll $DEST_FOLDER

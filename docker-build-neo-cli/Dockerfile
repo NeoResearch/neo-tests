@@ -38,7 +38,8 @@ RUN if [ "$LOCAL_NEO_BLOCKCHAIN" = "true" ] ; then (rm -rf /opt/neoLib/; mv $TEM
 #==========================================================================
 #========================== ALL THE MAGIC IS HERE =========================
 WORKDIR /opt/neoLib/src/Neo.CLI
-RUN dotnet publish -c Release -f net7.0 --output ./
+RUN dotnet restore
+RUN dotnet publish -c Release -f net7.0 --no-restore  --output ./
 WORKDIR /
 #==========================================================================
 
