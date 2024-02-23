@@ -29,12 +29,6 @@ ADD $LOCAL_NEO_BLOCKCHAIN_URL $TEMP_LOCAL_NEO_LIB
 RUN if [ "$LOCAL_NEO_BLOCKCHAIN" = "true" ] ; then (rm -rf /opt/neoLib/; mv $TEMP_LOCAL_NEO_LIB /opt/neoLib);  fi
 #==========================================================================
 #==========================================================================
-
-#RUN  dotnet pack /opt/neoLib/src/Neo --configuration Release     --output /opt/neoLib/out
-#RUN dotnet pack /opt/neoLib/src/Neo.Json --configuration Release    --output /opt/neoLib/out      
-#RUN dotnet pack /opt/neoLib/src/Neo.VM  --configuration Release --output /opt/neoLib/out        
-#RUN dotnet pack /opt/neoLib/src/Neo.ConsoleService    --configuration Release      --output /opt/neoLib/out   
-
 #==========================================================================
 #========================== ALL THE MAGIC IS HERE =========================
 WORKDIR /opt/neoLib/src/Neo.CLI
@@ -47,11 +41,16 @@ WORKDIR /
 ARG NEO_BLOCKCHAIN_RUN_TESTS
 #---------------------- NEO CORE LIB UNIT TESTS ---------------------------
 WORKDIR /opt/neoLib
+ARG COVERAGE_OUTPUT_FOLDER=/opt/neoLib/coverage-join/
+ARG COVERAGE_FILE_NAME=coverage.net7.0.json
 RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then (dotnet format --verify-no-changes --verbosity diagnostic);  fi
-RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then (dotnet test --verbosity n ./tests/Neo.ConsoleService.Tests/Neo.ConsoleService.Tests.csproj);  fi
-RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then (dotnet test --verbosity n ./tests/Neo.Json.UnitTests/Neo.Json.UnitTests.csproj);  fi
-RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then (dotnet test --verbosity n ./tests/Neo.UnitTests/Neo.UnitTests.csproj);  fi
-RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then (dotnet test --verbosity n ./tests/Neo.VM.Tests/Neo.VM.Tests.csproj);  fi
+RUN find tests -name *.csproj | xargs -I % dotnet add % package coverlet.msbuild
+RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then (dotnet test ./tests/Neo.ConsoleService.Tests         /p:CollectCoverage=true /p:CoverletOutput=$COVERAGE_OUTPUT_FOLDER);  fi
+RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then (dotnet test ./tests/Neo.Cryptography.BLS12_381.Tests /p:CollectCoverage=true /p:CoverletOutput=$COVERAGE_OUTPUT_FOLDER /p:MergeWith=$COVERAGE_OUTPUT_FOLDER$COVERAGE_FILE_NAME);  fi
+RUN mv /opt/neoLib/coverage-join/coverage.json /opt/neoLib/coverage-join/coverage.net7.0.json
+RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then (dotnet test ./tests/Neo.UnitTests                    /p:CollectCoverage=true /p:CoverletOutput=$COVERAGE_OUTPUT_FOLDER /p:MergeWith=$COVERAGE_OUTPUT_FOLDER$COVERAGE_FILE_NAME);  fi
+RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then (dotnet test ./tests/Neo.VM.Tests                     /p:CollectCoverage=true /p:CoverletOutput=$COVERAGE_OUTPUT_FOLDER /p:MergeWith=$COVERAGE_OUTPUT_FOLDER$COVERAGE_FILE_NAME);  fi
+RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then (dotnet test ./tests/Neo.Json.UnitTests               /p:CollectCoverage=true /p:CoverletOutput=/opt/neoLib/coverage/lcov  /p:MergeWith=$COVERAGE_OUTPUT_FOLDER$COVERAGE_FILE_NAME /p:CoverletOutputFormat=lcov);  fi
 WORKDIR /
 #---------------------- NEO CORE LIB UNIT TESTS ---------------------------
 #==========================================================================
@@ -87,13 +86,19 @@ ARG ENVFILE
 ADD $ENVFILE /opt/env-repositories.sh
 #--------------------------------------------------------------------------
 
+# Now it is submodule deps - Removing the existing directory
+RUN rm -r /opt/neo-modules/neo
+# Copying the new library into place
+RUN cp -r /opt/neoLib /opt/neo-modules/neo
+# Getting the git version of the module
+RUN cd /opt/neoLib && echo "Current neoLib last commit is: $(git rev-parse HEAD)"
+# Getting the git version of the submodule
+RUN cd /opt/neo-modules && echo "Current neo-modules last commit is: $(git rev-parse HEAD)"
 
-RUN dotnet remove /opt/neo-modules/Directory.Build.props reference Neo
-RUN dotnet add /opt/neo-modules/Directory.Build.props reference /opt/neoLib/src/Neo/Neo.csproj
-RUN sed -i 's|\.\.\\neoLib\\src\\Neo\\Neo.csproj|/opt/neoLib/src/Neo/Neo.csproj|' /opt/neo-modules/Directory.Build.props
-# STILL NEED TO DO THAT FOR CONSOLE SERVICE ON EACH CSPROJ for EACH PLUGIN
-
+# Create plugins folder inside Neo.CLI to be built
 RUN mkdir /opt/neoLib/src/Neo.CLI/Plugins/
+
+# Do everything and copy plugins
 RUN /opt/buildAllList_Plugins_3x.sh
 #==========================================================================
 
