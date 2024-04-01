@@ -2,7 +2,7 @@
 PLUGIN_TO_INCLUDE=1
 
 function usage {
-    echo "Usage: $0 [--plugin-name <plugin to build> --delete-neo-ref <bool>]"
+    echo "Usage: $0 [--plugin-name <plugin to build>]"
 }
 
 while [[ "$#" > 0 ]]; do case $1 in
@@ -22,12 +22,48 @@ while [[ "$#" > 0 ]]; do case $1 in
   esac;
 done
 
-echo "GOING TO PUBLISH $PLUGIN_TO_INCLUDE..."
+#================= PUBLISH ==============================
 echo ""
-(cd /opt/neo-modules/src/$PLUGIN_TO_INCLUDE; dotnet restore)
-(cd /opt/neo-modules/src/$PLUGIN_TO_INCLUDE; dotnet publish -c Release -f net7.0 --no-restore -o app)
+echo "GOING TO FOLDER /opt/neo-modules/src/$PLUGIN_TO_INCLUDE"
+cd /opt/neo-modules/src/$PLUGIN_TO_INCLUDE
 
-ls -R /opt/neo-modules/src/$PLUGIN_TO_INCLUDE
+echo ""
+echo "DOTNET INFO"
+dotnet --info
+
+echo ""
+echo "GOING TO RESTORE $PLUGIN_TO_INCLUDE..."
+dotnet restore 
+
+echo ""
+echo ""
+echo "GREP DOTNET PROCESS BEFORE SHUTDOWN"
+ps aux | grep dotnet
+
+echo ""
+echo "GOING build-server shutdown $PLUGIN_TO_INCLUDE..."
+dotnet build-server shutdown
+
+echo ""
+echo "GREP DOTNET PROCESS AFTER SHUTDOWN"
+ps aux | grep dotnet
+echo ""
+echo ""
+
+#echo "lsof"
+#lsof | grep dotnet
+
+echo ""
+echo "GOING TO BUILD $PLUGIN_TO_INCLUDE..."
+dotnet build --no-restore
+
+echo ""
+echo "GOING TO PUBLISH $PLUGIN_TO_INCLUDE..."
+dotnet publish -c Release -f net8.0 --no-restore -o app
+#================= PUBLISH ==============================
+
+# Sometimes LS is important in order to DEBUG BETTER if output is correct
+#ls -R /opt/neo-modules/src/$PLUGIN_TO_INCLUDE
 
 ORIGIN_PATH=/opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app
 

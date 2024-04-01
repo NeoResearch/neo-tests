@@ -1,20 +1,19 @@
 # https://github.com/neo-project/neo/commits/master
 NEO_BLOCKCHAIN_URL=https://github.com/neo-project/neo.git
 NEO_BLOCKCHAIN_BRANCH=master
-NEO_BLOCKCHAIN_COMMIT=b05501af882a0d1f2a1a7841c6ddc4d0504e5fc1
+NEO_BLOCKCHAIN_COMMIT=c550fc2
 
 # https://github.com/neo-project/neo-modules/commits/master
-NEO_PLUGINS_URL=https://github.com/neo-project/neo-modules.git
-NEO_PLUGINS_BRANCH=master
-NEO_PLUGINS_COMMIT=253a77e2b88f139bebb57779e4f3ca8837f92f68
+NEO_PLUGINS_URL=https://github.com/cschuchardt88/neo-modules.git
+NEO_PLUGINS_BRANCH=dotnet-upgrade
+NEO_PLUGINS_COMMIT=da29890
 
-LOCAL_NEO_BLOCKCHAIN="false"
+LOCAL_NEO_BLOCKCHAIN="true"
 LOCAL_NEO_BLOCKCHAIN_URL="localfiles/neo"
-LOCAL_NEO_PLUGINS="false"
-LOCAL_NEO_PLUGINS_URL="localfiles/neo-modules"
+LOCAL_NEO_PLUGINS="true"
+LOCAL_NEO_PLUGINS_URL="localfiles/neo-modules-cris"
 
 PLUGINS_LIST_NEO_PACKAGE=(ApplicationLogs DBFTPlugin LevelDBStore MPTTrie OracleService RocksDBStore RpcClient RpcServer SQLiteWallet StateService StatesDumper TokensTracker )
-PLUGINS_UT_LIST=(Neo.Cryptography.MPTTrie.Tests Neo.Network.RPC.Tests Neo.Plugins.OracleService.Tests Neo.Plugins.RpcServer.Tests  Neo.Plugins.Storage.Tests)
   
 NEO_BLOCKCHAIN_RUN_TESTS="true"
 PLUGINS_RUN_TESTS="true"
