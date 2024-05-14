@@ -49,7 +49,6 @@ RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then (dotnet format --verify-n
 ARG COVERAGE_OUTPUT_FOLDER=/opt/neoLib/coverage-join/
 ARG COVERAGE_FILE_NAME=coverage.net8.0.json
 ARG DOTNET_TEST_COMMAND="dotnet test --framework net8.0 --no-restore" 
-RUN find tests -name *.csproj | xargs -I % dotnet add % package coverlet.msbuild
 RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then $DOTNET_TEST_COMMAND ./tests/Neo.ConsoleService.Tests         /p:CollectCoverage=true /p:CoverletOutput=$COVERAGE_OUTPUT_FOLDER;  fi
 RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then $DOTNET_TEST_COMMAND ./tests/Neo.Cryptography.BLS12_381.Tests /p:CollectCoverage=true /p:CoverletOutput=$COVERAGE_OUTPUT_FOLDER /p:MergeWith=$COVERAGE_OUTPUT_FOLDER$COVERAGE_FILE_NAME;  fi
 RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then $DOTNET_TEST_COMMAND ./tests/Neo.UnitTests                    /p:CollectCoverage=true /p:CoverletOutput=$COVERAGE_OUTPUT_FOLDER /p:MergeWith=$COVERAGE_OUTPUT_FOLDER$COVERAGE_FILE_NAME;  fi
