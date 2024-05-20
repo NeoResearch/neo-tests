@@ -29,6 +29,7 @@ ADD $LOCAL_NEO_BLOCKCHAIN_URL $TEMP_LOCAL_NEO_LIB
 RUN if [ "$LOCAL_NEO_BLOCKCHAIN" = "true" ] ; then (rm -rf /opt/neoLib/; mv $TEMP_LOCAL_NEO_LIB /opt/neoLib);  fi
 #==========================================================================
 #==========================================================================
+
 #==========================================================================
 #========================== ALL THE MAGIC IS HERE =========================
 WORKDIR /opt/neoLib/
@@ -46,7 +47,7 @@ ARG NEO_BLOCKCHAIN_RUN_TESTS
 WORKDIR /opt/neoLib
 
 # Getting the git version 
-RUN echo "Current neoLib last commit is: $(git rev-parse HEAD)"
+RUN echo "LAST COMMIT FOR NEO IS: $(git rev-parse HEAD)"
 
 RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then (dotnet format --verify-no-changes --verbosity diagnostic);  fi
 
@@ -80,7 +81,6 @@ RUN mkdir /opt/neoLib/src/Neo.CLI/Plugins/
 
 #-------- FILES FOR BUILDING & TESTING PUGLINS ----------------------------
 ADD neo-modules-publish_scripts/build_plugin_3x.sh /opt/
-ADD neo-modules-publish_scripts/test_plugin_3x.sh /opt/
 ADD neo-modules-publish_scripts/buildAllList_Plugins_3x.sh /opt/
 #--------------------------------------------------------------------------
 
@@ -98,6 +98,9 @@ RUN /opt/buildAllList_Plugins_3x.sh
 #==========================================================================
 #============ COMPACT NEO-CLI IN A ZIP FILE  ==============================
 WORKDIR /opt/neoLib/src/
+
+#show everything to us
+RUN ls -R
 
 RUN zip -r /opt/neo-cli-built.zip Neo.CLI
 #==========================================================================

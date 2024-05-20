@@ -24,8 +24,8 @@ done
 
 #================= PUBLISH ==============================
 echo ""
-echo "GOING TO FOLDER /opt/neo-modules/src/$PLUGIN_TO_INCLUDE"
-cd /opt/neoLib/
+echo "GOING TO FOLDER /opt/neoLib/src/Plugins/$PLUGIN_TO_INCLUDE"
+cd /opt/neoLib/src/Plugins
 
 echo ""
 echo "DOTNET INFO"
@@ -33,7 +33,7 @@ dotnet --info
 
 echo ""
 echo "GOING TO RESTORE $PLUGIN_TO_INCLUDE..."
-#dotnet restore 
+dotnet restore 
 
 echo ""
 echo ""
@@ -55,11 +55,11 @@ echo ""
 
 echo ""
 echo "GOING TO BUILD $PLUGIN_TO_INCLUDE..."
-#dotnet build --no-restore
+dotnet build --no-restore
 
 echo ""
 echo "GOING TO PUBLISH $PLUGIN_TO_INCLUDE..."
-dotnet publish ./src/Plugins/$PLUGIN_TO_INCLUDE -c Release -f net8.0 --no-restore -o ./src/Plugins/$PLUGIN_TO_INCLUDE/app
+dotnet publish ./$PLUGIN_TO_INCLUDE -c Release -f net8.0 --no-restore -o ./$PLUGIN_TO_INCLUDE/app
 #================= PUBLISH ==============================
 
 
