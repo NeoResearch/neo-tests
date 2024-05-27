@@ -1,10 +1,9 @@
 # NEO csharp-nodes network simulator
-FROM microsoft/dotnet:2.2-sdk-bionic
+# https://hub.docker.com/_/microsoft-dotnet-aspnet/
+FROM mcr.microsoft.com/dotnet/aspnet:8.0.3-jammy
 
 LABEL maintainer="NeoResearch"
 LABEL authors="imcoelho,vncoelho"
-
-ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
 	    unzip \
@@ -30,6 +29,8 @@ RUN unzip -q -d /opt/node /opt/neo-cli.zip
 
 #Script used to start nodes on screen sessions
 ADD ./scripts/run.sh /opt/
+
+#Script used to simple start RPC
 ADD ./scripts/start_node.sh /opt/
 
 # On docker run, start the consensus nodes

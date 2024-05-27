@@ -79,9 +79,8 @@ echo "GOING TO COPY DEPENDENCIES (IF NEEDED - CURRENTLY JUST ORACLE SERVICES)"
 echo ""
 
 # =========================================================
-# cp -ri $ORIGIN_PATH/*.dll $DEST_FOLDER
+# ================= COPPYING DLLS =========================
 # =========================================================
-# OR COPY MANUALLY - TODO FOR SQLIT PLUGIN
 
 if [ $PLUGIN_TO_INCLUDE = "OracleService" ]; then
     echo "Going to copy file $ORIGIN_PATH/$PLUGIN_TO_INCLUDE.dll TO $DEST_FOLDER - and some other dependencies"

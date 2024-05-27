@@ -1,0 +1,50 @@
+{
+  "ApplicationConfiguration": {
+    "Logger": {
+      "Path": "Logs",
+      "ConsoleOutput": true,
+      "Active": true
+    },    
+    "Storage": {
+      "Engine": "LevelDBStore",
+      "Path": "Data_LevelDB_{0}"
+    },
+    "P2P": {
+      "Port": 20337,
+      "MinDesiredConnections": 10,
+      "MaxConnections": 40,
+      "MaxConnectionsPerAddress": 10
+    },
+    "UnlockWallet": {
+      "Path": "walletRpc.json",
+      "Password": "one",
+      "IsActive": true
+    }
+  },
+  "ProtocolConfiguration": {
+        "Network": 56753,
+	"AddressVersion": 53,        
+        "MillisecondsPerBlock": 1000,
+	"MaxTransactionsPerBlock": 5000,
+	"MemoryPoolMaxTransactions": 50000,   
+        "MaxTraceableBlocks": 2102400,
+    	"Hardforks": {
+        	"HF_Aspidochelone": 0,
+        	"HF_Basilisk": 0
+    	},
+	"InitialGasDistribution": 5200000000000000,    	
+        "ValidatorsCount": 4,         
+        "StandbyCommittee": [
+            "035cd1f46ae1428ac1a4d0bb5d53ed89155709f9e767abe839a402349494ad6550",
+            "028dbb429339ff85cbf0ca05f6f50a9aa7201138ca6458a5e3c78367f904b89d2f",
+            "03bbc4a365248c965200d7957e2575e14e932a04f7e43f834c689bbdcb726c44c3",
+            "027fc3235d24b10e0701025b696833f29ea38c9aae80e13b3dd94d00aac9b0d48b"
+        ],
+        "SeedList": [
+            "eco-neo-csharp-node1-running:20333",
+            "eco-neo-csharp-node2-running:20334",
+            "eco-neo-csharp-node3-running:20335",
+            "eco-neo-csharp-node4-running:20336"
+        ]
+    }
+}

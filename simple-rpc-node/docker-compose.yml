@@ -6,7 +6,7 @@ version: "3.7"
 services:
 
 # ================================================================================
-# ================== OPEN CONTAINER WITH NEO-CLI RPC DESIGNED FOR MAINNET ========
+# ================== OPEN CONTAINER WITH Neo.CLI RPC DESIGNED FOR MAINNET ========
   eco-neo-csharp-noderpc-mainnet-running:
     image: eco-neo-csharp-simple-node:latest
     container_name: "eco-neo-csharp-noderpc-${NETWORK}"
@@ -17,19 +17,18 @@ services:
       - "${PORT_BEGIN}0333:${PORT_BEGIN}0333"
       - "${PORT_BEGIN}0332:${PORT_BEGIN}0332"
     volumes:
-      - ./neo-cli/configs/protocol.${NETWORK}.json:/opt/node/neo-cli/protocol.json
-      - ./neo-cli/configs/config.${NETWORK}.json:/opt/node/neo-cli/config.json
-      - ./neo-cli/configs/plugins/simplePolicyConfig.json:/opt/node/neo-cli/Plugins/SimplePolicy/config.json
-      - ./neo-cli/configs/plugins/appLogConfig.json:/opt/node/neo-cli/Plugins/ApplicationLogs/config.json
-      - ./neo-cli/configs/plugins/importBlocks.json:/opt/node/neo-cli/Plugins/ImportBlocks/config.json
-      - ./neo-cli/configs/plugins/rpcSecurity.json:/opt/node/neo-cli/Plugins/RpcSecurity/config.json
-      - ./neo-cli/configs/plugins/statesDumper.json:/opt/node/neo-cli/Plugins/StatesDumper/config.json
-      - ./neo-cli/configs/plugins/rpcNep5Tracker.json:/opt/node/neo-cli/Plugins/RpcNep5Tracker/config.json
-      - ./neo-cli/configs/plugins/rpcSystemAssetTracker.json:/opt/node/neo-cli/Plugins/RpcSystemAssetTracker/config.json
-      - ./Chain_$NETWORK:/opt/node/neo-cli/Chain_${FOLDER_BEGIN}746E41
-      - ./AppLog_$NETWORK:/opt/node/neo-cli/AppLog_${FOLDER_BEGIN}746E41
-      - ./Storage_$NETWORK:/opt/node/neo-cli/Storage
-      - ./chain.acc.zip:/opt/node/neo-cli/chain.acc.zip
+      - ./Neo.CLI/configs/config.${NETWORK}.json:/opt/node/Neo.CLI/config.json
+      - ./Neo.CLI/configs/plugins/appLogConfig.json:/opt/node/Neo.CLI/Plugins/ApplicationLogs/ApplicationLogs.json
+      - ./Neo.CLI/configs/plugins/rpcServer.json:/opt/node/Neo.CLI/Plugins/RpcServer/RpcServer.json    
+      - ./Neo.CLI/configs/plugins/tokensTracker.json:/opt/node/Neo.CLI/Plugins/TokensTracker/TokensTracker.json
+      - ./Neo.CLI/configs/plugins/storageDumper.json:/opt/node/Neo.CLI/Plugins/StatesDumper/StorageDumper.json   
+      - ./Neo.CLI/configs/plugins/stateService.json:/opt/node/Neo.CLI/Plugins/StateService/StateService.json
+      - ./Neo.CLI/configs/plugins/wallets/walletRpc.json:/opt/node/Neo.CLI/walletRpc.json   
+      - ./Neo.CLI/configs/plugins/getIncStorage.sh:/opt/getIncStorage.sh
+      - ./Chain_$NETWORK:/opt/node/Neo.CLI/Chain_${FOLDER_BEGIN}746E41
+      - ./AppLog_$NETWORK:/opt/node/Neo.CLI/ApplicationLogs_0000DDB1
+      - ./Storage_$NETWORK:/opt/node/Neo.CLI/Storage
+      - ./chain.acc.zip:/opt/node/Neo.CLI/chain.acc.zip
     environment:
       IS_CONSENSUS: 0
       IS_RPC: 1

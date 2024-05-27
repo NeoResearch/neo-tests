@@ -1,0 +1,25 @@
+{
+  "PluginConfiguration": {
+    "Servers": [
+      {
+        "Network": 56753,
+        "BindAddress": "0.0.0.0",
+        "Port": 30337,
+        "SslCert": "",
+        "SslCertPassword": "",
+        "TrustedAuthorities": [],
+        "RpcUser": "",
+        "RpcPass": "",       
+        "MaxGasInvoke": 20,
+        "MaxFee": 0.1,
+        "MaxConcurrentConnections": 40,
+        "MaxIteratorResultItems": 100,
+        "MaxStackSize": 65535,
+        "DisabledMethods": [ "openwallet" ],
+        "SessionEnabled": false,
+        "SessionExpirationTime": 60,
+        "FindStoragePageSize": 50
+      }
+    ]
+  }
+}
