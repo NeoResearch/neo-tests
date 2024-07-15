@@ -1,10 +1,11 @@
 # https://hub.docker.com/_/microsoft-dotnet-sdk/
-FROM mcr.microsoft.com/dotnet/sdk:8.0.203-jammy
+# https://github.com/dotnet/dotnet-docker/blob/main/README.sdk.md#full-tag-listing
+FROM mcr.microsoft.com/dotnet/sdk:8.0.303-jammy
 LABEL maintainer="NeoResearch"
 
 # libleveldb-dev libsnappy-dev libc6-dev are used for testing Neo.Plugins.Storage.Tests
 RUN apt-get update \
-    && apt-get install -y zip libleveldb-dev libsnappy-dev libc6-dev
+    && apt-get install -y zip libleveldb-dev librocksdb-dev
 
 #==========================================================================
 RUN mkdir /opt/neoLib 
