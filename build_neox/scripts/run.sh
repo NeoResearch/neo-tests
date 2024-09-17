@@ -5,6 +5,8 @@
 
 node="/root/nodes/node"
 
+mkdir $node
+
 #geth --datadir $node account new --password /opt/password.txt
 
 #genesis_mainnet.json

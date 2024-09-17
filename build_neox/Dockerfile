@@ -24,9 +24,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Copy the built binary
 COPY --from=builder /app/go-ethereum/build/bin/geth /usr/local/bin/geth
 
-# Create necessary directories
-RUN mkdir -p $NODE_DIR
-
 # Copy the genesis file
 COPY --from=builder /app/go-ethereum/config/genesis_testnet.json /root/genesis_testnet.json
 COPY --from=builder /app/go-ethereum/config/genesis_mainnet.json /root/genesis_mainnet.json
