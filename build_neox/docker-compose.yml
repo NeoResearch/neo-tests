@@ -16,3 +16,4 @@ services:
       - ./scripts/password.txt:/root/nodes/node/password.txt
       - ./scripts/node_address.txt:/root/nodes/node/node_address.txt
       - ./scripts/UTC--2024-09-17T13-02-06.609594853Z--b64ffa409300d6f428fd99ea88839327e0eaa7f1:/root/nodes/node/keystore/UTC--2024-09-17T13-02-06.609594853Z--b64ffa409300d6f428fd99ea88839327e0eaa7f1
+      - ./chaindata/chaindata:/root/nodes/node/geth/chaindata
