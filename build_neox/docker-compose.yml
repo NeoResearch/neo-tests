@@ -5,10 +5,12 @@ services:
     image: banelabs-go-ethereum:latest
     container_name: "go-ethereum-running"
     ports:
-      - "30301:30301"
-      - "8551:8551"
-      - "8561:8561"
-      - "8571:8571"
+      - 30301:30301
+      - 8551:8551
+      - 8561:8561
+      - 8571:8571
+      - 8545:8545
+      - 8546:8546
     volumes:
       - ./scripts/run.sh:/opt/run.sh
       - ./scripts/startNode.sh:/opt/startNode.sh
@@ -17,3 +19,10 @@ services:
       - ./scripts/node_address.txt:/root/nodes/node/node_address.txt
       - ./scripts/UTC--2024-09-17T13-02-06.609594853Z--b64ffa409300d6f428fd99ea88839327e0eaa7f1:/root/nodes/node/keystore/UTC--2024-09-17T13-02-06.609594853Z--b64ffa409300d6f428fd99ea88839327e0eaa7f1
       - ./chaindata:/root/nodes/node/geth/chaindata
+      - ./execution:/execution
+    networks:
+      - my-network
+      
+networks:
+  my-network:
+    name: custom_network

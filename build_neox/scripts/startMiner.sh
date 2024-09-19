@@ -10,13 +10,17 @@ miner=$(<$node/node_address.txt)
 echo "$node and miner is $miner, rpc port $rpcport, p2p port $port"
 
 geth \
+--http \
+--http.addr=0.0.0.0 \
+--http.corsdomain=* \
+--authrpc.vhosts=* \
+--authrpc.addr=0.0.0.0 \
+--authrpc.jwtsecret=/execution/jwtsecret \
 --networkid $networkid_testnet \
---nat extip:$extip \
---port $port \
 --mine --miner.etherbase=$miner \
+--allow-insecure-unlock \
 --unlock $miner \
 --password $node/password.txt \
---authrpc.port $rpcport \
 --identity=$node \
 --maxpeers=50 \
 --syncmode full \
