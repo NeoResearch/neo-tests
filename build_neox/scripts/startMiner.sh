@@ -13,6 +13,7 @@ geth \
 --http \
 --http.addr=0.0.0.0 \
 --http.corsdomain=* \
+--http.api=debug,eth,net,web3 \
 --authrpc.vhosts=* \
 --authrpc.addr=0.0.0.0 \
 --authrpc.jwtsecret=/execution/jwtsecret \
@@ -25,6 +26,8 @@ geth \
 --maxpeers=50 \
 --syncmode full \
 --gcmode archive \
+--nat extip:$extip \
+--port $port \
 --datadir $node \
 --bootnodes "enode://65775722283d6b19cf64c875897faf34ee120dc686c552d11c1310ee3d44bad0da88cfd9cef53a92c10604f8140d5210c4381e3e7a99322400130b5b8d4d331b@34.143.193.38:30301" \
 --verbosity 3
