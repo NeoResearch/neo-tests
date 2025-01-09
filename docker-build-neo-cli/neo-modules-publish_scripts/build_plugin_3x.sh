@@ -59,10 +59,12 @@ cd /opt/neoLib/src/Plugins
 
 echo ""
 echo "GOING TO PUBLISH $PLUGIN_TO_INCLUDE..."
-dotnet publish ./$PLUGIN_TO_INCLUDE -c Release -f net8.0 -o ./$PLUGIN_TO_INCLUDE/app
+dotnet publish ./$PLUGIN_TO_INCLUDE -c Release -f net9.0 -o ./$PLUGIN_TO_INCLUDE/app
 #================= PUBLISH ==============================
 
 ORIGIN_PATH=/opt/neoLib/src/Plugins/$PLUGIN_TO_INCLUDE/app
+
+ls $ORIGIN_PATH
 
 echo "GOING TO CHECK CREATED DLL $PLUGIN_TO_INCLUDE..."
 echo ""

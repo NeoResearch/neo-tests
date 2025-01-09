@@ -1,11 +1,11 @@
 # https://hub.docker.com/_/microsoft-dotnet-sdk/
 # https://github.com/dotnet/dotnet-docker/blob/main/README.sdk.md#full-tag-listing
-FROM mcr.microsoft.com/dotnet/sdk:8.0.303-jammy
+FROM mcr.microsoft.com/dotnet/sdk:9.0.101-noble
 LABEL maintainer="NeoResearch"
 
 # libleveldb-dev libsnappy-dev libc6-dev are used for testing Neo.Plugins.Storage.Tests
 RUN apt-get update \
-    && apt-get install -y zip libleveldb-dev librocksdb-dev
+    && apt-get install -y zip libleveldb-dev librocksdb-dev libsnappy-dev
 
 #==========================================================================
 RUN mkdir /opt/neoLib 
@@ -38,7 +38,7 @@ RUN dotnet build
 
 WORKDIR /opt/neoLib/src/Neo.CLI
 # before we restored and build - now just build and use --no-build later instead of no-restore
-RUN dotnet publish -c Release -f net8.0 --no-restore  --output ./
+RUN dotnet publish -c Release -f net9.0 --no-restore  --output ./
 WORKDIR /
 #==========================================================================
 
@@ -54,7 +54,7 @@ RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then (dotnet format --verify-n
 
 ARG COVERAGE_OUTPUT_FOLDER=/opt/neoLib/coverage-join/
 ARG COVERAGE_FILE_NAME=coverage.json
-ARG DOTNET_TEST_COMMAND="dotnet test --framework net8.0 --no-restore" 
+ARG DOTNET_TEST_COMMAND="dotnet test --framework net9.0 --no-restore" 
 RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then $DOTNET_TEST_COMMAND ./tests/Neo.Cryptography.BLS12_381.Tests /p:CollectCoverage=true /p:CoverletOutput=$COVERAGE_OUTPUT_FOLDER; fi
 RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then $DOTNET_TEST_COMMAND ./tests/Neo.ConsoleService.Tests         /p:CollectCoverage=true /p:CoverletOutput=$COVERAGE_OUTPUT_FOLDER /p:MergeWith=$COVERAGE_OUTPUT_FOLDER$COVERAGE_FILE_NAME;  fi
 RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then $DOTNET_TEST_COMMAND ./tests/Neo.UnitTests                    /p:CollectCoverage=true /p:CoverletOutput=$COVERAGE_OUTPUT_FOLDER /p:MergeWith=$COVERAGE_OUTPUT_FOLDER$COVERAGE_FILE_NAME;  fi
