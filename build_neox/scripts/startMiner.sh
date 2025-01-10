@@ -13,7 +13,7 @@ geth \
 --http \
 --http.addr=0.0.0.0 \
 --http.corsdomain=* \
---http.api=debug,eth,net,web3 \
+--http.api=debug,eth,net,web3,txpool \
 --authrpc.vhosts=* \
 --authrpc.addr=0.0.0.0 \
 --authrpc.jwtsecret=/execution/jwtsecret \
