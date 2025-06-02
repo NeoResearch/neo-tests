@@ -1,7 +1,7 @@
 # https://github.com/neo-project/neo/commits/master
 NEO_BLOCKCHAIN_URL=https://github.com/neo-project/neo.git
 NEO_BLOCKCHAIN_BRANCH=master
-NEO_BLOCKCHAIN_COMMIT=5a3dd165a897b9a697558f55c7222b341b4fcc22
+NEO_BLOCKCHAIN_COMMIT=9b9be47357e9065de524005755212ed54c3f6a11
 
 LOCAL_NEO_BLOCKCHAIN="false"
 LOCAL_NEO_BLOCKCHAIN_URL="localfiles/neo"
