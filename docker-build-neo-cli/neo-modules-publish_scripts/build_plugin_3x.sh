@@ -111,6 +111,12 @@ if [ $PLUGIN_TO_INCLUDE = "SQLiteWallet" ]; then
     exit
 fi
 
+if [ $PLUGIN_TO_INCLUDE = "SignClient" ]; then
+    echo "Going to copy file $ORIGIN_PATH/$PLUGIN_TO_INCLUDE.dll TO $DEST_FOLDER - and some other dependencies"
+    cp -ri $ORIGIN_PATH/*.dll $DEST_FOLDER    
+    exit
+fi
+
 echo "GOING TO COPY DLL ITSELF"
 echo ""
 

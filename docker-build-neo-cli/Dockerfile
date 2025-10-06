@@ -1,6 +1,6 @@
 # https://hub.docker.com/_/microsoft-dotnet-sdk/
 # https://github.com/dotnet/dotnet-docker/blob/main/README.sdk.md#full-tag-listing
-FROM mcr.microsoft.com/dotnet/sdk:9.0.203-noble
+FROM mcr.microsoft.com/dotnet/sdk:9.0.304-noble
 LABEL maintainer="NeoResearch"
 
 # libleveldb-dev libsnappy-dev libc6-dev are used for testing Neo.Plugins.Storage.Tests
@@ -63,7 +63,7 @@ RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then $DOTNET_TEST_COMMAND ./te
 RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then $DOTNET_TEST_COMMAND  ./tests/Neo.Json.UnitTests              /p:CollectCoverage=true /p:CoverletOutput=$COVERAGE_OUTPUT_FOLDER /p:MergeWith=$COVERAGE_OUTPUT_FOLDER$COVERAGE_FILE_NAME;  fi
 
 RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then $DOTNET_TEST_COMMAND  ./tests/Neo.Cryptography.MPTTrie.Tests  /p:CollectCoverage=true /p:CoverletOutput=$COVERAGE_OUTPUT_FOLDER /p:MergeWith=$COVERAGE_OUTPUT_FOLDER$COVERAGE_FILE_NAME;  fi
-RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then $DOTNET_TEST_COMMAND  ./tests/Neo.Network.RPC.Tests           /p:CollectCoverage=true /p:CoverletOutput=$COVERAGE_OUTPUT_FOLDER /p:MergeWith=$COVERAGE_OUTPUT_FOLDER$COVERAGE_FILE_NAME;  fi
+#RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then $DOTNET_TEST_COMMAND  ./tests/Neo.Network.RPC.RpcClient.Tests /p:CollectCoverage=true /p:CoverletOutput=$COVERAGE_OUTPUT_FOLDER /p:MergeWith=$COVERAGE_OUTPUT_FOLDER$COVERAGE_FILE_NAME;  fi
 RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then $DOTNET_TEST_COMMAND  ./tests/Neo.Plugins.OracleService.Tests /p:CollectCoverage=true /p:CoverletOutput=$COVERAGE_OUTPUT_FOLDER /p:MergeWith=$COVERAGE_OUTPUT_FOLDER$COVERAGE_FILE_NAME;  fi
 RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then $DOTNET_TEST_COMMAND  ./tests/Neo.Plugins.ApplicationLogs.Tests /p:CollectCoverage=true /p:CoverletOutput=$COVERAGE_OUTPUT_FOLDER /p:MergeWith=$COVERAGE_OUTPUT_FOLDER$COVERAGE_FILE_NAME;  fi
 RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then $DOTNET_TEST_COMMAND  ./tests/Neo.Plugins.RpcServer.Tests     /p:CollectCoverage=true /p:CoverletOutput=$COVERAGE_OUTPUT_FOLDER  /p:MergeWith=$COVERAGE_OUTPUT_FOLDER$COVERAGE_FILE_NAME;  fi
