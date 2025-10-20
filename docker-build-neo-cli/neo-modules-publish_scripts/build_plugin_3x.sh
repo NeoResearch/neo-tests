@@ -24,8 +24,8 @@ done
 
 #================= PUBLISH ==============================
 echo ""
-echo "GOING TO FOLDER /opt/neoLib/src/Plugins/$PLUGIN_TO_INCLUDE"
-cd /opt/neoLib/src/Plugins
+echo "GOING TO FOLDER /opt/neo/src/Plugins/$PLUGIN_TO_INCLUDE"
+cd /opt/neo/src/Plugins
 
 #echo ""
 #echo "DOTNET INFO"
@@ -62,7 +62,7 @@ echo "GOING TO PUBLISH $PLUGIN_TO_INCLUDE..."
 dotnet publish ./$PLUGIN_TO_INCLUDE -c Release -f net9.0 -o ./$PLUGIN_TO_INCLUDE/app
 #================= PUBLISH ==============================
 
-ORIGIN_PATH=/opt/neoLib/src/Plugins/$PLUGIN_TO_INCLUDE/app
+ORIGIN_PATH=/opt/neo/src/Plugins/$PLUGIN_TO_INCLUDE/app
 
 ls $ORIGIN_PATH
 
@@ -74,7 +74,7 @@ if [ ! -f $ORIGIN_PATH/$PLUGIN_TO_INCLUDE.dll ]; then
     exit 1
 fi
 
-DEST_FOLDER=/opt/neoLib/src/Neo.CLI/Plugins/$PLUGIN_TO_INCLUDE/
+DEST_FOLDER=/opt/neo/src/Neo.CLI/Plugins/$PLUGIN_TO_INCLUDE/
 mkdir $DEST_FOLDER
 
 echo "GOING TO COPY DEPENDENCIES (IF NEEDED - CURRENTLY JUST ORACLE SERVICES)"
