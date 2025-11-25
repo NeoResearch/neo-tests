@@ -1,0 +1,29 @@
+services:
+  eco-neo-csharp-cnnode-running:
+    image: eco-neo-csharp-node-simple-cn:latest
+    container_name: "eco-neo-csharp-cnnode-running"
+    ports:
+      - "20333:20333"
+    volumes:
+      - ./neo-cli:/opt/node/Neo.CLI
+    restart: always
+    healthcheck:
+      test: ["CMD", "bash", "-c", "exec 6<>/dev/tcp/127.0.0.1/20333 || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    labels:
+      autoheal: 'true'
+
+  eco-neo-autoheal:
+    image: willfarrell/autoheal
+    container_name: eco-neo-autoheal
+    depends_on:
+      - eco-neo-csharp-cnnode-running
+    environment:
+      - AUTOHEAL_CONTAINER_LABEL=autoheal
+      - AUTOHEAL_INTERVAL=5
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
