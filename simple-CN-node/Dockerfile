@@ -1,5 +1,5 @@
 # NEO csharp node 
-# https://hub.docker.com/_/microsoft-dotnet-aspnet/
+# https://mcr.microsoft.com/v2/dotnet/aspnet/tags/list
 FROM mcr.microsoft.com/dotnet/aspnet:9.0.11-noble
 
 LABEL maintainer="NeoResearch"

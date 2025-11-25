@@ -3,12 +3,12 @@ services:
     image: eco-neo-csharp-node-simple-cn:latest
     container_name: "eco-neo-csharp-cnnode-running"
     ports:
-      - "20333:20333"
+      - "10333:10333"
     volumes:
       - ./neo-cli:/opt/node/Neo.CLI
     restart: always
     healthcheck:
-      test: ["CMD", "bash", "-c", "exec 6<>/dev/tcp/127.0.0.1/20333 || exit 1"]
+      test: ["CMD", "bash", "-c", "exec 6<>/dev/tcp/127.0.0.1/10333 || exit 1"]
       interval: 15s
       timeout: 5s
       retries: 3
