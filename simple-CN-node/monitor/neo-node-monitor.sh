@@ -56,7 +56,7 @@ fi
 if [ -f "$STATE_FILE" ]; then
     LAST_BLOCK=$(cat "$STATE_FILE")
 
-    echo "HI $LAST_BLOCK"
+    #echo "HI $LAST_BLOCK"
 
     if [ "$CURRENT_BLOCK" -eq "$LAST_BLOCK" ]; then
         if [ -f "$COUNT_FILE" ]; then
