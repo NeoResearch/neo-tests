@@ -4,6 +4,7 @@ services:
     container_name: "eco-neo-csharp-cnnode-running"
     ports:
       - "10333:10333"
+      - "10332:10332"      
     volumes:
       - ./neo-cli:/opt/node/Neo.CLI
     restart: always
