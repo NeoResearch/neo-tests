@@ -1,5 +1,5 @@
 #!/bin/bash
-./rpc_stop.sh
+./cn_stop.sh
 
 #Build neo cli
 ./docker_build.sh

@@ -1,0 +1,2 @@
+# m h  dom mon dow   command
+*/5 * * * * /opt/XXX/XXXX/neo-node-monitor.sh
