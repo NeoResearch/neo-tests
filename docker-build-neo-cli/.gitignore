@@ -3,7 +3,7 @@ __pycache__/
 .cache/
 *.zip
 others
-localfiles
 env-repositories-temp.sh
 *(copy)*
 build.log
+neo-cli-built

@@ -22,60 +22,30 @@ while [[ "$#" > 0 ]]; do case $1 in
   esac;
 done
 
+NEO_PLUGINS_PATH=/opt/neo-node/plugins
+DEST_FOLDER=/opt/app/Plugins/$PLUGIN_TO_INCLUDE/
+mkdir $DEST_FOLDER
 #================= PUBLISH ==============================
 echo ""
-echo "GOING TO FOLDER /opt/neo/src/Plugins/$PLUGIN_TO_INCLUDE"
-cd /opt/neo/src/Plugins
-
-#echo ""
-#echo "DOTNET INFO"
-#dotnet --info
-
-#echo ""
-#echo "GOING TO RESTORE $PLUGIN_TO_INCLUDE..."
-#dotnet restore 
-
-#echo ""
-#echo ""
-#echo "GREP DOTNET PROCESS BEFORE SHUTDOWN"
-#ps aux | grep dotnet
-
-#echo ""
-#echo "GOING build-server shutdown $PLUGIN_TO_INCLUDE..."
-#dotnet build-server shutdown
-
-#echo ""
-#echo "GREP DOTNET PROCESS AFTER SHUTDOWN"
-#ps aux | grep dotnet
-#echo ""
-#echo ""
-
-#echo "lsof"
-#lsof | grep dotnet
-
-#echo ""
-#echo "GOING TO BUILD $PLUGIN_TO_INCLUDE..."
-#dotnet build --no-restore
+echo "GOING TO FOLDER $NEO_PLUGINS_PATH"
+cd $NEO_PLUGINS_PATH
 
 echo ""
 echo "GOING TO PUBLISH $PLUGIN_TO_INCLUDE..."
-dotnet publish ./$PLUGIN_TO_INCLUDE -c Release -f net9.0 -o ./$PLUGIN_TO_INCLUDE/app
+dotnet publish ./$PLUGIN_TO_INCLUDE -c Release -f net10.0 -o ./$PLUGIN_TO_INCLUDE/app
 #================= PUBLISH ==============================
 
-ORIGIN_PATH=/opt/neo/src/Plugins/$PLUGIN_TO_INCLUDE/app
-
-ls $ORIGIN_PATH
 
 echo "GOING TO CHECK CREATED DLL $PLUGIN_TO_INCLUDE..."
 echo ""
 
+ORIGIN_PATH=$NEO_PLUGINS_PATH/$PLUGIN_TO_INCLUDE/app
 if [ ! -f $ORIGIN_PATH/$PLUGIN_TO_INCLUDE.dll ]; then
     echo "PLUGIN DLL File does not exist at $ORIGIN_PATH/$PLUGIN_TO_INCLUDE.dll"
     exit 1
 fi
 
-DEST_FOLDER=/opt/neo/src/Neo.CLI/Plugins/$PLUGIN_TO_INCLUDE/
-mkdir $DEST_FOLDER
+
 
 echo "GOING TO COPY DEPENDENCIES (IF NEEDED - CURRENTLY JUST ORACLE SERVICES)"
 echo ""
@@ -100,8 +70,15 @@ fi
 
 if [ $PLUGIN_TO_INCLUDE = "RestServer" ]; then
     echo "Going to copy file $ORIGIN_PATH/$PLUGIN_TO_INCLUDE.dll TO $DEST_FOLDER - and some other dependencies"
+    cp -ri $ORIGIN_PATH/*.dll $DEST_FOLDER 
+    # TODO - The file is not there anymore when updated 16 November 2025
+    # cp -ri $ORIGIN_PATH/RestServer.xml $DEST_FOLDER
+    exit
+fi
+
+if [ $PLUGIN_TO_INCLUDE = "RocksDBStore" ]; then
+    echo "Going to copy file $ORIGIN_PATH/$PLUGIN_TO_INCLUDE.dll TO $DEST_FOLDER - and some other dependencies"
     cp -ri $ORIGIN_PATH/*.dll $DEST_FOLDER    
-    cp -ri $ORIGIN_PATH/RestServer.xml $DEST_FOLDER
     exit
 fi
 
@@ -120,5 +97,5 @@ fi
 echo "GOING TO COPY DLL ITSELF"
 echo ""
 
-echo "Going to copy file /opt/neo-modules/src/$PLUGIN_TO_INCLUDE/app/$PLUGIN_TO_INCLUDE.dll TO /opt/neoNode/neo-cli/Plugins/"
+echo "Going to copy file $ORIGIN_PATH/$PLUGIN_TO_INCLUDE.dll TO $DEST_FOLDER"
 cp -ri $ORIGIN_PATH/$PLUGIN_TO_INCLUDE.dll $DEST_FOLDER
