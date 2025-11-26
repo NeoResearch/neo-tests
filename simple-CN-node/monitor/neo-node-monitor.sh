@@ -7,6 +7,7 @@ set -uo pipefail
 : "${PASSRPC:?PASSRPC not set}"
 : "${TG_BOT_TOKEN:=}"
 : "${TG_CHAT_ID:=}"
+: "${TG_CHAT_ID_2:=}"
 
 
 # ======== CONFIG=========
@@ -27,6 +28,11 @@ send_alert() {
         -d chat_id="$TG_CHAT_ID" \
         -d text="$message" \
         -d parse_mode="Markdown" > /dev/null
+
+    curl -s -X POST "https://api.telegram.org/bot$TG_BOT_TOKEN/sendMessage" \
+        -d chat_id="$TG_CHAT_ID_2" \
+        -d text="$message" \
+        -d parse_mode="Markdown" > /dev/null        
 }
 
 
