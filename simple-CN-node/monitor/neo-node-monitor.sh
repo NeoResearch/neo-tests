@@ -32,7 +32,8 @@ send_alert() {
 echo "HI"
 # ================= BLOCK HEIGHT =================
 
-BLOCK_JSON=$(curl -s -k --max-time 10 -H "Content-Type: application/json" -d '{"jsonrpc": "2.0", "method": "getblockcount", "params": [], "id": 1}' $RPC_URL)
+DOCKER_PATH="docker exec -it eco-neo-csharp-cnnode-running"
+BLOCK_JSON=$($DOCKER_PATH curl -s -k --max-time 10 -H "Content-Type: application/json" -d '{"jsonrpc": "2.0", "method": "getblockcount", "params": [], "id": 1}' $RPC_URL)
 
 echo "HI $BLOCK_JSON"
 
@@ -81,7 +82,7 @@ fi
 echo $CURRENT_BLOCK > "$STATE_FILE"
 
 # ================= PEERS =================
-PEERS_JSON=$(curl -s -k --max-time 10 -H "Content-Type: application/json" -d '{"jsonrpc": "2.0", "method": "getpeers", "params": [], "id": 1}' $RPC_URL)
+PEERS_JSON=$($DOCKER_PATH curl -s -k --max-time 10 -H "Content-Type: application/json" -d '{"jsonrpc": "2.0", "method": "getpeers", "params": [], "id": 1}' $RPC_URL)
 CONNECTED_PEERS=$(echo $PEERS_JSON | jq -r '.result.connected | length')
 
 echo "HI $PEERS_JSON"
