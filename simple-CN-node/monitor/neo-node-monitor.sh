@@ -14,8 +14,8 @@ RPC_URL="http://$USERRPC:$PASSRPC@127.0.0.1:10332"
 MIN_PEERS=5
 STALL_THRESHOLD=2
 
-echo "RPC IS $RPC_URL"
-echo "TG_BOT_TOKEN IS $TG_BOT_TOKEN"
+#echo "RPC IS $RPC_URL"
+#echo "TG_BOT_TOKEN IS $TG_BOT_TOKEN"
 
 STATE_FILE="/tmp/neo_monitor_block.state"
 COUNT_FILE="/tmp/neo_monitor_stall.count"
@@ -29,13 +29,13 @@ send_alert() {
         -d parse_mode="Markdown" > /dev/null
 }
 
-echo "HI"
+
 # ================= BLOCK HEIGHT =================
 
 DOCKER_PATH="docker exec -it eco-neo-csharp-cnnode-running"
 BLOCK_JSON=$($DOCKER_PATH curl -s -k --max-time 10 -H "Content-Type: application/json" -d '{"jsonrpc": "2.0", "method": "getblockcount", "params": [], "id": 1}' $RPC_URL)
 
-echo "HI $BLOCK_JSON"
+#echo "HI $BLOCK_JSON"
 
 if [ -z "$BLOCK_JSON" ]; then
     echo "El proceso neo-cli NO responde al RPC. Posible crash."
@@ -46,7 +46,7 @@ fi
 
 CURRENT_BLOCK=$(echo $BLOCK_JSON | jq -r '.result')
 
-echo "HI $CURRENT_BLOCK"
+#echo "HI $CURRENT_BLOCK"
 
 if ! [[ "$CURRENT_BLOCK" =~ ^[0-9]+$ ]]; then
     send_alert "Respuesta RPC inválida al pedir bloque."
@@ -85,8 +85,8 @@ echo $CURRENT_BLOCK > "$STATE_FILE"
 PEERS_JSON=$($DOCKER_PATH curl -s -k --max-time 10 -H "Content-Type: application/json" -d '{"jsonrpc": "2.0", "method": "getpeers", "params": [], "id": 1}' $RPC_URL)
 CONNECTED_PEERS=$(echo $PEERS_JSON | jq -r '.result.connected | length')
 
-echo "HI $PEERS_JSON"
-echo "HI $CONNECTED_PEERS"
+#echo "HI $PEERS_JSON"
+#echo "HI $CONNECTED_PEERS"
 
 if [ -z "$CONNECTED_PEERS" ] || [ "$CONNECTED_PEERS" == "null" ]; then
      CONNECTED_PEERS=0
@@ -96,6 +96,6 @@ if [ "$CONNECTED_PEERS" -le "$MIN_PEERS" ]; then
     send_alert "Baja cantidad de Peers.%0AConectados: $CONNECTED_PEERS%0AMínimo requerido: $MIN_PEERS"
 fi
 
-echo "BYE"
+#echo "BYE"
 
 exit 0
