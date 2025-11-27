@@ -28,7 +28,7 @@ LOCAL_NEO_VM_PATH="localfiles/neo-vm"
 # ========= INJECT SPECIFIC NEO-VM =========
 
 
-PLUGINS_LIST_NEO_PACKAGE=(ApplicationLogs DBFTPlugin LevelDBStore OracleService RestServer RocksDBStore RpcServer SQLiteWallet SignClient StateService StorageDumper TokensTracker)
+PLUGINS_LIST_NEO_PACKAGE=(ApplicationLogs DBFTPlugin LevelDBStore MPTTrie OracleService RestServer RocksDBStore RpcClient RpcServer SQLiteWallet SignClient StateService StorageDumper TokensTracker)
   
 NEO_BLOCKCHAIN_RUN_TESTS="true"
 PLUGINS_RUN_TESTS="true"
