@@ -57,6 +57,8 @@ echo ""
 if [ $PLUGIN_TO_INCLUDE = "OracleService" ]; then
     echo "Going to copy file $ORIGIN_PATH/$PLUGIN_TO_INCLUDE.dll TO $DEST_FOLDER - and some other dependencies"
     cp -ri $ORIGIN_PATH/$PLUGIN_TO_INCLUDE.dll $DEST_FOLDER
+    cp -ri $ORIGIN_PATH/BouncyCastle.Cryptography.dll $DEST_FOLDER
+    cp -ri $ORIGIN_PATH/BouncyCastle.Crypto.dll $DEST_FOLDER    
     cp -ri $ORIGIN_PATH/Neo.FileStorage.API.dll $DEST_FOLDER
     cp -ri $ORIGIN_PATH/Grpc.Net.Common.dll $DEST_FOLDER
     cp -ri $ORIGIN_PATH/Grpc.Net.ClientFactory.dll $DEST_FOLDER
