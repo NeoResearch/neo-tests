@@ -1,6 +1,6 @@
 # https://hub.docker.com/_/microsoft-dotnet-sdk/
 # https://github.com/dotnet/dotnet-docker/blob/main/README.sdk.md#full-tag-listing
-FROM mcr.microsoft.com/dotnet/sdk:10.0.100-noble
+FROM mcr.microsoft.com/dotnet/sdk:10.0.101-noble
 LABEL maintainer="NeoResearch"
 
 RUN apt-get update \
@@ -92,8 +92,8 @@ WORKDIR $NEO_LIB_PATH
 RUN echo "LAST COMMIT FOR NEO IS: $(git rev-parse HEAD)"
 
 RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then (dotnet format --verify-no-changes --verbosity diagnostic);  fi
-RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then (dotnet build --disable-parallel);  fi
-RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then (dotnet test --no-build);  fi
+#RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then (dotnet build --disable-parallel);  fi
+RUN if [ "$NEO_BLOCKCHAIN_RUN_TESTS" = "true" ] ; then (dotnet test );  fi
 #---------------------- NEO CORE LIB UNIT TESTS ---------------------------
 
 #---------------------- NEO VM UNIT TESTS---------------------------
